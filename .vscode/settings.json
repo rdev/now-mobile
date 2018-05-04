@@ -1,0 +1,30 @@
+{
+	"search.exclude": {
+		"coverage/": true,
+		"bower_components/": true,
+		"node_modules/": true,
+		"jspm_packages/": true,
+		".sass-cache/": true,
+		"dist/": true,
+		".idea/": true,
+		"temp/": true
+	},
+	"files.exclude": {
+		"coverage/": true,
+		"bower_components/": true,
+		"node_modules/": true,
+		"jspm_packages/": true,
+		".sass-cache/": true,
+		"dist/": true,
+		".idea/": true,
+		"temp/": true
+	},
+	"javascript.format.enable": false,
+	"eslint.autoFixOnSave": true,
+	"prettier.eslintIntegration": true,
+	"flow.useNPMPackagedFlow": true,
+	"prettier.disableLanguages": [
+		"markdown"
+	],
+	"javascript.validate.enable": false
+}
