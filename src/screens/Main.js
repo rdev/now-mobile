@@ -1,0 +1,96 @@
+// @flow
+import React, { Component } from 'react';
+import { TouchableWithoutFeedback } from 'react-native';
+import Carousel from 'react-native-snap-carousel';
+import styled from 'styled-components';
+import View from '../components/View';
+import Header from '../components/Header';
+import { viewport } from '../lib/utils';
+
+type State = {
+	activeView: number,
+}
+
+type Slide = {
+	item: string,
+	index: number,
+}
+
+const Container = styled.SafeAreaView`
+	width: 100%;
+	flex: 1;
+	flex-direction: column;
+	background-color: white;
+`;
+
+const Title = styled.Text`
+	font-size: 26px;
+	font-weight: 800;
+	margin-bottom: 20px;
+	padding-left: 7%;
+	letter-spacing: 0.6px;
+	height: 36px;
+	width: 100%;
+`;
+
+const VIEWS = [
+	'History',
+	'Deployments',
+	'Aliases',
+	'Domains',
+	'Usage',
+];
+
+export default class Main extends Component<{}, State> {
+	static renderView({ item, index }: Slide) {
+		return <View key={index} name={item} />;
+	}
+
+	state = {
+		activeView: 0,
+	};
+
+	renderTitle = ({ item, index }: Slide) => (
+		<TouchableWithoutFeedback onPress={() => {
+			this.titleSlider.snapToItem(index);
+			this.viewSlider.snapToItem(index);
+		}}
+		>
+			<Title key={index}>{item}</Title>
+		</TouchableWithoutFeedback>
+	)
+
+	render() {
+		return (
+			<Container>
+				<Header />
+				<Carousel
+					ref={(ref) => { this.titleSlider = ref; }}
+					data={VIEWS}
+					renderItem={this.renderTitle}
+					sliderWidth={viewport.width}
+					sliderHeight={36}
+					itemWidth={viewport.width * 0.8}
+					itemHeight={36}
+					inactiveSlideScale={1}
+					inactiveSlideOpacity={0.25}
+					activeSlideAlignment="start"
+					onSnapToItem={index => this.viewSlider.snapToItem(index)}
+				/>
+				<Carousel
+					ref={(ref) => { this.viewSlider = ref; }}
+					data={VIEWS}
+					renderItem={Main.renderView}
+					sliderWidth={viewport.width}
+					sliderHeight={36}
+					itemWidth={viewport.width}
+					itemHeight={36}
+					inactiveSlideScale={1}
+					inactiveSlideOpacity={0}
+					activeSlideAlignment="start"
+					onSnapToItem={index => this.titleSlider.snapToItem(index)}
+				/>
+			</Container>
+		);
+	}
+}

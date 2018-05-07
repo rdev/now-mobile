@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Clipboard } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components';
 import Logo from '../components/Logo';
@@ -56,6 +56,14 @@ const CodeText = styled.Text`
 export default class Authentication extends Component<{}, State> {
 	state = {};
 
+	// @TODO Remove in favor of Splash screen
+	componentWillMount = async () => {
+		const token = await AsyncStorage.getItem('@now:token');
+		if (token) {
+			this.props.navigation.replace('Main');
+		}
+	}
+
 	checker: IntervalID;
 
 	login = async (input: string) => {
@@ -77,7 +85,7 @@ export default class Authentication extends Component<{}, State> {
 			const res = await api.user.vitals();
 
 			if (res.user) {
-				// @TODO Proceed
+				this.props.navigation.replace('Main');
 			} else {
 				// Nope
 				AsyncStorage.removeItem('@now:token');
@@ -90,7 +98,8 @@ export default class Authentication extends Component<{}, State> {
 			const res = await api.auth.verify(email);
 			if (res.token) {
 				clearInterval(this.checker);
-				// @TODO Proceed
+				await AsyncStorage.setItem('@now:token', res.token);
+				this.props.navigation.replace('Main');
 			}
 		}, 3000);
 	}
