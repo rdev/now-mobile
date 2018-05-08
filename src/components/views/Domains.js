@@ -12,7 +12,7 @@ const Domains = ({ context }: Props) => {
 	const domains = context.domains.sort((a, b) => new Date(b.created) - new Date(a.created));
 
 	return (
-		<ScrollView>
+		<ScrollView contentContainerStyle={{ paddingBottom: 180 }}>
 			{domains.map((domain, i) => (
 				<Domain key={domain.uid} domain={domain} last={i === domains.length - 1} />
 			))}

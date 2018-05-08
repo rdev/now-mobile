@@ -1,18 +1,24 @@
+// @flow
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import { ScrollView } from 'react-native';
+import Alias from '../elements/aliases/Alias';
+import { connect } from '../../Provider';
 
-const Text = styled.Text`
-	color: blue;
-`;
+type Props = {
+	context: any | Context,
+}
 
-export default class Aliases extends Component {
-	state = {};
-
+@connect
+export default class Aliases extends Component<Props> {
 	render() {
+		const aliases = this.props.context.aliases
+			.sort((a, b) => new Date(b.created) - new Date(a.created));
+
 		return (
-			<Text>
-				Aliases View
-			</Text>
+			<ScrollView contentContainerStyle={{ paddingBottom: 180 }}>
+				{aliases.map((alias, i) => (
+					<Alias key={alias.uid} alias={alias} last={i === aliases.length - 1} />))}
+			</ScrollView>
 		);
 	}
 }

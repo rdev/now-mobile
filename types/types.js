@@ -65,8 +65,31 @@ declare type Zeit$Domains = {
 	error?: APIError
 }
 
+declare type Zeit$AliasRule = {
+	pathname?: string,
+	dest: string,
+}
+
+declare type Zeit$Alias = {
+	uid: string,
+	created: string,
+	alias: string,
+	deployment: {
+		id: string,
+		url: string,
+	},
+	deploymentId: string,
+	rules?: Zeit$AliasRule[],
+}
+
+declare type Zeit$Aliases = {
+	aliases: Zeit$Alias[],
+	error?: APIError
+}
+
 declare type Context = {
 	user: Zeit$User,
 	domains: Zeit$Domain[],
+	aliases: Zeit$Alias[],
 	fetchData: () => void,
 }

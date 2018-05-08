@@ -11,15 +11,14 @@ type Props = {
 
 const View = styled.View`
 	flex-direction: row;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-vertical: 15px;
 	${({ last }) => {
 		if (last) {
 			return '';
 		}
 		return `
-				border-bottom-width: 1px;
-				border-bottom-color: #EAEAEA;
+			border-bottom-width: 1px;
+			border-bottom-color: #EAEAEA;
 		`;
 	}}
 `;

@@ -13,8 +13,8 @@ const DEFAULT_CONTEXT = {
 		github: false,
 	},
 	domains: [],
+	aliases: [],
 	fetchData: () => {},
-	activeView: 0,
 };
 
 // $FlowFixMe
@@ -48,16 +48,25 @@ export class Provider extends React.Component<*, Context> {
 		return domains;
 	}
 
+	getAliases = async () => {
+		const { aliases, error } = await api.aliases();
+
+		if (error) return this.state.aliases;
+		return aliases;
+	}
+
 	fetcher: IntervalID;
 
 	fetchData = async () => {
 		const user = await this.getUserInfo();
 		const domains = await this.getDomains();
+		const aliases = await this.getAliases();
 
 		return new Promise((resolve) => {
 			this.setState({
 				user,
 				domains,
+				aliases,
 			}, resolve);
 		});
 	}

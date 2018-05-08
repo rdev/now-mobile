@@ -28,7 +28,7 @@ const Text = styled.Text`
 
 export default ({ date }: Props) => {
 	const diff = moment().diff(moment(date), 'days');
-	if (diff > 30) {
+	if (diff > 1) {
 		return <Text>{`${diff}d`}</Text>;
 	}
 	return <Text>{moment(date).fromNow(true)}</Text>;
