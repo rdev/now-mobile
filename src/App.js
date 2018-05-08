@@ -1,9 +1,10 @@
+import React from 'react';
 import { StackNavigator } from 'react-navigation';
-// import { AsyncStorage } from 'react-native';
 import Authentication from './screens/Authentication';
+import { Provider } from './Provider';
 import Main from './screens/Main';
 
-export default StackNavigator({
+const App = StackNavigator({
 	// Splash: {
 	// 	screen: SplashScreen,
 	// },
@@ -16,3 +17,9 @@ export default StackNavigator({
 }, {
 	headerMode: 'none',
 });
+
+export default () => (
+	<Provider>
+		<App />
+	</Provider>
+);
