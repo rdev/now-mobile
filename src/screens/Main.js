@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
+import * as Animatable from 'react-native-animatable';
 import View from '../components/View';
 import Header from '../components/Header';
 import { viewport } from '../lib/utils';
@@ -60,33 +61,35 @@ export default class Main extends Component<{}, {}> {
 	render() {
 		return (
 			<Container>
-				<Header />
-				<Carousel
-					ref={(ref) => { this.titleSlider = ref; }}
-					data={VIEWS}
-					renderItem={this.renderTitle}
-					sliderWidth={viewport.width}
-					sliderHeight={36}
-					itemWidth={viewport.width * 0.8}
-					itemHeight={36}
-					inactiveSlideScale={1}
-					inactiveSlideOpacity={0.15}
-					activeSlideAlignment="start"
-					onSnapToItem={index => this.viewSlider.snapToItem(index)}
-				/>
-				<Carousel
-					ref={(ref) => { this.viewSlider = ref; }}
-					data={VIEWS}
-					renderItem={Main.renderView}
-					sliderWidth={viewport.width}
-					sliderHeight={36}
-					itemWidth={viewport.width}
-					itemHeight={36}
-					inactiveSlideScale={1}
-					inactiveSlideOpacity={0}
-					activeSlideAlignment="start"
-					onSnapToItem={index => this.titleSlider.snapToItem(index)}
-				/>
+				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+					<Header />
+					<Carousel
+						ref={(ref) => { this.titleSlider = ref; }}
+						data={VIEWS}
+						renderItem={this.renderTitle}
+						sliderWidth={viewport.width}
+						sliderHeight={36}
+						itemWidth={viewport.width * 0.8}
+						itemHeight={36}
+						inactiveSlideScale={1}
+						inactiveSlideOpacity={0.15}
+						activeSlideAlignment="start"
+						onSnapToItem={index => this.viewSlider.snapToItem(index)}
+					/>
+					<Carousel
+						ref={(ref) => { this.viewSlider = ref; }}
+						data={VIEWS}
+						renderItem={Main.renderView}
+						sliderWidth={viewport.width}
+						sliderHeight={36}
+						itemWidth={viewport.width}
+						itemHeight={36}
+						inactiveSlideScale={1}
+						inactiveSlideOpacity={0}
+						activeSlideAlignment="start"
+						onSnapToItem={index => this.titleSlider.snapToItem(index)}
+					/>
+				</Animatable.View>
 			</Container>
 		);
 	}

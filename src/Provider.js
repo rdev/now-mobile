@@ -13,6 +13,8 @@ const DEFAULT_CONTEXT = {
 		github: false,
 	},
 	domains: [],
+	fetchData: () => {},
+	activeView: 0,
 };
 
 // $FlowFixMe
@@ -24,8 +26,8 @@ export class Provider extends React.Component<*, Context> {
 	state = DEFAULT_CONTEXT;
 
 	componentDidMount = () => {
-		this.fetchNewData();
-		this.fetcher = setInterval(this.fetchNewData, 10 * 1000);
+		this.fetchData();
+		this.fetcher = setInterval(this.fetchData, 10 * 1000);
 	}
 
 	componentWillUnmount = () => {
@@ -48,19 +50,25 @@ export class Provider extends React.Component<*, Context> {
 
 	fetcher: IntervalID;
 
-	fetchNewData = async () => {
+	fetchData = async () => {
 		const user = await this.getUserInfo();
 		const domains = await this.getDomains();
 
-		this.setState({
-			user,
-			domains,
+		return new Promise((resolve) => {
+			this.setState({
+				user,
+				domains,
+			}, resolve);
 		});
 	}
 
 	render() {
 		return (
-			<NowContext.Provider value={this.state}>
+			<NowContext.Provider value={{
+				...this.state,
+				fetchData: this.fetchData,
+			}}
+			>
 				{this.props.children}
 			</NowContext.Provider>
 		);
@@ -70,7 +78,12 @@ export class Provider extends React.Component<*, Context> {
 export function connect(WrappedComponent: typeof React.Component | Function) {
 	return (props: any) => (
 		<NowConsumer>
-			{context => <WrappedComponent {...props} context={context} />}
+			{context => (
+				<WrappedComponent
+					{...props}
+					context={context}
+				/>
+			)}
 		</NowConsumer>
 	);
 }

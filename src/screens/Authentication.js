@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { AsyncStorage, SafeAreaView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components';
+import * as Animatable from 'react-native-animatable';
 import Logo from '../components/Logo';
 import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
+import { viewport } from '../lib/utils';
 
 type State = {
 	code?: string,
@@ -60,14 +62,6 @@ const CodeText = styled.Text`
 export default class Authentication extends Component<Props, State> {
 	state = {};
 
-	// @TODO Remove in favor of Splash screen
-	componentWillMount = async () => {
-		const token = await AsyncStorage.getItem('@now:token');
-		if (token) {
-			this.props.navigation.replace('Main');
-		}
-	}
-
 	checker: IntervalID;
 
 	login = async (input: string) => {
@@ -111,46 +105,48 @@ export default class Authentication extends Component<Props, State> {
 	render() {
 		return (
 			<Container>
-				<KeyboardAwareScrollView
-					contentContainerStyle={{
-						justifyContent: 'center',
-						alignItems: 'center',
-						height: '100%',
-					}}
-					style={{
-						width: '100%',
-					}}
-					scrollEnabled={false}
-				>
-					<Logo size="large" style={{ position: 'absolute', top: '15%' }} />
-					{(() => {
-						if (this.state.code) {
+				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+					<KeyboardAwareScrollView
+						contentContainerStyle={{
+							justifyContent: 'center',
+							alignItems: 'center',
+							height: '100%',
+						}}
+						style={{
+							width: '100%',
+						}}
+						scrollEnabled={false}
+					>
+						{(() => {
+							if (this.state.code) {
+								return (
+									// $FlowFixMe
+									<React.Fragment>
+										<Header>Awaiting Confirmation</Header>
+										<Text>
+										An email with a verification code was sent to{' '}
+											<Email>
+												{this.state.email}
+											</Email>
+										</Text>
+										<Text style={{ marginTop: 20 }}>
+										Make sure it matches the following:
+										</Text>
+										<Code>
+											<CodeText>
+												{this.state.code}
+											</CodeText>
+										</Code>
+									</React.Fragment>
+								);
+							}
 							return (
-								// $FlowFixMe
-								<React.Fragment>
-									<Header>Awaiting Confirmation</Header>
-									<Text>
-									An email with a verification code was sent to{' '}
-										<Email>
-											{this.state.email}
-										</Email>
-									</Text>
-									<Text style={{ marginTop: 20 }}>
-									Make sure it matches the following:
-									</Text>
-									<Code>
-										<CodeText>
-											{this.state.code}
-										</CodeText>
-									</Code>
-								</React.Fragment>
+								<AuthInput onSubmit={this.login} />
 							);
-						}
-						return (
-							<AuthInput onSubmit={this.login} />
-						);
-					})()}
-				</KeyboardAwareScrollView>
+						})()}
+					</KeyboardAwareScrollView>
+				</Animatable.View>
+				<Logo size="large" style={{ position: 'absolute', top: viewport.height * 0.17 }} />
 			</Container>
 		);
 	}

@@ -68,4 +68,5 @@ declare type Zeit$Domains = {
 declare type Context = {
 	user: Zeit$User,
 	domains: Zeit$Domain[],
+	fetchData: () => void,
 }

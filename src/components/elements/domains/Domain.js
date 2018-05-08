@@ -6,11 +6,22 @@ import ExpireDate from './ExpireDate';
 
 type Props = {
 	domain: Zeit$Domain,
+	last: boolean,
 }
 
 const View = styled.View`
 	flex-direction: row;
-	margin-bottom: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	${({ last }) => {
+		if (last) {
+			return '';
+		}
+		return `
+				border-bottom-width: 1px;
+				border-bottom-color: #EAEAEA;
+		`;
+	}}
 `;
 
 const LeftSide = styled.View`
@@ -24,8 +35,8 @@ const Title = styled.Text`
 	margin-bottom: 5px;
 `;
 
-export default ({ domain }: Props) => (
-	<View>
+export default ({ domain, last }: Props) => (
+	<View last={last}>
 		<LeftSide>
 			<Title>{domain.name}</Title>
 			<ExpireDate date={domain.expiresAt} />

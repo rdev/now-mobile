@@ -13,7 +13,9 @@ const Domains = ({ context }: Props) => {
 
 	return (
 		<ScrollView>
-			{domains.map(domain => <Domain key={domain.uid} domain={domain} />)}
+			{domains.map((domain, i) => (
+				<Domain key={domain.uid} domain={domain} last={i === domains.length - 1} />
+			))}
 		</ScrollView>
 	);
 };
