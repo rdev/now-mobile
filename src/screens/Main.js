@@ -1,22 +1,20 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, SafeAreaView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
 import View from '../components/View';
 import Header from '../components/Header';
 import { viewport } from '../lib/utils';
 
-type State = {
-	activeView: number,
-}
-
+/* eslint-disable react/no-unused-prop-types */
 type Slide = {
 	item: string,
 	index: number,
 }
+/* eslint-enable react/no-unused-prop-types */
 
-const Container = styled.SafeAreaView`
+const Container = styled(SafeAreaView)`
 	width: 100%;
 	flex: 1;
 	flex-direction: column;
@@ -41,14 +39,13 @@ const VIEWS = [
 	'Usage',
 ];
 
-export default class Main extends Component<{}, State> {
+export default class Main extends Component<{}, {}> {
 	static renderView({ item, index }: Slide) {
 		return <View key={index} name={item} />;
 	}
 
-	state = {
-		activeView: 0,
-	};
+	titleSlider: Carousel;
+	viewSlider: Carousel;
 
 	renderTitle = ({ item, index }: Slide) => (
 		<TouchableWithoutFeedback onPress={() => {
@@ -73,7 +70,7 @@ export default class Main extends Component<{}, State> {
 					itemWidth={viewport.width * 0.8}
 					itemHeight={36}
 					inactiveSlideScale={1}
-					inactiveSlideOpacity={0.25}
+					inactiveSlideOpacity={0.15}
 					activeSlideAlignment="start"
 					onSnapToItem={index => this.viewSlider.snapToItem(index)}
 				/>

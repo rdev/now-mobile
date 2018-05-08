@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { AsyncStorage, Clipboard } from 'react-native';
+import { AsyncStorage, SafeAreaView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components';
 import Logo from '../components/Logo';
-import AuthInput from '../components/auth-screen/AuthInput';
+import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
 
 type State = {
@@ -12,7 +12,11 @@ type State = {
 	email?: string,
 }
 
-const Container = styled.SafeAreaView`
+type Props = {
+	navigation: Navigation,
+}
+
+const Container = styled(SafeAreaView)`
 	height: 100%;
 	width: 100%;
 	flex-direction: column;
@@ -53,7 +57,7 @@ const CodeText = styled.Text`
 	font-weight: 600;
 `;
 
-export default class Authentication extends Component<{}, State> {
+export default class Authentication extends Component<Props, State> {
 	state = {};
 
 	// @TODO Remove in favor of Splash screen
@@ -122,6 +126,7 @@ export default class Authentication extends Component<{}, State> {
 					{(() => {
 						if (this.state.code) {
 							return (
+								// $FlowFixMe
 								<React.Fragment>
 									<Header>Awaiting Confirmation</Header>
 									<Text>

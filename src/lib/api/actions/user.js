@@ -2,7 +2,7 @@
 import request from '../request';
 
 export async function vitals(): Promise<Zeit$Vitals> {
-	const result = await request('/www/user', 'GET');
+	const result: Zeit$Vitals = await request('/www/user', 'GET');
 
 	return result;
 }

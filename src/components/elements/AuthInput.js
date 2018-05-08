@@ -67,6 +67,7 @@ export default class AuthInput extends React.Component<Props, State> {
 	render() {
 		const { validationError } = this.state;
 		return (
+			// $FlowFixMe
 			<React.Fragment>
 				<Input
 					placeholder="Email or Token"

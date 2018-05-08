@@ -1,7 +1,11 @@
 // @flow
 import { AsyncStorage } from 'react-native';
 
-export default async function request(path: string, method: Method, options?: RequestOptions) {
+export default async function request(
+	path: string,
+	method: Method,
+	options?: RequestOptions,
+): Promise<*> {
 	try {
 		const TOKEN = await AsyncStorage.getItem('@now:token');
 		const res = await fetch(`https://api.zeit.co${path}${options && options.team ? `?teamId=${options.team}` : ''}`, {
@@ -17,7 +21,8 @@ export default async function request(path: string, method: Method, options?: Re
 		return res.json();
 	} catch (e) {
 		// @TODO: NICE ERROR ALERTING
-		return console.log(e);
+		console.log(e);
+		return Promise.reject(e);
 	}
 }
 

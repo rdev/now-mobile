@@ -19,6 +19,8 @@
 ; Ignore metro
 .*/node_modules/metro/.*
 
+.*/node_modules/react-native-keyboard-aware-scroll-view/*
+
 [include]
 
 [libs]
@@ -52,4 +54,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.71.0
+^0.67.0

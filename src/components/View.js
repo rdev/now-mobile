@@ -26,8 +26,6 @@ export default ({ name }) => {
 			return wrap(<Domains />);
 		case 'Usage':
 			return wrap(<Usage />);
-		case 'History':
-			return wrap(<History />);
 		default:
 			return null;
 	}

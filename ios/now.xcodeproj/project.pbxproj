@@ -1221,6 +1221,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile";
 				PRODUCT_NAME = now;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1239,6 +1240,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile";
 				PRODUCT_NAME = now;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
