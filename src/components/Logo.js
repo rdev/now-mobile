@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import ZeitLogo from '../../assets/zeit-logo.png';
 
 type Props = {
-	size: string,
-	style: any,
+	size?: string,
+	style?: any,
 }
 
 function setLogoSize(size: string) {
@@ -20,7 +20,13 @@ const Image = styled.Image`
 	width: ${({ size }) => setLogoSize(size).w};
 `;
 
-export default ({ size, style }: Props) => (
+const Logo = ({ size, style }: Props) => (
 	<Image source={ZeitLogo} size={size} style={style} />
 );
 
+Logo.defaultProps = {
+	size: '',
+	style: null,
+};
+
+export default Logo;

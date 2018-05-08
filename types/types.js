@@ -66,6 +66,6 @@ declare type Zeit$Domains = {
 }
 
 declare type Context = {
-	user?: Zeit$User,
-	domains?: Zeit$Domain[],
+	user: Zeit$User,
+	domains: Zeit$Domain[],
 }

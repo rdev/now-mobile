@@ -2,13 +2,26 @@
 import React from 'react';
 import api from './lib/api';
 
+const DEFAULT_CONTEXT = {
+	user: {
+		uid: '',
+		email: '',
+		username: '',
+		date: null,
+		billingChecked: true,
+		avatar: '',
+		github: false,
+	},
+	domains: [],
+};
+
 // $FlowFixMe
-const NowContext = React.createContext({});
+const NowContext = React.createContext(DEFAULT_CONTEXT);
 
 export const NowConsumer = NowContext.Consumer;
 
 export class Provider extends React.Component<*, Context> {
-	state = {};
+	state = DEFAULT_CONTEXT;
 
 	componentDidMount = () => {
 		this.fetchNewData();
@@ -52,4 +65,12 @@ export class Provider extends React.Component<*, Context> {
 			</NowContext.Provider>
 		);
 	}
+}
+
+export function connect(WrappedComponent: typeof React.Component | Function) {
+	return (props: any) => (
+		<NowConsumer>
+			{context => <WrappedComponent {...props} context={context} />}
+		</NowConsumer>
+	);
 }

@@ -1,8 +1,14 @@
+// @flow
 import React, { Component } from 'react';
 import { TouchableOpacity, Image } from 'react-native';
 import styled from 'styled-components';
 import api from '../lib/api';
+import { connect } from '../Provider';
 import Logo from './Logo';
+
+type Props = {
+	context: any | Context,
+}
 
 const View = styled.View`
 	width: 100%;
@@ -22,12 +28,10 @@ const ProfilePic = styled.View`
 	overflow: hidden;
 `;
 
-export default class Header extends Component {
-	state = { user: {} };
-	componentDidMount = async () => {
-		const { user } = await api.user.vitals();
-		console.log(user);
-		this.setState({ user });
+@connect
+export default class Header extends Component<Props> {
+	static defaultProps = {
+		context: null,
 	}
 
 	toggleSettings = () => {}
@@ -35,7 +39,7 @@ export default class Header extends Component {
 	profileDropdown = () => {}
 
 	render() {
-		const { avatar } = this.state.user;
+		const { avatar } = this.props.context.user;
 		return (
 			<View>
 				<TouchableOpacity activeOpacity={0.7}>
