@@ -12,7 +12,7 @@ type Props = {
 
 const View = styled.View`
 	flex-direction: row;
-	padding-vertical: 20px;
+	padding-vertical: 15px;
 	${({ last }) => {
 		if (last) {
 			return '';
@@ -35,13 +35,13 @@ const TitleWrap = styled.View`
 `;
 
 const Title = styled.Text`
-	font-size: 20px;
+	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
 `;
 
 const Deployment = styled.Text`
-	font-size: 18px
+	font-size: 16px
 	font-weight: 300;
 `;
 
@@ -68,7 +68,7 @@ export default ({ alias, last }: Props) => (
 		{/* $FlowFixMe */}
 		<React.Fragment>
 			<LeftSide>
-				<TouchableOpacity activeOpacity={0.7} onPress={() => promptOpen(alias.alias)}>
+				<TouchableOpacity activeOpacity={0.6} onPress={() => promptOpen(alias.alias)}>
 					<TitleWrap>
 						<Title>{alias.alias}</Title>
 						<Go source={GoIcon} />

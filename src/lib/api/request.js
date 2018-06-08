@@ -8,7 +8,12 @@ export default async function request(
 ): Promise<*> {
 	try {
 		const TOKEN = await AsyncStorage.getItem('@now:token');
-		const res = await fetch(`https://api.zeit.co${path}${options && options.team ? `?teamId=${options.team}` : ''}`, {
+		const url =
+			options && options.endpoint
+				? `https://${options.endpoint}${path}`
+				: `https://api.zeit.co${path}${options && options.team ? `?teamId=${options.team}` : ''}`;
+
+		const res = await fetch(url, {
 			headers: {
 				Authorization: TOKEN ? `Bearer ${TOKEN}` : null,
 				Accept: 'application/json',

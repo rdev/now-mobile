@@ -81,9 +81,9 @@ export default class Main extends Component<{}, {}> {
 						data={VIEWS}
 						renderItem={Main.renderView}
 						sliderWidth={viewport.width}
-						sliderHeight={36}
 						itemWidth={viewport.width}
-						itemHeight={36}
+						slideStyle={{ flex: 1 }}
+						containerCustomStyle={{ height: viewport.height - 40 - 36 - 100 }}
 						inactiveSlideScale={1}
 						inactiveSlideOpacity={0}
 						activeSlideAlignment="start"

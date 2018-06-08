@@ -8,6 +8,11 @@ type Props = {
 	context: any | Context,
 }
 
+const containerStyle = {
+	paddingBottom: 80,
+	paddingHorizontal: '6%',
+};
+
 @connect
 export default class Aliases extends Component<Props> {
 	render() {
@@ -15,7 +20,7 @@ export default class Aliases extends Component<Props> {
 			.sort((a, b) => new Date(b.created) - new Date(a.created));
 
 		return (
-			<ScrollView contentContainerStyle={{ paddingBottom: 180 }}>
+			<ScrollView contentContainerStyle={containerStyle}>
 				{aliases.map((alias, i) => (
 					<Alias key={alias.uid} alias={alias} last={i === aliases.length - 1} />))}
 			</ScrollView>

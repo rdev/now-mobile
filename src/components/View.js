@@ -7,8 +7,7 @@ import Domains from './views/Domains';
 import Usage from './views/Usage';
 
 const Wrapper = styled.View`
-	padding-horizontal: 6%;
-	height: 100%
+	
 `;
 
 // Add paddings

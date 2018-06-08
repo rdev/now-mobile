@@ -23,7 +23,7 @@ moment.updateLocale('en', {
 const Text = styled.Text`
 	color: #848484;
 	font-weight: 300;
-	font-size: 18px;
+	font-size: 16px;
 `;
 
 export default ({ date }: Props) => {
