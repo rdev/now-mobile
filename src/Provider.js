@@ -14,10 +14,11 @@ const DEFAULT_CONTEXT = {
 	},
 	domains: [],
 	aliases: [],
+	usage: {},
 	fetchData: () => {},
 };
 
-// $FlowFixMe
+// $FlowFixMe RN's used Flow version doesn't know about context yet
 const NowContext = React.createContext(DEFAULT_CONTEXT);
 
 export const NowConsumer = NowContext.Consumer;
@@ -55,18 +56,27 @@ export class Provider extends React.Component<*, Context> {
 		return aliases;
 	}
 
+	getUsage = async () => {
+		const usage = await api.usage();
+
+		if (usage.error) return this.state.usage;
+		return usage;
+	}
+
 	fetcher: IntervalID;
 
 	fetchData = async () => {
 		const user = await this.getUserInfo();
 		const domains = await this.getDomains();
 		const aliases = await this.getAliases();
+		const usage = await this.getUsage();
 
 		return new Promise((resolve) => {
 			this.setState({
 				user,
 				domains,
 				aliases,
+				usage,
 			}, resolve);
 		});
 	}

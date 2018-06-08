@@ -12,6 +12,7 @@ declare type RequestOptions = {
 		[string]: any,
 	},
 	team?: string,
+	endpoint?: string,
 };
 
 // API Response types
@@ -87,9 +88,30 @@ declare type Zeit$Aliases = {
 	error?: APIError
 }
 
+declare type Zeit$Usage = {
+	metrics: {
+		activeDeployments: number,
+		activeInstances: number,
+		aliases: number,
+		domains: number,
+		logs: {
+			count: number,
+			size: number,
+		},
+		bandwidth: {
+			rx: number,
+			tx: number,
+		},
+		startTime: string,
+	},
+	mode: string,
+	error?: APIError
+}
+
 declare type Context = {
-	user: Zeit$User,
+	user: any | Zeit$User,
 	domains: Zeit$Domain[],
 	aliases: Zeit$Alias[],
+	usage: any | Zeit$Usage,
 	fetchData: () => void,
 }

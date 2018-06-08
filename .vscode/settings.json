@@ -26,5 +26,8 @@
 	"prettier.disableLanguages": [
 		"markdown"
 	],
-	"javascript.validate.enable": false
+	"javascript.validate.enable": false,
+	"files.associations": {
+		"*.js": "javascriptreact"
+	}
 }
