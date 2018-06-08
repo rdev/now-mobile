@@ -48,6 +48,7 @@ export default class AuthInput extends React.Component<Props, State> {
 	// If they do, autopaste it for them
 	checkClipboard = async () => {
 		const value = await Clipboard.getString();
+		// Value length === 24 is probebly not the best way, but it works in most cases
 		if (value.includes('@') || value.length === 24) {
 			this.setState({ value });
 		}
@@ -55,6 +56,7 @@ export default class AuthInput extends React.Component<Props, State> {
 
 	handleSubmit = () => {
 		const { value } = this.state;
+
 		if (value) {
 			if (validEmail(value) || value.length === 24) {
 				this.props.onSubmit(value);

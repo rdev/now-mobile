@@ -1,5 +1,12 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
+
+type Props = {
+	usage: string,
+	max: string,
+	name: string,
+};
 
 const View = styled.View`
 	flex-direction: column;
@@ -40,7 +47,7 @@ const Separator = styled.View`
 	width: 50%;
 `;
 
-export default ({ usage, max, name }) => (
+export default ({ usage, max, name }: Props) => (
 	<View>
 		<Numbers>
 			<Usage>{usage}</Usage>

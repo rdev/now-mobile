@@ -8,10 +8,12 @@ type Props = {
 	style?: any,
 }
 
+// We need Zeit logo to be bigger in some cases (authentication)
 function setLogoSize(size: string) {
 	if (size === 'large') {
 		return { h: '57px', w: '64px' };
 	}
+
 	return { h: '30px', w: '34px' };
 }
 

@@ -3,7 +3,7 @@
 declare type Navigation = {
 	push: (path: string) => void,
 	replace: (path: string) => void,
-}
+};
 
 declare type Method = 'get' | 'GET' | 'post' | 'POST';
 
@@ -20,33 +20,33 @@ declare type RequestOptions = {
 type APIError = {
 	code: string,
 	message: string,
-}
+};
 
 declare type Zeit$Preauth = {
 	token: string,
 	securityCode: string,
-	error?: APIError
-}
+	error?: APIError,
+};
 
 declare type Zeit$Auth = {
 	token: string,
-	error?: APIError
-}
+	error?: APIError,
+};
 
 declare type Zeit$User = {
 	uid: string,
 	email: string,
 	username: string,
-	date: ? string,
+	date: ?string,
 	billingChecked: boolean,
 	avatar: string,
 	github: boolean,
-}
+};
 
 declare type Zeit$Vitals = {
 	user: Zeit$User,
-	error?: APIError
-}
+	error?: APIError,
+};
 
 declare type Zeit$Domain = {
 	uid: string,
@@ -58,18 +58,18 @@ declare type Zeit$Domain = {
 	serviceType: string,
 	verified: boolean,
 	aliases: string[],
-	certs: string[]
-}
+	certs: string[],
+};
 
 declare type Zeit$Domains = {
 	domains: Zeit$Domain[],
-	error?: APIError
-}
+	error?: APIError,
+};
 
 declare type Zeit$AliasRule = {
 	pathname?: string,
 	dest: string,
-}
+};
 
 declare type Zeit$Alias = {
 	uid: string,
@@ -81,12 +81,12 @@ declare type Zeit$Alias = {
 	},
 	deploymentId: string,
 	rules?: Zeit$AliasRule[],
-}
+};
 
 declare type Zeit$Aliases = {
 	aliases: Zeit$Alias[],
-	error?: APIError
-}
+	error?: APIError,
+};
 
 declare type Zeit$Usage = {
 	metrics: {
@@ -104,14 +104,21 @@ declare type Zeit$Usage = {
 		},
 		startTime: string,
 	},
-	mode: string,
-	error?: APIError
-}
+	mode: 'oss' | 'free' | 'premium' | 'pro' | 'advanced' | 'on-demand' | 'unlimited',
+	error?: APIError,
+};
+
+declare type Plan = {
+	bandwidth: number,
+	logs: number,
+	concurrentInstances: number,
+	domains: number,
+};
 
 declare type Context = {
-	user: any | Zeit$User,
+	user: any | Zeit$User, // @FIXME There's definitely a better way to do it
 	domains: Zeit$Domain[],
 	aliases: Zeit$Alias[],
-	usage: any | Zeit$Usage,
+	usage: any | Zeit$Usage, // @FIXME There's definitely a better way to do it
 	fetchData: () => void,
-}
+};

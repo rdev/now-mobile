@@ -59,17 +59,27 @@ const CodeText = styled.Text`
 	font-weight: 600;
 `;
 
+
+/**
+ * Authentication screen. This is going to ask for an email or a token.
+ * Token will be saved and used right away. Email will follow Zeit's normal login flow.
+ *
+ * @export
+ * @class Authentication
+ * @extends {React.Component}
+ */
 export default class Authentication extends Component<Props, State> {
 	state = {};
 
 	checker: IntervalID;
 
 	login = async (input: string) => {
+		// If it's an email
 		if (input.includes('@')) {
 			const res = await api.auth.login(input);
 
 			if (res.error) {
-				//
+				// @TODO Error message (or on API level? TBD)
 			} else {
 				await AsyncStorage.setItem('@now:preauthToken', res.token);
 				this.setState({
@@ -78,7 +88,7 @@ export default class Authentication extends Component<Props, State> {
 				}, () => this.verify(input));
 			}
 		} else if (input.length === 24) {
-			// See if this is a valid token
+			// If this is a valid token
 			await AsyncStorage.setItem('@now:token', input);
 			const res = await api.user.vitals();
 
@@ -87,11 +97,15 @@ export default class Authentication extends Component<Props, State> {
 			} else {
 				// Nope
 				AsyncStorage.removeItem('@now:token');
+				// @TODO Error message
 			}
 		}
+		// Otherwise do nothing
+		// @TODO Probably should have some error message here
 	}
 
 	verify = (email: string) => {
+		// Following Zeit's website / Now Desktop, we're gonna check every 3s if email has been verified
 		this.checker = setInterval(async () => {
 			const res = await api.auth.verify(email);
 			if (res.token) {
@@ -124,13 +138,13 @@ export default class Authentication extends Component<Props, State> {
 									<React.Fragment>
 										<Header>Awaiting Confirmation</Header>
 										<Text>
-										An email with a verification code was sent to{' '}
+											An email with a verification code was sent to{' '}
 											<Email>
 												{this.state.email}
 											</Email>
 										</Text>
 										<Text style={{ marginTop: 20 }}>
-										Make sure it matches the following:
+											Make sure it matches the following:
 										</Text>
 										<Code>
 											<CodeText>

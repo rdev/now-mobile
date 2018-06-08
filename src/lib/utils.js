@@ -1,17 +1,35 @@
+// @flow
 import { Dimensions } from 'react-native';
 
-export function validEmail(email) {
-	const EMAIL_RX = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-?\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+type PlansMap = Map<string, Plan>;
 
-	return email && EMAIL_RX.test(email);
+/**
+ * Email validation
+ *
+ * @export
+ * @param {*} email - Email to validate
+ * @returns {boolean}
+ */
+export function validEmail(email: string): boolean {
+	const EMAIL_RX = /^[-!#$%&'*+/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-?\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+
+	return email ? EMAIL_RX.test(email) : false;
 }
 
 export const viewport = Dimensions.get('screen');
 
-export function formatBytes(bytes, decimals) {
+
+/**
+ * Format bytes to a readable format
+ *
+ * @export
+ * @param {*} bytes - Bytes to convert
+ * @param {*} decimals - Decimals
+ * @returns {string}
+ */
+export function formatBytes(bytes: number, dm?: number = 2): string {
 	if (bytes === 0) return '0 B';
 	const k = 1024;
-	const dm = decimals || 2;
 	const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 	const i = Math.floor(Math.log(bytes) / Math.log(k));
 	return `${Math.floor(parseFloat((bytes / (k ** i)).toFixed(dm)))} ${sizes[i]}`;
@@ -20,7 +38,7 @@ export function formatBytes(bytes, decimals) {
 const mb = 1048576;
 const gb = 1024 * mb;
 
-export const plans = new Map([
+export const plans: PlansMap = new Map([
 	['oss', {
 		bandwidth: gb,
 		logs: 100 * mb,

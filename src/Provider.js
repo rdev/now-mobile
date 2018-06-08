@@ -14,7 +14,9 @@ const DEFAULT_CONTEXT = {
 	},
 	domains: [],
 	aliases: [],
-	usage: {},
+	usage: {
+		metrics: {},
+	},
 	fetchData: () => {},
 };
 
@@ -23,6 +25,13 @@ const NowContext = React.createContext(DEFAULT_CONTEXT);
 
 export const NowConsumer = NowContext.Consumer;
 
+/**
+ * Context provider containing all of the app's data
+ *
+ * @export
+ * @class Provider
+ * @extends {React.Component<*, Context>}
+ */
 export class Provider extends React.Component<*, Context> {
 	state = DEFAULT_CONTEXT;
 
@@ -42,14 +51,14 @@ export class Provider extends React.Component<*, Context> {
 		return user;
 	}
 
-	getDomains = async () => {
+	getDomains = async (): Promise<Zeit$Domain[]> => {
 		const { domains, error } = await api.domains();
 
 		if (error) return this.state.domains;
 		return domains;
 	}
 
-	getAliases = async () => {
+	getAliases = async (): Promise<Zeit$Alias[]> => {
 		const { aliases, error } = await api.aliases();
 
 		if (error) return this.state.aliases;
@@ -94,6 +103,14 @@ export class Provider extends React.Component<*, Context> {
 	}
 }
 
+
+/**
+ * Redux-like connect decorator to provide context to components
+ *
+ * @export
+ * @param {React.Component} WrappedComponent - Component to decorate
+ * @returns {React.Component}
+ */
 export function connect(WrappedComponent: typeof React.Component | Function) {
 	return (props: any) => (
 		<NowConsumer>

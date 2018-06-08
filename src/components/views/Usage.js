@@ -19,15 +19,22 @@ const Period = styled.Text`
 	letter-spacing: 0.5px;
 `;
 
+// This is new and Zeit sometimes still changes the API for this
 const Usage = ({ context }: Props) => {
-	console.log(context);
 	const { mode, metrics } = context.usage;
+	const plan = plans.get(mode);
 
-	const max = {
-		domains: plans.get(mode).domains,
-		bandwidth: plans.get(mode).bandwidth,
-		logs: plans.get(mode).logs,
-		instances: plans.get(mode).concurrentInstances,
+	// Right half of this ternary should never happen, unless Zeit does something breaking
+	const max = plan ? {
+		domains: plan.domains,
+		bandwidth: plan.bandwidth,
+		logs: plan.logs,
+		instances: plan.concurrentInstances,
+	} : {
+		domains: 0,
+		bandwidth: 0,
+		logs: 0,
+		instances: 0,
 	};
 
 	const periodStart = moment(metrics.startTime).format('MMMM DD, YYYY').toUpperCase();
