@@ -108,6 +108,28 @@ declare type Zeit$Usage = {
 	error?: APIError,
 };
 
+declare type Zeit$Deployment = {
+	uid: string,
+	name: string,
+	url: ?string,
+	created: string,
+	creator: {
+		uid: 'string',
+	},
+	state: 'DEPLOYING' | 'DEPLOYMENT_ERROR' | 'BOOTED' | 'BUILDING' | 'READY' | 'BUILD_ERROR' | 'FROZEN',
+	type: 'NPM' | 'DOCKER' | 'STATIC',
+	scale: {
+		current: number,
+		min: number,
+		max: number,
+	},
+};
+
+declare type Zeit$Deployments = {
+	deployments: Zeit$Deployment[],
+	error?: APIError,
+};
+
 declare type Plan = {
 	bandwidth: number,
 	logs: number,
@@ -120,5 +142,6 @@ declare type Context = {
 	domains: Zeit$Domain[],
 	aliases: Zeit$Alias[],
 	usage: any | Zeit$Usage, // @FIXME There's definitely a better way to do it
+	deployments: Zeit$Deployment[], // @FIXME There's definitely a better way to do it
 	fetchData: () => void,
 };
