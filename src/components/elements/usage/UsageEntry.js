@@ -41,7 +41,7 @@ const Title = styled.Text`
 
 const Separator = styled.View`
 	height: 1px;
-	border-bottom-color: #EAEAEA;
+	border-bottom-color: #eaeaea;
 	border-bottom-width: 1px;
 	margin-vertical: 20px;
 	width: 50%;

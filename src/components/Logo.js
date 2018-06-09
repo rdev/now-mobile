@@ -6,7 +6,7 @@ import ZeitLogo from '../../assets/zeit-logo.png';
 type Props = {
 	size?: string,
 	style?: any,
-}
+};
 
 // We need Zeit logo to be bigger in some cases (authentication)
 function setLogoSize(size: string) {
@@ -22,9 +22,7 @@ const Image = styled.Image`
 	width: ${({ size }) => setLogoSize(size).w};
 `;
 
-const Logo = ({ size, style }: Props) => (
-	<Image source={ZeitLogo} size={size} style={style} />
-);
+const Logo = ({ size, style }: Props) => <Image source={ZeitLogo} size={size} style={style} />;
 
 Logo.defaultProps = {
 	size: '',

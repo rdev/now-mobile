@@ -9,10 +9,6 @@ export default class Deployments extends Component {
 	state = {};
 
 	render() {
-		return (
-			<Text>
-				Deployments View
-			</Text>
-		);
+		return <Text>Deployments View</Text>;
 	}
 }

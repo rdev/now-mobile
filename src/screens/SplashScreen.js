@@ -21,8 +21,8 @@ const View = styled(SafeAreaView)`
 `;
 
 const logoStyle = {
-	top: (viewport.height / 2) - 90,
-	left: (viewport.width / 2) - 60,
+	top: viewport.height / 2 - 90,
+	left: viewport.width / 2 - 60,
 	width: 120,
 	height: 107,
 };
@@ -31,7 +31,7 @@ Animatable.initializeRegistryWithDefinitions({
 	transitionToAuth: {
 		from: logoStyle,
 		to: {
-			left: (viewport.width / 2) - 32,
+			left: viewport.width / 2 - 32,
 			top: viewport.height * 0.17,
 			height: 57,
 			width: 64,
@@ -47,7 +47,7 @@ Animatable.initializeRegistryWithDefinitions({
 		},
 		to: {
 			left: viewport.width / 2,
-			top: (viewport.height / 2) - 45,
+			top: viewport.height / 2 - 45,
 			width: 0,
 			height: 0,
 			opacity: 0,

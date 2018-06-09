@@ -5,8 +5,8 @@ import Domain from '../elements/domains/Domain';
 import { connect } from '../../Provider';
 
 type Props = {
-	context: any | Context;
-}
+	context: any | Context,
+};
 
 const containerStyle = {
 	paddingBottom: 80,

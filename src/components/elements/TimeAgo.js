@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 type Props = {
-	date: ? string,
-}
+	date: ?string,
+};
 
 moment.updateLocale('en', {
 	relativeTime: {

@@ -7,12 +7,12 @@ import { validEmail } from '../../lib/utils';
 
 type Props = {
 	onSubmit: (value: string) => Promise<*>,
-}
+};
 
 type State = {
 	value: ?string,
 	validationError: boolean,
-}
+};
 
 const Input = styled.TextInput`
 	color: black;
@@ -29,7 +29,7 @@ const ValidationHint = styled.Text`
 	font-size: 15px;
 	font-weight: 300;
 	margin-top: 10px;
-	color: #EC6262;
+	color: #ec6262;
 `;
 
 export default class AuthInput extends React.Component<Props, State> {
@@ -42,7 +42,7 @@ export default class AuthInput extends React.Component<Props, State> {
 
 	handleInput = (value: string) => {
 		this.setState({ value });
-	}
+	};
 
 	// Let's see if they have email/token copied
 	// If they do, autopaste it for them
@@ -52,7 +52,7 @@ export default class AuthInput extends React.Component<Props, State> {
 		if (value.includes('@') || value.length === 24) {
 			this.setState({ value });
 		}
-	}
+	};
 
 	handleSubmit = () => {
 		const { value } = this.state;
@@ -64,7 +64,7 @@ export default class AuthInput extends React.Component<Props, State> {
 				this.setState({ validationError: true });
 			}
 		}
-	}
+	};
 
 	render() {
 		const { validationError } = this.state;
@@ -80,10 +80,13 @@ export default class AuthInput extends React.Component<Props, State> {
 					value={this.state.value}
 					autoCapitalize="none"
 				/>
-				<Animatable.View ref={this.validationMessage} duration={600} transition="opacity" style={{ opacity: validationError ? 1 : 0 }}>
-					<ValidationHint>
-						That doesn’t look like an email or a token
-					</ValidationHint>
+				<Animatable.View
+					ref={this.validationMessage}
+					duration={600}
+					transition="opacity"
+					style={{ opacity: validationError ? 1 : 0 }}
+				>
+					<ValidationHint>That doesn’t look like an email or a token</ValidationHint>
 				</Animatable.View>
 			</React.Fragment>
 		);

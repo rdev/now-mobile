@@ -7,7 +7,7 @@ import ExpireDate from './ExpireDate';
 type Props = {
 	domain: Zeit$Domain,
 	last: boolean,
-}
+};
 
 const View = styled.View`
 	flex-direction: row;
@@ -20,7 +20,7 @@ const View = styled.View`
 			border-bottom-width: 1px;
 			border-bottom-color: #EAEAEA;
 		`;
-	}}
+	}};
 `;
 
 const LeftSide = styled.View`
@@ -43,4 +43,3 @@ export default ({ domain, last }: Props) => (
 		<TimeAgo date={domain.created} />
 	</View>
 );
-

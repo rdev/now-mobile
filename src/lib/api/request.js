@@ -11,7 +11,9 @@ export default async function request(
 		const url =
 			options && options.endpoint
 				? `https://${options.endpoint}${path}`
-				: `https://api.zeit.co${path}${options && options.team ? `?teamId=${options.team}` : ''}`;
+				: `https://api.zeit.co${path}${
+					options && options.team ? `?teamId=${options.team}` : ''
+				  }`;
 
 		const res = await fetch(url, {
 			headers: {
@@ -30,4 +32,3 @@ export default async function request(
 		return Promise.reject(e);
 	}
 }
-

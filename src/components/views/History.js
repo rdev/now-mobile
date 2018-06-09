@@ -9,10 +9,6 @@ export default class History extends Component {
 	state = {};
 
 	render() {
-		return (
-			<Text>
-				History View
-			</Text>
-		);
+		return <Text>History View</Text>;
 	}
 }

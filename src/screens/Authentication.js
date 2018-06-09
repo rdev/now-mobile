@@ -12,11 +12,11 @@ import { viewport } from '../lib/utils';
 type State = {
 	code?: string,
 	email?: string,
-}
+};
 
 type Props = {
 	navigation: Navigation,
-}
+};
 
 const Container = styled(SafeAreaView)`
 	height: 100%;
@@ -59,7 +59,6 @@ const CodeText = styled.Text`
 	font-weight: 600;
 `;
 
-
 /**
  * Authentication screen. This is going to ask for an email or a token.
  * Token will be saved and used right away. Email will follow Zeit's normal login flow.
@@ -82,10 +81,13 @@ export default class Authentication extends Component<Props, State> {
 				// @TODO Error message (or on API level? TBD)
 			} else {
 				await AsyncStorage.setItem('@now:preauthToken', res.token);
-				this.setState({
-					code: res.securityCode,
-					email: input,
-				}, () => this.verify(input));
+				this.setState(
+					{
+						code: res.securityCode,
+						email: input,
+					},
+					() => this.verify(input),
+				);
 			}
 		} else if (input.length === 24) {
 			// If this is a valid token
@@ -102,7 +104,7 @@ export default class Authentication extends Component<Props, State> {
 		}
 		// Otherwise do nothing
 		// @TODO Probably should have some error message here
-	}
+	};
 
 	verify = (email: string) => {
 		// Following Zeit's website / Now Desktop, we're gonna check every 3s if email has been verified
@@ -114,7 +116,7 @@ export default class Authentication extends Component<Props, State> {
 				this.props.navigation.replace('Main');
 			}
 		}, 3000);
-	}
+	};
 
 	render() {
 		return (
@@ -139,24 +141,18 @@ export default class Authentication extends Component<Props, State> {
 										<Header>Awaiting Confirmation</Header>
 										<Text>
 											An email with a verification code was sent to{' '}
-											<Email>
-												{this.state.email}
-											</Email>
+											<Email>{this.state.email}</Email>
 										</Text>
 										<Text style={{ marginTop: 20 }}>
 											Make sure it matches the following:
 										</Text>
 										<Code>
-											<CodeText>
-												{this.state.code}
-											</CodeText>
+											<CodeText>{this.state.code}</CodeText>
 										</Code>
 									</React.Fragment>
 								);
 							}
-							return (
-								<AuthInput onSubmit={this.login} />
-							);
+							return <AuthInput onSubmit={this.login} />;
 						})()}
 					</KeyboardAwareScrollView>
 				</Animatable.View>

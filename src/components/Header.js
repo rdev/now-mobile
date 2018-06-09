@@ -8,7 +8,7 @@ import Logo from './Logo';
 
 type Props = {
 	context: any | Context,
-}
+};
 
 const View = styled.View`
 	width: 100%;
@@ -32,11 +32,11 @@ const ProfilePic = styled.View`
 export default class Header extends Component<Props> {
 	static defaultProps = {
 		context: null,
-	}
+	};
 
-	toggleSettings = () => {}
+	toggleSettings = () => {};
 
-	profileDropdown = () => {}
+	profileDropdown = () => {};
 
 	render() {
 		const { avatar } = this.props.context.user;
@@ -47,7 +47,10 @@ export default class Header extends Component<Props> {
 				</TouchableOpacity>
 				<TouchableOpacity activeOpacity={0.7}>
 					<ProfilePic>
-						<Image source={{ uri: api.user.avatarPath(avatar) }} style={{ width: '100%', height: '100%' }} />
+						<Image
+							source={{ uri: api.user.avatarPath(avatar) }}
+							style={{ width: '100%', height: '100%' }}
+						/>
 					</ProfilePic>
 				</TouchableOpacity>
 			</View>

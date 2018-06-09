@@ -14,4 +14,3 @@ export async function teams() {
 export function avatarPath(id: string) {
 	return id ? `https://zeit.co/api/www/avatar/${id}?s=90` : '';
 }
-
