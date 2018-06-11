@@ -16,8 +16,7 @@ const containerStyle = {
 @connect
 export default class Aliases extends Component<Props> {
 	render() {
-		const aliases = this.props.context.aliases.sort((a, b) =>
-			new Date(b.created) - new Date(a.created));
+		const aliases = this.props.context.aliases.sort((a, b) => new Date(b.created) - new Date(a.created));
 
 		return (
 			<ScrollView contentContainerStyle={containerStyle}>
