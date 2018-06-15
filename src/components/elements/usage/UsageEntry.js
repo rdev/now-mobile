@@ -3,8 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-	usage: string,
-	max: string,
+	usage: string | number,
+	max: string | number,
 	name: string,
 };
 
