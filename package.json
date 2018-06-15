@@ -9,13 +9,15 @@
 	},
 	"dependencies": {
 		"moment": "^2.22.1",
+		"query-string": "^6.1.0",
 		"react": "16.3.1",
 		"react-native": "0.55.3",
 		"react-native-animatable": "^1.2.4",
 		"react-native-keyboard-aware-scroll-view": "^0.5.0",
 		"react-native-snap-carousel": "^3.7.0",
 		"react-navigation": "^1.5.12",
-		"styled-components": "^3.2.6"
+		"styled-components": "^3.2.6",
+		"ua-parser-js": "^0.7.18"
 	},
 	"devDependencies": {
 		"babel-eslint": "^8.2.3",
@@ -51,7 +53,8 @@
 	"eslintConfig": {
 		"extends": "vave",
 		"rules": {
-			"react/jsx-filename-extension": "off"
+			"react/jsx-filename-extension": "off",
+			"react/no-unused-prop-types": "off"
 		}
 	},
 	"prettier": {

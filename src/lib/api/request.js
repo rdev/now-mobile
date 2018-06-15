@@ -4,16 +4,13 @@ import { AsyncStorage } from 'react-native';
 export default async function request(
 	path: string,
 	method: Method,
-	options?: RequestOptions,
+	options?: RequestOptions = {},
 ): Promise<*> {
 	try {
 		const TOKEN = await AsyncStorage.getItem('@now:token');
-		const url =
-			options && options.endpoint
-				? `https://${options.endpoint}${path}`
-				: `https://api.zeit.co${path}${
-					options && options.team ? `?teamId=${options.team}` : ''
-				  }`;
+		const { endpoint = 'api.zeit.co', team = '', query } = options;
+
+		const url = `https://${endpoint}${path}?teamId=${team}${query ? `&${query}` : ''}`;
 
 		const res = await fetch(url, {
 			headers: {

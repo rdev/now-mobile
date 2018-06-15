@@ -5,6 +5,7 @@ import domains from './actions/domains';
 import aliases from './actions/aliases';
 import usage from './actions/usage';
 import deployments from './actions/deployments';
+import events from './actions/events';
 
 export default {
 	auth,
@@ -13,4 +14,5 @@ export default {
 	aliases,
 	usage,
 	deployments,
+	events,
 };
