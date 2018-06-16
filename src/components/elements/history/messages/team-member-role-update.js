@@ -11,8 +11,8 @@ export default class TeamMemberRoleUpdate extends Message {
 			<Text>
 				{this.getDisplayName()}
 				updated <Bold>{event.payload.updatedUser.username}</Bold>
-				{"'"}s role from <Bold>{event.payload.previousRole}</Bold>
-				to <Bold>{event.payload.role}</Bold>
+				{"'"}s role from <Bold>{event.payload.previousRole}</Bold> to{' '}
+				<Bold>{event.payload.role}</Bold>
 			</Text>
 		);
 	}

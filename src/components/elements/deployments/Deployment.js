@@ -36,7 +36,8 @@ const MetaGroup = styled.View`
 `;
 
 const MetaText = styled.Text`
-	color: #b5b5b5;
+	color: ${({ state }) =>
+		(state === 'BUILD_ERROR' || state === 'DEPLOYMENT_ERROR' ? '#D74C58' : '#B5B5B5')};
 	font-size: 16px;
 	font-weight: 300;
 `;
@@ -66,7 +67,7 @@ export default ({ deployment }: Props) => (
 					paddingRight: 10,
 				}}
 			>
-				<MetaText>{deployment.state}</MetaText>
+				<MetaText state={deployment.state}>{deployment.state}</MetaText>
 			</MetaGroup>
 			<MetaGroup
 				style={{ borderLeftWidth: 0.5, borderLeftColor: '#EAEAEA', paddingLeft: 10 }}

@@ -16,11 +16,12 @@ export const Bold = styled.Text`
 export const MonospaceWrap = styled.View`
 	background-color: #f5f5f5;
 	border-radius: 4px;
+	margin-top: 15px;
 `;
 
 export const Monospace = styled.Text`
 	font-size: 15px;
 	font-family: 'Menlo';
 	color: #848484;
-	background-color: red;
+	margin: 15px;
 `;

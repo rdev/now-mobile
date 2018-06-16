@@ -33,7 +33,7 @@ export default class Login extends Message {
 				: userAgent.program
 					? 'Now CLI'
 					: null;
-			os = osNames[userAgent.os.name] || userAgent.os.name;
+			os = userAgent.os ? osNames[userAgent.os.name] || userAgent.os.name : '';
 		} else {
 			from = payload.env;
 			os = payload.os;
