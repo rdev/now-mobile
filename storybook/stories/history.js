@@ -17,6 +17,7 @@ const user = {
 const team = { slug: 'zeit-slug' };
 
 const event = {
+	type: 'deployment',
 	payload: {
 		deploymentUrl: 'zeit-zvasdfasdf.now.sh',
 		url: 'zeit-zvasdfasdf.now.sh',
@@ -68,4 +69,8 @@ messageComponents.forEach((Component, key) => {
 
 const HistoryItemStories = storiesOf('HistoryItem', module).addDecorator(center);
 
-HistoryItemStories.add('Default', () => <HistoryItem />);
+HistoryItemStories.add('Default', () => <HistoryItem user={user} event={event} team={team} />);
+
+HistoryItemStories.add('Borderless', () => (
+	<HistoryItem user={user} event={{ ...event, type: 'alias' }} team={team} last />
+));
