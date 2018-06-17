@@ -3,6 +3,8 @@ import React from 'react';
 import { Text, Bold } from '../ItemComponents';
 import Message from './message';
 
+// @FIXME API changed by Zeit: event.payload.alias / event.payload.deploymentUrl gone
+
 export default class Alias extends Message {
 	render() {
 		const { event } = this.props;
@@ -16,7 +18,8 @@ export default class Alias extends Message {
 					configured {event.payload.ruleCount} alias rule
 					{event.payload.ruleCount === null || event.payload.ruleCount > 1
 						? 's'
-						: ''} for <Bold>{event.payload.alias}</Bold>
+						: ''} for <Bold>{event.payload.deployment.url}</Bold>{' '}
+					{/* event.payload.alias */}
 				</Text>
 			);
 		}

@@ -30,6 +30,8 @@ declare type Context = {
 	usage: any | Zeit$Usage, // @FIXME There's definitely a better way to do it
 	deployments: Zeit$Deployment[],
 	events: Zeit$Event[],
-	mode: string,
+	mode: 'me' | 'team' | 'system',
+	team: any, // @TODO
 	fetchData: () => void,
+	setMode: (mode: string) => Promise<void>,
 };

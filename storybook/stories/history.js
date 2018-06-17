@@ -1,7 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import messageComponents from '../../src/components/elements/history/messages';
 import HistoryItem from '../../src/components/elements/history/HistoryItem';
+import ModeSwitcher from '../../src/components/elements/history/ModeSwitcher';
 import center from './_center';
 
 const toTitle = str =>
@@ -74,3 +76,9 @@ HistoryItemStories.add('Default', () => <HistoryItem user={user} event={event} t
 HistoryItemStories.add('Borderless', () => (
 	<HistoryItem user={user} event={{ ...event, type: 'alias' }} team={team} last />
 ));
+
+const ModeSwitcherStories = storiesOf('ModeSwitcher', module).addDecorator(center);
+
+ModeSwitcherStories.add('Without Team', () => <ModeSwitcher active="me" />);
+
+ModeSwitcherStories.add('With Team', () => <ModeSwitcher team active="system" />);

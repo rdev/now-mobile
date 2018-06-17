@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
+import { AsyncStorage } from 'react-native';
 import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
 
 type EventTypes = {
-	auto: Set<string>,
-	manual: Set<string>,
+	system: Set<string>,
+	me: Set<string>,
 };
 
 const DEFAULT_CONTEXT = {
@@ -23,7 +24,7 @@ const DEFAULT_CONTEXT = {
 	aliases: [],
 	deployments: [],
 	events: [],
-	mode: 'manual',
+	mode: 'me',
 	usage: {
 		metrics: {
 			logs: {},
@@ -48,7 +49,7 @@ export const NowConsumer = NowContext.Consumer;
 export class Provider extends React.Component<*, Context> {
 	// Shamelessly borrowed from Now Desktop
 	static getEventTypes = (): EventTypes => {
-		const auto: Set<string> = new Set([
+		const system: Set<string> = new Set([
 			'scale',
 			'scale-auto',
 			'deployment-freeze',
@@ -57,11 +58,11 @@ export class Provider extends React.Component<*, Context> {
 		]);
 
 		const all = new Set(messages.keys());
-		const manual = [...all].filter(t => !auto.has(t));
+		const manual = [...all].filter(t => !system.has(t));
 
 		return {
-			auto,
-			manual: new Set(manual),
+			system,
+			me: new Set(manual),
 		};
 	};
 
@@ -120,26 +121,39 @@ export class Provider extends React.Component<*, Context> {
 			types: Array.from(types[this.state.mode]).join(','),
 		};
 
-		console.log(query);
-
 		const { events, error } = await api.events(qs.stringify(query, { encode: false }));
 
 		if (error) return this.state.events;
 		return events;
 	};
 
-	setMode = (mode: 'manual' | 'auto'): Promise<void> =>
-		new Promise(resolve => this.setState({ mode }, resolve));
+	setMode = (mode: 'me' | 'system'): Promise<void> =>
+		new Promise(resolve =>
+			this.setState({ mode }, async () => {
+				await this.reloadEvents();
+				resolve();
+			}));
+
+	reloadEvents = async () => {
+		const events = await this.getEvents();
+		this.setState({ events });
+	};
 
 	fetcher: IntervalID;
 
 	fetchData = async () => {
-		const user = await this.getUserInfo();
-		const events = await this.getEvents();
-		const domains = await this.getDomains();
-		const aliases = await this.getAliases();
-		const deployments = await this.getDeployments();
-		const usage = await this.getUsage();
+		const token = await AsyncStorage.getItem('@now:token');
+		if (!token) return false;
+
+		const apiCalls = [
+			this.getUserInfo(),
+			this.getEvents(),
+			this.getDomains(),
+			this.getAliases(),
+			this.getDeployments(),
+			this.getUsage(),
+		];
+		const [user, events, domains, aliases, deployments, usage] = await Promise.all(apiCalls);
 
 		return new Promise((resolve) => {
 			this.setState(

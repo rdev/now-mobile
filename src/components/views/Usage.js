@@ -19,6 +19,12 @@ const Period = styled.Text`
 	letter-spacing: 0.5px;
 `;
 
+const containerStyle = {
+	paddingBottom: 50,
+	paddingHorizontal: '6%',
+	alignItems: 'center',
+};
+
 // This is new and Zeit sometimes still changes the API for this
 const Usage = ({ context }: Props) => {
 	const { mode, metrics } = context.usage;
@@ -48,13 +54,7 @@ const Usage = ({ context }: Props) => {
 		.toUpperCase();
 
 	return (
-		<ScrollView
-			contentContainerStyle={{
-				paddingHorizontal: '6%',
-				alignItems: 'center',
-				height: '100%',
-			}}
-		>
+		<ScrollView contentContainerStyle={containerStyle}>
 			<UsageEntry usage={metrics.domains} max={max.domains} name="Domains" />
 			<UsageEntry usage={metrics.activeInstances} max={max.instances} name="Instances" />
 			<UsageEntry

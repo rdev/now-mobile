@@ -25,8 +25,8 @@ class Message extends PureComponent<Props> {
 		if (isCurrentUser) {
 			return [<Bold key="you">You</Bold>, ' '];
 		}
-
-		if (event.user.username) {
+		// @FIXME Probably same issue with alias API being changed by Zeit
+		if (event.user && event.user.username) {
 			return [<Bold key="username">{event.user.username}</Bold>, ' '];
 		}
 

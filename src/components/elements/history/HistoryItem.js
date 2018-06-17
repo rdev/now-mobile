@@ -1,9 +1,25 @@
+// @flow
 import React from 'react';
 import { Image } from 'react-native';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
 import api from '../../../lib/api';
+import NowLogo from '../../../../assets/now-white.png';
 import messageComponents from './messages';
+
+type Props = {
+	user: Zeit$User,
+	event: Zeit$Event,
+	team: any, // Zeit$Team,
+};
+
+const systemEvents = new Set([
+	'scale',
+	'scale-auto',
+	'deployment-freeze',
+	'deployment-unfreeze',
+	'cert-autorenew',
+]);
 
 const View = styled.View`
 	width: 100%;
@@ -36,14 +52,18 @@ const MessageWrap = styled.View`
 	flex: 1;
 `;
 
-export default ({ user, event, team }) => {
+export default ({ user, event, team }: Props) => {
 	const Component = messageComponents.get(event.type);
 
 	return (
 		<View>
 			<UserPic>
 				<Image
-					source={{ uri: api.user.avatarPath(user.uid) }}
+					source={
+						systemEvents.has(event.type)
+							? NowLogo
+							: { uri: api.user.avatarPath(user.uid) }
+					}
 					style={{ width: '100%', height: '100%' }}
 				/>
 			</UserPic>
