@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { storiesOf } from '@storybook/react-native';
 import DeploymentGroup from '../../src/components/elements/deployments/DeploymentGroup';
@@ -25,7 +26,10 @@ DeploymentGroupStories.add('Default', () => (
 			deployment,
 			{ ...deployment, scale: null, url: 'zeit-vcaczbvcgd.now.sh' },
 			{
-				...deployment, scale: null, url: 'zeit-dabvzxcvcv.now.sh', state: 'BUILD_ERROR',
+				...deployment,
+				scale: null,
+				url: 'zeit-dabvzxcvcv.now.sh',
+				state: 'BUILD_ERROR',
 			},
 		]}
 		name="zeit"
@@ -38,7 +42,10 @@ DeploymentGroupStories.add('Borderless', () => (
 			{ ...deployment, url: 'api-docs-habcnzxcvc.now.sh' },
 			{ ...deployment, scale: null, url: 'api-docs-vcaczbvcgd.now.sh' },
 			{
-				...deployment, scale: null, url: 'api-docs-dabvzxcvcv.now.sh', state: 'BUILD_ERROR',
+				...deployment,
+				scale: null,
+				url: 'api-docs-dabvzxcvcv.now.sh',
+				state: 'BUILD_ERROR',
 			},
 		]}
 		name="api-docs"
