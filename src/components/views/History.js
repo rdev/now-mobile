@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import HistoryItem from '../elements/history/HistoryItem';
 import ModeSwitcher from '../elements/history/ModeSwitcher';
 import { connect } from '../../Provider';
@@ -16,28 +16,46 @@ const containerStyle = {
 
 @connect
 export default class History extends Component<Props> {
+	loadMore = () => {
+		const { getEvents, events } = this.props.context;
+		getEvents(events[events.length - 1].created);
+	};
+
+	renderMessage = ({ item }: { item: Zeit$Event }) =>
+		// This is dirty, but it gets the job done
+		(item.id === 'switcher' ? (
+			<ModeSwitcher
+				onSystemPress={() => this.props.context.setMode('system')}
+				onMePress={() => this.props.context.setMode('me')}
+				onTeamPress={() => {}}
+				active={this.props.context.mode}
+				team={this.props.context.team}
+			/>
+		) : (
+			<HistoryItem
+				event={item}
+				user={this.props.context.user}
+				team={this.props.context.team}
+			/>
+		));
+
 	render() {
 		const { context } = this.props;
-		const events = context.events.sort((a, b) => new Date(b.created) - new Date(a.created));
+		// Idk if it's FlatList or events or me being dumb, but some times it yelles at duplicate keys. Using Set here to force dedupe everything
+		const events = Array.from(new Set(context.events)).sort((a, b) => new Date(b.created) - new Date(a.created));
 
 		return (
-			<ScrollView contentContainerStyle={containerStyle} contentOffset={{ y: 42 }}>
-				<ModeSwitcher
-					onSystemPress={() => context.setMode('system')}
-					onMePress={() => context.setMode('me')}
-					onTeamPress={() => {}}
-					active={context.mode}
-					team={context.team}
-				/>
-				{events.map(event => (
-					<HistoryItem
-						event={event}
-						user={context.user}
-						team={context.team}
-						key={event.id}
-					/>
-				))}
-			</ScrollView>
+			<FlatList
+				contentContainerStyle={containerStyle}
+				data={[{ id: 'switcher' }, ...events]}
+				// $FlowFixMe I know what I'm doing
+				renderItem={this.renderMessage}
+				contentOffset={{ y: 42 }}
+				onEndReached={this.loadMore}
+				keyExtractor={item => (item === 'switcher' ? 'switcher' : item.id)}
+				onRefresh={() => context.reloadEvents(true)}
+				refreshing={context.refreshing}
+			/>
 		);
 	}
 }

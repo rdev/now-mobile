@@ -52,25 +52,28 @@ const MessageWrap = styled.View`
 	flex: 1;
 `;
 
-export default ({ user, event, team }: Props) => {
-	const Component = messageComponents.get(event.type);
+export default class HistoryItem extends React.PureComponent<Props> {
+	render() {
+		const { user, event, team } = this.props;
+		const Component = messageComponents.get(event.type);
 
-	return (
-		<View>
-			<UserPic>
-				<Image
-					source={
-						systemEvents.has(event.type)
-							? NowLogo
-							: { uri: api.user.avatarPath(user.uid) }
-					}
-					style={{ width: '100%', height: '100%' }}
-				/>
-			</UserPic>
-			<MessageWrap>
-				<Component event={event} user={user} team={team} />
-			</MessageWrap>
-			<TimeAgo date={event.created} style={{ marginLeft: 10 }} />
-		</View>
-	);
-};
+		return (
+			<View>
+				<UserPic>
+					<Image
+						source={
+							systemEvents.has(event.type)
+								? NowLogo
+								: { uri: api.user.avatarPath(user.uid) }
+						}
+						style={{ width: '100%', height: '100%' }}
+					/>
+				</UserPic>
+				<MessageWrap>
+					<Component event={event} user={user} team={team} />
+				</MessageWrap>
+				<TimeAgo date={event.created} style={{ marginLeft: 10 }} />
+			</View>
+		);
+	}
+}

@@ -31,7 +31,12 @@ const DEFAULT_CONTEXT = {
 			bandwidth: {},
 		},
 	},
+	team: {},
+	refreshing: false,
 	fetchData: () => {},
+	setMode: () => {},
+	getEvents: () => [],
+	reloadEvents: () => {},
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -70,11 +75,6 @@ export class Provider extends React.Component<*, Context> {
 
 	componentDidMount = () => {
 		this.fetchData();
-		this.fetcher = setInterval(this.fetchData, 10 * 1000);
-	};
-
-	componentWillUnmount = () => {
-		clearInterval(this.fetcher);
 	};
 
 	getUserInfo = async () => {
@@ -112,11 +112,10 @@ export class Provider extends React.Component<*, Context> {
 		return deployments;
 	};
 
-	getEvents = async (since?: string): Promise<Zeit$Event[]> => {
+	getEvents = async (until?: string): Promise<Zeit$Event[]> => {
 		const types = Provider.getEventTypes();
 		const query = {
-			since,
-			until: new Date().toISOString(),
+			until: until || new Date().toISOString(),
 			limit: 25,
 			types: Array.from(types[this.state.mode]).join(','),
 		};
@@ -124,22 +123,34 @@ export class Provider extends React.Component<*, Context> {
 		const { events, error } = await api.events(qs.stringify(query, { encode: false }));
 
 		if (error) return this.state.events;
+
+		if (until) {
+			this.setState({ events: [...this.state.events, ...events] });
+		}
+
 		return events;
 	};
 
 	setMode = (mode: 'me' | 'system'): Promise<void> =>
-		new Promise(resolve =>
+		new Promise((resolve) => {
+			if (mode === this.state.mode) resolve();
+
 			this.setState({ mode }, async () => {
 				await this.reloadEvents();
 				resolve();
-			}));
+			});
+		});
 
-	reloadEvents = async () => {
+	setRefreshing = (refreshing: boolean): Promise<void> =>
+		new Promise((resolve) => {
+			this.setState({ refreshing }, resolve);
+		});
+
+	reloadEvents = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
 		const events = await this.getEvents();
-		this.setState({ events });
+		this.setState({ events, refreshing: false });
 	};
-
-	fetcher: IntervalID;
 
 	fetchData = async () => {
 		const token = await AsyncStorage.getItem('@now:token');
@@ -177,6 +188,8 @@ export class Provider extends React.Component<*, Context> {
 					...this.state,
 					fetchData: this.fetchData,
 					setMode: this.setMode,
+					getEvents: this.getEvents,
+					reloadEvents: this.reloadEvents,
 				}}
 			>
 				{this.props.children}

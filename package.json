@@ -64,7 +64,8 @@
 		"extends": "vave",
 		"rules": {
 			"react/jsx-filename-extension": "off",
-			"react/no-unused-prop-types": "off"
+			"react/no-unused-prop-types": "off",
+			"max-len": "off"
 		}
 	},
 	"prettier": {
