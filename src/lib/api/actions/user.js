@@ -7,6 +7,14 @@ export async function vitals(): Promise<Zeit$Vitals> {
 	return result;
 }
 
+export async function changeUsername(username: string) {
+	const result = await request('/www/user', 'PATCH', {
+		body: { username },
+	});
+
+	return result;
+}
+
 export async function teams() {
 	//
 }

@@ -8,7 +8,8 @@ import View from '../components/View';
 import Header from '../components/Header';
 import { viewport } from '../lib/utils'; // Idk why it complains here
 
-/* eslint-disable react/no-unused-prop-types */ type Slide = {
+/* eslint-disable react/no-unused-prop-types */
+type Slide = {
 	item: string,
 	index: number,
 };

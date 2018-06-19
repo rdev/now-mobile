@@ -1,6 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
 import api from '../lib/api';
 import { connect } from '../Provider';
@@ -8,6 +10,7 @@ import Logo from './Logo';
 
 type Props = {
 	context: any | Context,
+	navigation?: Navigation,
 };
 
 const View = styled.View`
@@ -28,13 +31,23 @@ const ProfilePic = styled.View`
 	overflow: hidden;
 `;
 
+@withNavigation
 @connect
 export default class Header extends Component<Props> {
 	static defaultProps = {
 		context: null,
 	};
 
-	toggleSettings = () => {};
+	toggleSettings = () => {
+		// $FlowFixMe
+		if (this.props.navigation.state.routeName === 'Settings') {
+			// $FlowFixMe
+			this.props.navigation.replace('Main');
+		} else {
+			// $FlowFixMe
+			this.props.navigation.replace('Settings');
+		}
+	};
 
 	profileDropdown = () => {};
 
@@ -42,13 +55,13 @@ export default class Header extends Component<Props> {
 		const { avatar } = this.props.context.user;
 		return (
 			<View>
-				<TouchableOpacity activeOpacity={0.7}>
+				<TouchableOpacity activeOpacity={0.7} onPress={this.toggleSettings}>
 					<Logo />
 				</TouchableOpacity>
 				<TouchableOpacity activeOpacity={0.7}>
 					<ProfilePic>
-						<Image
-							source={{ uri: api.user.avatarPath(avatar) }}
+						<CachedImage
+							source={{ uri: api.user.avatarPath(avatar), cache: 'force-cache' }}
 							style={{ width: '100%', height: '100%' }}
 						/>
 					</ProfilePic>

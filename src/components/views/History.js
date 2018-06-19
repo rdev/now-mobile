@@ -18,10 +18,11 @@ const containerStyle = {
 export default class History extends Component<Props> {
 	loadMore = () => {
 		const { getEvents, events } = this.props.context;
-		getEvents(events[events.length - 1].created);
+		const lastEvent = events[events.length - 1];
+		if (lastEvent) getEvents(lastEvent.created);
 	};
 
-	renderMessage = ({ item }: { item: Zeit$Event }) =>
+	renderItem = ({ item }: { item: Zeit$Event }) =>
 		// This is dirty, but it gets the job done
 		(item.id === 'switcher' ? (
 			<ModeSwitcher
@@ -49,7 +50,7 @@ export default class History extends Component<Props> {
 				contentContainerStyle={containerStyle}
 				data={[{ id: 'switcher' }, ...events]}
 				// $FlowFixMe I know what I'm doing
-				renderItem={this.renderMessage}
+				renderItem={this.renderItem}
 				contentOffset={{ y: 42 }}
 				onEndReached={this.loadMore}
 				keyExtractor={item => (item === 'switcher' ? 'switcher' : item.id)}

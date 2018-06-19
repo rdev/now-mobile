@@ -2,6 +2,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import styled from 'styled-components';
+import { CachedImage } from 'react-native-img-cache';
 import TimeAgo from '../TimeAgo';
 import api from '../../../lib/api';
 import NowLogo from '../../../../assets/now-white.png';
@@ -60,14 +61,14 @@ export default class HistoryItem extends React.PureComponent<Props> {
 		return (
 			<View>
 				<UserPic>
-					<Image
-						source={
-							systemEvents.has(event.type)
-								? NowLogo
-								: { uri: api.user.avatarPath(user.uid) }
-						}
-						style={{ width: '100%', height: '100%' }}
-					/>
+					{systemEvents.has(event.type) ? (
+						<Image source={NowLogo} style={{ width: '100%', height: '100%' }} />
+					) : (
+						<CachedImage
+							source={{ uri: api.user.avatarPath(user.uid) }}
+							style={{ width: '100%', height: '100%' }}
+						/>
+					)}
 				</UserPic>
 				<MessageWrap>
 					<Component event={event} user={user} team={team} />

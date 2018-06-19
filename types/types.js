@@ -3,9 +3,12 @@
 declare type Navigation = {
 	push: (path: string) => void,
 	replace: (path: string) => void,
+	state: {
+		routeName: string,
+	},
 };
 
-declare type Method = 'get' | 'GET' | 'post' | 'POST';
+declare type Method = 'get' | 'GET' | 'post' | 'POST' | 'patch' | 'PATCH';
 
 declare type RequestOptions = {
 	body?: {

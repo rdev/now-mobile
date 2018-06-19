@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import SplashScreen from './screens/SplashScreen';
 import Authentication from './screens/Authentication';
 import Main from './screens/Main';
+import Settings from './screens/Settings';
 import { Provider } from './Provider';
 
 const App = StackNavigator(
@@ -15,6 +16,9 @@ const App = StackNavigator(
 		},
 		Main: {
 			screen: Main,
+		},
+		Settings: {
+			screen: Settings,
 		},
 	},
 	{
