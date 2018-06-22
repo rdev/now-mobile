@@ -37,6 +37,7 @@ declare type Context = {
 	team: any, // @TODO
 	refreshing: boolean,
 	dropdownVisible: boolean,
+	networkError: boolean,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],

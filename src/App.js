@@ -4,6 +4,7 @@ import SplashScreen from './screens/SplashScreen';
 import Authentication from './screens/Authentication';
 import Main from './screens/Main';
 import Settings from './screens/Settings';
+import NetworkError from './components/NetworkError';
 import { Provider } from './Provider';
 
 const App = StackNavigator(
@@ -29,5 +30,6 @@ const App = StackNavigator(
 export default () => (
 	<Provider>
 		<App />
+		<NetworkError />
 	</Provider>
 );

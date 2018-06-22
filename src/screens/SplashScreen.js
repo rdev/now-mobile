@@ -67,16 +67,20 @@ export default class SplashScreen extends React.Component<Props> {
 	// While we're here, let's pull all our data into context, so when the views are rendered
 	// they have all the data they need. Or redirect to Auth if there's no token
 	initialLoad = async () => {
-		const token = await AsyncStorage.getItem('@now:token');
-		if (token) {
-			await this.props.context.fetchData();
-			await this.logo.transitionToMain(600);
+		try {
+			const token = await AsyncStorage.getItem('@now:token');
+			if (token) {
+				await this.props.context.fetchData();
+				await this.logo.transitionToMain(600);
 
-			this.props.navigation.replace('Main');
-		} else {
-			await this.logo.transitionToAuth(600);
+				this.props.navigation.replace('Main');
+			} else {
+				await this.logo.transitionToAuth(600);
 
-			this.props.navigation.replace('Authentication');
+				this.props.navigation.replace('Authentication');
+			}
+		} catch (e) {
+			console.log('INITIAL LOAD ERROR', e);
 		}
 	};
 

@@ -17,6 +17,7 @@ type State = {
 
 type Props = {
 	navigation: Navigation,
+	context: Context,
 };
 
 const Container = styled(SafeAreaView)`

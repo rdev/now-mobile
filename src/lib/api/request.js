@@ -24,7 +24,6 @@ export default async function request(
 
 		return res.json();
 	} catch (e) {
-		// @TODO: NICE ERROR ALERTING
 		console.log(e);
 		return Promise.reject(e);
 	}

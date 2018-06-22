@@ -57,7 +57,7 @@ const MainArea = styled.View`
 `;
 
 const Text = styled.Text`
-	font-size: 18px;
+	font-size: 17px;
 	font-weight: ${({ bold }) => (bold ? 800 : 300)};
 	color: ${({ bold }) => (bold ? 'black' : '#848484')};
 `;

@@ -37,7 +37,9 @@ const DEFAULT_CONTEXT = {
 	setMode: () => {},
 	getEvents: () => [],
 	reloadEvents: () => {},
+	toggleDropdown: () => {},
 	dropdownVisible: false,
+	networkError: false,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -123,10 +125,13 @@ export class Provider extends React.Component<*, Context> {
 
 		const { events, error } = await api.events(qs.stringify(query, { encode: false }));
 
-		if (error) return this.state.events;
+		if (error) {
+			this.setState({ networkError: true });
+			return this.state.events;
+		}
 
 		if (until) {
-			this.setState({ events: [...this.state.events, ...events] });
+			this.setState({ events: [...this.state.events, ...events], networkError: false });
 		}
 
 		return events;
@@ -154,33 +159,42 @@ export class Provider extends React.Component<*, Context> {
 	};
 
 	fetchData = async () => {
-		console.log('FETCHING DATA');
-		const token = await AsyncStorage.getItem('@now:token');
-		if (!token) return false;
+		try {
+			console.log('FETCHING DATA');
+			const token = await AsyncStorage.getItem('@now:token');
+			if (!token) return false;
 
-		const apiCalls = [
-			this.getUserInfo(),
-			this.getEvents(),
-			this.getDomains(),
-			this.getAliases(),
-			this.getDeployments(),
-			this.getUsage(),
-		];
-		const [user, events, domains, aliases, deployments, usage] = await Promise.all(apiCalls);
+			const apiCalls = [
+				this.getUserInfo(),
+				this.getEvents(),
+				this.getDomains(),
+				this.getAliases(),
+				this.getDeployments(),
+				this.getUsage(),
+			];
+			const [user, events, domains, aliases, deployments, usage] = await Promise.all(apiCalls);
 
-		return new Promise((resolve) => {
-			this.setState(
-				{
-					user,
-					domains,
-					aliases,
-					usage,
-					deployments,
-					events,
-				},
-				resolve,
-			);
-		});
+			return new Promise((resolve) => {
+				this.setState(
+					{
+						user,
+						domains,
+						aliases,
+						usage,
+						deployments,
+						events,
+						networkError: false,
+					},
+					resolve,
+				);
+			});
+		} catch (e) {
+			this.setState({ networkError: true });
+
+			return new Promise((resolve, reject) => {
+				reject();
+			});
+		}
 	};
 
 	toggleDropdown = () => {
