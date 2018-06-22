@@ -44,7 +44,7 @@ const Title = styled.Text`
 	align-self: flex-start;
 `;
 
-const ProfilePic = styled.View`
+export const ProfilePic = styled.View`
 	height: 128px;
 	width: 128px;
 	border-radius: 100px;
@@ -85,7 +85,7 @@ const Text = styled.Text`
 	letter-spacing: 0.2px;
 `;
 
-const Button = styled.Text`
+export const Button = styled.Text`
 	font-size: 18px;
 	font-weight: 300;
 	color: #067df7;

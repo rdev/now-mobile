@@ -6,4 +6,4 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 
 const STORYBOOK = false;
 
-AppRegistry.registerComponent('now', () => (STORYBOOK ? StorybookUI : App));
+AppRegistry.registerComponent('now', () => (__DEV__ && STORYBOOK ? StorybookUI : App));

@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 import request from '../request';
 
 export async function login(email: string): Promise<Zeit$Preauth> {
+	console.log(email);
 	const result: Zeit$Preauth = await request('/now/registration', 'POST', {
 		body: {
 			email,
@@ -10,13 +11,16 @@ export async function login(email: string): Promise<Zeit$Preauth> {
 		},
 	});
 
+	console.log('LOGIN', result);
+
 	return result;
 }
 
 export async function verify(email: string): Promise<Zeit$Auth> {
 	const TOKEN = await AsyncStorage.getItem('@now:preauthToken');
+	console.log(`/now/registration/verify?email=${email}&token=${TOKEN}`);
 	const result: Zeit$Auth = await request(
-		`/now/registration/verify?email=${email}&token=${TOKEN}`,
+		`/now/registration/verify?email=${email}&token=${TOKEN}&t=${new Date().getTime()}`,
 		'GET',
 	);
 

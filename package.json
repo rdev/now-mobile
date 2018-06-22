@@ -18,6 +18,7 @@
 		"react-native-img-cache": "^1.5.3",
 		"react-native-keyboard-aware-scroll-view": "^0.5.0",
 		"react-native-snap-carousel": "^3.7.0",
+		"react-native-triangle": "^0.0.9",
 		"react-navigation": "^1.5.12",
 		"styled-components": "^3.2.6",
 		"ua-parser-js": "^0.7.18"
@@ -68,6 +69,9 @@
 			"react/jsx-filename-extension": "off",
 			"react/no-unused-prop-types": "off",
 			"max-len": "off"
+		},
+		"globals": {
+			"__DEV__": true
 		}
 	},
 	"prettier": {

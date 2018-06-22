@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, AsyncStorage } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
@@ -58,7 +58,7 @@ export default class Header extends Component<Props> {
 				<TouchableOpacity activeOpacity={0.7} onPress={this.toggleSettings}>
 					<Logo />
 				</TouchableOpacity>
-				<TouchableOpacity activeOpacity={0.7}>
+				<TouchableOpacity activeOpacity={0.7} onPress={this.props.context.toggleDropdown}>
 					<ProfilePic>
 						<CachedImage
 							source={{ uri: api.user.avatarPath(avatar), cache: 'force-cache' }}

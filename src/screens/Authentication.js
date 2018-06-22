@@ -8,6 +8,7 @@ import Logo from '../components/Logo';
 import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
 import { viewport } from '../lib/utils';
+import { connect } from '../Provider';
 
 type State = {
 	code?: string,
@@ -67,6 +68,7 @@ const CodeText = styled.Text`
  * @class Authentication
  * @extends {React.Component}
  */
+@connect
 export default class Authentication extends Component<Props, State> {
 	state = {};
 
@@ -95,6 +97,7 @@ export default class Authentication extends Component<Props, State> {
 			const res = await api.user.vitals();
 
 			if (res.user) {
+				await this.props.context.fetchData();
 				this.props.navigation.replace('Main');
 			} else {
 				// Nope
@@ -110,9 +113,11 @@ export default class Authentication extends Component<Props, State> {
 		// Following Zeit's website / Now Desktop, we're gonna check every 3s if email has been verified
 		this.checker = setInterval(async () => {
 			const res = await api.auth.verify(email);
+			console.log(res);
 			if (res.token) {
 				clearInterval(this.checker);
 				await AsyncStorage.setItem('@now:token', res.token);
+				await this.props.context.fetchData();
 				this.props.navigation.replace('Main');
 			}
 		}, 3000);

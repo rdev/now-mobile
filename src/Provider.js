@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, ActionSheetIOS } from 'react-native';
 import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
@@ -37,6 +37,7 @@ const DEFAULT_CONTEXT = {
 	setMode: () => {},
 	getEvents: () => [],
 	reloadEvents: () => {},
+	dropdownVisible: false,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -153,6 +154,7 @@ export class Provider extends React.Component<*, Context> {
 	};
 
 	fetchData = async () => {
+		console.log('FETCHING DATA');
 		const token = await AsyncStorage.getItem('@now:token');
 		if (!token) return false;
 
@@ -181,6 +183,28 @@ export class Provider extends React.Component<*, Context> {
 		});
 	};
 
+	toggleDropdown = () => {
+		this.setState({ dropdownVisible: !this.state.dropdownVisible });
+	};
+
+	logOut = (): Promise<void> =>
+		new Promise((resolve) => {
+			ActionSheetIOS.showActionSheetWithOptions(
+				{
+					title: 'Are you sure you want to log out?',
+					options: ['Cancel', 'Logout'],
+					destructiveButtonIndex: 1,
+					cancelButtonIndex: 0,
+				},
+				async (buttonIndex): any => {
+					if (buttonIndex === 1) {
+						await AsyncStorage.removeItem('@now:token');
+						this.setState(DEFAULT_CONTEXT, resolve);
+					}
+				},
+			);
+		});
+
 	render() {
 		return (
 			<NowContext.Provider
@@ -190,6 +214,8 @@ export class Provider extends React.Component<*, Context> {
 					setMode: this.setMode,
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
+					toggleDropdown: this.toggleDropdown,
+					logOut: this.logOut,
 				}}
 			>
 				{this.props.children}

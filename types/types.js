@@ -36,8 +36,10 @@ declare type Context = {
 	mode: 'me' | 'system',
 	team: any, // @TODO
 	refreshing: boolean,
+	dropdownVisible: boolean,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],
 	reloadEvents: (showIndicator?: boolean) => void,
+	toggleDropdown: () => void,
 };

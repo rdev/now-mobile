@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import View from '../components/View';
 import Header from '../components/Header';
+import Dropdown from '../components/Dropdown';
 import { viewport } from '../lib/utils'; // Idk why it complains here
 
 /* eslint-disable react/no-unused-prop-types */
@@ -123,6 +124,7 @@ export default class Main extends Component<*> {
 						activeSlideAlignment="start"
 						onSnapToItem={index => this.titleSlider.snapToItem(index)}
 					/>
+					<Dropdown />
 				</Animatable.View>
 			</Container>
 		);
