@@ -138,3 +138,17 @@ declare type Zeit$Events = {
 	events: Zeit$Event[],
 	error?: APIError,
 };
+
+declare type Zeit$Team = {
+	id: string,
+	slug: string,
+	name: string,
+	creatorId: string,
+	created: string,
+	avatar: ?string,
+};
+
+declare type Zeit$Teams = {
+	teams: Zeit$Team[],
+	error?: APIError,
+};

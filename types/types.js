@@ -33,8 +33,9 @@ declare type Context = {
 	usage: any | Zeit$Usage, // @FIXME There's definitely a better way to do it
 	deployments: Zeit$Deployment[],
 	events: Zeit$Event[],
+	teams: Zeit$Team[],
 	mode: 'me' | 'system',
-	team: any, // @TODO
+	team: ?Zeit$Team,
 	refreshing: boolean,
 	dropdownVisible: boolean,
 	networkError: boolean,
@@ -43,4 +44,5 @@ declare type Context = {
 	getEvents: (since: string) => Zeit$Event[],
 	reloadEvents: (showIndicator?: boolean) => void,
 	toggleDropdown: () => void,
+	logOut: () => void,
 };

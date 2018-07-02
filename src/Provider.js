@@ -24,6 +24,7 @@ const DEFAULT_CONTEXT = {
 	aliases: [],
 	deployments: [],
 	events: [],
+	teams: [],
 	mode: 'me',
 	usage: {
 		metrics: {
@@ -31,7 +32,7 @@ const DEFAULT_CONTEXT = {
 			bandwidth: {},
 		},
 	},
-	team: {},
+	team: null,
 	refreshing: false,
 	fetchData: () => {},
 	setMode: () => {},
@@ -137,6 +138,13 @@ export class Provider extends React.Component<*, Context> {
 		return events;
 	};
 
+	getTeams = async (): Promise<Zeit$Team[]> => {
+		const { teams, error } = await api.teams.getTeams();
+
+		if (error) return this.state.teams;
+		return teams;
+	};
+
 	setMode = (mode: 'me' | 'system'): Promise<void> =>
 		new Promise((resolve) => {
 			if (mode === this.state.mode) resolve();
@@ -150,6 +158,16 @@ export class Provider extends React.Component<*, Context> {
 	setRefreshing = (refreshing: boolean): Promise<void> =>
 		new Promise((resolve) => {
 			this.setState({ refreshing }, resolve);
+		});
+
+	setTeam = (team: ?Zeit$Team): Promise<void> =>
+		new Promise(async (resolve) => {
+			console.log('SETTING TEAM', team);
+			await AsyncStorage.setItem('@now:teamId', team ? team.id : null);
+			this.setState({ team }, async () => {
+				await this.fetchData();
+				resolve();
+			});
 		});
 
 	reloadEvents = async (showIndicator?: boolean) => {
@@ -171,8 +189,9 @@ export class Provider extends React.Component<*, Context> {
 				this.getAliases(),
 				this.getDeployments(),
 				this.getUsage(),
+				this.getTeams(),
 			];
-			const [user, events, domains, aliases, deployments, usage] = await Promise.all(apiCalls);
+			const [user, events, domains, aliases, deployments, usage, teams] = await Promise.all(apiCalls);
 
 			return new Promise((resolve) => {
 				this.setState(
@@ -183,6 +202,7 @@ export class Provider extends React.Component<*, Context> {
 						usage,
 						deployments,
 						events,
+						teams,
 						networkError: false,
 					},
 					resolve,
@@ -230,6 +250,7 @@ export class Provider extends React.Component<*, Context> {
 					reloadEvents: this.reloadEvents,
 					toggleDropdown: this.toggleDropdown,
 					logOut: this.logOut,
+					setTeam: this.setTeam,
 				}}
 			>
 				{this.props.children}

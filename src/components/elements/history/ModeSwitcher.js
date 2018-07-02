@@ -43,7 +43,7 @@ export default ({
 			<Text active={active === 'system'}>System</Text>
 		</Switch>
 		{(() =>
-			(team.id ? (
+			(team ? (
 				<Switch activeOpacity={0.7} border onPress={onTeamPress}>
 					<Text active={active === 'team'}>Team</Text>
 				</Switch>

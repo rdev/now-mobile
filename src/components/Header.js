@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableOpacity, AsyncStorage } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ import { connect } from '../Provider';
 import Logo from './Logo';
 
 type Props = {
-	context: any | Context,
+	context: Context,
 	navigation?: Navigation,
 };
 
@@ -52,7 +52,8 @@ export default class Header extends Component<Props> {
 	profileDropdown = () => {};
 
 	render() {
-		const { avatar } = this.props.context.user;
+		const { user, team } = this.props.context;
+
 		return (
 			<View>
 				<TouchableOpacity activeOpacity={0.7} onPress={this.toggleSettings}>
@@ -61,7 +62,10 @@ export default class Header extends Component<Props> {
 				<TouchableOpacity activeOpacity={0.7} onPress={this.props.context.toggleDropdown}>
 					<ProfilePic>
 						<CachedImage
-							source={{ uri: api.user.avatarPath(avatar), cache: 'force-cache' }}
+							source={{
+								uri: api.user.avatarPath(team && team.avatar ? team.avatar : user.avatar),
+								cache: 'force-cache',
+							}}
 							style={{ width: '100%', height: '100%' }}
 						/>
 					</ProfilePic>

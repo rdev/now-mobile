@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { TouchableWithoutFeedback } from 'react-native';
 import { withNavigation } from 'react-navigation';
@@ -8,7 +9,14 @@ import api from '../lib/api';
 import { connect } from '../Provider';
 import DropdownRow from './elements/DropdownRow';
 
-const sleep = s => new Promise(resolve => setTimeout(resolve, s * 1000));
+type Props = {
+	context: Context,
+	navigation: Navigation,
+};
+
+type State = {
+	visible: boolean,
+};
 
 const CancelArea = styled.View`
 	width: 100%;
@@ -43,12 +51,12 @@ const DropdownContent = styled.View`
 
 @connect
 @withNavigation
-export default class Dropdown extends React.Component {
+export default class Dropdown extends React.Component<Props, State> {
 	state = {
 		visible: this.props.context.dropdownVisible,
 	};
 
-	componentDidUpdate = async (prevProps) => {
+	componentDidUpdate = async (prevProps: Props) => {
 		if (prevProps.context.dropdownVisible && !this.props.context.dropdownVisible) {
 			await this.container.fadeOut(300);
 			this.setState({ visible: false });
@@ -73,6 +81,8 @@ export default class Dropdown extends React.Component {
 		this.lastPress = time;
 	};
 
+	container: Animatable.View;
+
 	lastPress = 0;
 
 	logout = async () => {
@@ -81,7 +91,9 @@ export default class Dropdown extends React.Component {
 	};
 
 	render() {
-		const { user } = this.props.context;
+		const {
+			user, teams, team, setTeam,
+		} = this.props.context;
 
 		return this.state.visible ? (
 			<React.Fragment>
@@ -108,8 +120,18 @@ export default class Dropdown extends React.Component {
 						<DropdownRow
 							text={user.username}
 							image={api.user.avatarPath(user.avatar)}
-							active
+							active={!team}
+							onPress={() => setTeam(null)}
 						/>
+						{teams.map(t => (
+							<DropdownRow
+								text={t.name}
+								image={api.user.avatarPath(t.avatar)}
+								key={t.id}
+								active={team && team.id === t.id}
+								onPress={() => setTeam(t)}
+							/>
+						))}
 						<DropdownRow text="Logout" border="top" onPress={this.logout} padded />
 					</DropdownContent>
 				</DropdownContainer>

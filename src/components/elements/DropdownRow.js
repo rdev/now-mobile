@@ -58,7 +58,8 @@ const MainArea = styled.View`
 
 const Text = styled.Text`
 	font-size: 17px;
-	font-weight: ${({ bold }) => (bold ? 800 : 300)};
+	font-weight: ${({ bold }) => (bold ? 800 : 400)};
+	letter-spacing: 0.2px;
 	color: ${({ bold }) => (bold ? 'black' : '#848484')};
 `;
 

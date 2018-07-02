@@ -6,6 +6,7 @@ import aliases from './actions/aliases';
 import usage from './actions/usage';
 import deployments from './actions/deployments';
 import events from './actions/events';
+import * as teams from './actions/teams';
 
 export default {
 	auth,
@@ -15,4 +16,5 @@ export default {
 	usage,
 	deployments,
 	events,
+	teams,
 };
