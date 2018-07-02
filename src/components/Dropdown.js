@@ -10,8 +10,8 @@ import { connect } from '../Provider';
 import DropdownRow from './elements/DropdownRow';
 
 type Props = {
-	context: Context,
-	navigation: Navigation,
+	context: any | Context,
+	navigation: any | Navigation,
 };
 
 type State = {
@@ -96,6 +96,7 @@ export default class Dropdown extends React.Component<Props, State> {
 		} = this.props.context;
 
 		return this.state.visible ? (
+			// $FlowFixMe
 			<React.Fragment>
 				<TouchableWithoutFeedback style={{ flex: 1 }} onPress={this.onOutsideTap}>
 					<CancelArea />
@@ -126,8 +127,9 @@ export default class Dropdown extends React.Component<Props, State> {
 						{teams.map(t => (
 							<DropdownRow
 								text={t.name}
-								image={api.user.avatarPath(t.avatar)}
+								image={api.user.avatarPath(t.avatar ? t.avatar : '')}
 								key={t.id}
+								// $FlowFixMe this is weird
 								active={team && team.id === t.id}
 								onPress={() => setTeam(t)}
 							/>

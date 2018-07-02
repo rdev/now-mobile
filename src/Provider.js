@@ -39,6 +39,8 @@ const DEFAULT_CONTEXT = {
 	getEvents: () => [],
 	reloadEvents: () => {},
 	toggleDropdown: () => {},
+	logOut: () => {},
+	setTeam: () => {},
 	dropdownVisible: false,
 	networkError: false,
 };

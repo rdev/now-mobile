@@ -9,7 +9,7 @@ import { connect } from '../Provider';
 import Logo from './Logo';
 
 type Props = {
-	context: Context,
+	context: any | Context,
 	navigation?: Navigation,
 };
 
@@ -34,10 +34,6 @@ const ProfilePic = styled.View`
 @withNavigation
 @connect
 export default class Header extends Component<Props> {
-	static defaultProps = {
-		context: null,
-	};
-
 	toggleSettings = () => {
 		// $FlowFixMe
 		if (this.props.navigation.state.routeName === 'Settings') {

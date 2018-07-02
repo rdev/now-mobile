@@ -45,4 +45,5 @@ declare type Context = {
 	reloadEvents: (showIndicator?: boolean) => void,
 	toggleDropdown: () => void,
 	logOut: () => void,
+	setTeam: (teamId: ?Zeit$Team) => void,
 };

@@ -79,12 +79,6 @@ const ProfileName = styled.Text`
 	letter-spacing: 0.2px;
 `;
 
-const Text = styled.Text`
-	font-size: 18px;
-	font-weight: 300;
-	letter-spacing: 0.2px;
-`;
-
 export const Button = styled.Text`
 	font-size: 18px;
 	font-weight: 300;
