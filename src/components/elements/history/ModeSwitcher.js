@@ -49,7 +49,7 @@ export default ({
 				</Switch>
 			) : null))()}
 		<Switch activeOpacity={0.7} onPress={onMePress}>
-			<Text active={active === 'me'}>Me</Text>
+			<Text active={active === 'me'}>{team ? 'Just Me' : 'Me'}</Text>
 		</Switch>
 	</View>
 );

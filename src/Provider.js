@@ -8,6 +8,7 @@ import messages from './components/elements/history/messages';
 type EventTypes = {
 	system: Set<string>,
 	me: Set<string>,
+	team: Set<string>,
 };
 
 const DEFAULT_CONTEXT = {
@@ -74,6 +75,7 @@ export class Provider extends React.Component<*, Context> {
 		return {
 			system,
 			me: new Set(manual),
+			team: new Set(manual), // @TODO There should be a better way to do this
 		};
 	};
 
@@ -124,6 +126,8 @@ export class Provider extends React.Component<*, Context> {
 			until: until || new Date().toISOString(),
 			limit: 25,
 			types: Array.from(types[this.state.mode]).join(','),
+			teamId: this.state.team ? this.state.team.id : undefined,
+			userId: this.state.team && this.state.mode === 'me' ? this.state.user.uid : '',
 		};
 
 		const { events, error } = await api.events(qs.stringify(query, { encode: false }));
@@ -147,7 +151,7 @@ export class Provider extends React.Component<*, Context> {
 		return teams;
 	};
 
-	setMode = (mode: 'me' | 'system'): Promise<void> =>
+	setMode = (mode: 'me' | 'system' | 'team'): Promise<void> =>
 		new Promise((resolve) => {
 			if (mode === this.state.mode) resolve();
 
@@ -166,7 +170,7 @@ export class Provider extends React.Component<*, Context> {
 		new Promise(async (resolve) => {
 			console.log('SETTING TEAM', team);
 			await AsyncStorage.setItem('@now:teamId', team ? team.id : null);
-			this.setState({ team }, async () => {
+			this.setState({ team, mode: 'me' }, async () => {
 				await this.fetchData();
 				resolve();
 			});

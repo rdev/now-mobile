@@ -34,7 +34,7 @@ declare type Context = {
 	deployments: Zeit$Deployment[],
 	events: Zeit$Event[],
 	teams: Zeit$Team[],
-	mode: 'me' | 'system',
+	mode: 'me' | 'system' | 'team',
 	team: ?Zeit$Team,
 	refreshing: boolean,
 	dropdownVisible: boolean,

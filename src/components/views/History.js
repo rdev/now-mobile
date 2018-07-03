@@ -28,7 +28,7 @@ export default class History extends Component<Props> {
 			<ModeSwitcher
 				onSystemPress={() => this.props.context.setMode('system')}
 				onMePress={() => this.props.context.setMode('me')}
-				onTeamPress={() => {}}
+				onTeamPress={() => this.props.context.setMode('team')}
 				active={this.props.context.mode}
 				team={this.props.context.team}
 			/>

@@ -8,12 +8,9 @@ export default async function request(
 ): Promise<*> {
 	try {
 		const TOKEN = await AsyncStorage.getItem('@now:token');
-		const teamId = await AsyncStorage.getItem('@now:teamId');
-		const { endpoint = 'api.zeit.co', team = '', query } = options;
+		const { endpoint = 'api.zeit.co', query } = options;
 
-		const url = `https://${endpoint}${path}?teamId=${teamId || team}${
-			query ? `&${query}` : ''
-		}`;
+		const url = `https://${endpoint}${path}?${query ? `${query}` : ''}`;
 
 		const res = await fetch(url, {
 			headers: {
