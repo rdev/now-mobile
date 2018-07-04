@@ -18,6 +18,7 @@
 		"react-native-img-cache": "^1.5.3",
 		"react-native-keyboard-aware-scroll-view": "^0.5.0",
 		"react-native-snap-carousel": "^3.7.0",
+		"react-native-spotlight-search": "^1.1.0",
 		"react-native-touch-id": "^4.0.4",
 		"react-native-triangle": "^0.0.9",
 		"react-navigation": "^1.5.12",

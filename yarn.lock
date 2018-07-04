@@ -8233,6 +8233,10 @@ react-native-snap-carousel@^3.7.0:
     prop-types "^15.6.1"
     react-addons-shallow-compare "15.6.2"
 
+react-native-spotlight-search@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-spotlight-search/-/react-native-spotlight-search-1.1.0.tgz#eb225231b52cabaedf29309a0dbf35eb222a6ad5"
+
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"
   resolved "https://codeload.github.com/react-navigation/react-native-tab-view/tar.gz/36ebd834d78b841fc19778c966465d02fd1213bb"

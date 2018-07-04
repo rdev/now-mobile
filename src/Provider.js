@@ -5,6 +5,7 @@ import TouchID from 'react-native-touch-id';
 import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
+import * as spotlight from './extensions/spotlight';
 
 type EventTypes = {
 	system: Set<string>,
@@ -119,6 +120,9 @@ export class Provider extends React.Component<*, Context> {
 		const { deployments, error } = await api.deployments();
 
 		if (error) return this.state.deployments;
+
+		spotlight.indexDeployments(deployments);
+
 		return deployments;
 	};
 
@@ -242,6 +246,7 @@ export class Provider extends React.Component<*, Context> {
 					if (buttonIndex === 1) {
 						await AsyncStorage.removeItem('@now:token');
 						await AsyncStorage.removeItem('@now:touchId');
+						spotlight.clear();
 
 						this.setState(DEFAULT_CONTEXT, resolve);
 					}
