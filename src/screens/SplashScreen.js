@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { SafeAreaView, AsyncStorage } from 'react-native';
+import { SafeAreaView, AsyncStorage, AlertIOS } from 'react-native';
+import TouchID from 'react-native-touch-id';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { viewport } from '../lib/utils';
@@ -69,7 +70,18 @@ export default class SplashScreen extends React.Component<Props> {
 	initialLoad = async () => {
 		try {
 			const token = await AsyncStorage.getItem('@now:token');
+
 			if (token) {
+				const biometricAuth = await this.touchId();
+
+				if (!biometricAuth) {
+					await AsyncStorage.removeItem('@now:token');
+					await AsyncStorage.removeItem('@now:touchId');
+
+					this.props.navigation.replace('Authentication');
+					return;
+				}
+
 				await this.props.context.fetchData();
 				await this.logo.transitionToMain(600);
 
@@ -83,6 +95,69 @@ export default class SplashScreen extends React.Component<Props> {
 			console.log('INITIAL LOAD ERROR', e);
 		}
 	};
+
+	touchId = (): Promise<boolean> =>
+		new Promise(async (resolve) => {
+			const pin = await AsyncStorage.getItem('@now:touchId');
+
+			if (!pin) return resolve(true);
+
+			try {
+				await TouchID.authenticate('to log in to your Now account', {
+					fallbackLabel: 'Use PIN',
+				});
+				resolve(true);
+			} catch (e) {
+				// Other error types shouldn't happen at all
+				if (
+					e.name === 'LAErrorUserCancel' ||
+					e.name === 'LAErrorUserFallback' ||
+					e.name === 'LAErrorAuthenticationFailed' ||
+					e.name === 'LAErrorSystemCancel'
+				) {
+					const pinResult = await this.pinPrompt(pin);
+					resolve(pinResult);
+				} else if (e.name === 'RCTTouchIDNotSupported') {
+					// Touch ID has been disabled due to a bunch of failed attempts
+					// It's re-enabled by entering the passcode on lock screen, but we're already here
+					const pinResult = await this.pinPrompt(pin, null, true);
+					resolve(pinResult);
+				}
+			}
+		});
+
+	pinPrompt = (pin: string, retry?: ?boolean, touchIdDisabled?: boolean): Promise<boolean> =>
+		new Promise(async (resolve) => {
+			AlertIOS.prompt(
+				'Enter PIN',
+				retry
+					? 'The pin you enterred was incorrect'
+					: touchIdDisabled
+						? 'Touch ID has been disabled. Use your PIN to log in.'
+						: '',
+				[
+					{
+						text: 'Log Out',
+						onPress: () => resolve(false),
+						style: 'cancel',
+					},
+					{
+						text: 'OK',
+						onPress: async (enteredPin) => {
+							if (enteredPin === pin) {
+								resolve(true);
+							} else {
+								const retryAttempt = await this.pinPrompt(pin, true);
+								resolve(retryAttempt);
+							}
+						},
+					},
+				],
+				'secure-text',
+				undefined,
+				'number-pad',
+			);
+		});
 
 	render() {
 		return (

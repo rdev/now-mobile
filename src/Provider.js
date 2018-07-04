@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { AsyncStorage, ActionSheetIOS } from 'react-native';
+import TouchID from 'react-native-touch-id';
 import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
@@ -83,6 +84,7 @@ export class Provider extends React.Component<*, Context> {
 
 	componentDidMount = () => {
 		this.fetchData();
+		this.detectBiometry();
 	};
 
 	getUserInfo = async () => {
@@ -184,7 +186,6 @@ export class Provider extends React.Component<*, Context> {
 
 	fetchData = async () => {
 		try {
-			console.log('FETCHING DATA');
 			const token = await AsyncStorage.getItem('@now:token');
 			if (!token) return false;
 
@@ -197,6 +198,7 @@ export class Provider extends React.Component<*, Context> {
 				this.getUsage(),
 				this.getTeams(),
 			];
+			console.log('FETCHING DATA');
 			const [user, events, domains, aliases, deployments, usage, teams] = await Promise.all(apiCalls);
 
 			return new Promise((resolve) => {
@@ -239,11 +241,22 @@ export class Provider extends React.Component<*, Context> {
 				async (buttonIndex): any => {
 					if (buttonIndex === 1) {
 						await AsyncStorage.removeItem('@now:token');
+						await AsyncStorage.removeItem('@now:touchId');
+
 						this.setState(DEFAULT_CONTEXT, resolve);
 					}
 				},
 			);
 		});
+
+	detectBiometry = async () => {
+		try {
+			const type = await TouchID.isSupported();
+			this.setState({ biometry: type === 'FaceID' ? 'face' : 'touch' });
+		} catch (e) {
+			console.log('BIOMETRY NOT SUPPORTED', e);
+		}
+	};
 
 	render() {
 		return (

@@ -1,6 +1,13 @@
 // @flow
 import React from 'react';
-import { SafeAreaView, Image, TouchableOpacity } from 'react-native';
+import {
+	SafeAreaView,
+	Image,
+	TouchableOpacity,
+	Switch,
+	AsyncStorage,
+	AlertIOS,
+} from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -15,6 +22,7 @@ type Props = {
 
 type State = {
 	editing: boolean,
+	touchId: boolean,
 	inputValue: string,
 };
 
@@ -31,7 +39,7 @@ const View = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	padding-bottom: 128px;
+	padding-bottom: 100px;
 `;
 
 const Title = styled.Text`
@@ -92,11 +100,36 @@ const Email = styled.Text`
 	margin-top: 15px;
 `;
 
+const Separator = styled.View`
+	height: 1px;
+	border-bottom-color: #eaeaea;
+	border-bottom-width: 1px;
+	margin-vertical: 30px;
+	width: 80%;
+`;
+
+const SettingsRow = styled.View`
+	width: 80%;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const RowText = styled.Text`
+	font-size: 18px
+	font-weight: 400;
+`;
+
 @connect
 export default class Settings extends React.Component<Props, State> {
 	state = {
 		editing: false,
 		inputValue: this.props.context.user.username,
+		touchId: false,
+	};
+
+	componentDidMount = () => {
+		this.setTouchId();
 	};
 
 	toggleEditing = () => {
@@ -118,7 +151,49 @@ export default class Settings extends React.Component<Props, State> {
 		}
 	};
 
+	setTouchId = async () => {
+		const touchIdEnabled = await AsyncStorage.getItem('@now:touchId');
+		if (touchIdEnabled) {
+			this.setState({ touchId: true });
+		}
+	};
+
+	toggleTouchId = async (active: boolean) => {
+		const { biometry } = this.props.context;
+
+		if (active) {
+			// $FlowFixMe this method won't ever be called if 'biometry === undefined'
+			AlertIOS.prompt(
+				'Enter PIN',
+				`This will be used if ${biometry.replace(/^\w/, c =>
+					c.toUpperCase())} ID doesn't work`,
+				[
+					{
+						text: 'Cancel',
+						onPress: () => console.log('Cancel Pressed'),
+						style: 'cancel',
+					},
+					{
+						text: 'OK',
+						onPress: async (pin) => {
+							await AsyncStorage.setItem('@now:touchId', pin);
+							this.setState({ touchId: true });
+						},
+					},
+				],
+				'secure-text',
+				undefined,
+				'number-pad',
+			);
+		} else {
+			await AsyncStorage.removeItem('@now:touchId');
+			this.setState({ touchId: false });
+		}
+	};
+
 	render() {
+		const { biometry } = this.props.context;
+		const { touchId } = this.state;
 		const { avatar, username, email } = this.props.context.user;
 
 		return (
@@ -196,6 +271,30 @@ export default class Settings extends React.Component<Props, State> {
 									);
 								})()}
 							</ProfileInfo>
+							{(() => {
+								if (biometry) {
+									return (
+										// $FlowFixMe
+										<React.Fragment>
+											<Separator />
+											<SettingsRow>
+												<RowText>
+													Use{' '}
+													{biometry.replace(/^\w/, c => c.toUpperCase())}{' '}
+													ID
+												</RowText>
+												<Switch
+													onTintColor="#000000"
+													value={this.state.touchId}
+													onValueChange={this.toggleTouchId}
+												/>
+											</SettingsRow>
+										</React.Fragment>
+									);
+								}
+
+								return null;
+							})()}
 						</View>
 					</KeyboardAwareScrollView>
 				</Animatable.View>

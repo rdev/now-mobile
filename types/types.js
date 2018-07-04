@@ -39,6 +39,7 @@ declare type Context = {
 	refreshing: boolean,
 	dropdownVisible: boolean,
 	networkError: boolean,
+	biometry?: string,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],

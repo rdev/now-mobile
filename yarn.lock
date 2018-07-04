@@ -8239,6 +8239,10 @@ react-native-snap-carousel@^3.7.0:
   dependencies:
     prop-types "^15.6.0"
 
+react-native-touch-id@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-touch-id/-/react-native-touch-id-4.0.4.tgz#7dbc051c9966bbcd33c2cfbb8d3bad171770b6b7"
+
 react-native-triangle@^0.0.9:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/react-native-triangle/-/react-native-triangle-0.0.9.tgz#53e804019477f757208da6c5977fc8695f49d4c8"
