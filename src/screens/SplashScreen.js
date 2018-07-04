@@ -4,7 +4,7 @@ import { SafeAreaView, AsyncStorage, AlertIOS } from 'react-native';
 import TouchID from 'react-native-touch-id';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
-import { viewport } from '../lib/utils';
+import { viewport, isIphoneX } from '../lib/utils';
 import ZeitLogo from '../../assets/zeit-logo.png';
 import { connect } from '../Provider';
 
@@ -133,7 +133,9 @@ export default class SplashScreen extends React.Component<Props> {
 				retry
 					? 'The pin you enterred was incorrect'
 					: touchIdDisabled
-						? 'Touch ID has been disabled. Use your PIN to log in.'
+						? `${
+							isIphoneX() ? 'Face' : 'Touch'
+						  } ID has been disabled. Use your PIN to log in.`
 						: '',
 				[
 					{

@@ -18,11 +18,12 @@ export async function login(email: string): Promise<Zeit$Preauth> {
 
 export async function verify(email: string): Promise<Zeit$Auth> {
 	const TOKEN = await AsyncStorage.getItem('@now:preauthToken');
-	console.log(`/now/registration/verify?email=${email}&token=${TOKEN}`);
 	const result: Zeit$Auth = await request(
 		`/now/registration/verify?email=${email}&token=${TOKEN}&t=${new Date().getTime()}`,
 		'GET',
 	);
+
+	console.log(result);
 
 	return result;
 }

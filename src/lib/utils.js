@@ -1,5 +1,5 @@
 // @flow
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 
 type PlansMap = Map<string, Plan>;
 
@@ -102,3 +102,14 @@ export const plans: PlansMap = new Map([
 		},
 	],
 ]);
+
+export function isIphoneX(): boolean {
+	const dimen = Dimensions.get('window');
+
+	return (
+		Platform.OS === 'ios' &&
+		!Platform.isPad &&
+		!Platform.isTVOS &&
+		(dimen.height === 812 || dimen.width === 812)
+	);
+}
