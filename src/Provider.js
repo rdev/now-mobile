@@ -123,7 +123,7 @@ export class Provider extends React.Component<*, Context> {
 		if (error) return this.state.deployments;
 
 		spotlight.indexDeployments(deployments);
-		saveToSharedGroup(deployments);
+		// saveToSharedGroup(deployments);
 
 		return deployments;
 	};

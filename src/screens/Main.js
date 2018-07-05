@@ -7,7 +7,8 @@ import * as Animatable from 'react-native-animatable';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
-import { viewport } from '../lib/utils'; // Idk why it complains here
+import { viewport } from '../lib/utils';
+import setUpBackgroundTask from '../lib/background-task';
 
 /* eslint-disable react/no-unused-prop-types */
 type Slide = {
@@ -56,6 +57,10 @@ export default class Main extends Component<*> {
 	static renderView({ item, index }: Slide) {
 		return <View key={index} name={item} />;
 	}
+
+	componentDidMount = () => {
+		setUpBackgroundTask();
+	};
 
 	titleSlider: Carousel;
 	viewSlider: Carousel;

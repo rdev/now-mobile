@@ -51,12 +51,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   @available(iOSApplicationExtension 10.0, *)
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     if activeDisplayMode == .expanded {
-      preferredContentSize = CGSize(width: maxSize.width, height: 260)
-      tableViewHeightConstraint.constant = 260
+      preferredContentSize = CGSize(width: maxSize.width, height: 260) // Set the container size for expanded mode
+      tableViewHeightConstraint.constant = 250 // Set the table height accordingly
     }
     else if activeDisplayMode == .compact {
       preferredContentSize = maxSize
-       tableViewHeightConstraint.constant = 100
+       tableViewHeightConstraint.constant = 98 // 2 pixels less to hide the divider
     }
   }
   
@@ -68,6 +68,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
       let decoder = JSONDecoder()
       let deployments = try decoder.decode(DeploymentsWidgetJSON.self, from: (deploymentsJSON?.data(using: .utf8))!)
       
+      // Write data and refresh table
       data = deployments.data;
       tableView.reloadData()
     } catch let err {
@@ -77,6 +78,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 }
 
 extension TodayViewController: UITableViewDelegate, UITableViewDataSource {
+  // Determine numer of rows. This is always gonna be 5 max because that's what we're saving from JS
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return data.count;
   }
