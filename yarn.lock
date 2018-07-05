@@ -8226,6 +8226,10 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
+react-native-shared-group-preferences@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-native-shared-group-preferences/-/react-native-shared-group-preferences-1.0.6.tgz#de471a4fc9591f318c655f95ee71e1bae00b1eca"
+
 react-native-snap-carousel@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-3.7.0.tgz#7d2794339c661d3e1f8ec4786b6335ae7cb23262"

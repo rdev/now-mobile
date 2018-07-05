@@ -6,6 +6,7 @@ import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
 import * as spotlight from './extensions/spotlight';
+import { saveDeployments as saveToSharedGroup } from './extensions/today';
 
 type EventTypes = {
 	system: Set<string>,
@@ -122,6 +123,7 @@ export class Provider extends React.Component<*, Context> {
 		if (error) return this.state.deployments;
 
 		spotlight.indexDeployments(deployments);
+		saveToSharedGroup(deployments);
 
 		return deployments;
 	};

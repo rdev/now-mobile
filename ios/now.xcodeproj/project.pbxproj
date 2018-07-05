@@ -36,12 +36,15 @@
 		2DCD954D1E0B4F2C00145EB5 /* nowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nowTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		39468099964545A79EA73F3B /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53063EAF19E44427BDEC6E81 /* libTouchID.a */; };
-		4599F5F620EBEC3A00A093C4 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4599F5F520EBEC3A00A093C4 /* NotificationCenter.framework */; };
-		4599F5F920EBEC3A00A093C4 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4599F5F820EBEC3A00A093C4 /* TodayViewController.swift */; };
-		4599F5FC20EBEC3A00A093C4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4599F5FA20EBEC3A00A093C4 /* MainInterface.storyboard */; };
-		4599F60020EBEC3A00A093C4 /* today-extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4599F5F420EBEC3900A093C4 /* today-extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		452D92FD20EE0D6800BF3AA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		45EB499F20ED40B900E0D63C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4599F5F520EBEC3A00A093C4 /* NotificationCenter.framework */; };
+		45EB49A220ED40B900E0D63C /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EB49A120ED40B900E0D63C /* TodayViewController.swift */; };
+		45EB49A520ED40B900E0D63C /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45EB49A320ED40B900E0D63C /* MainInterface.storyboard */; };
+		45EB49A920ED40B900E0D63C /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 45EB499E20ED40B900E0D63C /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		45EB49BC20ED4C9700E0D63C /* WidgetTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EB49BB20ED4C9700E0D63C /* WidgetTableRowController.swift */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6E0BFAB1E9F74CF9A06D052B /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623CC86BC564CB1ACDD296D /* libRNFetchBlob.a */; };
+		805F6D0348244255A4E66649 /* libRNReactNativeSharedGroupPreferences.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		F70C214091A143B28AAE6A76 /* libRCTSpotlightSearch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B729370EA1134C18A8C382CE /* libRCTSpotlightSearch.a */; };
@@ -300,19 +303,26 @@
 			remoteGlobalIDString = A15C300E1CD25C330074CB35;
 			remoteInfo = RNFetchBlob;
 		};
-		4599F5FE20EBEC3A00A093C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4599F5F320EBEC3900A093C4;
-			remoteInfo = "today-extension";
-		};
 		4599F63B20EC025500A093C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = TouchID;
+		};
+		45B963BD20ED395F00C2D7E3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 047C2C684B3E4050BFF4AFD8 /* RNReactNativeSharedGroupPreferences.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNReactNativeSharedGroupPreferences;
+		};
+		45EB49A720ED40B900E0D63C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45EB499D20ED40B900E0D63C;
+			remoteInfo = TodayExtension;
 		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -358,7 +368,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				4599F60020EBEC3A00A093C4 /* today-extension.appex in Embed App Extensions */,
+				45EB49A920ED40B900E0D63C /* TodayExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +385,7 @@
 		00E356EE1AD99517003FC87E /* nowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nowTests.m; sourceTree = "<group>"; };
+		047C2C684B3E4050BFF4AFD8 /* RNReactNativeSharedGroupPreferences.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeSharedGroupPreferences.xcodeproj; path = "../node_modules/react-native-shared-group-preferences/ios/RNReactNativeSharedGroupPreferences.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = now.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,16 +401,19 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		4599F5EF20EBEB9300A093C4 /* now.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = now.entitlements; path = now/now.entitlements; sourceTree = "<group>"; };
-		4599F5F420EBEC3900A093C4 /* today-extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "today-extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4599F5F520EBEC3A00A093C4 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		4599F5F820EBEC3A00A093C4 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		4599F5FB20EBEC3A00A093C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
-		4599F5FD20EBEC3A00A093C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45EB499E20ED40B900E0D63C /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		45EB49A120ED40B900E0D63C /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		45EB49A420ED40B900E0D63C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		45EB49A620ED40B900E0D63C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45EB49AD20ED40CE00E0D63C /* TodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayExtension.entitlements; sourceTree = "<group>"; };
+		45EB49BB20ED4C9700E0D63C /* WidgetTableRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTableRowController.swift; sourceTree = "<group>"; };
 		4623CC86BC564CB1ACDD296D /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		53063EAF19E44427BDEC6E81 /* libTouchID.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTouchID.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeSharedGroupPreferences.a; sourceTree = "<group>"; };
 		AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTSpotlightSearch.xcodeproj; path = "../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TouchID.xcodeproj; path = "../node_modules/react-native-touch-id/TouchID.xcodeproj"; sourceTree = "<group>"; };
@@ -435,6 +449,7 @@
 				6E0BFAB1E9F74CF9A06D052B /* libRNFetchBlob.a in Frameworks */,
 				39468099964545A79EA73F3B /* libTouchID.a in Frameworks */,
 				F70C214091A143B28AAE6A76 /* libRCTSpotlightSearch.a in Frameworks */,
+				805F6D0348244255A4E66649 /* libRNReactNativeSharedGroupPreferences.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,11 +476,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4599F5F120EBEC3900A093C4 /* Frameworks */ = {
+		45EB499B20ED40B900E0D63C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4599F5F620EBEC3A00A093C4 /* NotificationCenter.framework in Frameworks */,
+				45EB499F20ED40B900E0D63C /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +619,7 @@
 				4623CC86BC564CB1ACDD296D /* libRNFetchBlob.a */,
 				53063EAF19E44427BDEC6E81 /* libTouchID.a */,
 				B729370EA1134C18A8C382CE /* libRCTSpotlightSearch.a */,
+				84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -624,22 +640,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4599F5F720EBEC3A00A093C4 /* today-extension */ = {
-			isa = PBXGroup;
-			children = (
-				4599F5F820EBEC3A00A093C4 /* TodayViewController.swift */,
-				4599F5FA20EBEC3A00A093C4 /* MainInterface.storyboard */,
-				4599F5FD20EBEC3A00A093C4 /* Info.plist */,
-			);
-			path = "today-extension";
-			sourceTree = "<group>";
-		};
 		4599F63820EC025000A093C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				4599F63C20EC025500A093C4 /* libTouchID.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		45B9639320ED395F00C2D7E3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45B963BE20ED395F00C2D7E3 /* libRNReactNativeSharedGroupPreferences.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45EB49A020ED40B900E0D63C /* TodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				45EB49AD20ED40CE00E0D63C /* TodayExtension.entitlements */,
+				45EB49A120ED40B900E0D63C /* TodayViewController.swift */,
+				45EB49A320ED40B900E0D63C /* MainInterface.storyboard */,
+				45EB49A620ED40B900E0D63C /* Info.plist */,
+				45EB49BB20ED4C9700E0D63C /* WidgetTableRowController.swift */,
+			);
+			path = TodayExtension;
 			sourceTree = "<group>";
 		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
@@ -678,6 +704,7 @@
 				2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */,
 				B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */,
 				AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */,
+				047C2C684B3E4050BFF4AFD8 /* RNReactNativeSharedGroupPreferences.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -697,7 +724,7 @@
 				13B07FAE1A68108700A75B9A /* now */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* nowTests */,
-				4599F5F720EBEC3A00A093C4 /* today-extension */,
+				45EB49A020ED40B900E0D63C /* TodayExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				450A608320DB7E9D006A556B /* Recovered References */,
@@ -714,7 +741,7 @@
 				00E356EE1AD99517003FC87E /* nowTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* now-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* now-tvOSTests.xctest */,
-				4599F5F420EBEC3900A093C4 /* today-extension.appex */,
+				45EB499E20ED40B900E0D63C /* TodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -762,7 +789,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				4599F5FF20EBEC3A00A093C4 /* PBXTargetDependency */,
+				45EB49A820ED40B900E0D63C /* PBXTargetDependency */,
 			);
 			name = now;
 			productName = "Hello World";
@@ -805,21 +832,21 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* now-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		4599F5F320EBEC3900A093C4 /* today-extension */ = {
+		45EB499D20ED40B900E0D63C /* TodayExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4599F60120EBEC3A00A093C4 /* Build configuration list for PBXNativeTarget "today-extension" */;
+			buildConfigurationList = 45EB49AA20ED40C100E0D63C /* Build configuration list for PBXNativeTarget "TodayExtension" */;
 			buildPhases = (
-				4599F5F020EBEC3900A093C4 /* Sources */,
-				4599F5F120EBEC3900A093C4 /* Frameworks */,
-				4599F5F220EBEC3900A093C4 /* Resources */,
+				45EB499A20ED40B900E0D63C /* Sources */,
+				45EB499B20ED40B900E0D63C /* Frameworks */,
+				45EB499C20ED40B900E0D63C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "today-extension";
-			productName = "today-extension";
-			productReference = 4599F5F420EBEC3900A093C4 /* today-extension.appex */;
+			name = TodayExtension;
+			productName = TodayExtension;
+			productReference = 45EB499E20ED40B900E0D63C /* TodayExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -854,10 +881,15 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
-					4599F5F320EBEC3900A093C4 = {
+					45EB499D20ED40B900E0D63C = {
 						CreatedOnToolsVersion = 10.0;
 						DevelopmentTeam = Z4438K55LB;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -930,6 +962,10 @@
 					ProjectRef = 2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */;
 				},
 				{
+					ProductGroup = 45B9639320ED395F00C2D7E3 /* Products */;
+					ProjectRef = 047C2C684B3E4050BFF4AFD8 /* RNReactNativeSharedGroupPreferences.xcodeproj */;
+				},
+				{
 					ProductGroup = 4599F63820EC025000A093C4 /* Products */;
 					ProjectRef = B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */;
 				},
@@ -940,7 +976,7 @@
 				00E356ED1AD99517003FC87E /* nowTests */,
 				2D02E47A1E0B4A5D006451C7 /* now-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* now-tvOSTests */,
-				4599F5F320EBEC3900A093C4 /* today-extension */,
+				45EB499D20ED40B900E0D63C /* TodayExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1191,6 +1227,13 @@
 			remoteRef = 4599F63B20EC025500A093C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45B963BE20ED395F00C2D7E3 /* libRNReactNativeSharedGroupPreferences.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNReactNativeSharedGroupPreferences.a;
+			remoteRef = 45B963BD20ED395F00C2D7E3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1260,11 +1303,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4599F5F220EBEC3900A093C4 /* Resources */ = {
+		45EB499C20ED40B900E0D63C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4599F5FC20EBEC3A00A093C4 /* MainInterface.storyboard in Resources */,
+				45EB49A520ED40B900E0D63C /* MainInterface.storyboard in Resources */,
+				452D92FD20EE0D6800BF3AA7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1336,11 +1380,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4599F5F020EBEC3900A093C4 /* Sources */ = {
+		45EB499A20ED40B900E0D63C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4599F5F920EBEC3A00A093C4 /* TodayViewController.swift in Sources */,
+				45EB49A220ED40B900E0D63C /* TodayViewController.swift in Sources */,
+				45EB49BC20ED4C9700E0D63C /* WidgetTableRowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1357,10 +1402,10 @@
 			target = 2D02E47A1E0B4A5D006451C7 /* now-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
 		};
-		4599F5FF20EBEC3A00A093C4 /* PBXTargetDependency */ = {
+		45EB49A820ED40B900E0D63C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4599F5F320EBEC3900A093C4 /* today-extension */;
-			targetProxy = 4599F5FE20EBEC3A00A093C4 /* PBXContainerItemProxy */;
+			target = 45EB499D20ED40B900E0D63C /* TodayExtension */;
+			targetProxy = 45EB49A720ED40B900E0D63C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1374,10 +1419,10 @@
 			path = now;
 			sourceTree = "<group>";
 		};
-		4599F5FA20EBEC3A00A093C4 /* MainInterface.storyboard */ = {
+		45EB49A320ED40B900E0D63C /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4599F5FB20EBEC3A00A093C4 /* Base */,
+				45EB49A420ED40B900E0D63C /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -1399,12 +1444,14 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = nowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1429,12 +1476,14 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = nowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1464,6 +1513,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = now/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1495,6 +1545,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = now/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
@@ -1528,11 +1579,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = "now-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1566,11 +1619,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = "now-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1603,11 +1658,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = "now-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1640,11 +1697,13 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
+					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 				);
 				INFOPLIST_FILE = "now-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1661,7 +1720,7 @@
 			};
 			name = Release;
 		};
-		4599F60220EBEC3A00A093C4 /* Debug */ = {
+		45EB49AB20ED40C100E0D63C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1680,6 +1739,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1687,16 +1747,11 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "today-extension/Info.plist";
+				INFOPLIST_FILE = TodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -1706,7 +1761,7 @@
 			};
 			name = Debug;
 		};
-		4599F60320EBEC3A00A093C4 /* Release */ = {
+		45EB49AC20ED40C100E0D63C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1725,6 +1780,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayExtension/TodayExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
@@ -1732,15 +1788,10 @@
 				DEVELOPMENT_TEAM = Z4438K55LB;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "today-extension/Info.plist";
+				INFOPLIST_FILE = TodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1864,11 +1915,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4599F60120EBEC3A00A093C4 /* Build configuration list for PBXNativeTarget "today-extension" */ = {
+		45EB49AA20ED40C100E0D63C /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4599F60220EBEC3A00A093C4 /* Debug */,
-				4599F60320EBEC3A00A093C4 /* Release */,
+				45EB49AB20ED40C100E0D63C /* Debug */,
+				45EB49AC20ED40C100E0D63C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

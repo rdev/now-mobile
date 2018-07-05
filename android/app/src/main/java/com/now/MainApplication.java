@@ -3,6 +3,7 @@ package com.now;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.poppop.RNReactNativeSharedGroupPreferences.RNReactNativeSharedGroupPreferencesPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +26,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNReactNativeSharedGroupPreferencesPackage(),
             new FingerprintAuthPackage(),
             new RNFetchBlobPackage()
       );

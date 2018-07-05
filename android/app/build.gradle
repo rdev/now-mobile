@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-shared-group-preferences')
     compile project(':react-native-touch-id')
     compile project(':react-native-fetch-blob')
     compile fileTree(dir: "libs", include: ["*.jar"])
