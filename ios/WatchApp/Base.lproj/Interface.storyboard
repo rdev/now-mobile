@@ -1,14 +1,109 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11134" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14269.12" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11055"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14224.3"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--Usage Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="UsageController" customModule="WatchApp_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="gk1-oD-cgK">
+                            <items>
+                                <imageView width="30" height="18" alignment="left" image="zeit-logo" contentMode="scaleAspectFit" id="38H-oF-U93"/>
+                                <label alignment="left" verticalAlignment="center" text="Usage" id="fp8-Sa-xbD">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="5" top="6" bottom="12"/>
+                        </group>
+                        <group width="1" alignment="left" layout="vertical" id="98u-x4-jNd" userLabel="DomainsGroup">
+                            <items>
+                                <group width="1" alignment="left" id="xzp-tf-hrE" userLabel="MetricsGroup">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="-" id="cUt-yQ-jhP">
+                                            <fontDescription key="font" type="system" weight="thin" pointSize="28"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label alignment="center" verticalAlignment="center" text="Domains" id="6dd-dh-qgD">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="5"/>
+                        </group>
+                        <separator width="30" alignment="center" alpha="0.20000000000000001" id="JMx-e2-iEC"/>
+                        <group width="1" alignment="left" layout="vertical" id="RSp-iA-gco" userLabel="InstancesGroup">
+                            <items>
+                                <group width="1" alignment="left" id="T9P-pe-fka" userLabel="MetricsGroup">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="-" id="xaw-zD-POr">
+                                            <fontDescription key="font" type="system" weight="thin" pointSize="28"/>
+                                        </label>
+                                        <label alignment="center" verticalAlignment="center" alpha="0.69999999999999996" text="/" id="aWI-Iy-LHZ"/>
+                                        <label alignment="center" verticalAlignment="center" alpha="0.69999999999999996" text="-" id="pYe-7L-lBa">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label alignment="center" verticalAlignment="center" text="Instances" id="KJj-6a-9JD">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="5"/>
+                        </group>
+                        <separator width="30" alignment="center" alpha="0.20000000000000001" id="49W-MJ-OLz"/>
+                        <group width="1" alignment="left" layout="vertical" id="uaW-9l-2H4" userLabel="BandwidthGroup">
+                            <items>
+                                <group width="1" alignment="left" id="pgc-VA-VBk" userLabel="MetricsGroup">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="-" id="ovG-np-WSI">
+                                            <fontDescription key="font" type="system" weight="thin" pointSize="28"/>
+                                        </label>
+                                        <label alignment="center" verticalAlignment="center" alpha="0.69999999999999996" text="/" id="UGj-ae-ZHI"/>
+                                        <label alignment="center" verticalAlignment="center" alpha="0.69999999999999996" text="-" id="RmF-Rj-gat">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label alignment="center" verticalAlignment="center" text="Bandwidth" id="dDI-UY-Xp6">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="5"/>
+                        </group>
+                        <separator width="30" alignment="center" alpha="0.20000000000000001" id="Mj3-TA-9qV"/>
+                        <group width="1" alignment="left" layout="vertical" id="7Sb-IJ-2Zs" userLabel="LogsGroup">
+                            <items>
+                                <group width="1" alignment="left" id="wfI-Rs-j3X" userLabel="MetricsGroup">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="-" id="ZUh-q0-mG5">
+                                            <fontDescription key="font" type="system" weight="thin" pointSize="28"/>
+                                        </label>
+                                        <label alignment="center" verticalAlignment="center" alpha="0.69999999999999996" text="/" id="QYs-jY-KgJ"/>
+                                        <label alignment="center" verticalAlignment="center" alpha="0.69999999999999996" text="-" id="3Xp-kW-cbb">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <label alignment="center" verticalAlignment="center" text="Logs" id="OnX-CD-AC2">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="5"/>
+                        </group>
+                        <separator width="30" alignment="center" alpha="0.20000000000000001" id="UXa-Ds-PI1"/>
+                        <label alignment="center" alpha="0.69999999999999996" text="-" id="w7i-by-Ral">
+                            <fontDescription key="font" type="system" weight="medium" pointSize="12"/>
+                        </label>
+                    </items>
+                </controller>
             </objects>
         </scene>
     </scenes>

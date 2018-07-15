@@ -2,8 +2,8 @@
 //  ComplicationController.swift
 //  WatchApp Extension
 //
-//  Created by Max Rovensky on 06/07/2018.
-//  Copyright © 2018 Facebook. All rights reserved.
+//  Created by Max Rovensky on 16/07/2018.
+//  Copyright © 2018. All rights reserved.
 //
 
 import ClockKit

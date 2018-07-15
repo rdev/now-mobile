@@ -3,8 +3,10 @@
 //  TodayExtension
 //
 //  Created by Max Rovensky on 05/07/2018.
-//  Copyright © 2018 Facebook. All rights reserved.
+//  Copyright © 2018. All rights reserved.
 //
+
+// @TODO Handle unauthenticated case (cur: "Unable to load")
 
 import UIKit
 import NotificationCenter
@@ -97,7 +99,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource {
     if (item.state == "DEPLOYMENT_ERROR" || item.state == "BUILD_ERROR") {
       cell.deploymentState.textColor = UIColor(red:0.92, green:0.27, blue:0.27, alpha:1.0) // #EA4545
     }
-    
+
     if item.instances == -1 {
       cell.instanceImage.image = nil
       cell.instanceCount.isHidden = true

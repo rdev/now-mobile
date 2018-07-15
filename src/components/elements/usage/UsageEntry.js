@@ -51,7 +51,7 @@ export default ({ usage, max, name }: Props) => (
 	<View>
 		<Numbers>
 			<Usage>{usage}</Usage>
-			<Max>/ {max}</Max>
+			{name !== 'Domains' && <Max>/ {max}</Max>}
 		</Numbers>
 		<Title>{name}</Title>
 		{name !== 'Logs' && <Separator />}
