@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { TouchableWithoutFeedback } from 'react-native';
+import { TouchableWithoutFeedback, AlertIOS } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components';
@@ -90,6 +90,31 @@ export default class Dropdown extends React.Component<Props, State> {
 		this.props.navigation.replace('Authentication');
 	};
 
+	createTeam = (error?: string) => {
+		AlertIOS.prompt('Enter new team name', error, [
+			{
+				text: 'Cancel',
+				onPress: () => console.log('Cancel Pressed'),
+				style: 'cancel',
+			},
+			{
+				text: 'Create',
+				onPress: async (slug) => {
+					try {
+						await this.props.context.createTeam(slug);
+					} catch (e) {
+						console.log('TEAM CREATION ERROR', e);
+						if (e.code === 'slug_in_use_team') {
+							this.createTeam(`The name "${slug}" is already in use`);
+						} else {
+							this.createTeam('There was an error creating a team');
+						}
+					}
+				},
+			},
+		]);
+	};
+
 	render() {
 		const {
 			user, teams, team, setTeam,
@@ -116,7 +141,13 @@ export default class Dropdown extends React.Component<Props, State> {
 						style={{ position: 'absolute', right: 12, top: -16 }}
 					/>
 					<DropdownContent>
-						<DropdownRow text="Create a team" plus padded border="bottom" />
+						<DropdownRow
+							text="Create a team"
+							plus
+							padded
+							border="bottom"
+							onPress={() => this.createTeam()}
+						/>
 						<DropdownRow text="Profiles" bold />
 						<DropdownRow
 							text={user.username}
@@ -127,7 +158,7 @@ export default class Dropdown extends React.Component<Props, State> {
 						{teams.map(t => (
 							<DropdownRow
 								text={t.name}
-								image={api.user.avatarPath(t.avatar ? t.avatar : '')}
+								image={api.user.avatarPath(t.avatar, t.avatar ? null : t.id)}
 								key={t.id}
 								// $FlowFixMe this is weird
 								active={team && team.id === t.id}

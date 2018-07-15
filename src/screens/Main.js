@@ -96,6 +96,7 @@ export default class Main extends Component<*> {
 		return (
 			<Container>
 				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+					{/* $FlowFixMe */}
 					<Header />
 					{/* Titles carousel */}
 					<Carousel
@@ -129,6 +130,7 @@ export default class Main extends Component<*> {
 						activeSlideAlignment="start"
 						onSnapToItem={index => this.titleSlider.snapToItem(index)}
 					/>
+					{/* $FlowFixMe */}
 					<Dropdown />
 				</Animatable.View>
 			</Container>

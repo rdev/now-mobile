@@ -71,7 +71,7 @@ export default class HistoryItem extends React.PureComponent<Props> {
 					)}
 				</UserPic>
 				<MessageWrap>
-					<Component event={event} user={user} team={team} />
+					<Component event={event} user={user} team={team || {}} />
 				</MessageWrap>
 				<TimeAgo date={event.created} style={{ marginLeft: 10 }} />
 			</View>

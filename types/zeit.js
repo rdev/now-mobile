@@ -153,3 +153,8 @@ declare type Zeit$Teams = {
 	teams: Zeit$Team[],
 	error?: APIError,
 };
+
+declare type Zeit$NewTeam = {
+	id: string,
+	error?: APIError,
+};

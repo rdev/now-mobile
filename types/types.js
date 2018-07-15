@@ -47,4 +47,5 @@ declare type Context = {
 	toggleDropdown: () => void,
 	logOut: () => void,
 	setTeam: (teamId: ?Zeit$Team) => void,
+	createTeam: (slug: string) => string,
 };

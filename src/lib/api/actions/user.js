@@ -19,6 +19,9 @@ export async function teams() {
 	//
 }
 
-export function avatarPath(id: string) {
+export function avatarPath(id?: ?string, teamId: ?string) {
+	if (teamId) {
+		return `https://zeit.co/api/www/avatar/?teamId=${teamId}&s=90`;
+	}
 	return id ? `https://zeit.co/api/www/avatar/${id}?s=90` : '';
 }

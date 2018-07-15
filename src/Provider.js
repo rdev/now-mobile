@@ -1,4 +1,6 @@
 // @flow
+// @TODO I feel like this component is becoming way too gigantic and something needs to be improoved
+
 import React from 'react';
 import { AsyncStorage, ActionSheetIOS } from 'react-native';
 import TouchID from 'react-native-touch-id';
@@ -45,6 +47,7 @@ const DEFAULT_CONTEXT = {
 	toggleDropdown: () => {},
 	logOut: () => {},
 	setTeam: () => {},
+	createTeam: () => {},
 	dropdownVisible: false,
 	networkError: false,
 };
@@ -123,7 +126,7 @@ export class Provider extends React.Component<*, Context> {
 		if (error) return this.state.deployments;
 
 		spotlight.indexDeployments(deployments);
-		// saveToSharedGroup(deployments);
+		saveToSharedGroup(deployments);
 
 		return deployments;
 	};
@@ -159,6 +162,20 @@ export class Provider extends React.Component<*, Context> {
 		return teams;
 	};
 
+	createTeam = (slug: string): Promise<string> =>
+		new Promise(async (resolve, reject) => {
+			const { id, error } = await api.teams.createTeam(slug);
+
+			if (error) {
+				reject(error);
+			} else {
+				const teams = await this.getTeams();
+
+				this.setState({ teams });
+				resolve(id);
+			}
+		});
+
 	setMode = (mode: 'me' | 'system' | 'team'): Promise<void> =>
 		new Promise((resolve) => {
 			if (mode === this.state.mode) resolve();
@@ -177,7 +194,13 @@ export class Provider extends React.Component<*, Context> {
 	setTeam = (team: ?Zeit$Team): Promise<void> =>
 		new Promise(async (resolve) => {
 			console.log('SETTING TEAM', team);
-			await AsyncStorage.setItem('@now:teamId', team ? team.id : null);
+
+			if (team) {
+				await AsyncStorage.setItem('@now:teamId', team.id);
+			} else {
+				await AsyncStorage.removeItem('@now:teamId');
+			}
+
 			this.setState({ team, mode: 'me' }, async () => {
 				await this.fetchData();
 				resolve();
@@ -277,6 +300,7 @@ export class Provider extends React.Component<*, Context> {
 					toggleDropdown: this.toggleDropdown,
 					logOut: this.logOut,
 					setTeam: this.setTeam,
+					createTeam: this.createTeam,
 				}}
 			>
 				{this.props.children}

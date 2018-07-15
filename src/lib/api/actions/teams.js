@@ -8,9 +8,9 @@ export async function getTeams(): Promise<Zeit$Teams> {
 }
 
 // @TODO
-export async function createTeam(): Promise<*> {
-	const result: Zeit$Aliases = await request('/teams', 'POST', {
-		body: {},
+export async function createTeam(slug: string): Promise<*> {
+	const result: Zeit$NewTeam = await request('/teams', 'POST', {
+		body: { slug },
 	});
 
 	return result;
