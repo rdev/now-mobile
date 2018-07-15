@@ -36,6 +36,7 @@ declare type Zeit$Vitals = {
 declare type Zeit$Domain = {
 	uid: string,
 	name: string,
+	cdnEnabled: boolean,
 	created: string,
 	boughtAt: ?string,
 	expiresAt: ?string,

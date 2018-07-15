@@ -28,6 +28,22 @@ const LeftSide = styled.View`
 	flex: 1;
 `;
 
+const Metadata = styled.View`
+	flex-direction: row;
+	align-items: center;
+`;
+
+const MetaText = styled.Text`
+	color: ${({ enabled }) => (enabled ? 'black' : '#B5B5B5')};
+	font-size: 16px;
+	font-weight: 300;
+`;
+
+const MetaGroup = styled.View`
+	flex-direction: row;
+	align-items: center;
+`;
+
 const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
@@ -38,7 +54,21 @@ export default ({ domain, last }: Props) => (
 	<View last={last}>
 		<LeftSide>
 			<Title>{domain.name}</Title>
-			<ExpireDate date={domain.expiresAt} />
+			<Metadata>
+				<MetaGroup
+					style={{
+						borderRightWidth: 0.5,
+						borderRightColor: '#EAEAEA',
+						paddingRight: 10,
+						marginRight: 10,
+					}}
+				>
+					<MetaText enabled={domain.enabled}>
+						{domain.enabled ? 'CDN: On' : 'CDN: Off'}
+					</MetaText>
+				</MetaGroup>
+				<ExpireDate date={domain.expiresAt} />
+			</Metadata>
 		</LeftSide>
 		<TimeAgo date={domain.created} />
 	</View>
