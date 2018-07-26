@@ -4,6 +4,7 @@
 import React from 'react';
 import { AsyncStorage, ActionSheetIOS } from 'react-native';
 import TouchID from 'react-native-touch-id';
+import * as watch from 'react-native-watch-connectivity';
 import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
@@ -47,9 +48,11 @@ const DEFAULT_CONTEXT = {
 	toggleDropdown: () => {},
 	logOut: () => {},
 	setTeam: () => {},
-	createTeam: () => {},
+	createTeam: () => '',
+	sendTokenToWatch: () => {},
 	dropdownVisible: false,
 	networkError: false,
+	watchIsReachable: false,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -90,6 +93,7 @@ export class Provider extends React.Component<*, Context> {
 	componentDidMount = () => {
 		this.fetchData();
 		this.detectBiometry();
+		this.setUpWatchConnectivity();
 	};
 
 	getUserInfo = async () => {
@@ -272,6 +276,7 @@ export class Provider extends React.Component<*, Context> {
 						await AsyncStorage.removeItem('@now:token');
 						await AsyncStorage.removeItem('@now:touchId');
 						spotlight.clear();
+						watch.updateApplicationContext({});
 
 						this.setState(DEFAULT_CONTEXT, resolve);
 					}
@@ -288,6 +293,36 @@ export class Provider extends React.Component<*, Context> {
 		}
 	};
 
+	sendTokenToWatch = async () => {
+		const token = await AsyncStorage.getItem('@now:token');
+		watch.updateApplicationContext(token ? { token } : {});
+	};
+
+	setUpWatchConnectivity = () => {
+		watch.getWatchReachability((err, watchIsReachable) => {
+			this.setState({ watchIsReachable });
+		});
+		watch.subscribeToWatchReachability((err, watchIsReachable) => {
+			if (!err) {
+				this.setState({ watchIsReachable });
+
+				if (watchIsReachable) {
+					this.sendTokenToWatch();
+				}
+			}
+		});
+		watch.getWatchState((err, watchState) => {
+			if (!err && watchState === 'Activated') {
+				this.sendTokenToWatch();
+			}
+		});
+		watch.subscribeToWatchState((err, watchState) => {
+			if (!err && watchState === 'Activated') {
+				this.sendTokenToWatch();
+			}
+		});
+	};
+
 	render() {
 		return (
 			<NowContext.Provider
@@ -301,6 +336,7 @@ export class Provider extends React.Component<*, Context> {
 					logOut: this.logOut,
 					setTeam: this.setTeam,
 					createTeam: this.createTeam,
+					sendTokenToWatch: this.sendTokenToWatch,
 				}}
 			>
 				{this.props.children}

@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../components/Header';
+import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
 import api from '../lib/api';
 import { connect } from '../Provider';
@@ -161,7 +162,7 @@ export default class Settings extends React.Component<Props, State> {
 	toggleTouchId = async (active: boolean) => {
 		const { biometry } = this.props.context;
 
-		if (active) {
+		if (active && biometry !== undefined) {
 			// $FlowFixMe this method won't ever be called if 'biometry === undefined'
 			AlertIOS.prompt(
 				'Enter PIN',
@@ -192,8 +193,7 @@ export default class Settings extends React.Component<Props, State> {
 	};
 
 	render() {
-		const { biometry } = this.props.context;
-		const { touchId } = this.state;
+		const { biometry, watchIsReachable, sendTokenToWatch } = this.props.context;
 		const { avatar, username, email } = this.props.context.user;
 
 		return (
@@ -210,6 +210,7 @@ export default class Settings extends React.Component<Props, State> {
 						}}
 						scrollEnabled={false}
 					>
+						{/* $FlowFixMe */}
 						<Header />
 						<Title>Settings</Title>
 						<View>
@@ -295,8 +296,30 @@ export default class Settings extends React.Component<Props, State> {
 
 								return null;
 							})()}
+							{(() => {
+								if (watchIsReachable) {
+									return (
+										// $FlowFixMe
+										<React.Fragment>
+											<Separator />
+											<SettingsRow>
+												<RowText>Apple Watch</RowText>
+												<TouchableOpacity
+													activeOpacity={0.6}
+													onPress={sendTokenToWatch}
+												>
+													<Button>Force Sync</Button>
+												</TouchableOpacity>
+											</SettingsRow>
+										</React.Fragment>
+									);
+								}
+
+								return null;
+							})()}
 						</View>
 					</KeyboardAwareScrollView>
+					<Dropdown />
 				</Animatable.View>
 			</Container>
 		);

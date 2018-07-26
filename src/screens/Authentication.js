@@ -98,6 +98,7 @@ export default class Authentication extends Component<Props, State> {
 			const res = await api.user.vitals();
 
 			if (res.user) {
+				this.props.context.sendTokenToWatch();
 				await this.props.context.fetchData();
 				this.props.navigation.replace('Main');
 			} else {
@@ -114,10 +115,10 @@ export default class Authentication extends Component<Props, State> {
 		// Following Zeit's website / Now Desktop, we're gonna check every 3s if email has been verified
 		this.checker = setInterval(async () => {
 			const res = await api.auth.verify(email);
-			console.log(res);
 			if (res.token) {
 				clearInterval(this.checker);
 				await AsyncStorage.setItem('@now:token', res.token);
+				this.props.context.sendTokenToWatch();
 				await this.props.context.fetchData();
 				this.props.navigation.replace('Main');
 			}

@@ -40,6 +40,7 @@ declare type Context = {
 	dropdownVisible: boolean,
 	networkError: boolean,
 	biometry?: string,
+	watchIsReachable?: boolean,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],
@@ -48,4 +49,5 @@ declare type Context = {
 	logOut: () => void,
 	setTeam: (teamId: ?Zeit$Team) => void,
 	createTeam: (slug: string) => string,
+	sendTokenToWatch: () => void,
 };

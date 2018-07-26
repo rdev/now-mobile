@@ -21,7 +21,7 @@ struct DeploymentWidgetItem: Codable {
   let state: String?
   let url: String?
   let date: String?
-  
+
   private enum CodingKeys: String, CodingKey {
     case instances
     case state
@@ -38,18 +38,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
 
 	override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     // Set support for expanded mode
     extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-    
+
     self.refreshData() // Get data from the shared group
   }
-  
+
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
     self.refreshData() // Get fresh data
     completionHandler(NCUpdateResult.newData) // Signal completion
   }
-  
+
   @available(iOSApplicationExtension 10.0, *)
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     if activeDisplayMode == .expanded {
@@ -61,15 +61,15 @@ class TodayViewController: UIViewController, NCWidgetProviding {
        tableViewHeightConstraint.constant = 98 // 2 pixels less to hide the divider
     }
   }
-  
+
   func refreshData() {
     let sharedContainer = UserDefaults(suiteName: "group.im.rdev.now-mobile")
     let deploymentsJSON = sharedContainer?.string(forKey: "deployments")
-    
+
     do {
       let decoder = JSONDecoder()
       let deployments = try decoder.decode(DeploymentsWidgetJSON.self, from: (deploymentsJSON?.data(using: .utf8))!)
-      
+
       // Write data and refresh table
       data = deployments.data;
       tableView.reloadData()
@@ -84,10 +84,10 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return data.count;
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WidgetTableRowController", for: indexPath) as! WidgetTableRowController
-    
+
     let item = data[indexPath.row]
 
     cell.deploymentURL?.text = item.url
@@ -107,7 +107,7 @@ extension TodayViewController: UITableViewDelegate, UITableViewDataSource {
       cell.instanceCountLeftConstraint.constant = 0
       cell.deploymentStateLeftConstraint.constant = 0
     }
-    
+
     return cell
   }
 }

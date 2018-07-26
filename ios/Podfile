@@ -1,0 +1,10 @@
+use_frameworks!
+
+workspace 'Now.xcworkspace'
+project 'now.xcodeproj'
+
+target 'WatchApp Extension' do
+  platform :watchos, '4.0'
+  pod 'Alamofire', '~> 4.7'
+  pod 'SwiftyJSON', '~> 4.0'
+end
