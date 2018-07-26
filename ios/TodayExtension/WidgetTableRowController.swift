@@ -1,10 +1,3 @@
-//
-//  WidgetTableRowController.swift
-//  TodayExtension
-//
-//  Created by Max Rovensky on 05/07/2018.
-//
-
 import UIKit
 
 class WidgetTableRowController: UITableViewCell {

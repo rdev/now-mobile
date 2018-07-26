@@ -1,11 +1,3 @@
-//
-//  TodayViewController.swift
-//  TodayExtension
-//
-//  Created by Max Rovensky on 05/07/2018.
-//  Copyright © 2018. All rights reserved.
-//
-
 // @TODO Handle unauthenticated case (cur: "Unable to load")
 
 import UIKit
