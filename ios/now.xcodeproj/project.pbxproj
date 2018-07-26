@@ -39,6 +39,10 @@
 		452D92FD20EE0D6800BF3AA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		45349EAA2104DCBF0095EFF5 /* AliasRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45349EA92104DCBF0095EFF5 /* AliasRowController.swift */; };
 		45349ED92104DF560095EFF5 /* AliasesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45349ED82104DF560095EFF5 /* AliasesController.swift */; };
+		457DD235210A522400E96315 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4599F5F520EBEC3A00A093C4 /* NotificationCenter.framework */; };
+		457DD238210A522400E96315 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DD237210A522400E96315 /* TodayViewController.swift */; };
+		457DD23B210A522400E96315 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 457DD239210A522400E96315 /* MainInterface.storyboard */; };
+		457DD23F210A522400E96315 /* TodayUsageExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 457DD234210A522400E96315 /* TodayUsageExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		458122BD21051DB100EF4DA6 /* DeploymentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581229121051DB000EF4DA6 /* DeploymentsController.swift */; };
 		458122C1210527C800EF4DA6 /* DeploymentRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458122C0210527C800EF4DA6 /* DeploymentRowController.swift */; };
 		45EB499F20ED40B900E0D63C /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4599F5F520EBEC3A00A093C4 /* NotificationCenter.framework */; };
@@ -317,6 +321,13 @@
 			remoteGlobalIDString = A15C300E1CD25C330074CB35;
 			remoteInfo = RNFetchBlob;
 		};
+		457DD23D210A522400E96315 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 457DD233210A522400E96315;
+			remoteInfo = TodayUsageExtension;
+		};
 		4599F63B20EC025500A093C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */;
@@ -418,6 +429,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				457DD23F210A522400E96315 /* TodayUsageExtension.appex in Embed App Extensions */,
 				45EB49A920ED40B900E0D63C /* TodayExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -464,6 +476,11 @@
 		4525FFFF20FBAEEA004F5C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		45349EA92104DCBF0095EFF5 /* AliasRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliasRowController.swift; sourceTree = "<group>"; };
 		45349ED82104DF560095EFF5 /* AliasesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliasesController.swift; sourceTree = "<group>"; };
+		457DD234210A522400E96315 /* TodayUsageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayUsageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		457DD237210A522400E96315 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		457DD23A210A522400E96315 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		457DD23C210A522400E96315 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		457DD26E210A5CB000E96315 /* TodayUsageExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodayUsageExtension.entitlements; sourceTree = "<group>"; };
 		4581229121051DB000EF4DA6 /* DeploymentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeploymentsController.swift; sourceTree = "<group>"; };
 		458122C0210527C800EF4DA6 /* DeploymentRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeploymentRowController.swift; sourceTree = "<group>"; };
 		4599F5EF20EBEB9300A093C4 /* now.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = now.entitlements; path = now/now.entitlements; sourceTree = "<group>"; };
@@ -537,6 +554,14 @@
 				B1F700FEA36645AC3C53E8B3 /* Pods_WatchApp_Extension.framework in Frameworks */,
 				4525016A20FBDCB1004F5C4B /* Alamofire.framework in Frameworks */,
 				4525019720FBDCB4004F5C4B /* SwiftyJSON.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		457DD231210A522400E96315 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457DD235210A522400E96315 /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,6 +779,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		457DD236210A522400E96315 /* TodayUsageExtension */ = {
+			isa = PBXGroup;
+			children = (
+				457DD26E210A5CB000E96315 /* TodayUsageExtension.entitlements */,
+				457DD237210A522400E96315 /* TodayViewController.swift */,
+				457DD239210A522400E96315 /* MainInterface.storyboard */,
+				457DD23C210A522400E96315 /* Info.plist */,
+			);
+			path = TodayUsageExtension;
+			sourceTree = "<group>";
+		};
 		4599F63820EC025000A093C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +893,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* nowTests */,
 				45EB49A020ED40B900E0D63C /* TodayExtension */,
+				457DD236210A522400E96315 /* TodayUsageExtension */,
 				4525FFFD20FBAEEA004F5C4B /* WatchApp */,
 				4525000C20FBAEED004F5C4B /* WatchApp Extension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -877,6 +914,7 @@
 				45EB499E20ED40B900E0D63C /* TodayExtension.appex */,
 				4525FFFC20FBAEEA004F5C4B /* WatchApp.app */,
 				4525000820FBAEED004F5C4B /* WatchApp Extension.appex */,
+				457DD234210A522400E96315 /* TodayUsageExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -927,6 +965,7 @@
 			dependencies = (
 				45EB49A820ED40B900E0D63C /* PBXTargetDependency */,
 				4525001720FBAEEF004F5C4B /* PBXTargetDependency */,
+				457DD23E210A522400E96315 /* PBXTargetDependency */,
 			);
 			name = now;
 			productName = "Hello World";
@@ -969,6 +1008,23 @@
 			productName = WatchApp;
 			productReference = 4525FFFC20FBAEEA004F5C4B /* WatchApp.app */;
 			productType = "com.apple.product-type.application.watchapp2";
+		};
+		457DD233210A522400E96315 /* TodayUsageExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 457DD26D210A522500E96315 /* Build configuration list for PBXNativeTarget "TodayUsageExtension" */;
+			buildPhases = (
+				457DD230210A522400E96315 /* Sources */,
+				457DD231210A522400E96315 /* Frameworks */,
+				457DD232210A522400E96315 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TodayUsageExtension;
+			productName = TodayUsageExtension;
+			productReference = 457DD234210A522400E96315 /* TodayUsageExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		45EB499D20ED40B900E0D63C /* TodayExtension */ = {
 			isa = PBXNativeTarget;
@@ -1022,6 +1078,16 @@
 						CreatedOnToolsVersion = 10.0;
 						DevelopmentTeam = Z4438K55LB;
 						ProvisioningStyle = Automatic;
+					};
+					457DD233210A522400E96315 = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = Z4438K55LB;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					45EB499D20ED40B900E0D63C = {
 						CreatedOnToolsVersion = 10.0;
@@ -1125,6 +1191,7 @@
 				13B07F861A680F5B00A75B9A /* now */,
 				00E356ED1AD99517003FC87E /* nowTests */,
 				45EB499D20ED40B900E0D63C /* TodayExtension */,
+				457DD233210A522400E96315 /* TodayUsageExtension */,
 				4525FFFB20FBAEEA004F5C4B /* WatchApp */,
 				4525000720FBAEED004F5C4B /* WatchApp Extension */,
 			);
@@ -1469,6 +1536,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		457DD232210A522400E96315 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457DD23B210A522400E96315 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45EB499C20ED40B900E0D63C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1569,6 +1644,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		457DD230210A522400E96315 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457DD238210A522400E96315 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		45EB499A20ED40B900E0D63C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1596,6 +1679,11 @@
 			target = 4525FFFB20FBAEEA004F5C4B /* WatchApp */;
 			targetProxy = 4525001620FBAEEF004F5C4B /* PBXContainerItemProxy */;
 		};
+		457DD23E210A522400E96315 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 457DD233210A522400E96315 /* TodayUsageExtension */;
+			targetProxy = 457DD23D210A522400E96315 /* PBXContainerItemProxy */;
+		};
 		45EB49A820ED40B900E0D63C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 45EB499D20ED40B900E0D63C /* TodayExtension */;
@@ -1619,6 +1707,14 @@
 				4525FFFF20FBAEEA004F5C4B /* Base */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		457DD239210A522400E96315 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				457DD23A210A522400E96315 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		45EB49A320ED40B900E0D63C /* MainInterface.storyboard */ = {
@@ -1956,6 +2052,86 @@
 			};
 			name = Release;
 		};
+		457DD240210A522400E96315 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayUsageExtension/TodayUsageExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z4438K55LB;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = TodayUsageExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-usage";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		457DD241210A522400E96315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TodayUsageExtension/TodayUsageExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z4438K55LB;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = TodayUsageExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-usage";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		45EB49AB20ED40C100E0D63C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2157,6 +2333,15 @@
 			buildConfigurations = (
 				4525001E20FBAEEF004F5C4B /* Debug */,
 				4525001F20FBAEEF004F5C4B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		457DD26D210A522500E96315 /* Build configuration list for PBXNativeTarget "TodayUsageExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				457DD240210A522400E96315 /* Debug */,
+				457DD241210A522400E96315 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

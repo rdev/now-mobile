@@ -319,6 +319,7 @@ export default class Settings extends React.Component<Props, State> {
 							})()}
 						</View>
 					</KeyboardAwareScrollView>
+					{/* $FlowFixMe */}
 					<Dropdown />
 				</Animatable.View>
 			</Container>

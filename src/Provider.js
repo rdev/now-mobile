@@ -9,7 +9,7 @@ import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
 import * as spotlight from './extensions/spotlight';
-import { saveDeployments as saveToSharedGroup } from './extensions/today';
+import * as SharedGroup from './extensions/today';
 
 type EventTypes = {
 	system: Set<string>,
@@ -121,6 +121,9 @@ export class Provider extends React.Component<*, Context> {
 		const usage = await api.usage();
 
 		if (usage.error) return this.state.usage;
+
+		SharedGroup.saveUsage(usage);
+
 		return usage;
 	};
 
@@ -130,7 +133,7 @@ export class Provider extends React.Component<*, Context> {
 		if (error) return this.state.deployments;
 
 		spotlight.indexDeployments(deployments);
-		saveToSharedGroup(deployments);
+		SharedGroup.saveDeployments(deployments);
 
 		return deployments;
 	};
@@ -277,6 +280,8 @@ export class Provider extends React.Component<*, Context> {
 						await AsyncStorage.removeItem('@now:touchId');
 						spotlight.clear();
 						watch.updateApplicationContext({});
+						SharedGroup.clearDeployments();
+						SharedGroup.clearUsage();
 
 						this.setState(DEFAULT_CONTEXT, resolve);
 					}
