@@ -15,6 +15,7 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
 import api from '../lib/api';
+import { isIphoneSE } from '../lib/utils';
 import { connect } from '../Provider';
 
 type Props = {
@@ -40,7 +41,7 @@ const View = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	padding-bottom: 100px;
+	padding-bottom: ${isIphoneSE() ? '0px' : '100px'};
 `;
 
 const Title = styled.Text`
@@ -105,7 +106,7 @@ const Separator = styled.View`
 	height: 1px;
 	border-bottom-color: #eaeaea;
 	border-bottom-width: 1px;
-	margin-vertical: 30px;
+	margin-vertical: 12px;
 	width: 80%;
 `;
 
@@ -277,7 +278,7 @@ export default class Settings extends React.Component<Props, State> {
 									return (
 										// $FlowFixMe
 										<React.Fragment>
-											<Separator />
+											<Separator style={{ marginTop: 30 }} />
 											<SettingsRow>
 												<RowText>
 													Use{' '}
