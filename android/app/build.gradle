@@ -76,6 +76,12 @@ project.ext.react = [
     entryFile: "index.js"
 ]
 
+configurations.all {
+    resolutionStrategy {
+        force 'org.webkit:android-jsc:r224109'
+    }
+}
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -99,7 +105,7 @@ android {
 
     defaultConfig {
         applicationId "com.now"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
