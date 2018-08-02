@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { AsyncStorage, SafeAreaView } from 'react-native';
+import { AsyncStorage, SafeAreaView, Dimensions } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
@@ -60,6 +60,9 @@ const CodeText = styled.Text`
 	font-size: 20px;
 	font-weight: 600;
 `;
+
+const { height, width } = Dimensions.get('window');
+const isPad = height / width < 1.6;
 
 /**
  * Authentication screen. This is going to ask for an email or a token.
@@ -161,9 +164,20 @@ export default class Authentication extends Component<Props, State> {
 							}
 							return <AuthInput onSubmit={this.login} />;
 						})()}
+						{isPad ? (
+							<Logo
+								size="large"
+								style={{ position: 'absolute', top: viewport.height * 0.17 }}
+							/>
+						) : null}
 					</KeyboardAwareScrollView>
 				</Animatable.View>
-				<Logo size="large" style={{ position: 'absolute', top: viewport.height * 0.17 }} />
+				{isPad ? null : (
+					<Logo
+						size="large"
+						style={{ position: 'absolute', top: viewport.height * 0.17 }}
+					/>
+				)}
 			</Container>
 		);
 	}

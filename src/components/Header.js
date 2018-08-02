@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
@@ -13,6 +13,9 @@ type Props = {
 	navigation?: Navigation,
 };
 
+const { height, width } = Dimensions.get('window');
+const isPad = height / width < 1.6;
+
 const View = styled.View`
 	width: 100%;
 	padding-horizontal: 5%;
@@ -20,7 +23,7 @@ const View = styled.View`
 	justify-content: space-between;
 	align-items: center;
 	height: 70px;
-	margin-bottom: 30px;
+	margin-bottom: ${isPad ? '0' : '30px'};
 `;
 
 const ProfilePic = styled.View`
