@@ -47,6 +47,6 @@ If you find any, please [report them](https://github.com/rdev/now-mobile/issues/
 
 This is **not** an official ZEIT software.
 
-It just uses ZEIT's APIs, some of which is copied from [Now Desktop](zeit/now-desktop) and isn't documented on the official website.
+It just uses ZEIT's APIs, some of which is copied from [Now Desktop](https://github.com/zeit/now-desktop) and isn't documented on the official website.
 
 If you have any questions or issues with this app, please don't bug people of ZEIT about it and just [file an issue](https://github.com/rdev/now-mobile/issues/new) on this repo.
