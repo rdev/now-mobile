@@ -10,17 +10,31 @@ type Props = {
 	context: Context,
 };
 
+type State = {
+	loading: boolean,
+};
+
 const containerStyle = {
 	paddingBottom: 80,
 	paddingHorizontal: '6%',
 };
 
 @connect
-export default class History extends Component<Props> {
+export default class History extends Component<Props, State> {
+	state = {
+		loading: false,
+	};
+
 	loadMore = () => {
-		const { getEvents, events } = this.props.context;
-		const lastEvent = events[events.length - 1];
-		if (lastEvent) getEvents(lastEvent.created);
+		if (this.state.loading) return;
+		this.setState({ loading: true }, async () => {
+			const { getEvents, events } = this.props.context;
+			const lastEvent = events[events.length - 1];
+			if (lastEvent) {
+				await getEvents(lastEvent.created);
+				this.setState({ loading: false });
+			}
+		});
 	};
 
 	renderItem = ({ item }: { item: Zeit$Event }) =>
