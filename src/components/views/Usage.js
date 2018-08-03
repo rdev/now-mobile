@@ -3,6 +3,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import styled from 'styled-components';
 import moment from 'moment';
+import ErrorBoundary from '../ErrorBoundary';
 import UsageEntry from '../elements/usage/UsageEntry';
 import { connect } from '../../Provider';
 import { plans, formatBytes } from '../../lib/utils';
@@ -54,23 +55,25 @@ const Usage = ({ context }: Props) => {
 		.toUpperCase();
 
 	return (
-		<ScrollView contentContainerStyle={containerStyle}>
-			<UsageEntry usage={metrics.domains} max={max.domains} name="Domains" />
-			<UsageEntry usage={metrics.activeInstances} max={max.instances} name="Instances" />
-			<UsageEntry
-				usage={formatBytes(metrics.bandwidth.tx)}
-				max={formatBytes(max.bandwidth)}
-				name="Bandwidth"
-			/>
-			<UsageEntry
-				usage={formatBytes(metrics.logs.size)}
-				max={formatBytes(max.logs)}
-				name="Logs"
-			/>
-			<Period>
-				{periodStart} - {periodEnd}
-			</Period>
-		</ScrollView>
+		<ErrorBoundary viewName="usage">
+			<ScrollView contentContainerStyle={containerStyle}>
+				<UsageEntry usage={metrics.domains} max={max.domains} name="Domains" />
+				<UsageEntry usage={metrics.activeInstances} max={max.instances} name="Instances" />
+				<UsageEntry
+					usage={formatBytes(metrics.bandwidth.tx)}
+					max={formatBytes(max.bandwidth)}
+					name="Bandwidth"
+				/>
+				<UsageEntry
+					usage={formatBytes(metrics.logs.size)}
+					max={formatBytes(max.logs)}
+					name="Logs"
+				/>
+				<Period>
+					{periodStart} - {periodEnd}
+				</Period>
+			</ScrollView>
+		</ErrorBoundary>
 	);
 };
 

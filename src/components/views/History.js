@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+import ErrorBoundary from '../ErrorBoundary';
 import HistoryItem from '../elements/history/HistoryItem';
 import ModeSwitcher from '../elements/history/ModeSwitcher';
 import { connect } from '../../Provider';
@@ -46,17 +47,19 @@ export default class History extends Component<Props> {
 		const events = Array.from(new Set(context.events)).sort((a, b) => new Date(b.created) - new Date(a.created));
 
 		return (
-			<FlatList
-				contentContainerStyle={containerStyle}
-				data={[{ id: 'switcher' }, ...events]}
-				// $FlowFixMe I know what I'm doing
-				renderItem={this.renderItem}
-				contentOffset={{ y: 42 }}
-				onEndReached={this.loadMore}
-				keyExtractor={item => (item === 'switcher' ? 'switcher' : item.id)}
-				onRefresh={() => context.reloadEvents(true)}
-				refreshing={context.refreshing}
-			/>
+			<ErrorBoundary viewName="history">
+				<FlatList
+					contentContainerStyle={containerStyle}
+					data={[{ id: 'switcher' }, ...events]}
+					// $FlowFixMe I know what I'm doing
+					renderItem={this.renderItem}
+					contentOffset={{ y: 42 }}
+					onEndReached={this.loadMore}
+					keyExtractor={item => (item === 'switcher' ? 'switcher' : item.id)}
+					onRefresh={() => context.reloadEvents(true)}
+					refreshing={context.refreshing}
+				/>
+			</ErrorBoundary>
 		);
 	}
 }

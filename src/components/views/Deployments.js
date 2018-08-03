@@ -1,8 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
-// import DeploymentGroup from '.'
-import Deployment from '../elements/deployments/Deployment';
+import ErrorBoundary from '../ErrorBoundary';
 import { connect } from '../../Provider';
 import DeploymentGroup from '../elements/deployments/DeploymentGroup';
 
@@ -35,16 +34,18 @@ export default class Deployments extends Component<Props> {
 		});
 
 		return (
-			<ScrollView contentContainerStyle={containerStyle}>
-				{Object.keys(sortedDeployments).map((key, i) => (
-					<DeploymentGroup
-						deployments={sortedDeployments[key]}
-						name={key}
-						last={i === sortedDeployments.length - 1}
-						key={key}
-					/>
-				))}
-			</ScrollView>
+			<ErrorBoundary viewName="deployments">
+				<ScrollView contentContainerStyle={containerStyle}>
+					{Object.keys(sortedDeployments).map((key, i) => (
+						<DeploymentGroup
+							deployments={sortedDeployments[key]}
+							name={key}
+							last={i === sortedDeployments.length - 1}
+							key={key}
+						/>
+					))}
+				</ScrollView>
+			</ErrorBoundary>
 		);
 	}
 }
