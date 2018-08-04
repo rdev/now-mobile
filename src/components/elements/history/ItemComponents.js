@@ -11,7 +11,7 @@ export const Text = styled.Text`
 export const Bold = styled.Text`
 	font-size: 16px;
 	font-weight: 300;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 export const MonospaceWrap = styled.View`

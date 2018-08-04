@@ -32,7 +32,7 @@ const Title = styled.Text`
 	letter-spacing: 0.6px;
 	height: 36px;
 	width: 100%;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 // There's a limited number of views, all of which we know,

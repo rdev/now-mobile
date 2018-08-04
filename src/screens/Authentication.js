@@ -1,13 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { AsyncStorage, SafeAreaView, Dimensions } from 'react-native';
+import { AsyncStorage, SafeAreaView, Dimensions, Platform } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import Logo from '../components/Logo';
 import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
-import { viewport, platformBlackColor } from '../lib/utils';
+import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
 import { connect } from '../Provider';
 
 type State = {
@@ -33,20 +33,20 @@ const Header = styled.Text`
 	font-size: 22px;
 	font-weight: 600;
 	margin-bottom: 20px;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Text = styled.Text`
 	font-size: 17px;
 	width: 80%;
 	text-align: center;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Email = styled.Text`
 	font-size: 17px;
 	font-weight: 600;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Code = styled.View`
@@ -62,11 +62,11 @@ const Code = styled.View`
 const CodeText = styled.Text`
 	font-size: 20px;
 	font-weight: 600;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const { height, width } = Dimensions.get('window');
-const isPad = height / width < 1.6;
+const isPad = height / width < 1.6 && Platform.OS !== 'android';
 
 /**
  * Authentication screen. This is going to ask for an email or a token.
@@ -147,6 +147,9 @@ export default class Authentication extends Component<Props, State> {
 						}}
 						scrollEnabled={false}
 					>
+						{isAndroid ? (
+							<Logo size="large" style={{ marginBottom: 50, marginTop: -160 }} />
+						) : null}
 						{(() => {
 							if (this.state.code) {
 								return (
@@ -176,7 +179,7 @@ export default class Authentication extends Component<Props, State> {
 						) : null}
 					</KeyboardAwareScrollView>
 				</Animatable.View>
-				{isPad ? null : (
+				{isPad || isAndroid ? null : (
 					<Logo
 						size="large"
 						style={{ position: 'absolute', top: viewport.height * 0.17 }}

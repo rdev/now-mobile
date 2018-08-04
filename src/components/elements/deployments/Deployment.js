@@ -17,7 +17,7 @@ const View = styled.View`
 const Address = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Metadata = styled.View`

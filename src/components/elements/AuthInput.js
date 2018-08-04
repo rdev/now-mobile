@@ -15,7 +15,7 @@ type State = {
 };
 
 const Input = styled.TextInput`
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 	font-size: 18px;
 	font-weight: 300;
 	width: 70%;

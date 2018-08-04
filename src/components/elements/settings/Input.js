@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { platformBlackColor } from '../../../lib/utils';
 
 const Input = styled.TextInput`
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 	font-size: 18px;
 	font-weight: 300;
 	width: 70%;

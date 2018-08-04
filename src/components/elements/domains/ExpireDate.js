@@ -11,7 +11,7 @@ type Props = {
 const Text = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 export default ({ date }: Props) => <Text>{date ? moment(date).format('DD MMM YYYY') : '-'}</Text>;

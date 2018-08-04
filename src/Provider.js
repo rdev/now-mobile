@@ -2,11 +2,12 @@
 // @TODO I feel like this component is becoming way too gigantic and something needs to be improoved
 
 import React from 'react';
-import { AsyncStorage, ActionSheetIOS, Platform } from 'react-native';
+import { AsyncStorage, ActionSheetIOS, Platform, Alert } from 'react-native';
 import TouchID from 'react-native-touch-id';
 import * as watch from 'react-native-watch-connectivity';
 import qs from 'query-string';
 import api from './lib/api';
+import { isAndroid } from './lib/utils';
 import messages from './components/elements/history/messages';
 import * as SharedGroup from './extensions/today';
 
@@ -92,7 +93,7 @@ export class Provider extends React.Component<*, Context> {
 	componentDidMount = () => {
 		this.fetchData();
 		this.detectBiometry();
-		this.setUpWatchConnectivity();
+		if (!isAndroid) this.setUpWatchConnectivity();
 	};
 
 	getUserInfo = async () => {
@@ -131,8 +132,8 @@ export class Provider extends React.Component<*, Context> {
 
 		if (error) return this.state.deployments;
 
-		if (Platform.OS === 'ios') {
-			require('./extensions/spotlight').clear();
+		if (!isAndroid) {
+			require('./extensions/spotlight').indexDeployments(deployments);
 		}
 
 		SharedGroup.saveDeployments(deployments);
@@ -269,29 +270,53 @@ export class Provider extends React.Component<*, Context> {
 
 	logOut = (): Promise<void> =>
 		new Promise((resolve) => {
-			ActionSheetIOS.showActionSheetWithOptions(
-				{
-					title: 'Are you sure you want to log out?',
-					options: ['Cancel', 'Logout'],
-					destructiveButtonIndex: 1,
-					cancelButtonIndex: 0,
-				},
-				async (buttonIndex): any => {
-					if (buttonIndex === 1) {
-						await AsyncStorage.removeItem('@now:token');
-						await AsyncStorage.removeItem('@now:touchId');
-						watch.updateApplicationContext({});
-						SharedGroup.clearDeployments();
-						SharedGroup.clearUsage();
-
-						if (Platform.OS === 'ios') {
-							require('./extensions/spotlight').clear();
+			if (isAndroid) {
+				Alert.alert(
+					'Are you sure you want to log out?',
+					null,
+					[
+						{ text: 'Cancel', onPress: () => {} },
+						{
+							text: 'Log Out',
+							onPress: async () => {
+								await this.handleLogout();
+								resolve();
+							},
+						},
+					],
+					{ cancelable: false },
+				);
+			} else {
+				ActionSheetIOS.showActionSheetWithOptions(
+					{
+						title: 'Are you sure you want to log out?',
+						options: ['Cancel', 'Logout'],
+						destructiveButtonIndex: 1,
+						cancelButtonIndex: 0,
+					},
+					async (buttonIndex): any => {
+						if (buttonIndex === 1) {
+							await this.handleLogout();
+							resolve();
 						}
+					},
+				);
+			}
+		});
 
-						this.setState(DEFAULT_CONTEXT, resolve);
-					}
-				},
-			);
+	handleLogout = (): Promise<void> =>
+		new Promise(async (resolve) => {
+			await AsyncStorage.removeItem('@now:token');
+			await AsyncStorage.removeItem('@now:touchId');
+			SharedGroup.clearDeployments();
+			SharedGroup.clearUsage();
+
+			if (!isAndroid) {
+				watch.updateApplicationContext({});
+				require('./extensions/spotlight').clear();
+			}
+
+			this.setState(DEFAULT_CONTEXT, resolve);
 		});
 
 	detectBiometry = async () => {
@@ -304,6 +329,8 @@ export class Provider extends React.Component<*, Context> {
 	};
 
 	sendTokenToWatch = async () => {
+		if (Platform.OS !== 'ios') return;
+
 		const token = await AsyncStorage.getItem('@now:token');
 		watch.updateApplicationContext(token ? { token } : {});
 	};

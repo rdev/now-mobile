@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import com.transistorsoft.rnbackgroundfetch.RNBackgroundFetchPackage;
 import com.poppop.RNReactNativeSharedGroupPreferences.RNReactNativeSharedGroupPreferencesPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
+import im.shimo.react.prompt.RNPromptPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNBackgroundFetchPackage(),
             new RNReactNativeSharedGroupPreferencesPackage(),
             new FingerprintAuthPackage(),
-            new RNFetchBlobPackage()
+            new RNFetchBlobPackage(),
+            new RNPromptPackage()
       );
     }
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { Linking, TouchableOpacity, Alert } from 'react-native';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
-import { platformBlackColor } from '../../../lib/utils';
+import { platformBlackColor, isAndroid } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
 
 type Props = {
@@ -32,31 +32,32 @@ const LeftSide = styled.View`
 
 const TitleWrap = styled.View`
 	flex-direction: row;
-	align-items: baseline;
+	align-items: ${isAndroid ? 'flex-start' : 'baseline'};
 `;
 
 const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Deployment = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Go = styled.Image`
 	width: 15px;
 	height: 14px;
 	margin-left: 10px;
+	margin-top: ${isAndroid ? '6px' : 0};
 `;
 
 function promptOpen(path: string) {
 	Alert.alert(
-		'Open in Safari',
+		`Open in ${isAndroid ? 'browser' : 'Safari'}`,
 		`Do you want to open ${path} in browser?`,
 		[
 			{ text: 'Cancel', style: 'cancel' },

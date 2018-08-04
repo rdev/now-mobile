@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
-import { Platform } from 'react-native';
 import styled from 'styled-components';
-import { platformBlackColor } from '../../../lib/utils';
+import { platformBlackColor, isAndroid } from '../../../lib/utils';
 
 type Props = {
 	usage: string | number,
@@ -26,8 +25,8 @@ const Usage = styled.Text`
 	font-weight: 100;
 	font-size: 40px;
 	letter-spacing: 0.5px;
-	color: ${platformBlackColor()};
-	font-family: ${Platform.OS === 'android' ? 'sans-serif-thin' : undefined};
+	color: ${platformBlackColor};
+	${isAndroid ? 'font-family: sans-serif-thin;' : ''};
 `;
 
 const Max = styled.Text`
@@ -41,7 +40,7 @@ const Title = styled.Text`
 	font-size: 17px;
 	font-weight: 300;
 	margin-top: 5px;
-	color: ${platformBlackColor()};
+	color: ${platformBlackColor};
 `;
 
 const Separator = styled.View`
