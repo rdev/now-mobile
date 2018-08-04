@@ -20,5 +20,18 @@ allprojects {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
         }
+        // Google now hosts their latest API dependencies on their own maven  server.
+        // React Native will eventually add this to their app template.
+        maven {
+            url "$rootDir/../node_modules/react-native-background-fetch/android/libs"
+        }
     }
+}
+
+ext {
+    compileSdkVersion   = 26
+    targetSdkVersion    = 26
+    buildToolsVersion   = "26.0.2"
+    supportLibVersion   = "26.1.0"
+    playServicesVersion = "11.8.0"
 }

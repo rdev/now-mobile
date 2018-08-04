@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { platformBlackColor } from '../../../lib/utils';
 
 export const Text = styled.Text`
 	font-size: 16px;
@@ -10,7 +11,7 @@ export const Text = styled.Text`
 export const Bold = styled.Text`
 	font-size: 16px;
 	font-weight: 300;
-	color: black;
+	color: ${platformBlackColor};
 `;
 
 export const MonospaceWrap = styled.View`

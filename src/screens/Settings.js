@@ -1,13 +1,6 @@
 // @flow
 import React from 'react';
-import {
-	SafeAreaView,
-	Image,
-	TouchableOpacity,
-	Switch,
-	AsyncStorage,
-	AlertIOS,
-} from 'react-native';
+import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage } from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -15,7 +8,8 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
 import api from '../lib/api';
-import { isIphoneSE } from '../lib/utils';
+import touchIdPrompt from '../lib/touch-id-prompt';
+import { isIphoneSE, platformBlackColor, isAndroid } from '../lib/utils';
 import { connect } from '../Provider';
 
 type Props = {
@@ -52,6 +46,7 @@ const Title = styled.Text`
 	height: 36px;
 	width: 100%;
 	align-self: flex-start;
+	color: ${platformBlackColor};
 `;
 
 export const ProfilePic = styled.View`
@@ -87,6 +82,7 @@ const ProfileName = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	letter-spacing: 0.2px;
+	color: ${platformBlackColor};
 `;
 
 export const Button = styled.Text`
@@ -120,6 +116,7 @@ const SettingsRow = styled.View`
 const RowText = styled.Text`
 	font-size: 18px
 	font-weight: 400;
+	color: ${platformBlackColor};
 `;
 
 @connect
@@ -165,28 +162,16 @@ export default class Settings extends React.Component<Props, State> {
 
 		if (active && biometry !== undefined) {
 			// $FlowFixMe this method won't ever be called if 'biometry === undefined'
-			AlertIOS.prompt(
-				'Enter PIN',
-				`This will be used if ${biometry.replace(/^\w/, c =>
-					c.toUpperCase())} ID doesn't work`,
-				[
-					{
-						text: 'Cancel',
-						onPress: () => console.log('Cancel Pressed'),
-						style: 'cancel',
-					},
-					{
-						text: 'OK',
-						onPress: async (pin) => {
-							await AsyncStorage.setItem('@now:touchId', pin);
-							this.setState({ touchId: true });
-						},
-					},
-				],
-				'secure-text',
-				undefined,
-				'number-pad',
-			);
+			try {
+				await touchIdPrompt({
+					biometryType: isAndroid
+						? 'fingerprint'
+						: `${biometry.replace(/^\w/, c => c.toUpperCase())} ID`,
+				});
+				this.setState({ touchId: true });
+			} catch (e) {
+				console.log('ERROR SETTING TOUCH ID', e);
+			}
 		} else {
 			await AsyncStorage.removeItem('@now:touchId');
 			this.setState({ touchId: false });
@@ -282,11 +267,14 @@ export default class Settings extends React.Component<Props, State> {
 											<SettingsRow>
 												<RowText>
 													Use{' '}
-													{biometry.replace(/^\w/, c => c.toUpperCase())}{' '}
-													ID
+													{isAndroid
+														? 'fingerprint'
+														: `${biometry.replace(/^\w/, c =>
+															c.toUpperCase())} ID`}
 												</RowText>
 												<Switch
-													onTintColor="#000000"
+													onTintColor={isAndroid ? '#bbbbbb' : '#000000'}
+													thumbTintColor={isAndroid ? '#000000' : null}
 													value={this.state.touchId}
 													onValueChange={this.toggleTouchId}
 												/>

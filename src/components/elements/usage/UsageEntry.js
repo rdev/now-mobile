@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import { platformBlackColor, isAndroid } from '../../../lib/utils';
 
 type Props = {
 	usage: string | number,
@@ -24,6 +25,8 @@ const Usage = styled.Text`
 	font-weight: 100;
 	font-size: 40px;
 	letter-spacing: 0.5px;
+	color: ${platformBlackColor};
+	${isAndroid ? 'font-family: sans-serif-thin;' : ''};
 `;
 
 const Max = styled.Text`
@@ -37,6 +40,7 @@ const Title = styled.Text`
 	font-size: 17px;
 	font-weight: 300;
 	margin-top: 5px;
+	color: ${platformBlackColor};
 `;
 
 const Separator = styled.View`

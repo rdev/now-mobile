@@ -31,7 +31,9 @@ export function formatBytes(bytes: number, dm?: number = 2): string {
 	const k = 1024;
 	const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 	const i = Math.floor(Math.log(bytes) / Math.log(k));
-	return `${Math.floor(parseFloat((bytes / k ** i).toFixed(dm)))} ${sizes[i]}`;
+	// Exponentiation operator doesn't work on Android for some reason (https://github.com/facebook/react-native/issues/8290#issuecomment-315491051)
+	/* eslint-diable-next-line no-restricted-properties */
+	return `${Math.floor(parseFloat((bytes / Math.pow(k, i)).toFixed(dm)))} ${sizes[i]}`;
 }
 
 const mb = 1048576;
@@ -124,3 +126,8 @@ export function isIphoneSE(): boolean {
 		(dimen.height === 568 || dimen.width === 568)
 	);
 }
+
+// @TODO There's almost certainly a better way to handle the whole font color situation
+export const platformBlackColor = Platform.OS === 'android' ? '#2a2a2a' : 'black';
+
+export const isAndroid = Platform.OS === 'android';
