@@ -75,7 +75,10 @@
 			"react/no-unused-prop-types": "off",
 			"react/sort-comp": "off",
 			"no-nested-ternary": "off",
-			"max-len": "off"
+			"max-len": "off",
+			"promise/always-return": "off",
+			"promise/prefer-await-to-then": "off",
+			"global-require": "off"
 		},
 		"globals": {
 			"__DEV__": true

@@ -2,13 +2,12 @@
 // @TODO I feel like this component is becoming way too gigantic and something needs to be improoved
 
 import React from 'react';
-import { AsyncStorage, ActionSheetIOS } from 'react-native';
+import { AsyncStorage, ActionSheetIOS, Platform } from 'react-native';
 import TouchID from 'react-native-touch-id';
 import * as watch from 'react-native-watch-connectivity';
 import qs from 'query-string';
 import api from './lib/api';
 import messages from './components/elements/history/messages';
-import * as spotlight from './extensions/spotlight';
 import * as SharedGroup from './extensions/today';
 
 type EventTypes = {
@@ -132,7 +131,10 @@ export class Provider extends React.Component<*, Context> {
 
 		if (error) return this.state.deployments;
 
-		spotlight.indexDeployments(deployments);
+		if (Platform.OS === 'ios') {
+			require('./extensions/spotlight').clear();
+		}
+
 		SharedGroup.saveDeployments(deployments);
 
 		return deployments;
@@ -278,10 +280,13 @@ export class Provider extends React.Component<*, Context> {
 					if (buttonIndex === 1) {
 						await AsyncStorage.removeItem('@now:token');
 						await AsyncStorage.removeItem('@now:touchId');
-						spotlight.clear();
 						watch.updateApplicationContext({});
 						SharedGroup.clearDeployments();
 						SharedGroup.clearUsage();
+
+						if (Platform.OS === 'ios') {
+							require('./extensions/spotlight').clear();
+						}
 
 						this.setState(DEFAULT_CONTEXT, resolve);
 					}

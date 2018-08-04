@@ -98,7 +98,7 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.now"
+        applicationId "im.rdev.nowmobile"
         minSdkVersion 16
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
