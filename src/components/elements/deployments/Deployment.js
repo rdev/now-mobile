@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import InstanceIcon from '../../../../assets/instance-icon.png';
 import TimeAgo from '../TimeAgo';
+import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	deployment: Zeit$Deployment,
@@ -16,6 +17,7 @@ const View = styled.View`
 const Address = styled.Text`
 	font-size: 16px
 	font-weight: 300;
+	color: ${platformBlackColor};
 `;
 
 const Metadata = styled.View`

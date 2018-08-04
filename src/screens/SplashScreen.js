@@ -1,10 +1,11 @@
 // @flow
 import React from 'react';
-import { SafeAreaView, AsyncStorage, AlertIOS } from 'react-native';
+import { SafeAreaView, AsyncStorage } from 'react-native';
 import TouchID from 'react-native-touch-id';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
-import { viewport, isIphoneX } from '../lib/utils';
+import { viewport, isIphoneX, isAndroid } from '../lib/utils';
+import touchIdPrompt from '../lib/touch-id-prompt';
 import ZeitLogo from '../../assets/zeit-logo.png';
 import { connect } from '../Provider';
 
@@ -100,16 +101,23 @@ export default class SplashScreen extends React.Component<Props> {
 		new Promise(async (resolve) => {
 			const pin = await AsyncStorage.getItem('@now:touchId');
 
-			if (!pin) return resolve(true);
+			if (!pin) {
+				resolve(true);
+				return;
+			}
 
 			try {
-				await TouchID.authenticate('to log in to your Now account', {
+				await TouchID.authenticate('To log in to your Now account', {
+					color: '#000000',
 					fallbackLabel: 'Use PIN',
 				});
 				resolve(true);
 			} catch (e) {
-				// Other error types shouldn't happen at all
-				if (
+				if (isAndroid) {
+					const pinResult = await this.pinPrompt(pin);
+					resolve(pinResult);
+				} else if (
+					// Other error types shouldn't happen at all
 					e.name === 'LAErrorUserCancel' ||
 					e.name === 'LAErrorUserFallback' ||
 					e.name === 'LAErrorAuthenticationFailed' ||
@@ -128,37 +136,25 @@ export default class SplashScreen extends React.Component<Props> {
 
 	pinPrompt = (pin: string, retry?: ?boolean, touchIdDisabled?: boolean): Promise<boolean> =>
 		new Promise(async (resolve) => {
-			AlertIOS.prompt(
-				'Enter PIN',
-				retry
-					? 'The pin you enterred was incorrect'
+			await touchIdPrompt({
+				text: retry
+					? `The ${isAndroid ? 'password' : 'pin'} you enterred was incorrect`
 					: touchIdDisabled
 						? `${
 							isIphoneX() ? 'Face' : 'Touch'
 						  } ID has been disabled. Use your PIN to log in.`
 						: '',
-				[
-					{
-						text: 'Log Out',
-						onPress: () => resolve(false),
-						style: 'cancel',
-					},
-					{
-						text: 'OK',
-						onPress: async (enteredPin) => {
-							if (enteredPin === pin) {
-								resolve(true);
-							} else {
-								const retryAttempt = await this.pinPrompt(pin, true);
-								resolve(retryAttempt);
-							}
-						},
-					},
-				],
-				'secure-text',
-				undefined,
-				'number-pad',
-			);
+				cancelLabel: 'Log Out',
+				onCancel: () => resolve(false),
+				onPress: async (enteredPin) => {
+					if (enteredPin === pin) {
+						resolve(true);
+					} else {
+						const retryAttempt = await this.pinPrompt(pin, true);
+						resolve(retryAttempt);
+					}
+				},
+			});
 		});
 
 	render() {

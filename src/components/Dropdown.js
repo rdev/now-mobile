@@ -5,7 +5,10 @@ import { withNavigation } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components';
 import Triangle from 'react-native-triangle';
+// $FlowFixMe
+import Prompt from 'react-native-prompt-android'; // eslint-disable-line import/no-unresolved, import/extensions
 import api from '../lib/api';
+import { isAndroid } from '../lib/utils';
 import { connect } from '../Provider';
 import DropdownRow from './elements/DropdownRow';
 
@@ -30,7 +33,7 @@ const CancelArea = styled.View`
 
 const Container = styled.View`
 	position: absolute;
-	top: 86px;
+	top: ${isAndroid === 'android' ? '64px' : '86px'};
 	right: 10px;
 	width: 65%;
 	background-color: white;
@@ -39,6 +42,8 @@ const Container = styled.View`
 	shadow-radius: 20px;
 	shadow-color: black;
 	shadow-offset: 8px 4px;
+	elevation: 5;
+	border: 0;
 `;
 
 const DropdownContainer = Animatable.createAnimatableComponent(Container);
@@ -91,7 +96,8 @@ export default class Dropdown extends React.Component<Props, State> {
 	};
 
 	createTeam = (error?: string) => {
-		AlertIOS.prompt('Enter new team name', error, [
+		const handler = isAndroid ? Prompt : AlertIOS.prompt;
+		handler('Enter new team name', error, [
 			{
 				text: 'Cancel',
 				onPress: () => console.log('Cancel Pressed'),

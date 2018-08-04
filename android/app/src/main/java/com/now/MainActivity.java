@@ -1,4 +1,4 @@
-package com.now;
+package im.rdev.nowmobile;
 
 import com.facebook.react.ReactActivity;
 
