@@ -3,7 +3,7 @@ import React from 'react';
 import { Clipboard } from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
-import { validEmail } from '../../lib/utils';
+import { validEmail, platformBlackColor } from '../../lib/utils';
 
 type Props = {
 	onSubmit: (value: string) => Promise<*>,
@@ -15,7 +15,7 @@ type State = {
 };
 
 const Input = styled.TextInput`
-	color: black;
+	color: ${platformBlackColor()};
 	font-size: 18px;
 	font-weight: 300;
 	width: 70%;
@@ -79,6 +79,7 @@ export default class AuthInput extends React.Component<Props, State> {
 					onSubmitEditing={this.handleSubmit}
 					value={this.state.value}
 					autoCapitalize="none"
+					underlineColorAndroid="rgba(0,0,0,0)"
 				/>
 				<Animatable.View
 					ref={this.validationMessage}

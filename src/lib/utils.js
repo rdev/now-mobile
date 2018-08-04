@@ -126,3 +126,8 @@ export function isIphoneSE(): boolean {
 		(dimen.height === 568 || dimen.width === 568)
 	);
 }
+
+// @TODO There's almost certainly a better way to handle the whole font color situation
+export function platformBlackColor() {
+	return Platform.OS === 'android' ? '#2a2a2a' : 'black';
+}

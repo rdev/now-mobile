@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
+import { platformBlackColor } from '../../../lib/utils';
 import ExpireDate from './ExpireDate';
 
 type Props = {
@@ -48,6 +49,7 @@ const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
+	color: ${platformBlackColor()};
 `;
 
 export default ({ domain, last }: Props) => (

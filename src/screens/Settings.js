@@ -15,7 +15,7 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
 import api from '../lib/api';
-import { isIphoneSE } from '../lib/utils';
+import { isIphoneSE, platformBlackColor } from '../lib/utils';
 import { connect } from '../Provider';
 
 type Props = {
@@ -52,6 +52,7 @@ const Title = styled.Text`
 	height: 36px;
 	width: 100%;
 	align-self: flex-start;
+	color: ${platformBlackColor()};
 `;
 
 export const ProfilePic = styled.View`
@@ -87,6 +88,7 @@ const ProfileName = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	letter-spacing: 0.2px;
+	color: ${platformBlackColor()};
 `;
 
 export const Button = styled.Text`
@@ -120,6 +122,7 @@ const SettingsRow = styled.View`
 const RowText = styled.Text`
 	font-size: 18px
 	font-weight: 400;
+	color: ${platformBlackColor()};
 `;
 
 @connect

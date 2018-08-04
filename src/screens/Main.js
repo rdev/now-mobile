@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
-import { viewport } from '../lib/utils';
+import { viewport, platformBlackColor } from '../lib/utils';
 import setUpBackgroundTask from '../lib/background-task';
 
 /* eslint-disable react/no-unused-prop-types */
@@ -32,6 +32,7 @@ const Title = styled.Text`
 	letter-spacing: 0.6px;
 	height: 36px;
 	width: 100%;
+	color: ${platformBlackColor()};
 `;
 
 // There's a limited number of views, all of which we know,

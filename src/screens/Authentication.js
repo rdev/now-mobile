@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import Logo from '../components/Logo';
 import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
-import { viewport } from '../lib/utils';
+import { viewport, platformBlackColor } from '../lib/utils';
 import { connect } from '../Provider';
 
 type State = {
@@ -33,17 +33,20 @@ const Header = styled.Text`
 	font-size: 22px;
 	font-weight: 600;
 	margin-bottom: 20px;
+	color: ${platformBlackColor()};
 `;
 
 const Text = styled.Text`
 	font-size: 17px;
 	width: 80%;
 	text-align: center;
+	color: ${platformBlackColor()};
 `;
 
 const Email = styled.Text`
 	font-size: 17px;
 	font-weight: 600;
+	color: ${platformBlackColor()};
 `;
 
 const Code = styled.View`
@@ -59,6 +62,7 @@ const Code = styled.View`
 const CodeText = styled.Text`
 	font-size: 20px;
 	font-weight: 600;
+	color: ${platformBlackColor()};
 `;
 
 const { height, width } = Dimensions.get('window');

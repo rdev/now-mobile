@@ -3,6 +3,7 @@ import React from 'react';
 import { Linking, TouchableOpacity, Alert } from 'react-native';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
+import { platformBlackColor } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
 
 type Props = {
@@ -38,11 +39,13 @@ const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
+	color: ${platformBlackColor()};
 `;
 
 const Deployment = styled.Text`
 	font-size: 16px
 	font-weight: 300;
+	color: ${platformBlackColor()};
 `;
 
 const Go = styled.Image`

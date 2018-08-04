@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import { platformBlackColor } from '../../../lib/utils';
 import Deployment from './Deployment';
 
 type Props = {
@@ -32,6 +33,7 @@ const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
+	color: ${platformBlackColor()};
 `;
 
 export default ({ deployments, name, last }: Props) => (
