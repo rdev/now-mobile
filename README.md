@@ -38,7 +38,7 @@ If you find any, please [report them](https://github.com/rdev/now-mobile/issues/
 - [ ] Cache latest state and show it on startup before loading from network. This is already beind done on the Watch so it's only fair main app has it
 - [ ] Simplify `Provider` component (?)
 - [ ] Flow types improvements
-- [ ] Android version. It's basically good to go but there's gonna be mandatory Android bugs to sort out
+- [x] Android version. It's basically good to go but there's gonna be mandatory Android bugs to sort out
 - [ ] Today extension auth handling
 - [ ] Tests
 - [ ] Fastlane (?)
