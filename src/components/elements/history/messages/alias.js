@@ -18,8 +18,7 @@ export default class Alias extends Message {
 					configured {event.payload.ruleCount} alias rule
 					{event.payload.ruleCount === null || event.payload.ruleCount > 1
 						? 's'
-						: ''} for <Bold>{event.payload.deployment.url}</Bold>{' '}
-					{/* event.payload.alias */}
+						: ''} for <Bold>{event.payload.alias}</Bold>
 				</Text>
 			);
 		}

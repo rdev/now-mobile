@@ -91,7 +91,7 @@ class AliasesController: WKInterfaceController {
       row.wrapper.setBackgroundColor(UIColor.black)
       
       row.domain.setText(alias["alias"].stringValue)
-      row.deploymentUrl.setText(alias["deployment"]["url"].stringValue)
+      row.deploymentUrl.setText(alias["deployment"]["url"].string == nil ? "\(alias["rules"].arrayValue.count) alias rules" : alias["deployment"]["url"].stringValue)
     }
   }
 

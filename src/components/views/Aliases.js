@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
 import Alias from '../elements/aliases/Alias';
+import AliasGroup from '../elements/aliases/AliasGroup';
 import { connect } from '../../Provider';
 
 type Props = {
@@ -22,9 +23,20 @@ export default class Aliases extends Component<Props> {
 		return (
 			<ErrorBoundary viewName="aliases">
 				<ScrollView contentContainerStyle={containerStyle}>
-					{aliases.map((alias, i) => (
-						<Alias key={alias.uid} alias={alias} last={i === aliases.length - 1} />
-					))}
+					{aliases.map((alias, i) =>
+						(alias.rules ? (
+							<AliasGroup
+								alias={alias}
+								key={alias.uid}
+								last={i === aliases.length - 1}
+							/>
+						) : (
+							<Alias
+								key={alias.uid}
+								alias={alias}
+								last={i === aliases.length - 1}
+							/>
+						)))}
 				</ScrollView>
 			</ErrorBoundary>
 		);

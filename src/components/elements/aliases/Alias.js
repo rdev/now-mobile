@@ -55,7 +55,7 @@ const Go = styled.Image`
 	margin-top: ${isAndroid ? '6px' : 0};
 `;
 
-function promptOpen(path: string) {
+export function promptOpen(path: string) {
 	Alert.alert(
 		`Open in ${isAndroid ? 'browser' : 'Safari'}`,
 		`Do you want to open ${path} in browser?`,

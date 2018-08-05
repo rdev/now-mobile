@@ -75,6 +75,7 @@
 			"react/jsx-filename-extension": "off",
 			"react/no-unused-prop-types": "off",
 			"react/sort-comp": "off",
+			"react/require-default-props": "off",
 			"no-nested-ternary": "off",
 			"max-len": "off",
 			"promise/always-return": "off",
