@@ -43,6 +43,10 @@ If you find any, please [report them](https://github.com/rdev/now-mobile/issues/
 - [ ] Tests
 - [ ] Fastlane (?)
 
+## Landing page
+
+Code for [mobile.now.sh](https://mobile.now.sh) is available [here](https://github.com/rdev/now-mobile-landing).
+
 ## Disclamer
 
 This is **not** an official ZEIT software.
