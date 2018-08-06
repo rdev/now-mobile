@@ -58,15 +58,19 @@ const Usage = ({ context }: Props) => {
 		<ErrorBoundary viewName="usage">
 			<ScrollView contentContainerStyle={containerStyle}>
 				<UsageEntry usage={metrics.domains} max={max.domains} name="Domains" />
-				<UsageEntry usage={metrics.activeInstances} max={max.instances} name="Instances" />
+				<UsageEntry
+					usage={metrics.activeInstances}
+					max={max.instances === Infinity ? '∞' : max.instances}
+					name="Instances"
+				/>
 				<UsageEntry
 					usage={formatBytes(metrics.bandwidth.tx)}
-					max={formatBytes(max.bandwidth)}
+					max={max.bandwidth === Infinity ? '∞' : formatBytes(max.bandwidth)}
 					name="Bandwidth"
 				/>
 				<UsageEntry
 					usage={formatBytes(metrics.logs.size)}
-					max={formatBytes(max.logs)}
+					max={max.logs === Infinity ? '∞' : formatBytes(max.logs)}
 					name="Logs"
 				/>
 				<Period>

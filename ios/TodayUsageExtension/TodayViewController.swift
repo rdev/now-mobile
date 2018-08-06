@@ -8,7 +8,7 @@ struct UsageWidgetJSON: Decodable {
 
 struct UsageWidgetData: Codable {
   let instances: Int?
-  let instancesLimit: Int?
+  let instancesLimit: String?
   let bandwidth: String?
   let bandwidthLimit: String?
 

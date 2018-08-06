@@ -68,7 +68,7 @@ export async function saveUsage(usage: Zeit$Usage) {
 		logs: formatBytes(metrics.logs.size),
 		logsLimit: max.logs === Infinity ? '∞' : formatBytes(max.logs),
 		instances: metrics.activeInstances,
-		instancesLimit: max.instances === Infinity ? '∞' : max.instances,
+		instancesLimit: max.instances === Infinity ? '∞' : `${max.instances}`,
 	};
 
 	console.log('SHARED GROUP DATA', data);
