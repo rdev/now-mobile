@@ -1,8 +1,19 @@
+/* @flow */
 import React from 'react';
-import { SafeAreaView, TouchableOpacity, Dimensions } from 'react-native';
+import { SafeAreaView, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components';
 import { connect } from '../Provider';
+
+type Props = {
+	context: Context,
+	navigation: Navigation,
+};
+
+type State = {
+	visible: boolean,
+};
 
 const Container = Animatable.createAnimatableComponent(SafeAreaView);
 
@@ -41,16 +52,21 @@ const RetryText = styled.Text`
 	color: white;
 `;
 
+@withNavigation
 @connect
-export default class NetworkError extends React.Component {
+export default class NetworkError extends React.Component<Props, State> {
 	state = {
 		visible: this.props.context.networkError,
 	};
 
-	componentDidUpdate = async (prevProps) => {
+	container: Animatable.View;
+
+	componentDidUpdate = async (prevProps: Props) => {
 		if (prevProps.context.networkError && !this.props.context.networkError) {
 			await this.container.slideOutUp(300);
-			this.setState({ visible: false });
+			this.setState({ visible: false }, () => {
+				this.props.navigation.replace('Main');
+			});
 		} else if (!prevProps.context.networkError && this.props.context.networkError) {
 			this.setState({ visible: true });
 		}
