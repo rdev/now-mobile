@@ -41,6 +41,7 @@ declare type Context = {
 	networkError: boolean,
 	biometry?: string,
 	watchIsReachable?: boolean,
+	refreshUserInfo: () => void,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],

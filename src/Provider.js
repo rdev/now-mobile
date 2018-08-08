@@ -42,6 +42,7 @@ const DEFAULT_CONTEXT = {
 	team: null,
 	refreshing: false,
 	fetchData: () => {},
+	refreshUserInfo: () => {},
 	setMode: () => {},
 	getEvents: () => [],
 	reloadEvents: () => {},
@@ -101,6 +102,12 @@ export class Provider extends React.Component<*, Context> {
 
 		if (error) return this.state.user;
 		return user;
+	};
+
+	refreshUserInfo = async () => {
+		const user = await this.getUserInfo();
+
+		this.setState({ user });
 	};
 
 	getDomains = async (): Promise<Zeit$Domain[]> => {
@@ -369,6 +376,7 @@ export class Provider extends React.Component<*, Context> {
 					setMode: this.setMode,
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
+					refreshUserInfo: this.refreshUserInfo,
 					toggleDropdown: this.toggleDropdown,
 					logOut: this.logOut,
 					setTeam: this.setTeam,

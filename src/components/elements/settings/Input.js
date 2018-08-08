@@ -1,6 +1,12 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 import { platformBlackColor } from '../../../lib/utils';
+
+type Props = {
+	onChangeText: (inputValue: string) => void,
+	value: string,
+};
 
 const Input = styled.TextInput`
 	color: ${platformBlackColor};
@@ -13,6 +19,6 @@ const Input = styled.TextInput`
 	padding-vertical: 10px;
 `;
 
-export default ({ onChange, value }) => (
-	<Input onChangeText={onChange} value={value} underlineColorAndroid="rgba(0,0,0,0)" />
+export default ({ onChangeText, value }: Props) => (
+	<Input onChangeText={onChangeText} value={value} underlineColorAndroid="rgba(0,0,0,0)" />
 );

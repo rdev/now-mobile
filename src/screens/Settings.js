@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage } from 'react-native';
+import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage, Alert } from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -85,6 +85,13 @@ const ProfileName = styled.Text`
 	color: ${platformBlackColor};
 `;
 
+const Text = styled.Text`
+	font-size: 18px;
+	font-weight: 300;
+	letter-spacing: 0.2px;
+	color: ${platformBlackColor};
+`;
+
 export const Button = styled.Text`
 	font-size: 18px;
 	font-weight: 300;
@@ -142,10 +149,11 @@ export default class Settings extends React.Component<Props, State> {
 	changeUsername = async () => {
 		const result = await api.user.changeUsername(this.state.inputValue);
 
-		if (result.error) {
-			// @TODO error handling
+		if (result.message) {
+			// This one doesn't have an "error" field
+			Alert.alert('Error', result.message, [{ text: 'Dismiss' }]);
 		} else {
-			// @TODO Context update
+			this.props.context.refreshUserInfo();
 			this.toggleEditing();
 		}
 	};
@@ -242,16 +250,17 @@ export default class Settings extends React.Component<Props, State> {
 										<React.Fragment>
 											<ProfileMeta>
 												<ProfileName>{`${username} `}</ProfileName>
-												{/* Commenting this out for now since Zeit's API is responding to username change but no change actually happens
-												// @TODO Figure it out
 												<Text>
 													{'('}
-													<TouchableOpacity activeOpacity={0.65} style={{ height: 20 }} onPress={this.toggleEditing}>
+													<TouchableOpacity
+														activeOpacity={0.65}
+														style={{ height: 20 }}
+														onPress={this.toggleEditing}
+													>
 														<Button>change</Button>
 													</TouchableOpacity>
 													{')'}
 												</Text>
-												*/}
 											</ProfileMeta>
 											<Email>{email}</Email>
 										</React.Fragment>
