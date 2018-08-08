@@ -4,6 +4,7 @@ import { Image, TouchableOpacity } from 'react-native';
 import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
 import plusImage from '../../../assets/plus.png';
+import gradient from '../../../assets/gradient.jpg';
 
 type Props = {
 	bold?: boolean,
@@ -80,11 +81,20 @@ const DropdownRow = ({
 			<MainArea>
 				{image ? (
 					<ImageContainer>
-						<CachedImage
-							source={{ uri: image }}
-							style={{ width: '100%', height: '100%' }}
-							resizeMode="contain"
-						/>
+						{image === 'gradient' ? (
+							<Image
+								// $FlowFixMe
+								source={gradient}
+								style={{ width: '100%', height: '100%' }}
+								resizeMode="contain"
+							/>
+						) : (
+							<CachedImage
+								source={{ uri: image }}
+								style={{ width: '100%', height: '100%' }}
+								resizeMode="contain"
+							/>
+						)}
 					</ImageContainer>
 				) : null}
 				<Text bold={bold || active}>{text}</Text>

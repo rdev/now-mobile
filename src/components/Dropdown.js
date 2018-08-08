@@ -157,14 +157,14 @@ export default class Dropdown extends React.Component<Props, State> {
 						<DropdownRow text="Profiles" bold />
 						<DropdownRow
 							text={user.username}
-							image={api.user.avatarPath(user.avatar)}
+							image={user.avatar ? api.user.avatarPath(user.avatar) : 'gradient'}
 							active={!team}
 							onPress={() => setTeam(null)}
 						/>
 						{teams.map(t => (
 							<DropdownRow
 								text={t.name}
-								image={api.user.avatarPath(t.avatar, t.avatar ? null : t.id)}
+								image={t.avatar ? api.user.avatarPath(t.avatar) : 'gradient'}
 								key={t.id}
 								// $FlowFixMe this is weird
 								active={team && team.id === t.id}
