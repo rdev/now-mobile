@@ -2,7 +2,7 @@
 // @TODO I feel like this component is becoming way too gigantic and something needs to be improoved
 
 import React from 'react';
-import { AsyncStorage, ActionSheetIOS, Platform, Alert } from 'react-native';
+import { AsyncStorage, ActionSheetIOS, Alert } from 'react-native';
 import TouchID from 'react-native-touch-id';
 import * as watch from 'react-native-watch-connectivity';
 import qs from 'query-string';
@@ -336,7 +336,7 @@ export class Provider extends React.Component<*, Context> {
 	};
 
 	sendTokenToWatch = async () => {
-		if (Platform.OS !== 'ios') return;
+		if (isAndroid) return;
 
 		const token = await AsyncStorage.getItem('@now:token');
 		watch.updateApplicationContext(token ? { token } : {});

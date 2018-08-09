@@ -1,13 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { AsyncStorage, SafeAreaView, Dimensions, Platform } from 'react-native';
+import { AsyncStorage, SafeAreaView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import Logo from '../components/Logo';
 import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
-import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
+import { viewport, platformBlackColor, isAndroid, isPad } from '../lib/utils';
 import { connect } from '../Provider';
 
 type State = {
@@ -64,9 +64,6 @@ const CodeText = styled.Text`
 	font-weight: 600;
 	color: ${platformBlackColor};
 `;
-
-const { height, width } = Dimensions.get('window');
-const isPad = height / width < 1.6 && Platform.OS !== 'android';
 
 /**
  * Authentication screen. This is going to ask for an email or a token.

@@ -105,25 +105,23 @@ export const plans: PlansMap = new Map([
 	],
 ]);
 
-export function isIphoneX(): boolean {
-	const dimen = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
+export function isIphoneX(): boolean {
 	return (
 		Platform.OS === 'ios' &&
 		!Platform.isPad &&
 		!Platform.isTVOS &&
-		(dimen.height === 812 || dimen.width === 812)
+		(height === 812 || width === 812)
 	);
 }
 
 export function isIphoneSE(): boolean {
-	const dimen = Dimensions.get('window');
-
 	return (
 		Platform.OS === 'ios' &&
 		!Platform.isPad &&
 		!Platform.isTVOS &&
-		(dimen.height === 568 || dimen.width === 568)
+		(height === 568 || width === 568)
 	);
 }
 
@@ -131,6 +129,7 @@ export function isIphoneSE(): boolean {
 export const platformBlackColor = Platform.OS === 'android' ? '#2a2a2a' : 'black';
 
 export const isAndroid = Platform.OS === 'android';
+export const isPad = height / width < 1.6 && !isAndroid;
 
 export const getUsageLimits = async (mode: Zeit$PlanName) => {
 	// User-set limits for 'on-demand' and 'unlimited'
