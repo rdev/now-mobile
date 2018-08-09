@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	onSystemPress: Function,
@@ -32,7 +33,7 @@ const Switch = styled.TouchableOpacity`
 const Text = styled.Text`
 	font-size: 14px;
 	font-weight: 300;
-	color: ${({ active }) => (active ? 'black' : '#848484')};
+	color: ${({ active }) => (active ? platformBlackColor : '#848484')};
 `;
 
 export default ({

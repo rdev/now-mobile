@@ -35,7 +35,7 @@ const Metadata = styled.View`
 `;
 
 const MetaText = styled.Text`
-	color: ${({ enabled }) => (enabled ? 'black' : '#B5B5B5')};
+	color: ${({ enabled }) => (enabled ? platformBlackColor : '#B5B5B5')};
 	font-size: 16px;
 	font-weight: 300;
 `;

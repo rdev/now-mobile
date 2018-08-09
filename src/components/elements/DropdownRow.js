@@ -5,6 +5,7 @@ import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
 import plusImage from '../../../assets/plus.png';
 import gradient from '../../../assets/gradient.jpg';
+import { platformBlackColor } from '../../lib/utils';
 
 type Props = {
 	bold?: boolean,
@@ -61,7 +62,7 @@ const Text = styled.Text`
 	font-size: 17px;
 	font-weight: ${({ bold }) => (bold ? 800 : 400)};
 	letter-spacing: 0.2px;
-	color: ${({ bold }) => (bold ? 'black' : '#848484')};
+	color: ${({ bold }) => (bold ? platformBlackColor : '#848484')};
 `;
 
 const Plus = styled.View`
