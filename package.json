@@ -19,6 +19,7 @@
 		"react-native-img-cache": "^1.5.3",
 		"react-native-keyboard-aware-scroll-view": "^0.5.0",
 		"react-native-prompt-android": "^0.3.3",
+		"react-native-push-notification": "^3.1.1",
 		"react-native-shared-group-preferences": "^1.0.6",
 		"react-native-snap-carousel": "^3.7.0",
 		"react-native-spotlight-search": "^1.1.0",

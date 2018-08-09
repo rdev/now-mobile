@@ -25,6 +25,7 @@
 		1A0DE86005D7494CBC51528A /* RNBackgroundFetch+AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A932775785249EDAFAC1264 /* RNBackgroundFetch+AppDelegate.m */; };
 		39468099964545A79EA73F3B /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53063EAF19E44427BDEC6E81 /* libTouchID.a */; };
 		3B955073A3B8490BBD7A6469 /* libRNBackgroundFetch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5BA22D715B24EB0B9EC62F8 /* libRNBackgroundFetch.a */; };
+		4516D108211C5E440035CD99 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4516D0E6211C5E320035CD99 /* libRCTPushNotification.a */; };
 		4525000020FBAEEA004F5C4B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4525FFFE20FBAEEA004F5C4B /* Interface.storyboard */; };
 		4525000220FBAEED004F5C4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4525000120FBAEED004F5C4B /* Assets.xcassets */; };
 		4525000920FBAEED004F5C4B /* WatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4525000820FBAEED004F5C4B /* WatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -293,6 +294,20 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		4516D0E5211C5E320035CD99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTPushNotification;
+		};
+		4516D0E7211C5E320035CD99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
+			remoteInfo = "RCTPushNotification-tvOS";
+		};
 		4525000A20FBAEED004F5C4B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
@@ -461,6 +476,7 @@
 		2A932775785249EDAFAC1264 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		4525000120FBAEED004F5C4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4525000320FBAEED004F5C4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4525000820FBAEED004F5C4B /* WatchApp Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchApp Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -537,6 +553,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				4516D108211C5E440035CD99 /* libRCTPushNotification.a in Frameworks */,
 				6E0BFAB1E9F74CF9A06D052B /* libRNFetchBlob.a in Frameworks */,
 				39468099964545A79EA73F3B /* libTouchID.a in Frameworks */,
 				F70C214091A143B28AAE6A76 /* libRCTSpotlightSearch.a in Frameworks */,
@@ -736,6 +753,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		4516D0D5211C5E310035CD99 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4516D0E6211C5E320035CD99 /* libRCTPushNotification.a */,
+				4516D0E8211C5E320035CD99 /* libRCTPushNotification-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4525000C20FBAEED004F5C4B /* WatchApp Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -867,6 +893,7 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
+				4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */,
 				2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */,
 				B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */,
 				AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */,
@@ -1140,6 +1167,10 @@
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
 					ProjectRef = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+				},
+				{
+					ProductGroup = 4516D0D5211C5E310035CD99 /* Products */;
+					ProjectRef = 4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1421,6 +1452,20 @@
 			fileType = archive.ar;
 			path = libjschelpers.a;
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4516D0E6211C5E320035CD99 /* libRCTPushNotification.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTPushNotification.a;
+			remoteRef = 4516D0E5211C5E320035CD99 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4516D0E8211C5E320035CD99 /* libRCTPushNotification-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTPushNotification-tvOS.a";
+			remoteRef = 4516D0E7211C5E320035CD99 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4560470720ECD8A900B2D6EA /* libRCTSpotlightSearch.a */ = {

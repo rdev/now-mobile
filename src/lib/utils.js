@@ -1,7 +1,7 @@
 // @flow
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, AsyncStorage } from 'react-native';
 
-type PlansMap = Map<string, Plan>;
+type PlansMap = Map<Zeit$PlanName, Plan>;
 
 /**
  * Email validation
@@ -131,3 +131,32 @@ export function isIphoneSE(): boolean {
 export const platformBlackColor = Platform.OS === 'android' ? '#2a2a2a' : 'black';
 
 export const isAndroid = Platform.OS === 'android';
+
+export const getUsageLimits = async (mode: Zeit$PlanName) => {
+	// User-set limits for 'on-demand' and 'unlimited'
+	if (mode === 'on-demand' || mode === 'unlimited') {
+		const instances = (await AsyncStorage.getItem('@now:instanceLimit')) || '0';
+		const bandwidth = (await AsyncStorage.getItem('@now:bandwidthLimit')) || '0';
+		const logs = (await AsyncStorage.getItem('@now:logsLimit')) || '0';
+
+		return {
+			instances: parseInt(instances, 10),
+			bandwidth: parseInt(bandwidth, 10),
+			logs: parseInt(logs, 10),
+		};
+	}
+
+	// 80% of the plan otherwise
+	const plan = plans.get(mode);
+
+	if (plan) {
+		const instances = Math.floor(plan.concurrentInstances * 0.8);
+		const bandwidth = Math.floor(plan.bandwidth * 0.8);
+		const logs = Math.floor(plan.logs * 0.8);
+
+		return { instances, bandwidth, logs };
+	}
+
+	// If ZEIT introduces a new plan we shouldn't break
+	return { instances: 0, bandwidth: 0, logs: 0 };
+};

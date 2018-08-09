@@ -74,6 +74,15 @@ declare type Zeit$Aliases = {
 	error?: APIError,
 };
 
+declare type Zeit$PlanName =
+	| 'oss'
+	| 'free'
+	| 'premium'
+	| 'pro'
+	| 'advanced'
+	| 'on-demand'
+	| 'unlimited';
+
 declare type Zeit$Usage = {
 	metrics: {
 		activeDeployments: number,
@@ -90,7 +99,7 @@ declare type Zeit$Usage = {
 		},
 		startTime: string,
 	},
-	mode: 'oss' | 'free' | 'premium' | 'pro' | 'advanced' | 'on-demand' | 'unlimited',
+	mode: Zeit$PlanName,
 	error?: APIError,
 };
 

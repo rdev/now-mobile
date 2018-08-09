@@ -1,3 +1,4 @@
+// @TODO This component is getting too huge for comfort
 // @flow
 import React from 'react';
 import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage, Alert } from 'react-native';
@@ -7,6 +8,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
+import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import api from '../lib/api';
 import touchIdPrompt from '../lib/touch-id-prompt';
 import { isIphoneSE, platformBlackColor, isAndroid } from '../lib/utils';
@@ -20,6 +22,9 @@ type State = {
 	editing: boolean,
 	touchId: boolean,
 	inputValue: string,
+	instanceLimit: string,
+	bandwidthLimit: string,
+	logsLimit: string,
 };
 
 const Container = styled(SafeAreaView)`
@@ -35,7 +40,7 @@ const View = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	padding-bottom: ${isIphoneSE() ? '0px' : '100px'};
+	padding-bottom: ${isIphoneSE() ? '20%' : '100px'};
 `;
 
 const Title = styled.Text`
@@ -56,6 +61,7 @@ export const ProfilePic = styled.View`
 	background: #e0e0e0;
 	overflow: hidden;
 	margin-bottom: 30px;
+	margin-top: ${isIphoneSE() ? '0px' : '100px'};
 `;
 
 const ProfileInfo = styled.View`
@@ -63,6 +69,7 @@ const ProfileInfo = styled.View`
 	align-items: center;
 	height: 56px;
 	width: 100%;
+	margin-bottom: 30px;
 `;
 
 const ProfileMeta = styled.View`
@@ -118,6 +125,7 @@ const SettingsRow = styled.View`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin-vertical: 5px;
 `;
 
 const RowText = styled.Text`
@@ -126,16 +134,28 @@ const RowText = styled.Text`
 	color: ${platformBlackColor};
 `;
 
+const SectionHeading = styled.Text`
+	font-size: 18px
+	font-weight: 700;
+	color: ${platformBlackColor};
+	width: 80%;
+	margin-bottom: 15px;
+`;
+
 @connect
 export default class Settings extends React.Component<Props, State> {
 	state = {
 		editing: false,
 		inputValue: this.props.context.user.username,
 		touchId: false,
+		instanceLimit: '0',
+		bandwidthLimit: '0',
+		logsLimit: '0',
 	};
 
 	componentDidMount = () => {
 		this.setTouchId();
+		this.getUsageLimits();
 	};
 
 	toggleEditing = () => {
@@ -186,13 +206,45 @@ export default class Settings extends React.Component<Props, State> {
 		}
 	};
 
+	getUsageLimits = async () => {
+		const instanceLimit =
+			(await AsyncStorage.getItem('@now:instanceLimit')) || this.state.instanceLimit;
+		const bandwidthLimit =
+			(await AsyncStorage.getItem('@now:bandwidthLimit')) || this.state.bandwidthLimit;
+		const logsLimit = (await AsyncStorage.getItem('@now:logsLimit')) || this.state.logsLimit;
+
+		this.setState({
+			instanceLimit,
+			bandwidthLimit,
+			logsLimit,
+		});
+	};
+
+	setLimit = async (value: string, type: 'instanceLimit' | 'bandwidthLimit' | 'logsLimit') => {
+		let limit = value.replace(/\D/g, '');
+		if (limit.length > 0 && limit.substr(0, 1) === '0') {
+			limit = limit.slice(1);
+		}
+		if (limit === '') {
+			limit = '0';
+		}
+
+		await AsyncStorage.setItem(`@now:${type}`, limit);
+		this.setState({ [type]: limit });
+	};
+
 	render() {
-		const { biometry, watchIsReachable, sendTokenToWatch } = this.props.context;
+		const {
+			biometry, watchIsReachable, sendTokenToWatch, usage,
+		} = this.props.context;
 		const { avatar, username, email } = this.props.context.user;
 
 		return (
 			<Container>
 				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+					{/* $FlowFixMe */}
+					<Header />
+					<Title>Settings</Title>
 					<KeyboardAwareScrollView
 						contentContainerStyle={{
 							justifyContent: 'center',
@@ -202,11 +254,8 @@ export default class Settings extends React.Component<Props, State> {
 						style={{
 							width: '100%',
 						}}
-						scrollEnabled={false}
+						scrollEnabled
 					>
-						{/* $FlowFixMe */}
-						<Header />
-						<Title>Settings</Title>
 						<View>
 							<ProfilePic>
 								<Image
@@ -250,17 +299,20 @@ export default class Settings extends React.Component<Props, State> {
 										<React.Fragment>
 											<ProfileMeta>
 												<ProfileName>{`${username} `}</ProfileName>
-												<Text>
-													{'('}
-													<TouchableOpacity
-														activeOpacity={0.65}
-														style={{ height: 20 }}
-														onPress={this.toggleEditing}
+												{/* We can't have anything except text inside <Text> on Android, sooo */}
+												<Text>(</Text>
+												<TouchableOpacity
+													activeOpacity={0.65}
+													style={{ height: 20 }}
+													onPress={this.toggleEditing}
+												>
+													<Button
+														style={isAndroid ? { marginTop: -3 } : {}}
 													>
-														<Button>change</Button>
-													</TouchableOpacity>
-													{')'}
-												</Text>
+														change
+													</Button>
+												</TouchableOpacity>
+												<Text>)</Text>
 											</ProfileMeta>
 											<Email>{email}</Email>
 										</React.Fragment>
@@ -272,7 +324,7 @@ export default class Settings extends React.Component<Props, State> {
 									return (
 										// $FlowFixMe
 										<React.Fragment>
-											<Separator style={{ marginTop: 30 }} />
+											<Separator />
 											<SettingsRow>
 												<RowText>
 													Use{' '}
@@ -313,6 +365,47 @@ export default class Settings extends React.Component<Props, State> {
 									);
 								}
 
+								return null;
+							})()}
+							{(() => {
+								if (usage.mode === 'on-demand' || usage.mode === 'unlimited') {
+									return (
+										// $FlowFixMe
+										<React.Fragment>
+											<Separator />
+											<SectionHeading>Usage limits</SectionHeading>
+											<SettingsRow>
+												<RowText>Instances</RowText>
+												<UsageLimitInput
+													value={this.state.instanceLimit}
+													onChangeText={(val: string) => {
+														this.setLimit(val, 'instanceLimit');
+													}}
+												/>
+											</SettingsRow>
+											<SettingsRow>
+												<RowText>Bandwidth</RowText>
+												<UsageLimitInput
+													value={this.state.bandwidthLimit}
+													onChangeText={(val: string) => {
+														this.setLimit(val, 'bandwidthLimit');
+													}}
+													label
+												/>
+											</SettingsRow>
+											<SettingsRow style={{ height: 40 }}>
+												<RowText>Logs</RowText>
+												<UsageLimitInput
+													value={this.state.logsLimit}
+													onChangeText={(val: string) => {
+														this.setLimit(val, 'logsLimit');
+													}}
+													label
+												/>
+											</SettingsRow>
+										</React.Fragment>
+									);
+								}
 								return null;
 							})()}
 						</View>

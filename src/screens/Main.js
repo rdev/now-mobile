@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import { TouchableWithoutFeedback, SafeAreaView, PushNotificationIOS } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
+import PushNotification from 'react-native-push-notification';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
@@ -61,6 +62,16 @@ export default class Main extends Component<*> {
 
 	componentDidMount = () => {
 		setUpBackgroundTask();
+		PushNotification.configure({
+			onNotification: (notification) => {
+				if (notification.userInteraction) {
+					this.titleSlider.snapToItem(4);
+					this.viewSlider.snapToItem(4);
+				}
+				notification.finish(PushNotificationIOS.FetchResult.NoData);
+			},
+			requestPermissions: true,
+		});
 	};
 
 	titleSlider: Carousel;
