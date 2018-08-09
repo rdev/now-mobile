@@ -62,7 +62,7 @@ export default class Header extends Component<Props> {
 					<ProfilePic>
 						<CachedImage
 							source={{
-								uri: api.user.avatarPath(team && team.avatar ? team.avatar : user.avatar),
+								uri: api.user.avatarPath(team && team.avatar ? team.avatar : user.avatar || user.uid),
 								cache: 'force-cache',
 							}}
 							style={{ width: '100%', height: '100%' }}

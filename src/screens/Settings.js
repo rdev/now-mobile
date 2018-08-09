@@ -180,7 +180,9 @@ export default class Settings extends React.Component<Props, State> {
 
 	render() {
 		const { biometry, watchIsReachable, sendTokenToWatch } = this.props.context;
-		const { avatar, username, email } = this.props.context.user;
+		const {
+			avatar, uid, username, email,
+		} = this.props.context.user;
 
 		return (
 			<Container>
@@ -203,7 +205,7 @@ export default class Settings extends React.Component<Props, State> {
 							<ProfilePic>
 								<Image
 									source={{
-										uri: api.user.avatarPath(avatar),
+										uri: api.user.avatarPath(avatar || uid),
 										cache: 'force-cache',
 									}}
 									style={{ width: '100%', height: '100%' }}
