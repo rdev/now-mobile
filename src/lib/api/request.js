@@ -1,5 +1,6 @@
 // @flow
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Platform } from 'react-native';
+import pkg from '../../../package.json';
 
 export default async function request(
 	path: string,
@@ -17,6 +18,7 @@ export default async function request(
 				Authorization: TOKEN ? `Bearer ${TOKEN}` : null,
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
+				'User-Agent': `now-mobile/${pkg.version}/${Platform.OS}`,
 			},
 			body: options ? JSON.stringify(options.body) : null,
 			method,
