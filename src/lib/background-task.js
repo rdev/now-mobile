@@ -60,15 +60,15 @@ const handleBandwidth = async ({
 	// 1. We're over the limit
 	// 2. We haven't alerted about bandwidth during this billing period yet
 
-	// const isDateAppropriate = !!(!lastAlertDate || lastAlertDate < billingPeriodStart);
+	const isDateAppropriate = !!(!lastAlertDate || lastAlertDate < billingPeriodStart);
 
-	// if (bandwidth > limit && isDateAppropriate) {
-	PushNotification.localNotification({
-		title: `You're ${bandwidth > planLimit ? 'over' : 'approaching'} your plan limit`,
-		message: `Your bandwidth usage is at ${formatBytes(bandwidth)} / ${formatBytes(limit)}`,
-	});
-	// 	await AsyncStorage.setItem('@now:lastBandwidthAlert', new Date().toISOString());
-	// }
+	if (bandwidth > limit && isDateAppropriate) {
+		PushNotification.localNotification({
+			title: `You're ${bandwidth > planLimit ? 'over' : 'approaching'} your plan limit`,
+			message: `Your bandwidth usage is at ${formatBytes(bandwidth)} / ${formatBytes(limit)}`,
+		});
+		await AsyncStorage.setItem('@now:lastBandwidthAlert', new Date().toISOString());
+	}
 };
 
 const handleLogs = async ({

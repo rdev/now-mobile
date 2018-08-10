@@ -61,7 +61,7 @@ export const ProfilePic = styled.View`
 	background: #e0e0e0;
 	overflow: hidden;
 	margin-bottom: 30px;
-	margin-top: ${isIphoneSE() ? '0px' : '100px'};
+	margin-top: ${isIphoneSE() ? '60px' : '120px'};
 `;
 
 const ProfileInfo = styled.View`
@@ -247,9 +247,8 @@ export default class Settings extends React.Component<Props, State> {
 					<Title>Settings</Title>
 					<KeyboardAwareScrollView
 						contentContainerStyle={{
-							justifyContent: 'center',
 							alignItems: 'center',
-							height: '100%',
+							paddingBottom: 100,
 						}}
 						style={{
 							width: '100%',

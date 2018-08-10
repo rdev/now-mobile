@@ -83,8 +83,8 @@ export default class Main extends Component<Props> {
 
 			// If app was opened from Spotlight and we're coming from splash screen, send user to deployment screen right away
 			const fromSplash = this.props.navigation.getParam('fromSplash');
-			if (fromSplash) {
-				const id = await Spotlight.handleAppOpen();
+			const id = await Spotlight.handleAppOpen();
+			if (fromSplash && id) {
 				this.props.navigation.push('DeploymentDetails', { id });
 			}
 		}
@@ -140,7 +140,7 @@ export default class Main extends Component<Props> {
 	render() {
 		return (
 			<Container>
-				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+				<Animatable.View animation="fadeIn" duration={700} style={{ width: '100%' }}>
 					{/* $FlowFixMe */}
 					<Header />
 					{/* Titles carousel */}
