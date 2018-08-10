@@ -8,8 +8,13 @@ import PushNotification from 'react-native-push-notification';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
-import { viewport, platformBlackColor } from '../lib/utils';
+import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
 import setUpBackgroundTask from '../lib/background-task';
+
+type Props = {
+	navigation: Navigation,
+	context: Context,
+};
 
 /* eslint-disable react/no-unused-prop-types */
 type Slide = {
@@ -47,7 +52,7 @@ const VIEWS = ['History', 'Deployments', 'Aliases', 'Domains', 'Usage'];
  * @class Main
  * @extends {React.Component}
  */
-export default class Main extends Component<*> {
+export default class Main extends Component<Props> {
 	/**
 	 * Carousels use this function to render a view
 	 *
@@ -60,7 +65,7 @@ export default class Main extends Component<*> {
 		return <View key={index} name={item} />;
 	}
 
-	componentDidMount = () => {
+	componentDidMount = async () => {
 		setUpBackgroundTask();
 		PushNotification.configure({
 			onNotification: (notification) => {
@@ -72,10 +77,38 @@ export default class Main extends Component<*> {
 			},
 			requestPermissions: true,
 		});
+		if (!isAndroid) {
+			const Spotlight = require('../extensions/spotlight');
+			Spotlight.addListener(this.handleSpotlightClick);
+
+			// If app was opened from Spotlight and we're coming from splash screen, send user to deployment screen right away
+			const fromSplash = this.props.navigation.getParam('fromSplash');
+			if (fromSplash) {
+				const id = await Spotlight.handleAppOpen();
+				this.props.navigation.push('DeploymentDetails', { id });
+			}
+		}
+	};
+
+	componentWillUnmount = () => {
+		if (!isAndroid) {
+			const Spotlight = require('../extensions/spotlight');
+			Spotlight.removeListener(this.handleSpotlightClick);
+		}
 	};
 
 	titleSlider: Carousel;
 	viewSlider: Carousel;
+
+	/**
+	 *
+	 * @param {string} id - Deployment ID of the Spotlight item
+	 * @returns {TouchableWithoutFeedback}
+	 * @memberof Main
+	 */
+	handleSpotlightClick = (id: string) => {
+		this.props.navigation.push('DeploymentDetails', { id });
+	};
 
 	/**
 	 *

@@ -1,11 +1,12 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components';
 import Logo from '../../Logo';
 
 const LoadingIndicator = styled.View`
 	width: 100%;
-	height: 100%;
+	height: ${Dimensions.get('window').height * 0.8};
 	align-items: center;
 	justify-content: center;
 `;

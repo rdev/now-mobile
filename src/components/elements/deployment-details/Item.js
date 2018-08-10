@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
 import { platformBlackColor, isAndroid, promptOpen } from '../../../lib/utils';

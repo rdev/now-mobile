@@ -62,6 +62,7 @@ export default class DeploymentDetails extends Component<Props, State> {
 					style={{
 						width: '100%',
 					}}
+					scrollEnabled={!!data}
 				>
 					{data ? (
 						<Details

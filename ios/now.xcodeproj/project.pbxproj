@@ -58,7 +58,7 @@
 		85590F678FC642FDA05B4F88 /* libRNWatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED117917F6ED4AE38BFD0D25 /* libRNWatch.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B1F700FEA36645AC3C53E8B3 /* Pods_WatchApp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673C9450867FEF99CBCAFEED /* Pods_WatchApp_Extension.framework */; };
-		F70C214091A143B28AAE6A76 /* libRCTSpotlightSearch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B729370EA1134C18A8C382CE /* libRCTSpotlightSearch.a */; };
+		E975679212894B12A572BF52 /* libRCTSearchApi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDEBFDC560BD44A6B13C778E /* libRCTSearchApi.a */; };
 		FF0368262FCD4EC89520B2DD /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87790BC18544031B3DFE043 /* TSBackgroundFetch.framework */; };
 /* End PBXBuildFile section */
 
@@ -294,6 +294,13 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		4502E35A211DE05B00F5AE17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 006CFC6F0BA849AFB7E9956D /* RCTSearchApi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F35C8FBE1D19DABC00E97D91;
+			remoteInfo = RCTSearchApi;
+		};
 		4516D0E5211C5E320035CD99 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */;
@@ -321,13 +328,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 4525FFFB20FBAEEA004F5C4B;
 			remoteInfo = WatchApp;
-		};
-		4560470620ECD8A900B2D6EA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F35C8FBE1D19DABC00E97D91;
-			remoteInfo = RCTSpotlightSearch;
 		};
 		4565C25D20DB7EC6009C2278 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -453,6 +453,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		006CFC6F0BA849AFB7E9956D /* RCTSearchApi.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTSearchApi.xcodeproj; path = "../node_modules/react-native-search-api/ios/RCTSearchApi.xcodeproj"; sourceTree = "<group>"; };
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
@@ -516,15 +517,14 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeSharedGroupPreferences.a; sourceTree = "<group>"; };
-		AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTSpotlightSearch.xcodeproj; path = "../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TouchID.xcodeproj; path = "../node_modules/react-native-touch-id/TouchID.xcodeproj"; sourceTree = "<group>"; };
-		B729370EA1134C18A8C382CE /* libRCTSpotlightSearch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTSpotlightSearch.a; sourceTree = "<group>"; };
 		B87790BC18544031B3DFE043 /* TSBackgroundFetch.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TSBackgroundFetch.framework; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/TSBackgroundFetch.framework"; sourceTree = SDKROOT; };
 		DEA890FDE7564B31BAE14608 /* RNWatch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNWatch.xcodeproj; path = "../node_modules/react-native-watch-connectivity/RNWatch.xcodeproj"; sourceTree = "<group>"; };
 		ED117917F6ED4AE38BFD0D25 /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNWatch.a; sourceTree = "<group>"; };
 		F3CE23C15F2A2E5D1140FB6E /* Pods-WatchApp Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchApp Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatchApp Extension/Pods-WatchApp Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		F5BA22D715B24EB0B9EC62F8 /* libRNBackgroundFetch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundFetch.a; sourceTree = "<group>"; };
+		FDEBFDC560BD44A6B13C778E /* libRCTSearchApi.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTSearchApi.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -556,11 +556,11 @@
 				4516D108211C5E440035CD99 /* libRCTPushNotification.a in Frameworks */,
 				6E0BFAB1E9F74CF9A06D052B /* libRNFetchBlob.a in Frameworks */,
 				39468099964545A79EA73F3B /* libTouchID.a in Frameworks */,
-				F70C214091A143B28AAE6A76 /* libRCTSpotlightSearch.a in Frameworks */,
 				805F6D0348244255A4E66649 /* libRNReactNativeSharedGroupPreferences.a in Frameworks */,
 				3B955073A3B8490BBD7A6469 /* libRNBackgroundFetch.a in Frameworks */,
 				FF0368262FCD4EC89520B2DD /* TSBackgroundFetch.framework in Frameworks */,
 				85590F678FC642FDA05B4F88 /* libRNWatch.a in Frameworks */,
+				E975679212894B12A572BF52 /* libRCTSearchApi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,15 +740,23 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		4502E357211DE05B00F5AE17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4502E35B211DE05B00F5AE17 /* libRCTSearchApi.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		450A608320DB7E9D006A556B /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				4623CC86BC564CB1ACDD296D /* libRNFetchBlob.a */,
 				53063EAF19E44427BDEC6E81 /* libTouchID.a */,
-				B729370EA1134C18A8C382CE /* libRCTSpotlightSearch.a */,
 				84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */,
 				F5BA22D715B24EB0B9EC62F8 /* libRNBackgroundFetch.a */,
 				ED117917F6ED4AE38BFD0D25 /* libRNWatch.a */,
+				FDEBFDC560BD44A6B13C778E /* libRCTSearchApi.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -787,14 +795,6 @@
 				4525000320FBAEED004F5C4B /* Info.plist */,
 			);
 			path = WatchApp;
-			sourceTree = "<group>";
-		};
-		4560470320ECD8A900B2D6EA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4560470720ECD8A900B2D6EA /* libRCTSpotlightSearch.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		4565C23520DB7EC6009C2278 /* Products */ = {
@@ -896,10 +896,10 @@
 				4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */,
 				2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */,
 				B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */,
-				AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */,
 				047C2C684B3E4050BFF4AFD8 /* RNReactNativeSharedGroupPreferences.xcodeproj */,
 				5010BA6090C94A60AC67F687 /* RNBackgroundFetch.xcodeproj */,
 				DEA890FDE7564B31BAE14608 /* RNWatch.xcodeproj */,
+				006CFC6F0BA849AFB7E9956D /* RCTSearchApi.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1173,12 +1173,12 @@
 					ProjectRef = 4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */;
 				},
 				{
-					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
-					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
+					ProductGroup = 4502E357211DE05B00F5AE17 /* Products */;
+					ProjectRef = 006CFC6F0BA849AFB7E9956D /* RCTSearchApi.xcodeproj */;
 				},
 				{
-					ProductGroup = 4560470320ECD8A900B2D6EA /* Products */;
-					ProjectRef = AB45803DDFBF4D67B64C037E /* RCTSpotlightSearch.xcodeproj */;
+					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
+					ProjectRef = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
 				},
 				{
 					ProductGroup = 832341B11AAA6A8300B99B32 /* Products */;
@@ -1454,6 +1454,13 @@
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4502E35B211DE05B00F5AE17 /* libRCTSearchApi.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTSearchApi.a;
+			remoteRef = 4502E35A211DE05B00F5AE17 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4516D0E6211C5E320035CD99 /* libRCTPushNotification.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1466,13 +1473,6 @@
 			fileType = archive.ar;
 			path = "libRCTPushNotification-tvOS.a";
 			remoteRef = 4516D0E7211C5E320035CD99 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4560470720ECD8A900B2D6EA /* libRCTSpotlightSearch.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRCTSpotlightSearch.a;
-			remoteRef = 4560470620ECD8A900B2D6EA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4565C25E20DB7EC6009C2278 /* libRNFetchBlob.a */ = {
@@ -1787,23 +1787,15 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
-					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
 					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
+					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
 				);
 				INFOPLIST_FILE = nowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1824,23 +1816,15 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
-					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
 					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
+					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
 				);
 				INFOPLIST_FILE = nowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1866,10 +1850,10 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
-					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
 					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
+					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
 				);
 				INFOPLIST_FILE = now/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1901,10 +1885,10 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
-					"$(SRCROOT)/../node_modules/react-native-spotlight-search/ios/RCTSpotlightSearch/RCTSpotlightSearch",
 					"$(SRCROOT)/../node_modules/react-native-shared-group-preferences/ios",
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
+					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
 				);
 				INFOPLIST_FILE = now/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2043,6 +2027,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2086,6 +2071,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2127,6 +2113,7 @@
 				INFOPLIST_FILE = TodayUsageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-usage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2168,6 +2155,7 @@
 				INFOPLIST_FILE = TodayUsageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-usage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2207,11 +2195,7 @@
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2253,11 +2237,7 @@
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

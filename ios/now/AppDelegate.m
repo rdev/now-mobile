@@ -10,13 +10,12 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <React/RCTPushNotificationManager.h>
-#import "RCTSpotlightSearch.h"
+#import "RCTSearchApiManager.h"
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray * _Nullable))restorationHandler {
-  [RCTSpotlightSearch handleContinueUserActivity:userActivity];
-  return YES;
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+  return [RCTSearchApiManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

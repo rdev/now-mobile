@@ -87,7 +87,7 @@ export default class SplashScreen extends React.Component<Props> {
 				await this.props.context.fetchData();
 				await this.logo.transitionToMain(600);
 
-				this.props.navigation.replace('Main');
+				this.props.navigation.replace('Main', { fromSplash: true });
 			} else {
 				await this.logo.transitionToAuth(600);
 
