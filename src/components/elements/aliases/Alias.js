@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
-import { Linking, TouchableOpacity, Alert } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
-import { platformBlackColor, isAndroid } from '../../../lib/utils';
+import { platformBlackColor, isAndroid, promptOpen } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
 
 type Props = {
@@ -54,18 +54,6 @@ const Go = styled.Image`
 	margin-left: 10px;
 	margin-top: ${isAndroid ? '6px' : 0};
 `;
-
-export function promptOpen(path: string) {
-	Alert.alert(
-		`Open in ${isAndroid ? 'browser' : 'Safari'}`,
-		`Do you want to open ${path} in browser?`,
-		[
-			{ text: 'Cancel', style: 'cancel' },
-			{ text: 'Open', onPress: () => Linking.openURL(`https://${path}`) },
-		],
-		{ cancelable: false },
-	);
-}
 
 export default ({ alias, last }: Props) => (
 	<View last={last}>

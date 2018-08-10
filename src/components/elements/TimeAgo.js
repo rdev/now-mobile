@@ -5,6 +5,7 @@ import moment from 'moment';
 
 type Props = {
 	date: ?string,
+	bracketed?: boolean,
 };
 
 moment.updateLocale('en', {
@@ -26,10 +27,14 @@ const Text = styled.Text`
 	font-size: 16px;
 `;
 
-export default ({ date }: Props) => {
+export default ({ date, bracketed }: Props) => {
 	const diff = moment().diff(moment(date), 'days');
 	if (diff > 1) {
-		return <Text>{`${diff}d`}</Text>;
+		return <Text bracketed={bracketed}>{bracketed ? `[${diff}d]` : `${diff}d`}</Text>;
 	}
-	return <Text>{moment(date).fromNow(true)}</Text>;
+	return (
+		<Text bracketed={bracketed}>
+			{bracketed ? `[${moment(date).fromNow(true)}]` : moment(date).fromNow(true)}
+		</Text>
+	);
 };

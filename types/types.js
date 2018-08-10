@@ -1,8 +1,9 @@
 // @flow
 
 declare type Navigation = {
-	push: (path: string) => void,
+	push: (path: string, params?: { id: string }) => void,
 	replace: (path: string) => void,
+	getParam: (name: string) => any,
 	state: {
 		routeName: string,
 	},
