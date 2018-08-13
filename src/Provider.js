@@ -39,10 +39,18 @@ const DEFAULT_CONTEXT = {
 			bandwidth: {},
 		},
 	},
-	team: null,
+	team: {
+		id: null,
+		name: '',
+		slug: '',
+		avatar: '',
+		created: '',
+		creatorId: '',
+	},
 	refreshing: false,
 	fetchData: () => {},
 	refreshUserInfo: () => {},
+	refreshTeamInfo: () => {},
 	setMode: () => {},
 	getEvents: () => [],
 	reloadEvents: () => {},
@@ -104,10 +112,22 @@ export class Provider extends React.Component<*, Context> {
 		return user;
 	};
 
+	getTeamInfo = async (id: string) => {
+		const team = await api.teams.getTeam(id);
+
+		return team;
+	};
+
 	refreshUserInfo = async () => {
 		const user = await this.getUserInfo();
 
 		this.setState({ user });
+	};
+
+	refreshTeamInfo = async (id: string) => {
+		const team = await this.getTeamInfo(id);
+
+		this.setState({ team });
 	};
 
 	getDomains = async (): Promise<Zeit$Domain[]> => {
@@ -210,15 +230,16 @@ export class Provider extends React.Component<*, Context> {
 
 	setTeam = (team: ?Zeit$Team): Promise<void> =>
 		new Promise(async (resolve) => {
-			console.log('SETTING TEAM', team);
+			let mode = 'me';
 
 			if (team) {
 				await AsyncStorage.setItem('@now:teamId', team.id);
+				mode = 'team';
 			} else {
 				await AsyncStorage.removeItem('@now:teamId');
 			}
 
-			this.setState({ team, mode: 'me' }, async () => {
+			this.setState({ team, mode }, async () => {
 				await this.fetchData();
 				resolve();
 			});
@@ -377,6 +398,7 @@ export class Provider extends React.Component<*, Context> {
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
 					refreshUserInfo: this.refreshUserInfo,
+					refreshTeamInfo: this.refreshTeamInfo,
 					toggleDropdown: this.toggleDropdown,
 					logOut: this.logOut,
 					setTeam: this.setTeam,

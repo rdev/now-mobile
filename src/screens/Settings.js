@@ -90,6 +90,7 @@ const ProfileName = styled.Text`
 	font-weight: 700;
 	letter-spacing: 0.2px;
 	color: ${platformBlackColor};
+	margin-right: 5px;
 `;
 
 const Text = styled.Text`
@@ -153,6 +154,24 @@ export default class Settings extends React.Component<Props, State> {
 		logsLimit: '0',
 	};
 
+	static getDerivedStateFromProps = (nextProps: object, prevState: object) => {
+		const { mode, user, team } = nextProps.context;
+		const { inputValue } = prevState;
+		const isUser = mode === 'me';
+
+		if (isUser && inputValue !== user.username) {
+			return {
+				inputValue: user.username,
+			};
+		} else if (!isUser && inputValue !== team.name) {
+			return {
+				inputValue: team.name,
+			};
+		}
+
+		return null;
+	};
+
 	componentDidMount = () => {
 		this.setTouchId();
 		this.getUsageLimits();
@@ -166,16 +185,30 @@ export default class Settings extends React.Component<Props, State> {
 		this.setState({ inputValue });
 	};
 
+	handleNameChange = (message: string) => {
+		const { refreshUserInfo, refreshTeamInfo, team } = this.props.context;
+
+		if (message) {
+			// This one doesn't have an "error" field
+			Alert.alert('Error', message, [{ text: 'Dismiss' }]);
+		} else {
+			refreshUserInfo();
+			refreshTeamInfo(team.id);
+			this.toggleEditing();
+		}
+	};
+
 	changeUsername = async () => {
 		const result = await api.user.changeUsername(this.state.inputValue);
 
-		if (result.message) {
-			// This one doesn't have an "error" field
-			Alert.alert('Error', result.message, [{ text: 'Dismiss' }]);
-		} else {
-			this.props.context.refreshUserInfo();
-			this.toggleEditing();
-		}
+		this.handleNameChange(result.message);
+	};
+
+	changeTeamName = async () => {
+		const { team } = this.props.context;
+		const result = await api.teams.changeTeamName(team.id, this.state.inputValue);
+
+		this.handleNameChange(result.message);
 	};
 
 	setTouchId = async () => {
@@ -235,9 +268,25 @@ export default class Settings extends React.Component<Props, State> {
 
 	render() {
 		const {
-			biometry, watchIsReachable, sendTokenToWatch, usage,
+			biometry,
+			watchIsReachable,
+			sendTokenToWatch,
+			usage,
+			mode,
+			user,
+			team,
 		} = this.props.context;
-		const { avatar, username, email } = this.props.context.user;
+		const changeName = mode === 'me' ? this.changeUsername : this.changeTeamName;
+		const current =
+			mode === 'me'
+				? {
+					avatar: user.avatar || user.uid,
+					name: user.username,
+				  }
+				: {
+					avatar: team.avatar || team.id,
+					name: team.name,
+				  };
 
 		return (
 			<Container>
@@ -260,7 +309,7 @@ export default class Settings extends React.Component<Props, State> {
 							<ProfilePic>
 								<Image
 									source={{
-										uri: api.user.avatarPath(avatar),
+										uri: api.user.avatarPath(current.avatar),
 										cache: 'force-cache',
 									}}
 									style={{ width: '100%', height: '100%' }}
@@ -279,7 +328,7 @@ export default class Settings extends React.Component<Props, State> {
 												<ButtonGroup>
 													<TouchableOpacity
 														activeOpacity={0.65}
-														onPress={this.changeUsername}
+														onPress={changeName}
 													>
 														<Button>save</Button>
 													</TouchableOpacity>
@@ -298,7 +347,7 @@ export default class Settings extends React.Component<Props, State> {
 										// $FlowFixMe
 										<React.Fragment>
 											<ProfileMeta>
-												<ProfileName>{`${username} `}</ProfileName>
+												<ProfileName>{`${current.name}`}</ProfileName>
 												{/* We can't have anything except text inside <Text> on Android, sooo */}
 												<Text>(</Text>
 												<TouchableOpacity
@@ -314,7 +363,7 @@ export default class Settings extends React.Component<Props, State> {
 												</TouchableOpacity>
 												<Text>)</Text>
 											</ProfileMeta>
-											<Email>{email}</Email>
+											<Email>{user.email}</Email>
 										</React.Fragment>
 									);
 								})()}
