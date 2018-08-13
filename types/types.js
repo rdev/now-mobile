@@ -8,7 +8,7 @@ declare type Navigation = {
 	},
 };
 
-declare type Method = 'get' | 'GET' | 'post' | 'POST' | 'patch' | 'PATCH';
+declare type Method = 'get' | 'GET' | 'post' | 'POST' | 'patch' | 'PATCH' | 'delete' | 'DELETE';
 
 declare type RequestOptions = {
 	body?: {
@@ -42,6 +42,7 @@ declare type Context = {
 	biometry?: string,
 	watchIsReachable?: boolean,
 	refreshUserInfo: () => void,
+	refreshTeamInfo: () => void,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],
