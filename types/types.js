@@ -42,7 +42,7 @@ declare type Context = {
 	biometry?: string,
 	watchIsReachable?: boolean,
 	refreshUserInfo: () => void,
-	refreshTeamInfo: () => void,
+	refreshTeamInfo: (id: string) => void,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],

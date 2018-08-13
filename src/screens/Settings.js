@@ -186,16 +186,20 @@ export default class Settings extends React.Component<Props, State> {
 	};
 
 	handleNameChange = (message: string) => {
-		const { refreshUserInfo, refreshTeamInfo, team } = this.props.context;
+		const {
+			mode, refreshUserInfo, refreshTeamInfo, team,
+		} = this.props.context;
 
 		if (message) {
 			// This one doesn't have an "error" field
 			Alert.alert('Error', message, [{ text: 'Dismiss' }]);
-		} else {
+		} else if (mode === 'me') {
 			refreshUserInfo();
+		} else {
 			refreshTeamInfo(team.id);
-			this.toggleEditing();
 		}
+
+		this.toggleEditing();
 	};
 
 	changeUsername = async () => {
