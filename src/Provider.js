@@ -39,14 +39,7 @@ const DEFAULT_CONTEXT = {
 			bandwidth: {},
 		},
 	},
-	team: {
-		id: null,
-		name: '',
-		slug: '',
-		avatar: '',
-		created: '',
-		creatorId: '',
-	},
+	team: null,
 	refreshing: false,
 	fetchData: () => {},
 	refreshUserInfo: () => {},
@@ -58,6 +51,7 @@ const DEFAULT_CONTEXT = {
 	logOut: () => {},
 	setTeam: () => {},
 	createTeam: () => '',
+	deleteTeam: () => '',
 	sendTokenToWatch: () => {},
 	dropdownVisible: false,
 	networkError: false,
@@ -210,6 +204,20 @@ export class Provider extends React.Component<*, Context> {
 
 				this.setState({ teams });
 				resolve(id);
+			}
+		});
+
+	deleteTeam = (id: string): Promise<string> =>
+		new Promise(async (resolve, reject) => {
+			const { error } = await api.teams.deleteTeam(id);
+
+			if (error) {
+				reject(error);
+			} else {
+				const teams = await this.getTeams();
+
+				this.setState({ teams, mode: 'me', team: null });
+				resolve();
 			}
 		});
 
@@ -403,6 +411,7 @@ export class Provider extends React.Component<*, Context> {
 					logOut: this.logOut,
 					setTeam: this.setTeam,
 					createTeam: this.createTeam,
+					deleteTeam: this.deleteTeam,
 					sendTokenToWatch: this.sendTokenToWatch,
 				}}
 			>
