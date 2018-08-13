@@ -1,7 +1,15 @@
 // @TODO This component is getting too huge for comfort
 // @flow
 import React from 'react';
-import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage, Alert } from 'react-native';
+import {
+	SafeAreaView,
+	Image,
+	TouchableOpacity,
+	Switch,
+	AsyncStorage,
+	Alert,
+	ActionSheetIOS,
+} from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -143,6 +151,10 @@ const SectionHeading = styled.Text`
 	margin-bottom: 15px;
 `;
 
+const DeleteText = styled.Text`
+	color: rgb(215, 76, 88);
+`;
+
 @connect
 export default class Settings extends React.Component<Props, State> {
 	state = {
@@ -213,6 +225,42 @@ export default class Settings extends React.Component<Props, State> {
 		const result = await api.teams.changeTeamName(team.id, this.state.inputValue);
 
 		this.handleNameChange(result.message);
+	};
+
+	deleteTeam = async () => {
+		const message = 'Are you sure you want delete this team?';
+		const { deleteTeam, team } = this.props.context;
+
+		if (isAndroid) {
+			Alert.alert(
+				message,
+				null,
+				[
+					{ text: 'Cancel', onPress: () => {} },
+					{
+						text: 'Delete',
+						onPress: async () => {
+							await deleteTeam(team.id);
+						},
+					},
+				],
+				{ cancelable: false },
+			);
+		} else {
+			ActionSheetIOS.showActionSheetWithOptions(
+				{
+					title: message,
+					options: ['Cancel', 'Delete'],
+					destructiveButtonIndex: 1,
+					cancelButtonIndex: 0,
+				},
+				async (buttonIndex): any => {
+					if (buttonIndex === 1) {
+						await deleteTeam(team.id);
+					}
+				},
+			);
+		}
 	};
 
 	setTouchId = async () => {
@@ -459,6 +507,20 @@ export default class Settings extends React.Component<Props, State> {
 										</React.Fragment>
 									);
 								}
+								return null;
+							})()}
+							{(() => {
+								if (team) {
+									return (
+										<TouchableOpacity
+											activeOpacity={0.65}
+											onPress={() => this.deleteTeam()}
+										>
+											<DeleteText>DELETE TEAM</DeleteText>
+										</TouchableOpacity>
+									);
+								}
+
 								return null;
 							})()}
 						</View>

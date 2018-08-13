@@ -167,3 +167,8 @@ declare type Zeit$NewTeam = {
 	id: string,
 	error?: APIError,
 };
+
+declare type Zeit$DeleteTeam = {
+	id: string,
+	error?: APIError,
+};

@@ -22,6 +22,12 @@ export async function createTeam(slug: string): Promise<*> {
 	return result;
 }
 
+export async function deleteTeam(id: string): Promise<*> {
+	const result: Zeit$DeleteTeam = await request(`/teams/${id}`, 'DELETE');
+
+	return result;
+}
+
 export async function changeTeamName(id: string, name: string) {
 	const result = await request(`/teams/${id}`, 'PATCH', {
 		body: { name },

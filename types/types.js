@@ -51,5 +51,6 @@ declare type Context = {
 	logOut: () => void,
 	setTeam: (teamId: ?Zeit$Team) => void,
 	createTeam: (slug: string) => string,
+	deleteTeam: (id: string) => string,
 	sendTokenToWatch: () => void,
 };
