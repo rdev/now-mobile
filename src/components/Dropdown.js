@@ -126,6 +126,8 @@ export default class Dropdown extends React.Component<Props, State> {
 			user, teams, team, setTeam,
 		} = this.props.context;
 
+		const avatar = user.avatar || user.uid;
+
 		return this.state.visible ? (
 			// $FlowFixMe
 			<React.Fragment>
@@ -157,7 +159,7 @@ export default class Dropdown extends React.Component<Props, State> {
 						<DropdownRow text="Profiles" bold />
 						<DropdownRow
 							text={user.username}
-							image={user.avatar ? api.user.avatarPath(user.avatar) : 'gradient'}
+							image={avatar ? api.user.avatarPath(avatar) : 'gradient'}
 							active={!team}
 							onPress={() => setTeam(null)}
 						/>

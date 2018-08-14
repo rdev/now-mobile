@@ -71,7 +71,7 @@ export default class Header extends Component<Props> {
 							source={
 								avatar
 									? {
-										uri: api.user.avatarPath(team && team.avatar ? team.avatar : user.avatar),
+										uri: api.user.avatarPath(avatar),
 										cache: 'force-cache',
 									  }
 									: gradient
