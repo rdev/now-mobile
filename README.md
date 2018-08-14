@@ -34,7 +34,7 @@ If you find any, please [report them](https://github.com/rdev/now-mobile/issues/
 
 ## TODO
 
-- [ ] Deployment details screen on tap
+- [x] Deployment details screen on tap
 - [ ] Cache latest state and show it on startup before loading from network. This is already beind done on the Watch so it's only fair main app has it
 - [ ] Simplify `Provider` component (?)
 - [ ] Flow types improvements
