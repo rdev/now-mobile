@@ -1,5 +1,5 @@
 // @flow
-import { Dimensions, Platform, AsyncStorage } from 'react-native';
+import { Dimensions, Platform, AsyncStorage, Linking, Alert } from 'react-native';
 
 type PlansMap = Map<Zeit$PlanName, Plan>;
 
@@ -159,3 +159,24 @@ export const getUsageLimits = async (mode: Zeit$PlanName) => {
 	// If ZEIT introduces a new plan we shouldn't break
 	return { instances: 0, bandwidth: 0, logs: 0 };
 };
+
+// Stolen from Now CLI
+// makes sure the promise never rejects, exposing the error
+// as the resolved value instead
+export function caught(p: Promise<any>): Promise<any> {
+	return new Promise((resolve) => {
+		p.then(resolve).catch(resolve);
+	});
+}
+
+export function promptOpen(path: string) {
+	Alert.alert(
+		`Open in ${isAndroid ? 'browser' : 'Safari'}`,
+		`Do you want to open ${path} in browser?`,
+		[
+			{ text: 'Cancel', style: 'cancel' },
+			{ text: 'Open', onPress: () => Linking.openURL(`https://${path}`) },
+		],
+		{ cancelable: false },
+	);
+}

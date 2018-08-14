@@ -2,9 +2,8 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import { platformBlackColor, isAndroid } from '../../../lib/utils';
+import { platformBlackColor, isAndroid, promptOpen } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
-import { promptOpen } from './Alias';
 
 type Props = {
 	pathname?: string,

@@ -123,6 +123,17 @@ declare type Zeit$Deployment = {
 		current: number,
 		min: number,
 		max: number,
+		// V3 API
+		sfo1: {
+			current: number,
+			min: number,
+			max: number,
+		},
+		bru1: {
+			current: number,
+			min: number,
+			max: number,
+		},
 	},
 };
 
@@ -139,6 +150,7 @@ declare type Zeit$Event = {
 	type: string,
 	created: string,
 	region: string,
+	event: string,
 	payload: {
 		[string]: any, // @TODO implement ALL of this
 	},
@@ -171,4 +183,20 @@ declare type Zeit$NewTeam = {
 declare type Zeit$DeleteTeam = {
 	id: string,
 	error?: APIError,
+};
+
+declare type Zeit$Instance = {
+	uid: string,
+	url: string,
+};
+
+declare type Zeit$Scale = {
+	bru1: { instances: Zeit$Instance[] },
+	sfo1: { instances: Zeit$Instance[] },
+};
+
+declare type Zeit$DeploymentDetails = {
+	deployment: Zeit$Deployment,
+	scale: Zeit$Scale,
+	events: ?(Zeit$Event[]),
 };

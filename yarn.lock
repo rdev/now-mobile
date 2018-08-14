@@ -8258,6 +8258,10 @@ react-native-safe-area-view@^0.7.0:
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
+react-native-search-api@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-search-api/-/react-native-search-api-1.2.0.tgz#824b49e1f9a40aa36ef81b95c528dc29d4b88454"
+
 react-native-shared-group-preferences@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-native-shared-group-preferences/-/react-native-shared-group-preferences-1.0.6.tgz#de471a4fc9591f318c655f95ee71e1bae00b1eca"
@@ -8268,10 +8272,6 @@ react-native-snap-carousel@^3.7.0:
   dependencies:
     prop-types "^15.6.1"
     react-addons-shallow-compare "15.6.2"
-
-react-native-spotlight-search@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-spotlight-search/-/react-native-spotlight-search-1.1.0.tgz#eb225231b52cabaedf29309a0dbf35eb222a6ad5"
 
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"
