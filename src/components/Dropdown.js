@@ -121,10 +121,16 @@ export default class Dropdown extends React.Component<Props, State> {
 		]);
 	};
 
+	switchTeam = (team?: string) => {
+		const { setTeam, toggleDropdown, setUpdateMessage } = this.props.context;
+
+		setTeam(team);
+		toggleDropdown();
+		setUpdateMessage('Team context updated!');
+	};
+
 	render() {
-		const {
-			user, teams, team, setTeam,
-		} = this.props.context;
+		const { user, teams, team } = this.props.context;
 
 		return this.state.visible ? (
 			// $FlowFixMe
@@ -159,7 +165,7 @@ export default class Dropdown extends React.Component<Props, State> {
 							text={user.username}
 							image={user.avatar ? api.user.avatarPath(user.avatar) : 'gradient'}
 							active={!team}
-							onPress={() => setTeam(null)}
+							onPress={() => this.switchTeam(null)}
 						/>
 						{teams.map(t => (
 							<DropdownRow
@@ -168,7 +174,7 @@ export default class Dropdown extends React.Component<Props, State> {
 								key={t.id}
 								// $FlowFixMe this is weird
 								active={team && team.id === t.id}
-								onPress={() => setTeam(t)}
+								onPress={() => this.switchTeam(t)}
 							/>
 						))}
 						<DropdownRow text="Logout" border="top" onPress={this.logout} padded />
