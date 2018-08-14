@@ -1,7 +1,7 @@
 // @flow
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, AsyncStorage, Linking, Alert } from 'react-native';
 
-type PlansMap = Map<string, Plan>;
+type PlansMap = Map<Zeit$PlanName, Plan>;
 
 /**
  * Email validation
@@ -105,25 +105,23 @@ export const plans: PlansMap = new Map([
 	],
 ]);
 
-export function isIphoneX(): boolean {
-	const dimen = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
+export function isIphoneX(): boolean {
 	return (
 		Platform.OS === 'ios' &&
 		!Platform.isPad &&
 		!Platform.isTVOS &&
-		(dimen.height === 812 || dimen.width === 812)
+		(height === 812 || width === 812)
 	);
 }
 
 export function isIphoneSE(): boolean {
-	const dimen = Dimensions.get('window');
-
 	return (
 		Platform.OS === 'ios' &&
 		!Platform.isPad &&
 		!Platform.isTVOS &&
-		(dimen.height === 568 || dimen.width === 568)
+		(height === 568 || width === 568)
 	);
 }
 
@@ -131,3 +129,54 @@ export function isIphoneSE(): boolean {
 export const platformBlackColor = Platform.OS === 'android' ? '#2a2a2a' : 'black';
 
 export const isAndroid = Platform.OS === 'android';
+export const isPad = height / width < 1.6 && !isAndroid;
+
+export const getUsageLimits = async (mode: Zeit$PlanName) => {
+	// User-set limits for 'on-demand' and 'unlimited'
+	if (mode === 'on-demand' || mode === 'unlimited') {
+		const instances = (await AsyncStorage.getItem('@now:instanceLimit')) || '0';
+		const bandwidth = (await AsyncStorage.getItem('@now:bandwidthLimit')) || '0';
+		const logs = (await AsyncStorage.getItem('@now:logsLimit')) || '0';
+
+		return {
+			instances: parseInt(instances, 10),
+			bandwidth: parseInt(bandwidth, 10),
+			logs: parseInt(logs, 10),
+		};
+	}
+
+	// 80% of the plan otherwise
+	const plan = plans.get(mode);
+
+	if (plan) {
+		const instances = Math.floor(plan.concurrentInstances * 0.8);
+		const bandwidth = Math.floor(plan.bandwidth * 0.8);
+		const logs = Math.floor(plan.logs * 0.8);
+
+		return { instances, bandwidth, logs };
+	}
+
+	// If ZEIT introduces a new plan we shouldn't break
+	return { instances: 0, bandwidth: 0, logs: 0 };
+};
+
+// Stolen from Now CLI
+// makes sure the promise never rejects, exposing the error
+// as the resolved value instead
+export function caught(p: Promise<any>): Promise<any> {
+	return new Promise((resolve) => {
+		p.then(resolve).catch(resolve);
+	});
+}
+
+export function promptOpen(path: string) {
+	Alert.alert(
+		`Open in ${isAndroid ? 'browser' : 'Safari'}`,
+		`Do you want to open ${path} in browser?`,
+		[
+			{ text: 'Cancel', style: 'cancel' },
+			{ text: 'Open', onPress: () => Linking.openURL(`https://${path}`) },
+		],
+		{ cancelable: false },
+	);
+}

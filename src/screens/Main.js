@@ -1,14 +1,20 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableWithoutFeedback, SafeAreaView } from 'react-native';
+import { TouchableWithoutFeedback, SafeAreaView, PushNotificationIOS } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
+import PushNotification from 'react-native-push-notification';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
-import { viewport, platformBlackColor } from '../lib/utils';
+import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
 import setUpBackgroundTask from '../lib/background-task';
+
+type Props = {
+	navigation: Navigation,
+	context: Context,
+};
 
 /* eslint-disable react/no-unused-prop-types */
 type Slide = {
@@ -46,7 +52,7 @@ const VIEWS = ['History', 'Deployments', 'Aliases', 'Domains', 'Usage'];
  * @class Main
  * @extends {React.Component}
  */
-export default class Main extends Component<*> {
+export default class Main extends Component<Props> {
 	/**
 	 * Carousels use this function to render a view
 	 *
@@ -59,12 +65,50 @@ export default class Main extends Component<*> {
 		return <View key={index} name={item} />;
 	}
 
-	componentDidMount = () => {
+	componentDidMount = async () => {
 		setUpBackgroundTask();
+		PushNotification.configure({
+			onNotification: (notification) => {
+				if (notification.userInteraction) {
+					this.titleSlider.snapToItem(4);
+					this.viewSlider.snapToItem(4);
+				}
+				notification.finish(PushNotificationIOS.FetchResult.NoData);
+			},
+			requestPermissions: true,
+		});
+		if (!isAndroid) {
+			const Spotlight = require('../extensions/spotlight');
+			Spotlight.addListener(this.handleSpotlightClick);
+
+			// If app was opened from Spotlight and we're coming from splash screen, send user to deployment screen right away
+			const fromSplash = this.props.navigation.getParam('fromSplash');
+			const id = await Spotlight.handleAppOpen();
+			if (fromSplash && id) {
+				this.props.navigation.push('DeploymentDetails', { id });
+			}
+		}
+	};
+
+	componentWillUnmount = () => {
+		if (!isAndroid) {
+			const Spotlight = require('../extensions/spotlight');
+			Spotlight.removeListener(this.handleSpotlightClick);
+		}
 	};
 
 	titleSlider: Carousel;
 	viewSlider: Carousel;
+
+	/**
+	 *
+	 * @param {string} id - Deployment ID of the Spotlight item
+	 * @returns {TouchableWithoutFeedback}
+	 * @memberof Main
+	 */
+	handleSpotlightClick = (id: string) => {
+		this.props.navigation.push('DeploymentDetails', { id });
+	};
 
 	/**
 	 *
@@ -96,7 +140,7 @@ export default class Main extends Component<*> {
 	render() {
 		return (
 			<Container>
-				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+				<Animatable.View animation="fadeIn" duration={700} style={{ width: '100%' }}>
 					{/* $FlowFixMe */}
 					<Header />
 					{/* Titles carousel */}

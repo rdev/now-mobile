@@ -7,6 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import { viewport, isIphoneX, isAndroid } from '../lib/utils';
 import touchIdPrompt from '../lib/touch-id-prompt';
 import ZeitLogo from '../../assets/zeit-logo.png';
+import NetworkError from '../components/NetworkError';
 import { connect } from '../Provider';
 
 type Props = {
@@ -86,7 +87,7 @@ export default class SplashScreen extends React.Component<Props> {
 				await this.props.context.fetchData();
 				await this.logo.transitionToMain(600);
 
-				this.props.navigation.replace('Main');
+				this.props.navigation.replace('Main', { fromSplash: true });
 			} else {
 				await this.logo.transitionToAuth(600);
 
@@ -167,6 +168,8 @@ export default class SplashScreen extends React.Component<Props> {
 						this.logo = ref;
 					}}
 				/>
+				{/* $FlowFixMe */}
+				<NetworkError />
 			</View>
 		);
 	}

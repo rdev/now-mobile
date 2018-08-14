@@ -1,14 +1,15 @@
 // @flow
 
 declare type Navigation = {
-	push: (path: string) => void,
-	replace: (path: string) => void,
+	push: (path: string, params?: { id: string }) => void,
+	replace: (path: string, params?: { fromSplash?: boolean }) => void,
+	getParam: (name: string) => any,
 	state: {
 		routeName: string,
 	},
 };
 
-declare type Method = 'get' | 'GET' | 'post' | 'POST' | 'patch' | 'PATCH';
+declare type Method = 'get' | 'GET' | 'post' | 'POST' | 'patch' | 'PATCH' | 'delete' | 'DELETE';
 
 declare type RequestOptions = {
 	body?: {
@@ -41,6 +42,8 @@ declare type Context = {
 	networkError: boolean,
 	biometry?: string,
 	watchIsReachable?: boolean,
+	refreshUserInfo: () => void,
+	refreshTeamInfo: (id: string) => void,
 	fetchData: () => void,
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],
@@ -49,5 +52,6 @@ declare type Context = {
 	logOut: () => void,
 	setTeam: (teamId: ?Zeit$Team) => void,
 	createTeam: (slug: string) => string,
+	deleteTeam: (id: string) => string,
 	sendTokenToWatch: () => void,
 };

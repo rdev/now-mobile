@@ -1,16 +1,27 @@
+// @TODO This component is getting too huge for comfort
 // @flow
 import React from 'react';
-import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage } from 'react-native';
+import {
+	SafeAreaView,
+	Image,
+	TouchableOpacity,
+	Switch,
+	AsyncStorage,
+	Alert,
+	ActionSheetIOS,
+} from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
+import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import api from '../lib/api';
 import touchIdPrompt from '../lib/touch-id-prompt';
 import { isIphoneSE, platformBlackColor, isAndroid } from '../lib/utils';
 import { connect } from '../Provider';
+import gradient from '../../assets/gradient.jpg';
 
 type Props = {
 	context: Context,
@@ -20,6 +31,9 @@ type State = {
 	editing: boolean,
 	touchId: boolean,
 	inputValue: string,
+	instanceLimit: string,
+	bandwidthLimit: string,
+	logsLimit: string,
 };
 
 const Container = styled(SafeAreaView)`
@@ -35,7 +49,7 @@ const View = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	padding-bottom: ${isIphoneSE() ? '0px' : '100px'};
+	padding-bottom: ${isIphoneSE() ? '20%' : '100px'};
 `;
 
 const Title = styled.Text`
@@ -56,6 +70,7 @@ export const ProfilePic = styled.View`
 	background: #e0e0e0;
 	overflow: hidden;
 	margin-bottom: 30px;
+	margin-top: ${isIphoneSE() ? '60px' : '120px'};
 `;
 
 const ProfileInfo = styled.View`
@@ -63,6 +78,7 @@ const ProfileInfo = styled.View`
 	align-items: center;
 	height: 56px;
 	width: 100%;
+	margin-bottom: 30px;
 `;
 
 const ProfileMeta = styled.View`
@@ -81,6 +97,14 @@ const ButtonGroup = styled.View`
 const ProfileName = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
+	letter-spacing: 0.2px;
+	color: ${platformBlackColor};
+	margin-right: 5px;
+`;
+
+const Text = styled.Text`
+	font-size: 18px;
+	font-weight: 300;
 	letter-spacing: 0.2px;
 	color: ${platformBlackColor};
 `;
@@ -111,6 +135,7 @@ const SettingsRow = styled.View`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	margin-vertical: 5px;
 `;
 
 const RowText = styled.Text`
@@ -119,16 +144,51 @@ const RowText = styled.Text`
 	color: ${platformBlackColor};
 `;
 
+const SectionHeading = styled.Text`
+	font-size: 18px
+	font-weight: 700;
+	color: ${platformBlackColor};
+	width: 80%;
+	margin-bottom: 15px;
+`;
+
+const DeleteText = styled.Text`
+	color: rgb(215, 76, 88);
+`;
+
 @connect
 export default class Settings extends React.Component<Props, State> {
 	state = {
 		editing: false,
 		inputValue: this.props.context.user.username,
 		touchId: false,
+		instanceLimit: '0',
+		bandwidthLimit: '0',
+		logsLimit: '0',
+	};
+
+	static getDerivedStateFromProps = (nextProps: Props, prevState: State) => {
+		const { user, team } = nextProps.context;
+		const { inputValue } = prevState;
+
+		if (!team && inputValue !== user.username) {
+			// If user
+			return {
+				inputValue: user.username,
+			};
+		} else if (team && inputValue !== team.name) {
+			// If team
+			return {
+				inputValue: team.name,
+			};
+		}
+
+		return null;
 	};
 
 	componentDidMount = () => {
 		this.setTouchId();
+		this.getUsageLimits();
 	};
 
 	toggleEditing = () => {
@@ -139,14 +199,71 @@ export default class Settings extends React.Component<Props, State> {
 		this.setState({ inputValue });
 	};
 
+	handleNameChange = (message: string) => {
+		const { refreshUserInfo, refreshTeamInfo, team } = this.props.context;
+
+		if (message) {
+			// This one doesn't have an "error" field
+			Alert.alert('Error', message, [{ text: 'Dismiss' }]);
+		} else if (team) {
+			refreshTeamInfo(team.id);
+		} else {
+			refreshUserInfo();
+		}
+
+		this.toggleEditing();
+	};
+
 	changeUsername = async () => {
 		const result = await api.user.changeUsername(this.state.inputValue);
 
-		if (result.error) {
-			// @TODO error handling
+		this.handleNameChange(result.message);
+	};
+
+	changeTeamName = async () => {
+		const { team } = this.props.context;
+		if (!team) return;
+
+		const result = await api.teams.changeTeamName(team.id, this.state.inputValue);
+
+		this.handleNameChange(result.message);
+	};
+
+	deleteTeam = async () => {
+		const message = 'Are you sure you want delete this team?';
+		const { deleteTeam, team } = this.props.context;
+
+		if (!team) return;
+
+		if (isAndroid) {
+			Alert.alert(
+				message,
+				null,
+				[
+					{ text: 'Cancel', onPress: () => {} },
+					{
+						text: 'Delete',
+						onPress: async () => {
+							await deleteTeam(team.id);
+						},
+					},
+				],
+				{ cancelable: false },
+			);
 		} else {
-			// @TODO Context update
-			this.toggleEditing();
+			ActionSheetIOS.showActionSheetWithOptions(
+				{
+					title: message,
+					options: ['Cancel', 'Delete'],
+					destructiveButtonIndex: 1,
+					cancelButtonIndex: 0,
+				},
+				async (buttonIndex): any => {
+					if (buttonIndex === 1) {
+						await deleteTeam(team.id);
+					}
+				},
+			);
 		}
 	};
 
@@ -178,36 +295,80 @@ export default class Settings extends React.Component<Props, State> {
 		}
 	};
 
+	getUsageLimits = async () => {
+		const instanceLimit =
+			(await AsyncStorage.getItem('@now:instanceLimit')) || this.state.instanceLimit;
+		const bandwidthLimit =
+			(await AsyncStorage.getItem('@now:bandwidthLimit')) || this.state.bandwidthLimit;
+		const logsLimit = (await AsyncStorage.getItem('@now:logsLimit')) || this.state.logsLimit;
+
+		this.setState({
+			instanceLimit,
+			bandwidthLimit,
+			logsLimit,
+		});
+	};
+
+	setLimit = async (value: string, type: 'instanceLimit' | 'bandwidthLimit' | 'logsLimit') => {
+		let limit = value.replace(/\D/g, '');
+		if (limit.length > 0 && limit.substr(0, 1) === '0') {
+			limit = limit.slice(1);
+		}
+		if (limit === '') {
+			limit = '0';
+		}
+
+		await AsyncStorage.setItem(`@now:${type}`, limit);
+		this.setState({ [type]: limit });
+	};
+
 	render() {
-		const { biometry, watchIsReachable, sendTokenToWatch } = this.props.context;
 		const {
-			avatar, uid, username, email,
-		} = this.props.context.user;
+			biometry,
+			watchIsReachable,
+			sendTokenToWatch,
+			usage,
+			user,
+			team,
+		} = this.props.context;
+		const changeName = team ? this.changeTeamName : this.changeUsername;
+		const current = team
+			? {
+				avatar: team.avatar || null,
+				name: team.name,
+			  }
+			: {
+				avatar: user.avatar || user.uid,
+				name: user.username,
+			  };
 
 		return (
 			<Container>
 				<Animatable.View animation="fadeIn" duration={600} style={{ width: '100%' }}>
+					{/* $FlowFixMe */}
+					<Header />
+					<Title>Settings</Title>
 					<KeyboardAwareScrollView
 						contentContainerStyle={{
-							justifyContent: 'center',
 							alignItems: 'center',
-							height: '100%',
+							paddingBottom: 100,
 						}}
 						style={{
 							width: '100%',
 						}}
-						scrollEnabled={false}
+						scrollEnabled
 					>
-						{/* $FlowFixMe */}
-						<Header />
-						<Title>Settings</Title>
 						<View>
 							<ProfilePic>
 								<Image
-									source={{
-										uri: api.user.avatarPath(avatar || uid),
-										cache: 'force-cache',
-									}}
+									source={
+										current.avatar
+											? {
+												uri: api.user.avatarPath(current.avatar),
+												cache: 'force-cache',
+											  }
+											: gradient
+									}
 									style={{ width: '100%', height: '100%' }}
 								/>
 							</ProfilePic>
@@ -224,7 +385,7 @@ export default class Settings extends React.Component<Props, State> {
 												<ButtonGroup>
 													<TouchableOpacity
 														activeOpacity={0.65}
-														onPress={this.changeUsername}
+														onPress={changeName}
 													>
 														<Button>save</Button>
 													</TouchableOpacity>
@@ -243,29 +404,47 @@ export default class Settings extends React.Component<Props, State> {
 										// $FlowFixMe
 										<React.Fragment>
 											<ProfileMeta>
-												<ProfileName>{`${username} `}</ProfileName>
-												{/* Commenting this out for now since Zeit's API is responding to username change but no change actually happens
-												// @TODO Figure it out
-												<Text>
-													{'('}
-													<TouchableOpacity activeOpacity={0.65} style={{ height: 20 }} onPress={this.toggleEditing}>
-														<Button>change</Button>
-													</TouchableOpacity>
-													{')'}
-												</Text>
-												*/}
+												<ProfileName>{`${current.name}`}</ProfileName>
+												{/* We can't have anything except text inside <Text> on Android, sooo */}
+												<Text>(</Text>
+												<TouchableOpacity
+													activeOpacity={0.65}
+													style={{ height: 20 }}
+													onPress={this.toggleEditing}
+												>
+													<Button
+														style={isAndroid ? { marginTop: -3 } : {}}
+													>
+														change
+													</Button>
+												</TouchableOpacity>
+												<Text>)</Text>
 											</ProfileMeta>
-											<Email>{email}</Email>
+											{team ? null : <Email>{user.email}</Email>}
 										</React.Fragment>
 									);
 								})()}
 							</ProfileInfo>
 							{(() => {
+								if (team) {
+									return (
+										<TouchableOpacity
+											activeOpacity={0.65}
+											onPress={() => this.deleteTeam()}
+										>
+											<DeleteText>DELETE TEAM</DeleteText>
+										</TouchableOpacity>
+									);
+								}
+
+								return null;
+							})()}
+							{(() => {
 								if (biometry) {
 									return (
 										// $FlowFixMe
 										<React.Fragment>
-											<Separator style={{ marginTop: 30 }} />
+											<Separator />
 											<SettingsRow>
 												<RowText>
 													Use{' '}
@@ -306,6 +485,47 @@ export default class Settings extends React.Component<Props, State> {
 									);
 								}
 
+								return null;
+							})()}
+							{(() => {
+								if (usage.mode === 'on-demand' || usage.mode === 'unlimited') {
+									return (
+										// $FlowFixMe
+										<React.Fragment>
+											<Separator />
+											<SectionHeading>Usage limits</SectionHeading>
+											<SettingsRow>
+												<RowText>Instances</RowText>
+												<UsageLimitInput
+													value={this.state.instanceLimit}
+													onChangeText={(val: string) => {
+														this.setLimit(val, 'instanceLimit');
+													}}
+												/>
+											</SettingsRow>
+											<SettingsRow>
+												<RowText>Bandwidth</RowText>
+												<UsageLimitInput
+													value={this.state.bandwidthLimit}
+													onChangeText={(val: string) => {
+														this.setLimit(val, 'bandwidthLimit');
+													}}
+													label
+												/>
+											</SettingsRow>
+											<SettingsRow style={{ height: 40 }}>
+												<RowText>Logs</RowText>
+												<UsageLimitInput
+													value={this.state.logsLimit}
+													onChangeText={(val: string) => {
+														this.setLimit(val, 'logsLimit');
+													}}
+													label
+												/>
+											</SettingsRow>
+										</React.Fragment>
+									);
+								}
 								return null;
 							})()}
 						</View>

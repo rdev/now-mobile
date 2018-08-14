@@ -8248,11 +8248,19 @@ react-native-prompt-android@^0.3.3:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/react-native-prompt-android/-/react-native-prompt-android-0.3.3.tgz#d55859fb767b23ec259f9530e4698ba65eb35758"
 
+react-native-push-notification@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.1.1.tgz#99ce426e78e95788c298f73750cc4e68db04d7ab"
+
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"
   dependencies:
     hoist-non-react-statics "^2.3.1"
+
+react-native-search-api@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-search-api/-/react-native-search-api-1.2.0.tgz#824b49e1f9a40aa36ef81b95c528dc29d4b88454"
 
 react-native-shared-group-preferences@^1.0.6:
   version "1.0.6"
@@ -8264,10 +8272,6 @@ react-native-snap-carousel@^3.7.0:
   dependencies:
     prop-types "^15.6.1"
     react-addons-shallow-compare "15.6.2"
-
-react-native-spotlight-search@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-spotlight-search/-/react-native-spotlight-search-1.1.0.tgz#eb225231b52cabaedf29309a0dbf35eb222a6ad5"
 
 "react-native-tab-view@github:react-navigation/react-native-tab-view":
   version "0.0.74"

@@ -33,8 +33,6 @@ export async function saveDeployments(deployments: Zeit$Deployment[]) {
 		})
 		.slice(0, 5);
 
-	console.log('SHARED GROUP DATA', data);
-
 	try {
 		await SharedGroupPreferences.setItem('deployments', { data }, appGroupIdentifier);
 	} catch (e) {
@@ -70,8 +68,6 @@ export async function saveUsage(usage: Zeit$Usage) {
 		instances: metrics.activeInstances,
 		instancesLimit: max.instances === Infinity ? '∞' : `${max.instances}`,
 	};
-
-	console.log('SHARED GROUP DATA', data);
 
 	try {
 		await SharedGroupPreferences.setItem('usage', { data }, appGroupIdentifier);

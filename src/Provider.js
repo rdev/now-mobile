@@ -2,7 +2,7 @@
 // @TODO I feel like this component is becoming way too gigantic and something needs to be improoved
 
 import React from 'react';
-import { AsyncStorage, ActionSheetIOS, Platform, Alert } from 'react-native';
+import { AsyncStorage, ActionSheetIOS, Alert } from 'react-native';
 import TouchID from 'react-native-touch-id';
 import * as watch from 'react-native-watch-connectivity';
 import qs from 'query-string';
@@ -42,6 +42,8 @@ const DEFAULT_CONTEXT = {
 	team: null,
 	refreshing: false,
 	fetchData: () => {},
+	refreshUserInfo: () => {},
+	refreshTeamInfo: () => {},
 	setMode: () => {},
 	getEvents: () => [],
 	reloadEvents: () => {},
@@ -49,6 +51,7 @@ const DEFAULT_CONTEXT = {
 	logOut: () => {},
 	setTeam: () => {},
 	createTeam: () => '',
+	deleteTeam: () => '',
 	sendTokenToWatch: () => {},
 	dropdownVisible: false,
 	networkError: false,
@@ -101,6 +104,24 @@ export class Provider extends React.Component<*, Context> {
 
 		if (error) return this.state.user;
 		return user;
+	};
+
+	getTeamInfo = async (id: string) => {
+		const team = await api.teams.getTeam(id);
+
+		return team;
+	};
+
+	refreshUserInfo = async () => {
+		const user = await this.getUserInfo();
+
+		this.setState({ user });
+	};
+
+	refreshTeamInfo = async (id: string) => {
+		const team = await this.getTeamInfo(id);
+
+		this.setState({ team });
 	};
 
 	getDomains = async (): Promise<Zeit$Domain[]> => {
@@ -186,6 +207,20 @@ export class Provider extends React.Component<*, Context> {
 			}
 		});
 
+	deleteTeam = (id: string): Promise<string> =>
+		new Promise(async (resolve, reject) => {
+			const { error } = await api.teams.deleteTeam(id);
+
+			if (error) {
+				reject(error);
+			} else {
+				const teams = await this.getTeams();
+
+				this.setState({ teams, mode: 'me', team: null });
+				resolve();
+			}
+		});
+
 	setMode = (mode: 'me' | 'system' | 'team'): Promise<void> =>
 		new Promise((resolve) => {
 			if (mode === this.state.mode) resolve();
@@ -203,15 +238,16 @@ export class Provider extends React.Component<*, Context> {
 
 	setTeam = (team: ?Zeit$Team): Promise<void> =>
 		new Promise(async (resolve) => {
-			console.log('SETTING TEAM', team);
+			let mode = 'me';
 
 			if (team) {
 				await AsyncStorage.setItem('@now:teamId', team.id);
+				mode = 'team';
 			} else {
 				await AsyncStorage.removeItem('@now:teamId');
 			}
 
-			this.setState({ team, mode: 'me' }, async () => {
+			this.setState({ team, mode }, async () => {
 				await this.fetchData();
 				resolve();
 			});
@@ -329,7 +365,7 @@ export class Provider extends React.Component<*, Context> {
 	};
 
 	sendTokenToWatch = async () => {
-		if (Platform.OS !== 'ios') return;
+		if (isAndroid) return;
 
 		const token = await AsyncStorage.getItem('@now:token');
 		watch.updateApplicationContext(token ? { token } : {});
@@ -369,10 +405,13 @@ export class Provider extends React.Component<*, Context> {
 					setMode: this.setMode,
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
+					refreshUserInfo: this.refreshUserInfo,
+					refreshTeamInfo: this.refreshTeamInfo,
 					toggleDropdown: this.toggleDropdown,
 					logOut: this.logOut,
 					setTeam: this.setTeam,
 					createTeam: this.createTeam,
+					deleteTeam: this.deleteTeam,
 					sendTokenToWatch: this.sendTokenToWatch,
 				}}
 			>

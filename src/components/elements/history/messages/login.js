@@ -12,7 +12,12 @@ const osNames = {
 	freebsd: 'FreeBSD',
 	sunos: 'SunOS',
 	'Mac OS': 'macOS',
+	ios: 'iOS',
+	android: 'Android',
 };
+
+const isMobile = ua =>
+	ua.includes('now-mobile') || ua.includes('CFNetwork') || ua.includes('okhttp');
 
 /* eslint-disable no-nested-ternary, prefer-destructuring, prefer-const */
 export default class Login extends Message {
@@ -28,12 +33,18 @@ export default class Login extends Message {
 		let os;
 
 		if (userAgent) {
-			from = userAgent.browser
-				? userAgent.browser.name
-				: userAgent.program
-					? 'Now CLI'
-					: null;
-			os = userAgent.os ? osNames[userAgent.os.name] || userAgent.os.name : '';
+			if (userAgent.ua && userAgent.ua.includes('Electron/')) {
+				from = 'Now Desktop';
+			} else if (userAgent.ua && isMobile(userAgent.ua)) {
+				from = 'Now Mobile';
+			} else {
+				from = userAgent.browser
+					? userAgent.browser.name
+					: userAgent.program
+						? 'Now CLI'
+						: null;
+			}
+			os = osNames[userAgent.os.name] || userAgent.os.name;
 		} else {
 			from = payload.env;
 			os = payload.os;
@@ -50,25 +61,21 @@ export default class Login extends Message {
 
 		if (geolocation) {
 			const city =
-				typeof geolocation.city === 'object' ? geolocation.city.names.en : geolocation.city;
+				geolocation.city && typeof geolocation.city === 'object'
+					? geolocation.city.names.en
+					: geolocation.city;
 			const region =
 				typeof geolocation.most_specific_subdivision === 'object'
 					? geolocation.most_specific_subdivision.names.en
 					: geolocation.regionName;
 
 			// Only output location if both city and region are specified
-			if (!city || !region) {
-				return (
-					<Text>
-						<Bold>You</Bold> {message}
-					</Text>
-				);
-			}
-
-			if (city === region) {
-				message += ` in ${city}`;
-			} else {
-				message += ` in ${city}, ${region}`;
+			if (city) {
+				if (city === region) {
+					message += ` in ${city}`;
+				} else {
+					message += ` in ${city}, ${region}`;
+				}
 			}
 		}
 

@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { withNavigation } from 'react-navigation';
 import styled from 'styled-components';
 import InstanceIcon from '../../../../assets/instance-icon.png';
 import TimeAgo from '../TimeAgo';
@@ -7,9 +8,10 @@ import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	deployment: Zeit$Deployment,
+	navigation: Navigation,
 };
 
-const View = styled.View`
+const View = styled.TouchableOpacity`
 	flex-direction: column;
 	padding-vertical: 10px;
 `;
@@ -44,8 +46,13 @@ const MetaText = styled.Text`
 	font-weight: 300;
 `;
 
-export default ({ deployment }: Props) => (
-	<View>
+export default withNavigation(({ deployment, navigation }: Props) => (
+	<View
+		activeOpacity={0.65}
+		onPress={() =>
+			navigation.push('DeploymentDetails', { id: deployment.uid, type: deployment.type })
+		}
+	>
 		<Address>{deployment.url}</Address>
 		<Metadata>
 			{(() => {
@@ -80,4 +87,4 @@ export default ({ deployment }: Props) => (
 			</MetaGroup>
 		</Metadata>
 	</View>
-);
+));
