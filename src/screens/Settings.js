@@ -21,6 +21,7 @@ import api from '../lib/api';
 import touchIdPrompt from '../lib/touch-id-prompt';
 import { isIphoneSE, platformBlackColor, isAndroid } from '../lib/utils';
 import { connect } from '../Provider';
+import gradient from '../../assets/gradient.jpg';
 
 type Props = {
 	context: Context,
@@ -166,16 +167,17 @@ export default class Settings extends React.Component<Props, State> {
 		logsLimit: '0',
 	};
 
-	static getDerivedStateFromProps = (nextProps: object, prevState: object) => {
-		const { mode, user, team } = nextProps.context;
+	static getDerivedStateFromProps = (nextProps: Props, prevState: State) => {
+		const { user, team } = nextProps.context;
 		const { inputValue } = prevState;
-		const isUser = mode === 'me';
 
-		if (isUser && inputValue !== user.username) {
+		if (!team && inputValue !== user.username) {
+			// If user
 			return {
 				inputValue: user.username,
 			};
-		} else if (!isUser && inputValue !== team.name) {
+		} else if (team && inputValue !== team.name) {
+			// If team
 			return {
 				inputValue: team.name,
 			};
@@ -198,17 +200,15 @@ export default class Settings extends React.Component<Props, State> {
 	};
 
 	handleNameChange = (message: string) => {
-		const {
-			mode, refreshUserInfo, refreshTeamInfo, team,
-		} = this.props.context;
+		const { refreshUserInfo, refreshTeamInfo, team } = this.props.context;
 
 		if (message) {
 			// This one doesn't have an "error" field
 			Alert.alert('Error', message, [{ text: 'Dismiss' }]);
-		} else if (mode === 'me') {
-			refreshUserInfo();
-		} else {
+		} else if (team) {
 			refreshTeamInfo(team.id);
+		} else {
+			refreshUserInfo();
 		}
 
 		this.toggleEditing();
@@ -222,6 +222,8 @@ export default class Settings extends React.Component<Props, State> {
 
 	changeTeamName = async () => {
 		const { team } = this.props.context;
+		if (!team) return;
+
 		const result = await api.teams.changeTeamName(team.id, this.state.inputValue);
 
 		this.handleNameChange(result.message);
@@ -230,6 +232,8 @@ export default class Settings extends React.Component<Props, State> {
 	deleteTeam = async () => {
 		const message = 'Are you sure you want delete this team?';
 		const { deleteTeam, team } = this.props.context;
+
+		if (!team) return;
 
 		if (isAndroid) {
 			Alert.alert(
@@ -324,21 +328,19 @@ export default class Settings extends React.Component<Props, State> {
 			watchIsReachable,
 			sendTokenToWatch,
 			usage,
-			mode,
 			user,
 			team,
 		} = this.props.context;
-		const changeName = mode === 'me' ? this.changeUsername : this.changeTeamName;
-		const current =
-			mode === 'me'
-				? {
-					avatar: user.avatar || user.uid,
-					name: user.username,
-				  }
-				: {
-					avatar: team.avatar || team.id,
-					name: team.name,
-				  };
+		const changeName = team ? this.changeTeamName : this.changeUsername;
+		const current = team
+			? {
+				avatar: team.avatar || null,
+				name: team.name,
+			  }
+			: {
+				avatar: user.avatar || user.uid,
+				name: user.username,
+			  };
 
 		return (
 			<Container>
@@ -359,10 +361,14 @@ export default class Settings extends React.Component<Props, State> {
 						<View>
 							<ProfilePic>
 								<Image
-									source={{
-										uri: api.user.avatarPath(current.avatar),
-										cache: 'force-cache',
-									}}
+									source={
+										current.avatar
+											? {
+												uri: api.user.avatarPath(current.avatar),
+												cache: 'force-cache',
+											  }
+											: gradient
+									}
 									style={{ width: '100%', height: '100%' }}
 								/>
 							</ProfilePic>
@@ -414,11 +420,25 @@ export default class Settings extends React.Component<Props, State> {
 												</TouchableOpacity>
 												<Text>)</Text>
 											</ProfileMeta>
-											<Email>{user.email}</Email>
+											{team ? null : <Email>{user.email}</Email>}
 										</React.Fragment>
 									);
 								})()}
 							</ProfileInfo>
+							{(() => {
+								if (team) {
+									return (
+										<TouchableOpacity
+											activeOpacity={0.65}
+											onPress={() => this.deleteTeam()}
+										>
+											<DeleteText>DELETE TEAM</DeleteText>
+										</TouchableOpacity>
+									);
+								}
+
+								return null;
+							})()}
 							{(() => {
 								if (biometry) {
 									return (
@@ -506,20 +526,6 @@ export default class Settings extends React.Component<Props, State> {
 										</React.Fragment>
 									);
 								}
-								return null;
-							})()}
-							{(() => {
-								if (team) {
-									return (
-										<TouchableOpacity
-											activeOpacity={0.65}
-											onPress={() => this.deleteTeam()}
-										>
-											<DeleteText>DELETE TEAM</DeleteText>
-										</TouchableOpacity>
-									);
-								}
-
 								return null;
 							})()}
 						</View>

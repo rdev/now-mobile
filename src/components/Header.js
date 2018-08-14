@@ -6,6 +6,7 @@ import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
 import api from '../lib/api';
 import { connect } from '../Provider';
+import gradient from '../../assets/gradient.jpg';
 import Logo from './Logo';
 
 type Props = {
@@ -52,6 +53,12 @@ export default class Header extends Component<Props> {
 
 	render() {
 		const { user, team } = this.props.context;
+		let avatar;
+		if (team) {
+			avatar = team.avatar || null;
+		} else {
+			avatar = user.avatar || user.uid;
+		}
 
 		return (
 			<View>
@@ -61,10 +68,14 @@ export default class Header extends Component<Props> {
 				<TouchableOpacity activeOpacity={0.7} onPress={this.props.context.toggleDropdown}>
 					<ProfilePic>
 						<CachedImage
-							source={{
-								uri: api.user.avatarPath(team && team.avatar ? team.avatar : user.avatar),
-								cache: 'force-cache',
-							}}
+							source={
+								avatar
+									? {
+										uri: api.user.avatarPath(team && team.avatar ? team.avatar : user.avatar),
+										cache: 'force-cache',
+									  }
+									: gradient
+							}
 							style={{ width: '100%', height: '100%' }}
 						/>
 					</ProfilePic>
