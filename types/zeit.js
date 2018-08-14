@@ -180,6 +180,11 @@ declare type Zeit$NewTeam = {
 	error?: APIError,
 };
 
+declare type Zeit$DeleteTeam = {
+	id: string,
+	error?: APIError,
+};
+
 declare type Zeit$Instance = {
 	uid: string,
 	url: string,

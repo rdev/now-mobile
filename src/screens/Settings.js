@@ -1,7 +1,15 @@
 // @TODO This component is getting too huge for comfort
 // @flow
 import React from 'react';
-import { SafeAreaView, Image, TouchableOpacity, Switch, AsyncStorage, Alert } from 'react-native';
+import {
+	SafeAreaView,
+	Image,
+	TouchableOpacity,
+	Switch,
+	AsyncStorage,
+	Alert,
+	ActionSheetIOS,
+} from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -90,6 +98,7 @@ const ProfileName = styled.Text`
 	font-weight: 700;
 	letter-spacing: 0.2px;
 	color: ${platformBlackColor};
+	margin-right: 5px;
 `;
 
 const Text = styled.Text`
@@ -142,6 +151,10 @@ const SectionHeading = styled.Text`
 	margin-bottom: 15px;
 `;
 
+const DeleteText = styled.Text`
+	color: rgb(215, 76, 88);
+`;
+
 @connect
 export default class Settings extends React.Component<Props, State> {
 	state = {
@@ -151,6 +164,24 @@ export default class Settings extends React.Component<Props, State> {
 		instanceLimit: '0',
 		bandwidthLimit: '0',
 		logsLimit: '0',
+	};
+
+	static getDerivedStateFromProps = (nextProps: object, prevState: object) => {
+		const { mode, user, team } = nextProps.context;
+		const { inputValue } = prevState;
+		const isUser = mode === 'me';
+
+		if (isUser && inputValue !== user.username) {
+			return {
+				inputValue: user.username,
+			};
+		} else if (!isUser && inputValue !== team.name) {
+			return {
+				inputValue: team.name,
+			};
+		}
+
+		return null;
 	};
 
 	componentDidMount = () => {
@@ -166,15 +197,69 @@ export default class Settings extends React.Component<Props, State> {
 		this.setState({ inputValue });
 	};
 
+	handleNameChange = (message: string) => {
+		const {
+			mode, refreshUserInfo, refreshTeamInfo, team,
+		} = this.props.context;
+
+		if (message) {
+			// This one doesn't have an "error" field
+			Alert.alert('Error', message, [{ text: 'Dismiss' }]);
+		} else if (mode === 'me') {
+			refreshUserInfo();
+		} else {
+			refreshTeamInfo(team.id);
+		}
+
+		this.toggleEditing();
+	};
+
 	changeUsername = async () => {
 		const result = await api.user.changeUsername(this.state.inputValue);
 
-		if (result.message) {
-			// This one doesn't have an "error" field
-			Alert.alert('Error', result.message, [{ text: 'Dismiss' }]);
+		this.handleNameChange(result.message);
+	};
+
+	changeTeamName = async () => {
+		const { team } = this.props.context;
+		const result = await api.teams.changeTeamName(team.id, this.state.inputValue);
+
+		this.handleNameChange(result.message);
+	};
+
+	deleteTeam = async () => {
+		const message = 'Are you sure you want delete this team?';
+		const { deleteTeam, team } = this.props.context;
+
+		if (isAndroid) {
+			Alert.alert(
+				message,
+				null,
+				[
+					{ text: 'Cancel', onPress: () => {} },
+					{
+						text: 'Delete',
+						onPress: async () => {
+							await deleteTeam(team.id);
+						},
+					},
+				],
+				{ cancelable: false },
+			);
 		} else {
-			this.props.context.refreshUserInfo();
-			this.toggleEditing();
+			ActionSheetIOS.showActionSheetWithOptions(
+				{
+					title: message,
+					options: ['Cancel', 'Delete'],
+					destructiveButtonIndex: 1,
+					cancelButtonIndex: 0,
+				},
+				async (buttonIndex): any => {
+					if (buttonIndex === 1) {
+						await deleteTeam(team.id);
+					}
+				},
+			);
 		}
 	};
 
@@ -235,9 +320,25 @@ export default class Settings extends React.Component<Props, State> {
 
 	render() {
 		const {
-			biometry, watchIsReachable, sendTokenToWatch, usage,
+			biometry,
+			watchIsReachable,
+			sendTokenToWatch,
+			usage,
+			mode,
+			user,
+			team,
 		} = this.props.context;
-		const { avatar, username, email } = this.props.context.user;
+		const changeName = mode === 'me' ? this.changeUsername : this.changeTeamName;
+		const current =
+			mode === 'me'
+				? {
+					avatar: user.avatar || user.uid,
+					name: user.username,
+				  }
+				: {
+					avatar: team.avatar || team.id,
+					name: team.name,
+				  };
 
 		return (
 			<Container>
@@ -259,7 +360,7 @@ export default class Settings extends React.Component<Props, State> {
 							<ProfilePic>
 								<Image
 									source={{
-										uri: api.user.avatarPath(avatar),
+										uri: api.user.avatarPath(current.avatar),
 										cache: 'force-cache',
 									}}
 									style={{ width: '100%', height: '100%' }}
@@ -278,7 +379,7 @@ export default class Settings extends React.Component<Props, State> {
 												<ButtonGroup>
 													<TouchableOpacity
 														activeOpacity={0.65}
-														onPress={this.changeUsername}
+														onPress={changeName}
 													>
 														<Button>save</Button>
 													</TouchableOpacity>
@@ -297,7 +398,7 @@ export default class Settings extends React.Component<Props, State> {
 										// $FlowFixMe
 										<React.Fragment>
 											<ProfileMeta>
-												<ProfileName>{`${username} `}</ProfileName>
+												<ProfileName>{`${current.name}`}</ProfileName>
 												{/* We can't have anything except text inside <Text> on Android, sooo */}
 												<Text>(</Text>
 												<TouchableOpacity
@@ -313,7 +414,7 @@ export default class Settings extends React.Component<Props, State> {
 												</TouchableOpacity>
 												<Text>)</Text>
 											</ProfileMeta>
-											<Email>{email}</Email>
+											<Email>{user.email}</Email>
 										</React.Fragment>
 									);
 								})()}
@@ -405,6 +506,20 @@ export default class Settings extends React.Component<Props, State> {
 										</React.Fragment>
 									);
 								}
+								return null;
+							})()}
+							{(() => {
+								if (team) {
+									return (
+										<TouchableOpacity
+											activeOpacity={0.65}
+											onPress={() => this.deleteTeam()}
+										>
+											<DeleteText>DELETE TEAM</DeleteText>
+										</TouchableOpacity>
+									);
+								}
+
 								return null;
 							})()}
 						</View>
