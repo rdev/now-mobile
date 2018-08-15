@@ -56,7 +56,7 @@ const DEFAULT_CONTEXT = {
 	dropdownVisible: false,
 	networkError: false,
 	watchIsReachable: false,
-	updateMessage: '',
+	loading: false,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -254,20 +254,8 @@ export class Provider extends React.Component<*, Context> {
 			});
 		});
 
-	setUpdateMessage = (message: string) => {
-		if (this.state.updateMessage !== '') {
-			return;
-		}
-
-		this.setState({
-			updateMessage: message,
-		});
-
-		setTimeout(() => {
-			this.setState({
-				updateMessage: '',
-			});
-		}, 1000);
+	setLoading = (loading: boolean) => {
+		this.setState({ loading });
 	};
 
 	reloadEvents = async (showIndicator?: boolean) => {
@@ -430,7 +418,7 @@ export class Provider extends React.Component<*, Context> {
 					createTeam: this.createTeam,
 					deleteTeam: this.deleteTeam,
 					sendTokenToWatch: this.sendTokenToWatch,
-					setUpdateMessage: this.setUpdateMessage,
+					setLoading: this.setLoading,
 				}}
 			>
 				{this.props.children}

@@ -3,10 +3,8 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { CachedImage } from 'react-native-img-cache';
-import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components';
 import api from '../lib/api';
-import { platformBlackColor } from '../lib/utils';
 import { connect } from '../Provider';
 import gradient from '../../assets/gradient.jpg';
 import Logo from './Logo';
@@ -27,16 +25,6 @@ const View = styled.View`
 	align-items: center;
 	height: 70px;
 	margin-bottom: ${isPad ? '0' : '30px'};
-`;
-
-const MessageContainer = View.extend`
-	justify-content: center;
-`;
-
-const Message = styled.Text`
-	font-size: 16px
-	font-weight: 300;
-	color: ${platformBlackColor};
 `;
 
 const ProfilePic = styled.View`
@@ -64,22 +52,12 @@ export default class Header extends Component<Props> {
 	profileDropdown = () => {};
 
 	render() {
-		const { user, team, updateMessage } = this.props.context;
+		const { user, team } = this.props.context;
 		let avatar;
 		if (team) {
 			avatar = team.avatar || null;
 		} else {
 			avatar = user.avatar || user.uid;
-		}
-
-		if (updateMessage !== '') {
-			return (
-				<MessageContainer>
-					<Animatable.View animation="fadeOut" delay={550} duration={300}>
-						<Message>{updateMessage}</Message>
-					</Animatable.View>
-				</MessageContainer>
-			);
 		}
 
 		return (

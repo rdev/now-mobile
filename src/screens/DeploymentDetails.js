@@ -4,7 +4,7 @@ import { SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components';
 import api from '../lib/api';
 import { connect } from '../Provider';
-import LoadingIndicator from '../components/elements/deployment-details/LoadingIndicator';
+import LoadingIndicator from '../components/elements/LoadingIndicator';
 import Details from '../components/elements/deployment-details/Details';
 
 type State = {

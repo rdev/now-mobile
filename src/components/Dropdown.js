@@ -121,12 +121,14 @@ export default class Dropdown extends React.Component<Props, State> {
 		]);
 	};
 
-	switchTeam = (team?: string) => {
-		const { setTeam, toggleDropdown, setUpdateMessage } = this.props.context;
+	switchTeam = async (team?: string) => {
+		const { setTeam, toggleDropdown, setLoading } = this.props.context;
 
-		setTeam(team);
 		toggleDropdown();
-		setUpdateMessage('Team context updated!');
+
+		setLoading(true);
+		await setTeam(team);
+		setLoading(false);
 	};
 
 	render() {
