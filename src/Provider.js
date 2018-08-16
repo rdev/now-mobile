@@ -56,6 +56,7 @@ const DEFAULT_CONTEXT = {
 	dropdownVisible: false,
 	networkError: false,
 	watchIsReachable: false,
+	loading: false,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -253,6 +254,10 @@ export class Provider extends React.Component<*, Context> {
 			});
 		});
 
+	setLoading = (loading: boolean) => {
+		this.setState({ loading });
+	};
+
 	reloadEvents = async (showIndicator?: boolean) => {
 		if (showIndicator) await this.setRefreshing(true);
 		const events = await this.getEvents();
@@ -413,6 +418,8 @@ export class Provider extends React.Component<*, Context> {
 					createTeam: this.createTeam,
 					deleteTeam: this.deleteTeam,
 					sendTokenToWatch: this.sendTokenToWatch,
+					setLoading: this.setLoading,
+					setRefreshing: this.setRefreshing,
 				}}
 			>
 				{this.props.children}

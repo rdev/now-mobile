@@ -10,10 +10,12 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
 import setUpBackgroundTask from '../lib/background-task';
+import { connect } from '../Provider';
+import LoadingIndicator from '../components/elements/LoadingIndicator';
 
 type Props = {
 	navigation: Navigation,
-	context: Context,
+	context: any | Context,
 };
 
 /* eslint-disable react/no-unused-prop-types */
@@ -52,6 +54,7 @@ const VIEWS = ['History', 'Deployments', 'Aliases', 'Domains', 'Usage'];
  * @class Main
  * @extends {React.Component}
  */
+@connect
 export default class Main extends Component<Props> {
 	/**
 	 * Carousels use this function to render a view
@@ -140,44 +143,48 @@ export default class Main extends Component<Props> {
 	render() {
 		return (
 			<Container>
-				<Animatable.View animation="fadeIn" duration={700} style={{ width: '100%' }}>
-					{/* $FlowFixMe */}
-					<Header />
-					{/* Titles carousel */}
-					<Carousel
-						ref={(ref) => {
-							this.titleSlider = ref;
-						}}
-						data={VIEWS}
-						renderItem={this.renderTitle}
-						sliderWidth={viewport.width}
-						sliderHeight={36}
-						itemWidth={viewport.width * 0.8}
-						itemHeight={36}
-						inactiveSlideScale={1}
-						inactiveSlideOpacity={0.15}
-						activeSlideAlignment="start"
-						onSnapToItem={index => this.viewSlider.snapToItem(index)}
-					/>
-					{/* Views carousel */}
-					<Carousel
-						ref={(ref) => {
-							this.viewSlider = ref;
-						}}
-						data={VIEWS}
-						renderItem={Main.renderView}
-						sliderWidth={viewport.width}
-						itemWidth={viewport.width}
-						slideStyle={{ flex: 1 }}
-						containerCustomStyle={{ height: viewport.height - 40 - 36 - 100 }}
-						inactiveSlideScale={1}
-						inactiveSlideOpacity={0}
-						activeSlideAlignment="start"
-						onSnapToItem={index => this.titleSlider.snapToItem(index)}
-					/>
-					{/* $FlowFixMe */}
-					<Dropdown />
-				</Animatable.View>
+				{!this.props.context.loading ? (
+					<Animatable.View animation="fadeIn" duration={700} style={{ width: '100%' }}>
+						{/* $FlowFixMe */}
+						<Header />
+						{/* Titles carousel */}
+						<Carousel
+							ref={(ref) => {
+								this.titleSlider = ref;
+							}}
+							data={VIEWS}
+							renderItem={this.renderTitle}
+							sliderWidth={viewport.width}
+							sliderHeight={36}
+							itemWidth={viewport.width * 0.8}
+							itemHeight={36}
+							inactiveSlideScale={1}
+							inactiveSlideOpacity={0.15}
+							activeSlideAlignment="start"
+							onSnapToItem={index => this.viewSlider.snapToItem(index)}
+						/>
+						{/* Views carousel */}
+						<Carousel
+							ref={(ref) => {
+								this.viewSlider = ref;
+							}}
+							data={VIEWS}
+							renderItem={Main.renderView}
+							sliderWidth={viewport.width}
+							itemWidth={viewport.width}
+							slideStyle={{ flex: 1 }}
+							containerCustomStyle={{ height: viewport.height - 40 - 36 - 100 }}
+							inactiveSlideScale={1}
+							inactiveSlideOpacity={0}
+							activeSlideAlignment="start"
+							onSnapToItem={index => this.titleSlider.snapToItem(index)}
+						/>
+						{/* $FlowFixMe */}
+						<Dropdown />
+					</Animatable.View>
+				) : (
+					<LoadingIndicator />
+				)}
 			</Container>
 		);
 	}
