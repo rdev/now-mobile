@@ -419,6 +419,7 @@ export class Provider extends React.Component<*, Context> {
 					deleteTeam: this.deleteTeam,
 					sendTokenToWatch: this.sendTokenToWatch,
 					setLoading: this.setLoading,
+					setRefreshing: this.setRefreshing,
 				}}
 			>
 				{this.props.children}
