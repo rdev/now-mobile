@@ -65,8 +65,8 @@ export default ({ domain, last }: Props) => (
 						marginRight: 10,
 					}}
 				>
-					<MetaText enabled={domain.enabled}>
-						{domain.enabled ? 'CDN: On' : 'CDN: Off'}
+					<MetaText enabled={domain.cdnEnabled}>
+						{domain.cdnEnabled ? 'CDN: On' : 'CDN: Off'}
 					</MetaText>
 				</MetaGroup>
 				<ExpireDate date={domain.expiresAt} />

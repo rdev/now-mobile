@@ -10,10 +10,11 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
 import setUpBackgroundTask from '../lib/background-task';
+import { connect } from '../Provider';
 
 type Props = {
 	navigation: Navigation,
-	context: Context,
+	context: any | Context,
 };
 
 /* eslint-disable react/no-unused-prop-types */
@@ -52,6 +53,7 @@ const VIEWS = ['History', 'Deployments', 'Aliases', 'Domains', 'Usage'];
  * @class Main
  * @extends {React.Component}
  */
+@connect
 export default class Main extends Component<Props> {
 	/**
 	 * Carousels use this function to render a view

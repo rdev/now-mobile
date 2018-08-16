@@ -93,8 +93,13 @@ export class Provider extends React.Component<*, Context> {
 
 	state = DEFAULT_CONTEXT;
 
-	componentDidMount = () => {
-		this.fetchData();
+	componentDidMount = async () => {
+		await this.fetchData();
+		const savedTeamId = await AsyncStorage.getItem('@now:teamId');
+		if (savedTeamId) {
+			const savedTeam = this.state.teams.find(({ id }) => id === savedTeamId);
+			this.setTeam(savedTeam);
+		}
 		this.detectBiometry();
 		if (!isAndroid) this.setUpWatchConnectivity();
 	};
@@ -168,7 +173,7 @@ export class Provider extends React.Component<*, Context> {
 			until: until || new Date().toISOString(),
 			limit: 25,
 			types: Array.from(types[this.state.mode]).join(','),
-			teamId: this.state.team ? this.state.team.id : undefined,
+			// teamId: this.state.team ? this.state.team.id : undefined,
 			userId: this.state.team && this.state.mode === 'me' ? this.state.user.uid : '',
 		};
 
@@ -238,6 +243,7 @@ export class Provider extends React.Component<*, Context> {
 
 	setTeam = (team: ?Zeit$Team): Promise<void> =>
 		new Promise(async (resolve) => {
+			this.setRefreshing(true);
 			let mode = 'me';
 
 			if (team) {
@@ -287,6 +293,7 @@ export class Provider extends React.Component<*, Context> {
 						events,
 						teams,
 						networkError: false,
+						refreshing: false,
 					},
 					resolve,
 				);
