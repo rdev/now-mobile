@@ -13,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* nowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nowTests.m */; };
+		0F89F6B11AD34C7C9184EED3 /* libAppCenterReactNativeAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12F9AEB6169541708007545F /* libAppCenterReactNativeAnalytics.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -37,6 +38,7 @@
 		4525016A20FBDCB1004F5C4B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4525016920FBDCB1004F5C4B /* Alamofire.framework */; };
 		4525019720FBDCB4004F5C4B /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4525019620FBDCB4004F5C4B /* SwiftyJSON.framework */; };
 		4525019920FBE3F4004F5C4B /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4525019820FBE3F4004F5C4B /* Utils.swift */; };
+		452681132126DE7F00EE9B3C /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 452681102126DE6200EE9B3C /* libCodePush.a */; };
 		452D92FD20EE0D6800BF3AA7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		45349EAA2104DCBF0095EFF5 /* AliasRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45349EA92104DCBF0095EFF5 /* AliasRowController.swift */; };
 		45349ED92104DF560095EFF5 /* AliasesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45349ED82104DF560095EFF5 /* AliasesController.swift */; };
@@ -53,12 +55,16 @@
 		45EB49BC20ED4C9700E0D63C /* WidgetTableRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EB49BB20ED4C9700E0D63C /* WidgetTableRowController.swift */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6E0BFAB1E9F74CF9A06D052B /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4623CC86BC564CB1ACDD296D /* libRNFetchBlob.a */; };
+		76AF5CE69E5C554E3E982FD6 /* Pods_now.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9004D19C78693F007AB46A17 /* Pods_now.framework */; };
 		805F6D0348244255A4E66649 /* libRNReactNativeSharedGroupPreferences.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		85590F678FC642FDA05B4F88 /* libRNWatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED117917F6ED4AE38BFD0D25 /* libRNWatch.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B1F700FEA36645AC3C53E8B3 /* Pods_WatchApp_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 673C9450867FEF99CBCAFEED /* Pods_WatchApp_Extension.framework */; };
+		D59B0CB5A7B04A66BE1F5948 /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B79C25973A54D26BD03536F /* libAppCenterReactNativeCrashes.a */; };
 		E975679212894B12A572BF52 /* libRCTSearchApi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDEBFDC560BD44A6B13C778E /* libRCTSearchApi.a */; };
+		EC1A736AAF5E4830A85617DE /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7118A3E68C434310BB23B65A /* AppCenter-Config.plist */; };
+		FBC8EFF60B51444A82AF07CA /* libAppCenterReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99E6B5F7CC6841B2AC0F7253 /* libAppCenterReactNative.a */; };
 		FF0368262FCD4EC89520B2DD /* TSBackgroundFetch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B87790BC18544031B3DFE043 /* TSBackgroundFetch.framework */; };
 /* End PBXBuildFile section */
 
@@ -329,6 +335,41 @@
 			remoteGlobalIDString = 4525FFFB20FBAEEA004F5C4B;
 			remoteInfo = WatchApp;
 		};
+		4526810F2126DE6200EE9B3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526810A2126DE6100EE9B3C /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = CodePush;
+		};
+		452681112126DE6200EE9B3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526810A2126DE6100EE9B3C /* CodePush.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F886647B1F4ADB500036D01B;
+			remoteInfo = "CodePush-tvOS";
+		};
+		4561DD1F2126CA8F00580F69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6F0290731E2047878C5463C9 /* AppCenterReactNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C35AEC211EF91F9300931F0C;
+			remoteInfo = AppCenterReactNative;
+		};
+		4561DD932126CABD00580F69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 348437CA27884CEF8562E985 /* AppCenterReactNativeAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 548694001D8384E600E6685A;
+			remoteInfo = AppCenterReactNativeAnalytics;
+		};
+		4561DDDC2126CB0400580F69 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC71B04E668844BB83608FA9 /* AppCenterReactNativeCrashes.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5419C2701D824AA700DDF3A1;
+			remoteInfo = AppCenterReactNativeCrashes;
+		};
 		4565C25D20DB7EC6009C2278 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */;
@@ -464,6 +505,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nowTests.m; sourceTree = "<group>"; };
 		047C2C684B3E4050BFF4AFD8 /* RNReactNativeSharedGroupPreferences.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReactNativeSharedGroupPreferences.xcodeproj; path = "../node_modules/react-native-shared-group-preferences/ios/RNReactNativeSharedGroupPreferences.xcodeproj"; sourceTree = "<group>"; };
+		12F9AEB6169541708007545F /* libAppCenterReactNativeAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNativeAnalytics.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* now.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = now.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -474,9 +516,11 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = now/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = now/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		17BD87737081A5A190CF7E51 /* Pods-now.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-now.release.xcconfig"; path = "Pods/Target Support Files/Pods-now/Pods-now.release.xcconfig"; sourceTree = "<group>"; };
 		2A932775785249EDAFAC1264 /* RNBackgroundFetch+AppDelegate.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = "RNBackgroundFetch+AppDelegate.m"; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/RNBackgroundFetch+AppDelegate.m"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E35EB31CD2E41688E9443ED /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
+		348437CA27884CEF8562E985 /* AppCenterReactNativeAnalytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNativeAnalytics.xcodeproj; path = "../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		4516D0D4211C5E310035CD99 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		4525000120FBAEED004F5C4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4525000320FBAEED004F5C4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -491,6 +535,8 @@
 		4525019820FBE3F4004F5C4B /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		4525FFFC20FBAEEA004F5C4B /* WatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4525FFFF20FBAEEA004F5C4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		4526810A2126DE6100EE9B3C /* CodePush.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CodePush.xcodeproj; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; };
+		452681142126DEAF00EE9B3C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		45349EA92104DCBF0095EFF5 /* AliasRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliasRowController.swift; sourceTree = "<group>"; };
 		45349ED82104DF560095EFF5 /* AliasesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AliasesController.swift; sourceTree = "<group>"; };
 		457DD234210A522400E96315 /* TodayUsageExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayUsageExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -510,17 +556,24 @@
 		45EB49BB20ED4C9700E0D63C /* WidgetTableRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTableRowController.swift; sourceTree = "<group>"; };
 		4623CC86BC564CB1ACDD296D /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		496E6C9C4D15E1CBD3EB7511 /* Pods-WatchApp Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchApp Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-WatchApp Extension/Pods-WatchApp Extension.release.xcconfig"; sourceTree = "<group>"; };
+		4B79C25973A54D26BD03536F /* libAppCenterReactNativeCrashes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNativeCrashes.a; sourceTree = "<group>"; };
 		5010BA6090C94A60AC67F687 /* RNBackgroundFetch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundFetch.xcodeproj; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch.xcodeproj"; sourceTree = "<group>"; };
 		53063EAF19E44427BDEC6E81 /* libTouchID.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTouchID.a; sourceTree = "<group>"; };
+		59BA598535B8C4298CB3649B /* Pods-now.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-now.debug.xcconfig"; path = "Pods/Target Support Files/Pods-now/Pods-now.debug.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		673C9450867FEF99CBCAFEED /* Pods_WatchApp_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WatchApp_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0290731E2047878C5463C9 /* AppCenterReactNative.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNative.xcodeproj; path = ../node_modules/appcenter/ios/AppCenterReactNative.xcodeproj; sourceTree = "<group>"; };
+		7118A3E68C434310BB23B65A /* AppCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "now/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		84F0638FE4B542939A22328A /* libRNReactNativeSharedGroupPreferences.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReactNativeSharedGroupPreferences.a; sourceTree = "<group>"; };
+		9004D19C78693F007AB46A17 /* Pods_now.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_now.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99E6B5F7CC6841B2AC0F7253 /* libAppCenterReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNative.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		B005F8EAA537437A866C5C31 /* TouchID.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TouchID.xcodeproj; path = "../node_modules/react-native-touch-id/TouchID.xcodeproj"; sourceTree = "<group>"; };
 		B87790BC18544031B3DFE043 /* TSBackgroundFetch.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = TSBackgroundFetch.framework; path = "../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/TSBackgroundFetch.framework"; sourceTree = SDKROOT; };
 		DEA890FDE7564B31BAE14608 /* RNWatch.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNWatch.xcodeproj; path = "../node_modules/react-native-watch-connectivity/RNWatch.xcodeproj"; sourceTree = "<group>"; };
+		EC71B04E668844BB83608FA9 /* AppCenterReactNativeCrashes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNativeCrashes.xcodeproj; path = "../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes.xcodeproj"; sourceTree = "<group>"; };
 		ED117917F6ED4AE38BFD0D25 /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNWatch.a; sourceTree = "<group>"; };
 		F3CE23C15F2A2E5D1140FB6E /* Pods-WatchApp Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WatchApp Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WatchApp Extension/Pods-WatchApp Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		F5BA22D715B24EB0B9EC62F8 /* libRNBackgroundFetch.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBackgroundFetch.a; sourceTree = "<group>"; };
@@ -540,6 +593,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452681132126DE7F00EE9B3C /* libCodePush.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -561,6 +615,10 @@
 				FF0368262FCD4EC89520B2DD /* TSBackgroundFetch.framework in Frameworks */,
 				85590F678FC642FDA05B4F88 /* libRNWatch.a in Frameworks */,
 				E975679212894B12A572BF52 /* libRCTSearchApi.a in Frameworks */,
+				FBC8EFF60B51444A82AF07CA /* libAppCenterReactNative.a in Frameworks */,
+				0F89F6B11AD34C7C9184EED3 /* libAppCenterReactNativeAnalytics.a in Frameworks */,
+				D59B0CB5A7B04A66BE1F5948 /* libAppCenterReactNativeCrashes.a in Frameworks */,
+				76AF5CE69E5C554E3E982FD6 /* Pods_now.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,12 +779,14 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				452681142126DEAF00EE9B3C /* libz.tbd */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				4525016920FBDCB1004F5C4B /* Alamofire.framework */,
 				4525019620FBDCB4004F5C4B /* SwiftyJSON.framework */,
 				4599F5F520EBEC3A00A093C4 /* NotificationCenter.framework */,
 				B87790BC18544031B3DFE043 /* TSBackgroundFetch.framework */,
 				673C9450867FEF99CBCAFEED /* Pods_WatchApp_Extension.framework */,
+				9004D19C78693F007AB46A17 /* Pods_now.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -736,6 +796,8 @@
 			children = (
 				F3CE23C15F2A2E5D1140FB6E /* Pods-WatchApp Extension.debug.xcconfig */,
 				496E6C9C4D15E1CBD3EB7511 /* Pods-WatchApp Extension.release.xcconfig */,
+				59BA598535B8C4298CB3649B /* Pods-now.debug.xcconfig */,
+				17BD87737081A5A190CF7E51 /* Pods-now.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -757,6 +819,9 @@
 				F5BA22D715B24EB0B9EC62F8 /* libRNBackgroundFetch.a */,
 				ED117917F6ED4AE38BFD0D25 /* libRNWatch.a */,
 				FDEBFDC560BD44A6B13C778E /* libRCTSearchApi.a */,
+				99E6B5F7CC6841B2AC0F7253 /* libAppCenterReactNative.a */,
+				12F9AEB6169541708007545F /* libAppCenterReactNativeAnalytics.a */,
+				4B79C25973A54D26BD03536F /* libAppCenterReactNativeCrashes.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -795,6 +860,39 @@
 				4525000320FBAEED004F5C4B /* Info.plist */,
 			);
 			path = WatchApp;
+			sourceTree = "<group>";
+		};
+		4526810B2126DE6100EE9B3C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				452681102126DE6200EE9B3C /* libCodePush.a */,
+				452681122126DE6200EE9B3C /* libCodePush.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4561DD1C2126CA8F00580F69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4561DD202126CA8F00580F69 /* libAppCenterReactNative.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4561DD902126CABD00580F69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4561DD942126CABD00580F69 /* libAppCenterReactNativeAnalytics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4561DDD92126CB0300580F69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4561DDDD2126CB0400580F69 /* libAppCenterReactNativeCrashes.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4565C23520DB7EC6009C2278 /* Products */ = {
@@ -900,6 +998,10 @@
 				5010BA6090C94A60AC67F687 /* RNBackgroundFetch.xcodeproj */,
 				DEA890FDE7564B31BAE14608 /* RNWatch.xcodeproj */,
 				006CFC6F0BA849AFB7E9956D /* RCTSearchApi.xcodeproj */,
+				6F0290731E2047878C5463C9 /* AppCenterReactNative.xcodeproj */,
+				348437CA27884CEF8562E985 /* AppCenterReactNativeAnalytics.xcodeproj */,
+				EC71B04E668844BB83608FA9 /* AppCenterReactNativeCrashes.xcodeproj */,
+				4526810A2126DE6100EE9B3C /* CodePush.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -927,6 +1029,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				450A608320DB7E9D006A556B /* Recovered References */,
 				372F01A0781ACDABD25E29D4 /* Pods */,
+				7118A3E68C434310BB23B65A /* AppCenter-Config.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -980,6 +1083,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "now" */;
 			buildPhases = (
+				19EAFD9681889EB73184B41B /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
@@ -1140,6 +1244,22 @@
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 4561DD1C2126CA8F00580F69 /* Products */;
+					ProjectRef = 6F0290731E2047878C5463C9 /* AppCenterReactNative.xcodeproj */;
+				},
+				{
+					ProductGroup = 4561DD902126CABD00580F69 /* Products */;
+					ProjectRef = 348437CA27884CEF8562E985 /* AppCenterReactNativeAnalytics.xcodeproj */;
+				},
+				{
+					ProductGroup = 4561DDD92126CB0300580F69 /* Products */;
+					ProjectRef = EC71B04E668844BB83608FA9 /* AppCenterReactNativeCrashes.xcodeproj */;
+				},
+				{
+					ProductGroup = 4526810B2126DE6100EE9B3C /* Products */;
+					ProjectRef = 4526810A2126DE6100EE9B3C /* CodePush.xcodeproj */;
+				},
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
@@ -1475,6 +1595,41 @@
 			remoteRef = 4516D0E7211C5E320035CD99 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		452681102126DE6200EE9B3C /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 4526810F2126DE6200EE9B3C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452681122126DE6200EE9B3C /* libCodePush.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCodePush.a;
+			remoteRef = 452681112126DE6200EE9B3C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4561DD202126CA8F00580F69 /* libAppCenterReactNative.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppCenterReactNative.a;
+			remoteRef = 4561DD1F2126CA8F00580F69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4561DD942126CABD00580F69 /* libAppCenterReactNativeAnalytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppCenterReactNativeAnalytics.a;
+			remoteRef = 4561DD932126CABD00580F69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4561DDDD2126CB0400580F69 /* libAppCenterReactNativeCrashes.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppCenterReactNativeCrashes.a;
+			remoteRef = 4561DDDC2126CB0400580F69 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4565C25E20DB7EC6009C2278 /* libRNFetchBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1561,6 +1716,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				EC1A736AAF5E4830A85617DE /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1614,6 +1770,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		19EAFD9681889EB73184B41B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-now-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		6084BB278A1E305EDBE37524 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1791,11 +1965,19 @@
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
+					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
+					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 				);
 				INFOPLIST_FILE = nowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1820,11 +2002,19 @@
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
+					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
+					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 				);
 				INFOPLIST_FILE = nowTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1836,6 +2026,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59BA598535B8C4298CB3649B /* Pods-now.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1845,7 +2036,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Z4438K55LB;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1854,6 +2048,9 @@
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
+					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
+					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 				);
 				INFOPLIST_FILE = now/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1872,6 +2069,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17BD87737081A5A190CF7E51 /* Pods-now.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1880,7 +2078,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4438K55LB;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../node_modules/react-native-background-fetch/ios/**",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1889,6 +2090,9 @@
 					"$(SRCROOT)/../node_modules/react-native-background-fetch/ios/RNBackgroundFetch/**",
 					"$(SRCROOT)/../node_modules/react-native-watch-connectivity",
 					"$(SRCROOT)/../node_modules/react-native-search-api/ios/RCTSearchApi",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
+					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
+					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
 				);
 				INFOPLIST_FILE = now/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -2027,7 +2231,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2071,7 +2280,12 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = WatchApp_Extension;
 				INFOPLIST_FILE = WatchApp/Info.plist;
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -2113,7 +2327,12 @@
 				INFOPLIST_FILE = TodayUsageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-usage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2155,7 +2374,12 @@
 				INFOPLIST_FILE = TodayUsageExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today-usage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2195,7 +2419,12 @@
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2237,7 +2466,12 @@
 				INFOPLIST_FILE = TodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "im.rdev.now-mobile.today";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

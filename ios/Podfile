@@ -8,3 +8,14 @@ target 'WatchApp Extension' do
   pod 'Alamofire', '~> 4.7'
   pod 'SwiftyJSON', '~> 4.0'
 end
+
+target 'now' do
+  # Pods for AppCenter
+  pod 'AppCenter/Crashes', '~> 1.8.0'
+  pod 'AppCenter/Analytics', '~> 1.8.0'
+  pod 'AppCenterReactNativeShared', '~> 1.7.1'
+
+  platform :ios, '9.0'
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
+end

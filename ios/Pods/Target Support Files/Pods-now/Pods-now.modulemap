@@ -1,0 +1,6 @@
+framework module Pods_now {
+  umbrella header "Pods-now-umbrella.h"
+
+  export *
+  module * { export * }
+}
