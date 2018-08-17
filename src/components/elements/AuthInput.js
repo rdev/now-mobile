@@ -72,7 +72,7 @@ export default class AuthInput extends React.Component<Props, State> {
 			// $FlowFixMe
 			<React.Fragment>
 				<Input
-					placeholder="Email or Token"
+					placeholder="Your Email"
 					keyboardType="email-address"
 					onFocus={this.checkClipboard}
 					onChangeText={this.handleInput}

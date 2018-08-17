@@ -1,5 +1,6 @@
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
+import codePush from 'react-native-code-push';
 import SplashScreen from './screens/SplashScreen';
 import Authentication from './screens/Authentication';
 import Main from './screens/Main';
@@ -46,8 +47,10 @@ const App = StackNavigator(
 	{ headerMode: 'screen' },
 );
 
-export default () => (
+const NowApp = () => (
 	<Provider>
 		<App />
 	</Provider>
 );
+
+export default codePush(NowApp);

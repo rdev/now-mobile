@@ -9,12 +9,16 @@
 		"storybook": "storybook start -p 7007"
 	},
 	"dependencies": {
+		"appcenter": "^1.7.1",
+		"appcenter-analytics": "^1.7.1",
+		"appcenter-crashes": "^1.7.1",
 		"moment": "^2.22.1",
 		"query-string": "^6.1.0",
 		"react": "16.3.1",
 		"react-native": "0.55.4",
 		"react-native-animatable": "^1.2.4",
 		"react-native-background-fetch": "^2.4.3",
+		"react-native-code-push": "^5.4.1",
 		"react-native-fetch-blob": "^0.10.8",
 		"react-native-img-cache": "^1.5.3",
 		"react-native-keyboard-aware-scroll-view": "^0.5.0",
@@ -68,7 +72,11 @@
 		"*.json": ["prettier --write", "git add"]
 	},
 	"jest": {
-		"preset": "react-native"
+		"preset": "react-native",
+		"setupFiles": [
+			"<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js",
+			"<rootDir>/node_modules/appcenter/test/AppCenterMock.js"
+		]
 	},
 	"eslintConfig": {
 		"extends": "vave",

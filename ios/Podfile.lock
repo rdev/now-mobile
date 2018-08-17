@@ -1,20 +1,34 @@
 PODS:
   - Alamofire (4.7.3)
+  - AppCenter/Analytics (1.8.0):
+    - AppCenter/Core
+  - AppCenter/Core (1.8.0)
+  - AppCenter/Crashes (1.8.0):
+    - AppCenter/Core
+  - AppCenterReactNativeShared (1.7.1):
+    - AppCenter/Core (= 1.8.0)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
+  - AppCenter/Analytics (~> 1.8.0)
+  - AppCenter/Crashes (~> 1.8.0)
+  - AppCenterReactNativeShared (~> 1.7.1)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AppCenter
+    - AppCenterReactNativeShared
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  AppCenter: 7e7b42e94b70294d1de3d747f164f0c1668a28e1
+  AppCenterReactNativeShared: 713c4b8da168d517297061d4168f7e2f4d2df9c5
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 6ad122f3ffd8d5053155897611d218f9a5e4f1d2
+PODFILE CHECKSUM: dc2e283412523314c395e6dc1e13a1f11a6b3408
 
 COCOAPODS: 1.5.3
