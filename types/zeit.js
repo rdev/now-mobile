@@ -151,6 +151,7 @@ declare type Zeit$Event = {
 	created: string,
 	region: string,
 	event: string,
+	user?: Zeit$User,
 	payload: {
 		[string]: any, // @TODO implement ALL of this
 	},

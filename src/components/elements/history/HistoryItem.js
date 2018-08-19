@@ -65,7 +65,10 @@ export default class HistoryItem extends React.PureComponent<Props> {
 						<Image source={NowLogo} style={{ width: '100%', height: '100%' }} />
 					) : (
 						<CachedImage
-							source={{ uri: api.user.avatarPath(user.uid) }}
+							// @TODO handle empty avatars
+							source={{
+								uri: api.user.avatarPath(event.user ? event.user.uid : event.userId),
+							}}
 							style={{ width: '100%', height: '100%' }}
 						/>
 					)}
