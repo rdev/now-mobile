@@ -49,8 +49,7 @@ const Usage = ({ context }: Props) => {
 	const periodStart = moment(metrics.startTime)
 		.format('MMMM DD, YYYY')
 		.toUpperCase();
-	const periodEnd = moment(metrics.startTime)
-		.add(1, 'month')
+	const periodEnd = moment()
 		.format('MMMM DD, YYYY')
 		.toUpperCase();
 
