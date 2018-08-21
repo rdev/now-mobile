@@ -265,6 +265,12 @@ export class Provider extends React.Component<*, Context> {
 		this.setState({ events, refreshing: false });
 	};
 
+	reloadDeployments = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
+		const deployments = await this.getDeployments();
+		this.setState({ deployments, refreshing: false });
+	};
+
 	reloadAliases = async (showIndicator?: boolean) => {
 		if (showIndicator) await this.setRefreshing(true);
 		const aliases = await this.getAliases();
@@ -424,6 +430,7 @@ export class Provider extends React.Component<*, Context> {
 					setMode: this.setMode,
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
+					reloadDeployments: this.reloadDeployments,
 					reloadAliases: this.reloadAliases,
 					reloadDomains: this.reloadDomains,
 					refreshUserInfo: this.refreshUserInfo,
