@@ -57,6 +57,7 @@ export default class History extends Component<Props, State> {
 
 	render() {
 		const { context } = this.props;
+		const { refreshing } = context;
 		// Idk if it's FlatList or events or me being dumb, but some times it yelles at duplicate keys. Using Set here to force dedupe everything
 		const events = Array.from(new Set(context.events)).sort((a, b) => new Date(b.created) - new Date(a.created));
 
@@ -71,7 +72,7 @@ export default class History extends Component<Props, State> {
 					onEndReached={this.loadMore}
 					keyExtractor={item => (item === 'switcher' ? 'switcher' : item.id)}
 					onRefresh={() => context.reloadEvents(true)}
-					refreshing={context.refreshing}
+					refreshing={refreshing === 'history' || refreshing === 'all'}
 				/>
 			</ErrorBoundary>
 		);
