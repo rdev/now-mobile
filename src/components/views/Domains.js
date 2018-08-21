@@ -2,6 +2,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import Domain from '../elements/domains/Domain';
 import { connect } from '../../Provider';
 
@@ -34,6 +35,7 @@ export default class Domains extends React.Component<Props> {
 				<FlatList
 					contentContainerStyle={containerStyle}
 					data={domains.map((domain, i) => ({ domain, last: i === domains.length - 1 }))}
+					ListEmptyComponent={<EmptyResults viewName="domains" />}
 					renderItem={this.renderItem}
 					keyExtractor={item => item.domain.uid}
 					onRefresh={reloadDomains}

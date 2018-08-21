@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import { connect } from '../../Provider';
 import DeploymentGroup from '../elements/deployments/DeploymentGroup';
 
@@ -54,6 +55,7 @@ export default class Deployments extends Component<Props> {
 				<FlatList
 					contentContainerStyle={containerStyle}
 					data={data}
+					ListEmptyComponent={<EmptyResults viewName="deployments" />}
 					renderItem={this.renderItem}
 					keyExtractor={item => item.name}
 					onRefresh={reloadDeployments}

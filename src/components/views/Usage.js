@@ -4,6 +4,7 @@ import { FlatList } from 'react-native';
 import styled from 'styled-components';
 import moment from 'moment';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import UsageEntry from '../elements/usage/UsageEntry';
 import { connect } from '../../Provider';
 import { plans, formatBytes } from '../../lib/utils';
@@ -107,6 +108,7 @@ export default class Usage extends React.Component<Props> {
 				<FlatList
 					contentContainerStyle={containerStyle}
 					data={data}
+					ListEmptyComponent={<EmptyResults viewName="usage" />}
 					renderItem={this.renderItem}
 					keyExtractor={item => item.name}
 					onRefresh={reloadUsage}

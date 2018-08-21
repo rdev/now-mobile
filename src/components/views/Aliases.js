@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import Alias from '../elements/aliases/Alias';
 import AliasGroup from '../elements/aliases/AliasGroup';
 import { connect } from '../../Provider';
@@ -37,6 +38,7 @@ export default class Aliases extends Component<Props> {
 				<FlatList
 					contentContainerStyle={containerStyle}
 					data={aliases.map((alias, i) => ({ alias, last: i === aliases.length - 1 }))}
+					ListEmptyComponent={<EmptyResults viewName="aliases" />}
 					renderItem={this.renderItem}
 					keyExtractor={item => item.alias.uid}
 					onRefresh={reloadAliases}
