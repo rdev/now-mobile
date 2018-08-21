@@ -45,7 +45,11 @@ export default class Usage extends React.Component<Props> {
 			</Period>
 		) : (
 			// This should never happen, but Flow complains, so putting N/A here just in case
-			<UsageEntry usage={item.current || 'N/A'} max={item.max || 'N/A'} name={item.name} />
+			<UsageEntry
+				usage={typeof item.current !== 'number' && !item.current ? 'N/A' : item.current}
+				max={item.max || 'N/A'}
+				name={item.name}
+			/>
 		));
 
 	render() {
