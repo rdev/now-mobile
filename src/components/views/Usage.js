@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import styled from 'styled-components';
 import moment from 'moment';
 import ErrorBoundary from '../ErrorBoundary';
@@ -55,7 +55,15 @@ const Usage = ({ context }: Props) => {
 
 	return (
 		<ErrorBoundary viewName="usage">
-			<ScrollView contentContainerStyle={containerStyle}>
+			<ScrollView
+				contentContainerStyle={containerStyle}
+				refreshControl={
+					<RefreshControl
+						refreshing={context.refreshing}
+						onRefresh={() => context.reloadUsage(true)}
+					/>
+				}
+			>
 				<UsageEntry usage={metrics.domains} max={max.domains} name="Domains" />
 				<UsageEntry
 					usage={metrics.activeInstances}

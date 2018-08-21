@@ -265,6 +265,30 @@ export class Provider extends React.Component<*, Context> {
 		this.setState({ events, refreshing: false });
 	};
 
+	reloadDeployments = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
+		const deployments = await this.getDeployments();
+		this.setState({ deployments, refreshing: false });
+	};
+
+	reloadAliases = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
+		const aliases = await this.getAliases();
+		this.setState({ aliases, refreshing: false });
+	};
+
+	reloadDomains = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
+		const domains = await this.getDomains();
+		this.setState({ domains, refreshing: false });
+	};
+
+	reloadUsage = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
+		const usage = await this.getUsage();
+		this.setState({ usage, refreshing: false });
+	};
+
 	fetchData = async () => {
 		try {
 			const token = await AsyncStorage.getItem('@now:token');
@@ -412,6 +436,10 @@ export class Provider extends React.Component<*, Context> {
 					setMode: this.setMode,
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
+					reloadDeployments: this.reloadDeployments,
+					reloadAliases: this.reloadAliases,
+					reloadDomains: this.reloadDomains,
+					reloadUsage: this.reloadUsage,
 					refreshUserInfo: this.refreshUserInfo,
 					refreshTeamInfo: this.refreshTeamInfo,
 					toggleDropdown: this.toggleDropdown,
