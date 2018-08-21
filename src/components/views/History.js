@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import HistoryItem from '../elements/history/HistoryItem';
 import ModeSwitcher from '../elements/history/ModeSwitcher';
 import { connect } from '../../Provider';
@@ -66,6 +67,7 @@ export default class History extends Component<Props, State> {
 				<FlatList
 					contentContainerStyle={containerStyle}
 					data={[{ id: 'switcher' }, ...events]}
+					ListEmptyComponent={<EmptyResults viewName="history" />}
 					// $FlowFixMe I know what I'm doing
 					renderItem={this.renderItem}
 					contentOffset={{ y: 42 }}
