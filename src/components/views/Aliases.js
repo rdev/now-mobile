@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
 import EmptyResults from '../EmptyResults';
 import Alias from '../elements/aliases/Alias';
@@ -18,31 +18,33 @@ const containerStyle = {
 
 @connect
 export default class Aliases extends Component<Props> {
-	render() {
-		const aliases = this.props.context.aliases.sort((a, b) => new Date(b.created) - new Date(a.created));
+	renderItem = ({ item, i }: { item: Zeit$Alias, i: number }) =>
+		(item.rules ? (
+			<AliasGroup
+				key={item.uid}
+				alias={item}
+				last={i === this.props.context.aliases.length - 1}
+			/>
+		) : (
+			<Alias key={item.uid} alias={item} last={i === this.props.context.aliases.length - 1} />
+		));
 
-		if (aliases.length === 0) {
-			return <EmptyResults viewName="aliases" />;
-		}
+	render() {
+		const { context } = this.props;
+		const aliases = context.aliases.sort((a, b) => new Date(b.created) - new Date(a.created));
 
 		return (
 			<ErrorBoundary viewName="aliases">
-				<ScrollView contentContainerStyle={containerStyle}>
-					{aliases.map((alias, i) =>
-						(alias.rules ? (
-							<AliasGroup
-								alias={alias}
-								key={alias.uid}
-								last={i === aliases.length - 1}
-							/>
-						) : (
-							<Alias
-								key={alias.uid}
-								alias={alias}
-								last={i === aliases.length - 1}
-							/>
-						)))}
-				</ScrollView>
+				<FlatList
+					contentContainerStyle={containerStyle}
+					data={aliases}
+					ListEmptyComponent={<EmptyResults viewName="aliases" />}
+					renderItem={this.renderItem}
+					onEndReached={this.loadMore}
+					keyExtractor={item => item.uid}
+					onRefresh={() => context.reloadAliases(true)}
+					refreshing={context.refreshing}
+				/>
 			</ErrorBoundary>
 		);
 	}
