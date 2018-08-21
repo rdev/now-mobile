@@ -28,8 +28,8 @@ export default class Deployments extends Component<Props> {
 	);
 
 	render() {
-		const { deployments, refreshing, reloadDeployments } = this.props.context;
-		deployments.sort((a, b) => {
+		const { refreshing, reloadDeployments } = this.props.context;
+		const deployments = this.props.context.deployments.sort((a, b) => {
 			if (a.name < b.name) return -1;
 			if (a.name > b.name) return 1;
 			return 0;

@@ -29,6 +29,7 @@ export default class Aliases extends Component<Props> {
 		) : (
 			<Alias alias={item.alias} last={item.last} />
 		));
+
 	render() {
 		const { reloadAliases, refreshing } = this.props.context;
 		const aliases = this.props.context.aliases.sort((a, b) => new Date(b.created) - new Date(a.created));
