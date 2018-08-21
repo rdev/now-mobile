@@ -271,6 +271,12 @@ export class Provider extends React.Component<*, Context> {
 		this.setState({ aliases, refreshing: false });
 	};
 
+	reloadDomains = async (showIndicator?: boolean) => {
+		if (showIndicator) await this.setRefreshing(true);
+		const domains = await this.getDomains();
+		this.setState({ domains, refreshing: false });
+	};
+
 	fetchData = async () => {
 		try {
 			const token = await AsyncStorage.getItem('@now:token');
@@ -419,6 +425,7 @@ export class Provider extends React.Component<*, Context> {
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
 					reloadAliases: this.reloadAliases,
+					reloadDomains: this.reloadDomains,
 					refreshUserInfo: this.refreshUserInfo,
 					refreshTeamInfo: this.refreshTeamInfo,
 					toggleDropdown: this.toggleDropdown,

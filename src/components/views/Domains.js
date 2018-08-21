@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
-import { ScrollView } from 'react-native';
+import React, { Component } from 'react';
+import { FlatList } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
 import EmptyResults from '../EmptyResults';
 import Domain from '../elements/domains/Domain';
@@ -15,22 +15,29 @@ const containerStyle = {
 	paddingHorizontal: '6%',
 };
 
-const Domains = ({ context }: Props) => {
-	const domains = context.domains.sort((a, b) => new Date(b.created) - new Date(a.created));
-
-	if (domains.length === 0) {
-		return <EmptyResults viewName="domains" />;
-	}
-
-	return (
-		<ErrorBoundary viewName="domains">
-			<ScrollView contentContainerStyle={containerStyle}>
-				{domains.map((domain, i) => (
-					<Domain key={domain.uid} domain={domain} last={i === domains.length - 1} />
-				))}
-			</ScrollView>
-		</ErrorBoundary>
+@connect
+export default class Domains extends Component<Props> {
+	renderItem = ({ item, i }: { item: Zeit$Domain, i: number }) => (
+		<Domain key={item.uid} domain={item} last={i === this.props.context.domains.length - 1} />
 	);
-};
 
-export default connect(Domains);
+	render() {
+		const { context } = this.props;
+		const domains = context.domains.sort((a, b) => new Date(b.created) - new Date(a.created));
+
+		return (
+			<ErrorBoundary viewName="domains">
+				<FlatList
+					contentContainerStyle={containerStyle}
+					data={domains}
+					ListEmptyComponent={<EmptyResults viewName="domains" />}
+					renderItem={this.renderItem}
+					onEndReached={this.loadMore}
+					keyExtractor={item => item.uid}
+					onRefresh={() => context.reloadDomains(true)}
+					refreshing={context.refreshing}
+				/>
+			</ErrorBoundary>
+		);
+	}
+}
