@@ -3,6 +3,8 @@
 declare type Navigation = {
 	push: (path: string, params?: { id: string }) => void,
 	replace: (path: string, params?: { fromSplash?: boolean }) => void,
+	navigate: (path: string, params?: { description: string }) => void,
+	goBack: () => void,
 	getParam: (name: string) => any,
 	state: {
 		routeName: string,
@@ -37,7 +39,7 @@ declare type Context = {
 	teams: Zeit$Team[],
 	mode: 'me' | 'system' | 'team',
 	team: ?Zeit$Team,
-	refreshing: boolean,
+	refreshing: ?string,
 	dropdownVisible: boolean,
 	networkError: boolean,
 	biometry?: string,
@@ -48,6 +50,10 @@ declare type Context = {
 	setMode: (mode: string) => void,
 	getEvents: (since: string) => Zeit$Event[],
 	reloadEvents: (showIndicator?: boolean) => void,
+	reloadDeployments: () => void,
+	reloadAliases: () => void,
+	reloadDomains: () => void,
+	reloadUsage: () => void,
 	toggleDropdown: () => void,
 	logOut: () => void,
 	setTeam: (teamId: ?Zeit$Team) => void,

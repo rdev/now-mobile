@@ -40,13 +40,17 @@ const DEFAULT_CONTEXT = {
 		},
 	},
 	team: null,
-	refreshing: false,
+	refreshing: null,
 	fetchData: () => {},
 	refreshUserInfo: () => {},
 	refreshTeamInfo: () => {},
 	setMode: () => {},
 	getEvents: () => [],
 	reloadEvents: () => {},
+	reloadDeployments: () => {},
+	reloadAliases: () => {},
+	reloadDomains: () => {},
+	reloadUsage: () => {},
 	toggleDropdown: () => {},
 	logOut: () => {},
 	setTeam: () => {},
@@ -236,14 +240,14 @@ export class Provider extends React.Component<*, Context> {
 			});
 		});
 
-	setRefreshing = (refreshing: boolean): Promise<void> =>
+	setRefreshing = (refreshing: string): Promise<void> =>
 		new Promise((resolve) => {
 			this.setState({ refreshing }, resolve);
 		});
 
 	setTeam = (team: ?Zeit$Team): Promise<void> =>
 		new Promise(async (resolve) => {
-			this.setRefreshing(true);
+			this.setRefreshing('all');
 			let mode = 'me';
 
 			if (team) {
@@ -260,29 +264,60 @@ export class Provider extends React.Component<*, Context> {
 		});
 
 	reloadEvents = async (showIndicator?: boolean) => {
-		if (showIndicator) await this.setRefreshing(true);
+		if (showIndicator) await this.setRefreshing('history');
 		const events = await this.getEvents();
-		this.setState({ events, refreshing: false });
+		this.setState({ events, refreshing: null });
 	};
 
-	fetchData = async () => {
-		try {
-			const token = await AsyncStorage.getItem('@now:token');
-			if (!token) return false;
+	reloadDeployments = async () => {
+		await this.setRefreshing('deployments');
+		const deployments = await this.getDeployments();
+		this.setState({ deployments, refreshing: null });
+	};
 
-			const apiCalls = [
-				this.getUserInfo(),
-				this.getEvents(),
-				this.getDomains(),
-				this.getAliases(),
-				this.getDeployments(),
-				this.getUsage(),
-				this.getTeams(),
-			];
-			console.log('FETCHING DATA');
-			const [user, events, domains, aliases, deployments, usage, teams] = await Promise.all(apiCalls);
+	reloadAliases = async () => {
+		await this.setRefreshing('aliases');
+		const aliases = await this.getAliases();
+		this.setState({ aliases, refreshing: null });
+	};
 
-			return new Promise((resolve) => {
+	reloadDomains = async () => {
+		await this.setRefreshing('domains');
+		const domains = await this.getDomains();
+		this.setState({ domains, refreshing: null });
+	};
+
+	reloadUsage = async () => {
+		await this.setRefreshing('usage');
+		const usage = await this.getUsage();
+		this.setState({ usage, refreshing: null });
+	};
+
+	fetchData = (): Promise<void> =>
+		new Promise(async (resolve, reject) => {
+			try {
+				const token = await AsyncStorage.getItem('@now:token');
+				if (!token) return;
+
+				const apiCalls = [
+					this.getUserInfo(),
+					this.getEvents(),
+					this.getDomains(),
+					this.getAliases(),
+					this.getDeployments(),
+					this.getUsage(),
+					this.getTeams(),
+				];
+				console.log('FETCHING DATA');
+				const [
+					user,
+					events,
+					domains,
+					aliases,
+					deployments,
+					usage,
+					teams,
+				] = await Promise.all(apiCalls);
 				this.setState(
 					{
 						user,
@@ -293,19 +328,16 @@ export class Provider extends React.Component<*, Context> {
 						events,
 						teams,
 						networkError: false,
-						refreshing: false,
+						refreshing: null,
 					},
 					resolve,
 				);
-			});
-		} catch (e) {
-			this.setState({ networkError: true });
+			} catch (e) {
+				this.setState({ networkError: true });
 
-			return new Promise((resolve, reject) => {
 				reject();
-			});
-		}
-	};
+			}
+		});
 
 	toggleDropdown = () => {
 		this.setState({ dropdownVisible: !this.state.dropdownVisible });
@@ -412,6 +444,10 @@ export class Provider extends React.Component<*, Context> {
 					setMode: this.setMode,
 					getEvents: this.getEvents,
 					reloadEvents: this.reloadEvents,
+					reloadDeployments: this.reloadDeployments,
+					reloadAliases: this.reloadAliases,
+					reloadDomains: this.reloadDomains,
+					reloadUsage: this.reloadUsage,
 					refreshUserInfo: this.refreshUserInfo,
 					refreshTeamInfo: this.refreshTeamInfo,
 					toggleDropdown: this.toggleDropdown,

@@ -50,8 +50,12 @@ export default ({ alias, last }: Props) => (
 		</TitleWrap>
 		<Group>
 			{/* $FlowFixMe rules is not undefined if this is being rendered */}
-			{alias.rules.map(({ pathname, dest }) => (
-				<PathAlias pathname={pathname} dest={dest} key={dest} />
+			{alias.rules.map(({ pathname, dest }, i) => (
+				<PathAlias
+					pathname={pathname}
+					dest={dest}
+					key={`${alias.uid}_${pathname || i}_${dest}`}
+				/>
 			))}
 		</Group>
 	</View>

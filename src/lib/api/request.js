@@ -19,6 +19,7 @@ export default async function request(
 				: '';
 
 		const url = `https://${endpoint}${path}?${queryString}`;
+		console.log('REQUEST', path);
 
 		const res = await fetch(url, {
 			headers: {
@@ -30,6 +31,8 @@ export default async function request(
 			body: options ? JSON.stringify(options.body) : null,
 			method,
 		});
+
+		console.log('REQUEST DONE', path);
 
 		return res.json();
 	} catch (e) {
