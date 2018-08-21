@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import Alias from '../elements/aliases/Alias';
 import AliasGroup from '../elements/aliases/AliasGroup';
 import { connect } from '../../Provider';
@@ -19,6 +20,10 @@ const containerStyle = {
 export default class Aliases extends Component<Props> {
 	render() {
 		const aliases = this.props.context.aliases.sort((a, b) => new Date(b.created) - new Date(a.created));
+
+		if (aliases.length === 0) {
+			return <EmptyResults viewName="aliases" />;
+		}
 
 		return (
 			<ErrorBoundary viewName="aliases">

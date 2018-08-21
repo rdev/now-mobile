@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import { connect } from '../../Provider';
 import DeploymentGroup from '../elements/deployments/DeploymentGroup';
 
@@ -32,6 +33,10 @@ export default class Deployments extends Component<Props> {
 			group.push(deployment);
 			if (group.length > 1) group.sort((a, b) => new Date(b.created) - new Date(a.created));
 		});
+
+		if (deployments.length === 0) {
+			return <EmptyResults viewName="deployments" />;
+		}
 
 		return (
 			<ErrorBoundary viewName="deployments">

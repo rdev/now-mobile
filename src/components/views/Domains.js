@@ -2,6 +2,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import ErrorBoundary from '../ErrorBoundary';
+import EmptyResults from '../EmptyResults';
 import Domain from '../elements/domains/Domain';
 import { connect } from '../../Provider';
 
@@ -16,6 +17,10 @@ const containerStyle = {
 
 const Domains = ({ context }: Props) => {
 	const domains = context.domains.sort((a, b) => new Date(b.created) - new Date(a.created));
+
+	if (domains.length === 0) {
+		return <EmptyResults viewName="domains" />;
+	}
 
 	return (
 		<ErrorBoundary viewName="domains">
