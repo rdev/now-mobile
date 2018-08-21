@@ -3,6 +3,8 @@
 declare type Navigation = {
 	push: (path: string, params?: { id: string }) => void,
 	replace: (path: string, params?: { fromSplash?: boolean }) => void,
+	navigate: (path: string, params?: { description: string }) => void,
+	goBack: () => void,
 	getParam: (name: string) => any,
 	state: {
 		routeName: string,

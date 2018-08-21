@@ -5,6 +5,7 @@ import Carousel from 'react-native-snap-carousel';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import PushNotification from 'react-native-push-notification';
+import codePush from 'react-native-code-push';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
@@ -89,6 +90,11 @@ export default class Main extends Component<Props> {
 			if (fromSplash && id) {
 				this.props.navigation.push('DeploymentDetails', { id });
 			}
+		}
+
+		const update = await codePush.getUpdateMetadata();
+		if (update && update.isFirstRun && update.description) {
+			this.props.navigation.navigate('WhatsNew', { description: update.description });
 		}
 	};
 

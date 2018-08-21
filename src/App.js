@@ -4,12 +4,13 @@ import codePush from 'react-native-code-push';
 import SplashScreen from './screens/SplashScreen';
 import Authentication from './screens/Authentication';
 import Main from './screens/Main';
+import WhatsNew from './screens/WhatsNew';
 import Settings from './screens/Settings';
 import DeploymentDetails from './screens/DeploymentDetails';
 import { Provider } from './Provider';
 import { platformBlackColor } from './lib/utils';
 
-const App = StackNavigator(
+const MainStack = StackNavigator(
 	{
 		Splash: {
 			screen: SplashScreen,
@@ -45,6 +46,21 @@ const App = StackNavigator(
 		},
 	},
 	{ headerMode: 'screen' },
+);
+
+const App = StackNavigator(
+	{
+		MainView: {
+			screen: MainStack,
+		},
+		WhatsNew: {
+			screen: WhatsNew,
+		},
+	},
+	{
+		mode: 'modal',
+		headerMode: 'none',
+	},
 );
 
 const NowApp = () => (
