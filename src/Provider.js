@@ -293,24 +293,31 @@ export class Provider extends React.Component<*, Context> {
 		this.setState({ usage, refreshing: null });
 	};
 
-	fetchData = async () => {
-		try {
-			const token = await AsyncStorage.getItem('@now:token');
-			if (!token) return false;
+	fetchData = (): Promise<void> =>
+		new Promise(async (resolve, reject) => {
+			try {
+				const token = await AsyncStorage.getItem('@now:token');
+				if (!token) return;
 
-			const apiCalls = [
-				this.getUserInfo(),
-				this.getEvents(),
-				this.getDomains(),
-				this.getAliases(),
-				this.getDeployments(),
-				this.getUsage(),
-				this.getTeams(),
-			];
-			console.log('FETCHING DATA');
-			const [user, events, domains, aliases, deployments, usage, teams] = await Promise.all(apiCalls);
-
-			return new Promise((resolve) => {
+				const apiCalls = [
+					this.getUserInfo(),
+					this.getEvents(),
+					this.getDomains(),
+					this.getAliases(),
+					this.getDeployments(),
+					this.getUsage(),
+					this.getTeams(),
+				];
+				console.log('FETCHING DATA');
+				const [
+					user,
+					events,
+					domains,
+					aliases,
+					deployments,
+					usage,
+					teams,
+				] = await Promise.all(apiCalls);
 				this.setState(
 					{
 						user,
@@ -325,15 +332,12 @@ export class Provider extends React.Component<*, Context> {
 					},
 					resolve,
 				);
-			});
-		} catch (e) {
-			this.setState({ networkError: true });
+			} catch (e) {
+				this.setState({ networkError: true });
 
-			return new Promise((resolve, reject) => {
 				reject();
-			});
-		}
-	};
+			}
+		});
 
 	toggleDropdown = () => {
 		this.setState({ dropdownVisible: !this.state.dropdownVisible });
