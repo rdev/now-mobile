@@ -6,11 +6,15 @@ import { platformBlackColor } from '../../../lib/utils';
 import Item from './Item';
 import ScaleTable from './ScaleTable';
 import EventList from './EventList';
+import DeploymentAlias from './DeploymentAlias';
+import AddAliasButton from './AddAliasButton';
 
 type Props = {
 	scale: any,
 	deployment: Zeit$Deployment,
 	events: Zeit$Event[],
+	aliases: Zeit$Alias[],
+	reload: () => void,
 };
 
 const View = styled(Animatable.View)`
@@ -29,7 +33,9 @@ const MultiWrap = styled.View`
 	justify-content: space-between;
 `;
 
-export default ({ scale, deployment, events }: Props) => (
+export default ({
+	scale, deployment, events, aliases, reload,
+}: Props) => (
 	<View animation="fadeIn" duration={500}>
 		<Heading>Meta</Heading>
 		<Item name="uid" value={deployment.uid} />
@@ -40,6 +46,18 @@ export default ({ scale, deployment, events }: Props) => (
 		</MultiWrap>
 		<Item name="url" value={deployment.url || '-'} link={deployment.url || null} />
 		<Item name="created" value={new Date(deployment.created)} last />
+		<Heading>Aliases</Heading>
+		{aliases && aliases.length > 0
+			? aliases.map(alias => (
+				// $FlowFixMe
+				<DeploymentAlias alias={alias} key={alias.uid} reload={reload} />
+			  ))
+			: null}
+		<AddAliasButton
+			deploymentId={deployment.uid}
+			reload={reload}
+			marginTop={aliases && aliases.length > 0 ? 20 : 0}
+		/>
 		{deployment.type === 'STATIC' ? null : (
 			<Fragment>
 				<Heading>Scale</Heading>

@@ -2,7 +2,7 @@
 
 // API Response types
 
-type APIError = {
+declare type APIError = {
 	code: string,
 	message: string,
 };

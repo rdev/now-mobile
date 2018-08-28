@@ -1,7 +1,7 @@
 {
 	"name": "now",
 	"version": "1.1.1",
-	"update": "1",
+	"update": "2",
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
@@ -28,6 +28,7 @@
 		"react-native-search-api": "^1.2.0",
 		"react-native-shared-group-preferences": "^1.0.6",
 		"react-native-snap-carousel": "^3.7.0",
+		"react-native-swipeout": "^2.3.6",
 		"react-native-touch-id": "^4.0.4",
 		"react-native-triangle": "^0.0.9",
 		"react-native-watch-connectivity": "^0.2.0",
@@ -76,7 +77,8 @@
 		"preset": "react-native",
 		"setupFiles": [
 			"<rootDir>/node_modules/appcenter-analytics/test/AppCenterAnalyticsMock.js",
-			"<rootDir>/node_modules/appcenter/test/AppCenterMock.js"
+			"<rootDir>/node_modules/appcenter/test/AppCenterMock.js",
+			"<rootDir>/node_modules/appcenter-crashes/test/AppCenterCrashesMock.js"
 		]
 	},
 	"eslintConfig": {

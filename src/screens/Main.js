@@ -80,12 +80,11 @@ export default class Main extends Component<Props> {
 			},
 			requestPermissions: true,
 		});
+		// We only need to do some things on first ever render
+		const fromSplash = this.props.navigation.getParam('fromSplash');
 		if (!isAndroid) {
 			const Spotlight = require('../extensions/spotlight');
 			Spotlight.addListener(this.handleSpotlightClick);
-
-			// If app was opened from Spotlight and we're coming from splash screen, send user to deployment screen right away
-			const fromSplash = this.props.navigation.getParam('fromSplash');
 			const id = await Spotlight.handleAppOpen();
 			if (fromSplash && id) {
 				this.props.navigation.push('DeploymentDetails', { id });
@@ -93,7 +92,7 @@ export default class Main extends Component<Props> {
 		}
 
 		const update = await codePush.getUpdateMetadata();
-		if (update && update.isFirstRun && update.description) {
+		if (fromSplash && update && update.isFirstRun && update.description) {
 			this.props.navigation.navigate('WhatsNew', { description: update.description });
 		}
 	};

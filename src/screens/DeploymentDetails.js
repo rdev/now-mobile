@@ -69,6 +69,13 @@ export default class DeploymentDetails extends Component<Props, State> {
 							scale={data.scale}
 							deployment={data.deployment}
 							events={data.events}
+							aliases={data.aliases.aliases}
+							reload={() => {
+								this.loadDetails();
+								// Also it's nice to have History and Aliases up to date when user goes back
+								this.props.context.reloadAliases();
+								this.props.context.reloadEvents();
+							}}
 						/>
 					) : (
 						<LoadingIndicator />

@@ -11,12 +11,19 @@ export async function deployments(): Promise<Zeit$Deployments> {
 
 export async function deploymentDetails(id: string, type: string): Promise<Zeit$DeploymentDetails> {
 	const query = qs.stringify({ types: 'event' });
-	const [deployment, scale, events] = await Promise.all([
+	const [deployment, scale, events, aliases] = await Promise.all([
 		caught(request(`/v3/now/deployments/${id}`, 'GET')),
 		caught(request(`/v3/now/deployments/${id}/instances`, 'GET')),
 		type === 'STATIC'
 			? null
 			: caught(request(`/v1/now/deployments/${id}/events`, 'GET', { query })),
+		caught(request(`/v2/now/deployments/${id}/aliases`, 'GET')),
 	]);
-	return { deployment, scale, events };
+
+	return {
+		deployment,
+		scale,
+		events,
+		aliases,
+	};
 }

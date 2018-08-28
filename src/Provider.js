@@ -141,7 +141,7 @@ export class Provider extends React.Component<*, Context> {
 	};
 
 	getAliases = async (): Promise<Zeit$Alias[]> => {
-		const { aliases, error } = await api.aliases();
+		const { aliases, error } = await api.aliases.getAll();
 
 		if (error) return this.state.aliases;
 		return aliases;

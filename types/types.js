@@ -29,6 +29,17 @@ declare type Plan = {
 	domains: number,
 };
 
+declare type CreateAliasResponse = {
+	id: string,
+	created: string,
+	error?: APIError,
+};
+
+declare type RemoveAliasResponse = {
+	status: string,
+	error?: APIError,
+};
+
 declare type Context = {
 	user: any | Zeit$User, // @FIXME There's definitely a better way to do it
 	domains: Zeit$Domain[],

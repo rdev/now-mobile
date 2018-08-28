@@ -139,9 +139,9 @@ export const getUsageLimits = async (mode: Zeit$PlanName) => {
 		const logs = (await AsyncStorage.getItem('@now:logsLimit')) || '0';
 
 		return {
-			instances: parseInt(instances, 10),
-			bandwidth: parseInt(bandwidth, 10),
-			logs: parseInt(logs, 10),
+			instances: instances === '0' ? Infinity : parseInt(instances, 10),
+			bandwidth: bandwidth === '0' ? Infinity : parseInt(bandwidth, 10),
+			logs: logs === '0' ? Infinity : parseInt(logs, 10),
 		};
 	}
 
@@ -157,7 +157,7 @@ export const getUsageLimits = async (mode: Zeit$PlanName) => {
 	}
 
 	// If ZEIT introduces a new plan we shouldn't break
-	return { instances: 0, bandwidth: 0, logs: 0 };
+	return { instances: Infinity, bandwidth: Infinity, logs: Infinity };
 };
 
 // Stolen from Now CLI
