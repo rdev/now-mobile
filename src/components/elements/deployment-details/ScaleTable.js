@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	scale: Zeit$Scale,
@@ -29,7 +28,7 @@ const Item = styled.View`
 const Text = styled.Text`
 	font-size: 16px
 	font-weight: ${({ heading }) => (heading ? '700' : '300')};
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 export default ({ scale, deployment }: Props) => (
@@ -54,9 +53,6 @@ export default ({ scale, deployment }: Props) => (
 			Object.keys(scale).forEach((dc) => {
 				const { instances } = scale[dc];
 				const cfg = deployment.scale[dc] || {};
-				console.log(instances);
-				console.log(deployment);
-				console.log(cfg);
 
 				const row = (
 					<Row key={dc}>

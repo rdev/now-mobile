@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { platformBlackColor, isAndroid } from '../../../lib/utils';
+import { isAndroid } from '../../../lib/utils';
 
 type Props = {
 	usage: string | number,
@@ -25,13 +25,13 @@ const Usage = styled.Text`
 	font-weight: 100;
 	font-size: 40px;
 	letter-spacing: 0.5px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 	${isAndroid ? 'font-family: sans-serif-thin;' : ''};
 `;
 
 const Max = styled.Text`
 	font-size: 22px;
-	color: #848484;
+	color: ${props => props.theme.lightText};
 	font-weight: 200;
 	margin-left: 10px;
 `;
@@ -40,12 +40,12 @@ const Title = styled.Text`
 	font-size: 17px;
 	font-weight: 300;
 	margin-top: 5px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Separator = styled.View`
 	height: 1px;
-	border-bottom-color: #eaeaea;
+	border-bottom-color: ${props => props.theme.border};
 	border-bottom-width: 1px;
 	margin-vertical: 20px;
 	width: 50%;

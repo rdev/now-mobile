@@ -1,14 +1,21 @@
+/* @flow */
+
 import React from 'react';
 import { StackNavigator } from 'react-navigation';
 import codePush from 'react-native-code-push';
+import { ThemeProvider } from 'styled-components';
 import SplashScreen from './screens/SplashScreen';
 import Authentication from './screens/Authentication';
 import Main from './screens/Main';
 import WhatsNew from './screens/WhatsNew';
 import Settings from './screens/Settings';
 import DeploymentDetails from './screens/DeploymentDetails';
-import { Provider } from './Provider';
-import { platformBlackColor } from './lib/utils';
+import { Provider, connect } from './Provider';
+import { platformBlackColor, themes } from './lib/utils';
+
+type AppProps = {
+	context: Context,
+};
 
 const MainStack = StackNavigator(
 	{
@@ -30,25 +37,25 @@ const MainStack = StackNavigator(
 		},
 		DeploymentDetails: {
 			screen: DeploymentDetails,
-			navigationOptions: {
+			navigationOptions: ({ screenProps }) => ({
 				title: 'Deployment',
-				headerTintColor: platformBlackColor,
+				headerTintColor: screenProps.theme.text,
 				backTitle: 'Back',
 				headerStyle: {
 					borderBottomColor: 'transparent',
 					borderBottomWidth: 0,
-					backgroundColor: 'white',
+					backgroundColor: screenProps.theme.background,
 				},
 				headerTitleStyle: {
-					color: platformBlackColor,
+					color: screenProps.theme.text,
 				},
-			},
+			}),
 		},
 	},
 	{ headerMode: 'screen' },
 );
 
-const App = StackNavigator(
+const Navigation = StackNavigator(
 	{
 		MainView: {
 			screen: MainStack,
@@ -62,6 +69,12 @@ const App = StackNavigator(
 		headerMode: 'none',
 	},
 );
+
+const App = connect(({ context }: AppProps) => (
+	<ThemeProvider theme={context.darkMode ? themes.dark : themes.light}>
+		<Navigation screenProps={{ theme: context.darkMode ? themes.dark : themes.light }} />
+	</ThemeProvider>
+));
 
 const NowApp = () => (
 	<Provider>

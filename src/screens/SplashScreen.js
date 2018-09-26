@@ -16,7 +16,7 @@ type Props = {
 };
 
 const View = styled(SafeAreaView)`
-	background-color: white;
+	background-color: ${props => props.theme.background};
 	height: 100%;
 	flex-direction: column;
 	align-items: center;

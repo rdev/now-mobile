@@ -7,7 +7,7 @@ type Props = {
 };
 
 const View = styled.View`
-	background-color: #f5f5f5;
+	background-color: ${props => props.theme.monoBackground};
 	border-radius: 4px;
 	padding: 10px;
 `;
@@ -15,7 +15,7 @@ const View = styled.View`
 const Text = styled.Text`
 	font-size: 15px;
 	font-family: 'Menlo';
-	color: ${({ green }) => (green ? '#12DDA0' : '#848484')};
+	color: ${({ green, theme }) => (green ? theme.monoGreenText : theme.lightText)};
 	${({ bold, green }) => (bold || green ? 'font-weight: bold;' : '')};
 `;
 
@@ -23,15 +23,14 @@ const Event = styled.View`
 	width: 100%;
 	flex-direction: column;
 	margin-bottom: 10px;
-	${({ last }) => {
+	${({ last, theme }) => {
 		if (last) {
 			return '';
 		}
 		return `
 			padding-bottom: 10px;
 			border-bottom-width: 1px;
-			border-bottom-color: #D7D7D7;
-		`;
+			border-bottom-color: ${theme.border};`;
 	}};
 `;
 

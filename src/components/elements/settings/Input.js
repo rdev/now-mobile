@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	onChangeText: (inputValue: string) => void,
@@ -12,12 +11,13 @@ type Props = {
 };
 
 const Input = styled.TextInput`
-	color: ${({ value }) => (value === '0' ? '#D3D3D3' : platformBlackColor)};
+	color: ${({ value, theme }) => (value === '0' ? theme.input : theme.text)};
 	font-size: 18px;
 	font-weight: 300;
 	width: ${({ width }) => width || '70%'};
 	border-bottom-width: 1px;
-	border-bottom-color: ${({ value }) => (value && value !== '0' ? 'black' : '#D3D3D3')};
+	border-bottom-color: ${({ value, theme }) =>
+		(value && value !== '0' ? theme.text : theme.input)};
 	text-align: center;
 	padding-vertical: 10px;
 `;

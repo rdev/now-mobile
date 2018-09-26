@@ -24,7 +24,7 @@ type UsageData = {
 const Period = styled.Text`
 	font-weight: 300;
 	font-size: 15px;
-	color: #b5b5b5;
+	color: ${props => props.theme.dimmedText};
 	margin-top: 20px;
 	letter-spacing: 0.5px;
 `;

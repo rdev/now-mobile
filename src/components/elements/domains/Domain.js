@@ -2,7 +2,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
-import { platformBlackColor } from '../../../lib/utils';
 import ExpireDate from './ExpireDate';
 
 type Props = {
@@ -13,14 +12,13 @@ type Props = {
 const View = styled.View`
 	flex-direction: row;
 	padding-vertical: 15px;
-	${({ last }) => {
+	${({ last, theme }) => {
 		if (last) {
 			return '';
 		}
 		return `
 			border-bottom-width: 1px;
-			border-bottom-color: #EAEAEA;
-		`;
+			border-bottom-color: ${theme.border};`;
 	}};
 `;
 
@@ -35,7 +33,7 @@ const Metadata = styled.View`
 `;
 
 const MetaText = styled.Text`
-	color: ${({ enabled }) => (enabled ? platformBlackColor : '#B5B5B5')};
+	color: ${({ enabled, theme }) => (enabled ? theme.text : theme.dimmedText)};
 	font-size: 16px;
 	font-weight: 300;
 `;
@@ -43,13 +41,14 @@ const MetaText = styled.Text`
 const MetaGroup = styled.View`
 	flex-direction: row;
 	align-items: center;
+	border-right-color: ${props => props.theme.border};
 `;
 
 const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 export default ({ domain, last }: Props) => (
@@ -60,7 +59,6 @@ export default ({ domain, last }: Props) => (
 				<MetaGroup
 					style={{
 						borderRightWidth: 0.5,
-						borderRightColor: '#EAEAEA',
 						paddingRight: 10,
 						marginRight: 10,
 					}}

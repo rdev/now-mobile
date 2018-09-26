@@ -4,7 +4,6 @@ import { withNavigation } from 'react-navigation';
 import styled from 'styled-components';
 import InstanceIcon from '../../../../assets/instance-icon.png';
 import TimeAgo from '../TimeAgo';
-import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	deployment: Zeit$Deployment,
@@ -19,7 +18,7 @@ const View = styled.TouchableOpacity`
 const Address = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Metadata = styled.View`
@@ -37,11 +36,15 @@ const Image = styled.Image`
 const MetaGroup = styled.View`
 	flex-direction: row;
 	align-items: center;
+	border-right-color: ${props => props.theme.border};
+	border-left-color: ${props => props.theme.border};
 `;
 
 const MetaText = styled.Text`
-	color: ${({ state }) =>
-		(state === 'BUILD_ERROR' || state === 'DEPLOYMENT_ERROR' ? '#D74C58' : '#B5B5B5')};
+	color: ${({ state, theme }) =>
+		(state === 'BUILD_ERROR' || state === 'DEPLOYMENT_ERROR'
+			? theme.deplomentErrorText
+			: theme.dimmedText)};
 	font-size: 16px;
 	font-weight: 300;
 `;
@@ -69,18 +72,14 @@ export default withNavigation(({ deployment, navigation }: Props) => (
 			<MetaGroup
 				style={{
 					borderRightWidth: 1,
-					borderRightColor: '#EAEAEA',
 					borderLeftWidth: deployment.scale ? 1 : 0,
-					borderLeftColor: '#EAEAEA',
 					paddingLeft: deployment.scale ? 10 : 0,
 					paddingRight: 10,
 				}}
 			>
 				<MetaText state={deployment.state}>{deployment.state}</MetaText>
 			</MetaGroup>
-			<MetaGroup
-				style={{ borderLeftWidth: 0.5, borderLeftColor: '#EAEAEA', paddingLeft: 10 }}
-			>
+			<MetaGroup style={{ borderLeftWidth: 0.5, paddingLeft: 10 }}>
 				<MetaText>
 					<TimeAgo date={deployment.created} />
 				</MetaText>

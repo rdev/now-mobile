@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import { platformBlackColor } from '../../../lib/utils';
 import Input from './Input';
 
 type Props = {
@@ -19,7 +18,7 @@ const View = styled.View`
 const Label = styled.Text`
 	font-size: 18px
 	font-weight: 400;
-	color: ${({ active }) => (active ? platformBlackColor : '#D3D3D3')};
+	color: ${({ active, theme }) => (active ? theme.text : theme.input)};
 `;
 
 export default ({ label, value, onChangeText }: Props) => (

@@ -2,7 +2,6 @@
 import React from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import { platformBlackColor } from '../lib/utils';
 import pkg from '../../package.json';
 
 type Props = {
@@ -17,32 +16,32 @@ const containerStyle = {
 };
 
 const View = styled.SafeAreaView`
-	background-color: #ffffff;
+	background-color: ${props => props.theme.background};
 	height: 100%;
 `;
 
 const Title = styled.Text`
 	font-weight: 700;
 	font-size: 18px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 	margin-top: 40%;
 	margin-bottom: 20px;
 `;
 
 const Version = styled.Text`
-	color: #cacaca;
+	color: ${props => props.theme.whatsNewText};
 	font-size: 16px;
 	margin-bottom: 35px;
 `;
 
 const Text = styled.Text`
 	font-size: 16px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Button = styled.Text`
 	font-size: 15px;
-	color: #cacaca;
+	color: ${props => props.theme.whatsNewText};
 	margin-top: 25px;
 `;
 

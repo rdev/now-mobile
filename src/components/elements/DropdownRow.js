@@ -5,7 +5,6 @@ import { CachedImage } from 'react-native-img-cache';
 import styled from 'styled-components';
 import plusImage from '../../../assets/plus.png';
 import gradient from '../../../assets/gradient.jpg';
-import { platformBlackColor } from '../../lib/utils';
 
 type Props = {
 	bold?: boolean,
@@ -24,19 +23,17 @@ const Row = styled.View`
 	align-items: center;
 	padding-horizontal: 22px;
 	width: 100%;
-	${({ border }) => {
+	${({ border, theme }) => {
 		if (border === 'top') {
 			return `
 				border-top-width: 1px;
-				border-top-color: #EAEAEA;
-			`;
+				border-top-color: ${theme.border};`;
 		}
 
 		if (border === 'bottom') {
 			return `
 				border-bottom-width: 1px;
-				border-bottom-color: #EAEAEA;
-			`;
+				border-bottom-color: ${theme.border};`;
 		}
 
 		return '';
@@ -62,7 +59,7 @@ const Text = styled.Text`
 	font-size: 17px;
 	font-weight: ${({ bold }) => (bold ? 800 : 400)};
 	letter-spacing: 0.2px;
-	color: ${({ bold }) => (bold ? platformBlackColor : '#848484')};
+	color: ${({ bold, theme }) => (bold ? theme.text : theme.lightText)};
 `;
 
 const Plus = styled.View`

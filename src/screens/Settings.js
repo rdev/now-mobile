@@ -19,7 +19,7 @@ import Input from '../components/elements/settings/Input';
 import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import api from '../lib/api';
 import touchIdPrompt from '../lib/touch-id-prompt';
-import { isIphoneSE, platformBlackColor, isAndroid } from '../lib/utils';
+import { isIphoneSE, isAndroid } from '../lib/utils';
 import { connect } from '../Provider';
 import gradient from '../../assets/gradient.jpg';
 
@@ -40,7 +40,7 @@ const Container = styled(SafeAreaView)`
 	width: 100%;
 	flex: 1;
 	flex-direction: column;
-	background-color: white;
+	background-color: ${props => props.theme.background};
 `;
 
 const View = styled.View`
@@ -60,7 +60,7 @@ const Title = styled.Text`
 	height: 36px;
 	width: 100%;
 	align-self: flex-start;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 export const ProfilePic = styled.View`
@@ -98,7 +98,7 @@ const ProfileName = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	letter-spacing: 0.2px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 	margin-right: 5px;
 `;
 
@@ -106,25 +106,25 @@ const Text = styled.Text`
 	font-size: 18px;
 	font-weight: 300;
 	letter-spacing: 0.2px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 export const Button = styled.Text`
 	font-size: 18px;
 	font-weight: 300;
-	color: #067df7;
+	color: ${props => props.theme.settingsButton};
 `;
 
 const Email = styled.Text`
 	font-size: 16px;
 	font-weight: 300;
-	color: #b5b5b5;
+	color: ${props => props.theme.dimmedText};
 	margin-top: 15px;
 `;
 
 const Separator = styled.View`
 	height: 1px;
-	border-bottom-color: #eaeaea;
+	border-bottom-color: ${props => props.theme.border};
 	border-bottom-width: 1px;
 	margin-vertical: 12px;
 	width: 80%;
@@ -141,19 +141,19 @@ const SettingsRow = styled.View`
 const RowText = styled.Text`
 	font-size: 18px
 	font-weight: 400;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const SectionHeading = styled.Text`
 	font-size: 18px
 	font-weight: 700;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 	width: 80%;
 	margin-bottom: 15px;
 `;
 
 const DeleteText = styled.Text`
-	color: rgb(215, 76, 88);
+	color: ${props => props.theme.deploymentErrorText};
 `;
 
 @connect

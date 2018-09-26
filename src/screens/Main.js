@@ -9,7 +9,7 @@ import codePush from 'react-native-code-push';
 import View from '../components/View';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
-import { viewport, platformBlackColor, isAndroid } from '../lib/utils';
+import { viewport, isAndroid } from '../lib/utils';
 import setUpBackgroundTask from '../lib/background-task';
 import { connect } from '../Provider';
 
@@ -29,7 +29,7 @@ const Container = styled(SafeAreaView)`
 	width: 100%;
 	flex: 1;
 	flex-direction: column;
-	background-color: white;
+	background-color: ${props => props.theme.background};
 `;
 
 const Title = styled.Text`
@@ -40,7 +40,7 @@ const Title = styled.Text`
 	letter-spacing: 0.6px;
 	height: 36px;
 	width: 100%;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 // There's a limited number of views, all of which we know,

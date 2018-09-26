@@ -57,9 +57,11 @@ const DEFAULT_CONTEXT = {
 	createTeam: () => '',
 	deleteTeam: () => '',
 	sendTokenToWatch: () => {},
+	setDarkMode: () => {},
 	dropdownVisible: false,
 	networkError: false,
 	watchIsReachable: false,
+	darkMode: true,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -433,6 +435,10 @@ export class Provider extends React.Component<*, Context> {
 				this.sendTokenToWatch();
 			}
 		});
+	};
+
+	setDarkMode = (status: boolean) => {
+		this.setState({ darkMode: status });
 	};
 
 	render() {

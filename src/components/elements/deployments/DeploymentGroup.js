@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { platformBlackColor } from '../../../lib/utils';
 import Deployment from './Deployment';
 
 type Props = {
@@ -13,14 +12,13 @@ type Props = {
 const View = styled.View`
 	flex-direction: column;
 	padding-vertical: 15px;
-	${({ last }) => {
+	${({ last, theme }) => {
 		if (last) {
 			return '';
 		}
 		return `
 			border-bottom-width: 1px;
-			border-bottom-color: #EAEAEA;
-		`;
+			border-bottom-color: ${theme.border};`;
 	}};
 `;
 
@@ -33,7 +31,7 @@ const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 export default ({ deployments, name, last }: Props) => (
