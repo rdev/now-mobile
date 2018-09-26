@@ -54,8 +54,8 @@ export default class Usage extends React.Component<Props> {
 
 	render() {
 		const { usage, reloadUsage, refreshing } = this.props.context;
-		const { mode, metrics } = usage;
-		const plan = plans.get(mode);
+		const { metrics } = usage;
+		const plan = plans.get(usage.plan);
 
 		// Right half of this ternary should never happen, unless Zeit does something breaking
 		const max = plan

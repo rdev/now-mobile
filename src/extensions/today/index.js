@@ -41,8 +41,8 @@ export async function saveDeployments(deployments: Zeit$Deployment[]) {
 }
 
 export async function saveUsage(usage: Zeit$Usage) {
-	const { mode, metrics } = usage;
-	const plan = plans.get(mode);
+	const { metrics } = usage;
+	const plan = plans.get(usage.plan);
 
 	// Right half of this ternary should never happen, unless Zeit does something breaking
 	const max = plan
