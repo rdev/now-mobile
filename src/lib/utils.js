@@ -199,6 +199,8 @@ export const themes = {
 		monoGreenText: '#12DDA0',
 		monoYellowText: '#E2B538',
 		settingsButton: '#067df7',
+		usageGridBackground: '#fafafa',
+		magenta: '#FF0080',
 	},
 	dark: {
 		background: '#080808',
@@ -217,5 +219,7 @@ export const themes = {
 		monoGreenText: '#12DDA0',
 		monoYellowText: '#E2B538',
 		settingsButton: '#06A7F7',
+		usageGridBackground: '#101010',
+		magenta: '#FF0080',
 	},
 };

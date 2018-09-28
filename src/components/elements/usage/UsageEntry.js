@@ -11,9 +11,14 @@ type Props = {
 
 const View = styled.View`
 	flex-direction: column;
-	width: 100%;
+	width: 50%;
 	justify-content: center;
 	align-items: center;
+	border-width: 1px;
+	border-style: solid;
+	border-color: ${props => props.theme.border};
+	padding-vertical: 25px;
+	background-color: ${props => props.theme.usageGridBackground};
 `;
 
 const Numbers = styled.View`
@@ -23,32 +28,24 @@ const Numbers = styled.View`
 
 const Usage = styled.Text`
 	font-weight: 100;
-	font-size: 40px;
+	font-size: 32px;
 	letter-spacing: 0.5px;
 	color: ${props => props.theme.text};
 	${isAndroid ? 'font-family: sans-serif-thin;' : ''};
 `;
 
 const Max = styled.Text`
-	font-size: 22px;
+	font-size: 18px;
 	color: ${props => props.theme.lightText};
 	font-weight: 200;
 	margin-left: 10px;
 `;
 
 const Title = styled.Text`
-	font-size: 17px;
+	font-size: 16px;
 	font-weight: 300;
 	margin-top: 5px;
 	color: ${props => props.theme.text};
-`;
-
-const Separator = styled.View`
-	height: 1px;
-	border-bottom-color: ${props => props.theme.border};
-	border-bottom-width: 1px;
-	margin-vertical: 20px;
-	width: 50%;
 `;
 
 export default ({ usage, max, name }: Props) => (
@@ -58,6 +55,5 @@ export default ({ usage, max, name }: Props) => (
 			{name !== 'Domains' && <Max>/ {max}</Max>}
 		</Numbers>
 		<Title>{name}</Title>
-		{name !== 'Logs' && <Separator />}
 	</View>
 );
