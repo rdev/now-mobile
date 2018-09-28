@@ -61,7 +61,7 @@ const DEFAULT_CONTEXT = {
 	dropdownVisible: false,
 	networkError: false,
 	watchIsReachable: false,
-	darkMode: true,
+	darkMode: false,
 };
 
 // $FlowFixMe RN's used Flow version doesn't know about context yet
@@ -102,9 +102,13 @@ export class Provider extends React.Component<*, Context> {
 	componentDidMount = async () => {
 		await this.fetchData();
 		const savedTeamId = await AsyncStorage.getItem('@now:teamId');
+		const savedDarkMode = await AsyncStorage.getItem('@now:darkMode');
 		if (savedTeamId) {
 			const savedTeam = this.state.teams.find(({ id }) => id === savedTeamId);
 			this.setTeam(savedTeam);
+		}
+		if (savedDarkMode) {
+			this.setDarkMode(true);
 		}
 		this.detectBiometry();
 		if (!isAndroid) this.setUpWatchConnectivity();
@@ -439,6 +443,11 @@ export class Provider extends React.Component<*, Context> {
 
 	setDarkMode = (status: boolean) => {
 		this.setState({ darkMode: status });
+		if (status === true) {
+			AsyncStorage.setItem('@now:darkMode', 'true');
+		} else {
+			AsyncStorage.removeItem('@now:darkMode');
+		}
 	};
 
 	render() {
@@ -462,6 +471,7 @@ export class Provider extends React.Component<*, Context> {
 					createTeam: this.createTeam,
 					deleteTeam: this.deleteTeam,
 					sendTokenToWatch: this.sendTokenToWatch,
+					setDarkMode: this.setDarkMode,
 				}}
 			>
 				{this.props.children}

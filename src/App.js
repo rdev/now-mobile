@@ -1,6 +1,7 @@
 /* @flow */
 
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import codePush from 'react-native-code-push';
 import { ThemeProvider } from 'styled-components';
@@ -11,7 +12,7 @@ import WhatsNew from './screens/WhatsNew';
 import Settings from './screens/Settings';
 import DeploymentDetails from './screens/DeploymentDetails';
 import { Provider, connect } from './Provider';
-import { platformBlackColor, themes } from './lib/utils';
+import { themes } from './lib/utils';
 
 type AppProps = {
 	context: Context,
@@ -72,7 +73,11 @@ const Navigation = StackNavigator(
 
 const App = connect(({ context }: AppProps) => (
 	<ThemeProvider theme={context.darkMode ? themes.dark : themes.light}>
-		<Navigation screenProps={{ theme: context.darkMode ? themes.dark : themes.light }} />
+		{/* $FlowFixMe */}
+		<React.Fragment>
+			<StatusBar barStyle={context.darkMode ? 'light-content' : 'dark-content'} />
+			<Navigation screenProps={{ theme: context.darkMode ? themes.dark : themes.light }} />
+		</React.Fragment>
 	</ThemeProvider>
 ));
 

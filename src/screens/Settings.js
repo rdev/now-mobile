@@ -19,7 +19,7 @@ import Input from '../components/elements/settings/Input';
 import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import api from '../lib/api';
 import touchIdPrompt from '../lib/touch-id-prompt';
-import { isIphoneSE, isAndroid } from '../lib/utils';
+import { isIphoneSE, isAndroid, themes } from '../lib/utils';
 import { connect } from '../Provider';
 import gradient from '../../assets/gradient.jpg';
 
@@ -330,6 +330,8 @@ export default class Settings extends React.Component<Props, State> {
 			usage,
 			user,
 			team,
+			darkMode,
+			setDarkMode,
 		} = this.props.context;
 		const changeName = team ? this.changeTeamName : this.changeUsername;
 		const current = team
@@ -349,13 +351,8 @@ export default class Settings extends React.Component<Props, State> {
 					<Header />
 					<Title>Settings</Title>
 					<KeyboardAwareScrollView
-						contentContainerStyle={{
-							alignItems: 'center',
-							paddingBottom: 100,
-						}}
-						style={{
-							width: '100%',
-						}}
+						contentContainerStyle={{ alignItems: 'center', paddingBottom: 100 }}
+						style={{ width: '100%' }}
 						scrollEnabled
 					>
 						<View>
@@ -439,6 +436,24 @@ export default class Settings extends React.Component<Props, State> {
 
 								return null;
 							})()}
+							<Separator />
+							<SettingsRow>
+								<RowText>Dark Mode</RowText>
+								<Switch
+									onTintColor={
+										isAndroid
+											? '#bbbbbb'
+											: darkMode
+												? themes.dark.text
+												: themes.light.text
+									}
+									thumbTintColor={
+										darkMode ? themes.dark.background : themes.light.background
+									}
+									value={darkMode}
+									onValueChange={setDarkMode}
+								/>
+							</SettingsRow>
 							{(() => {
 								if (biometry) {
 									return (
@@ -454,8 +469,20 @@ export default class Settings extends React.Component<Props, State> {
 															c.toUpperCase())} ID`}
 												</RowText>
 												<Switch
-													onTintColor={isAndroid ? '#bbbbbb' : '#000000'}
-													thumbTintColor={isAndroid ? '#000000' : null}
+													onTintColor={
+														isAndroid
+															? '#bbbbbb'
+															: darkMode
+																? themes.dark.text
+																: themes.light.text
+													}
+													thumbTintColor={
+														isAndroid
+															? darkMode
+																? themes.dark.text
+																: themes.light.text
+															: null
+													}
 													value={this.state.touchId}
 													onValueChange={this.toggleTouchId}
 												/>
