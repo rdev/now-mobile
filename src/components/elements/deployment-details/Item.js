@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
-import { platformBlackColor, isAndroid, promptOpen } from '../../../lib/utils';
+import { isAndroid, promptOpen } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
 
 type Props = {
@@ -17,14 +17,13 @@ const View = styled.View`
 	flex-direction: column;
 	padding-vertical: 10px;
 	width: ${({ small }) => (small ? '45%' : '100%')};
-	${({ last }) => {
+	${({ last, theme }) => {
 		if (last) {
 			return 'margin-bottom: 20px';
 		}
 		return `
 			border-bottom-width: 1px;
-			border-bottom-color: #EAEAEA;
-		`;
+			border-bottom-color: ${theme.border};`;
 	}};
 `;
 
@@ -32,14 +31,18 @@ const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Content = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${({ value }) =>
-		(value === 'ERROR' ? '#D74C58' : value === 'INITIALIZING' ? '#E2B538' : platformBlackColor)};
+	color: ${({ value, theme }) =>
+		(value === 'ERROR'
+			? theme.deploymentErrorText
+			: value === 'INITIALIZING'
+				? theme.monoYellowText
+				: theme.text)};
 `;
 
 const Button = styled.TouchableOpacity`

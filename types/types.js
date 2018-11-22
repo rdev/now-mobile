@@ -55,6 +55,7 @@ declare type Context = {
 	networkError: boolean,
 	biometry?: string,
 	watchIsReachable?: boolean,
+	darkMode: boolean,
 	refreshUserInfo: () => void,
 	refreshTeamInfo: (id: string) => void,
 	fetchData: () => void,
@@ -71,4 +72,5 @@ declare type Context = {
 	createTeam: (slug: string) => string,
 	deleteTeam: (id: string) => string,
 	sendTokenToWatch: () => void,
+	setDarkMode: (status: boolean) => void,
 };

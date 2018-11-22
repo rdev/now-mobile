@@ -1,11 +1,14 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from '../Provider';
 import ZeitLogo from '../../assets/zeit-logo.png';
+import ZeitLogoWhite from '../../assets/zeit-logo-white.png';
 
 type Props = {
 	size?: string,
 	style?: any,
+	context: any | Context,
 };
 
 // We need Zeit logo to be bigger in some cases (authentication)
@@ -22,11 +25,13 @@ const Image = styled.Image`
 	width: ${({ size }) => setLogoSize(size).w};
 `;
 
-const Logo = ({ size, style }: Props) => <Image source={ZeitLogo} size={size} style={style} />;
+const Logo = ({ size, style, context }: Props) => (
+	<Image source={context.darkMode ? ZeitLogoWhite : ZeitLogo} size={size} style={style} />
+);
 
 Logo.defaultProps = {
 	size: '',
 	style: null,
 };
 
-export default Logo;
+export default connect(Logo);

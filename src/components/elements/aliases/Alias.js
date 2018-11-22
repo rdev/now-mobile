@@ -3,7 +3,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import TimeAgo from '../TimeAgo';
-import { platformBlackColor, isAndroid, promptOpen } from '../../../lib/utils';
+import { isAndroid, promptOpen } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
 
 type Props = {
@@ -14,14 +14,13 @@ type Props = {
 const View = styled.View`
 	flex-direction: row;
 	padding-vertical: 15px;
-	${({ last }) => {
+	${({ last, theme }) => {
 		if (last) {
 			return '';
 		}
 		return `
 			border-bottom-width: 1px;
-			border-bottom-color: #EAEAEA;
-		`;
+			border-bottom-color: ${theme.border};`;
 	}};
 `;
 
@@ -39,13 +38,13 @@ const Title = styled.Text`
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 5px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Deployment = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Go = styled.Image`

@@ -22,7 +22,7 @@ const Container = styled(SafeAreaView)`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: white;
+	background-color: ${props => props.theme.background};
 `;
 
 /**

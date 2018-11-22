@@ -27,14 +27,13 @@ const View = styled.View`
 	flex-direction: row;
 	align-items: center;
 	padding-vertical: 15px;
-	${({ last }) => {
+	${({ last, theme }) => {
 		if (last) {
 			return '';
 		}
 		return `
 			border-bottom-width: 1px;
-			border-bottom-color: #EAEAEA;
-		`;
+			border-bottom-color: ${theme.border};`;
 	}};
 `;
 

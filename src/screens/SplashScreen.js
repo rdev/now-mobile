@@ -7,6 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import { viewport, isIphoneX, isAndroid } from '../lib/utils';
 import touchIdPrompt from '../lib/touch-id-prompt';
 import ZeitLogo from '../../assets/zeit-logo.png';
+import ZeitLogoWhite from '../../assets/zeit-logo-white.png';
 import NetworkError from '../components/NetworkError';
 import { connect } from '../Provider';
 
@@ -16,7 +17,7 @@ type Props = {
 };
 
 const View = styled(SafeAreaView)`
-	background-color: white;
+	background-color: ${props => props.theme.background};
 	height: 100%;
 	flex-direction: column;
 	align-items: center;
@@ -159,10 +160,12 @@ export default class SplashScreen extends React.Component<Props> {
 		});
 
 	render() {
+		const { darkMode } = this.props.context;
+
 		return (
 			<View>
 				<Animatable.Image
-					source={ZeitLogo}
+					source={darkMode ? ZeitLogoWhite : ZeitLogo}
 					style={{ position: 'absolute', ...logoStyle }}
 					ref={(ref) => {
 						this.logo = ref;

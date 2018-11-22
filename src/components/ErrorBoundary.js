@@ -23,7 +23,7 @@ const Error = styled.View`
 const ErrorMessage = styled.Text`
 	font-size: 16px;
 	font-weight: 300;
-	color: #848484;
+	color: ${props => props.theme.lightText};
 `;
 
 // @TODO I feel like some kind of error reporting is necessary after all

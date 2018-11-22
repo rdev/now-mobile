@@ -12,7 +12,7 @@ const EmtpyContainer = styled.View`
 const EmtpyMessage = styled.Text`
 	font-size: 16px;
 	font-weight: 300;
-	color: #848484;
+	color: ${props => props.theme.lightText};
 `;
 
 const EmptyResults = (props: { viewName: string }) => (
