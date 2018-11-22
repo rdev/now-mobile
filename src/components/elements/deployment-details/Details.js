@@ -2,7 +2,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
-import { platformBlackColor } from '../../../lib/utils';
 import Item from './Item';
 import ScaleTable from './ScaleTable';
 import EventList from './EventList';
@@ -25,7 +24,7 @@ const Heading = styled.Text`
 	font-size: 22px;
 	font-weight: 700;
 	margin-bottom: 20px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const MultiWrap = styled.View`

@@ -99,7 +99,7 @@ declare type Zeit$Usage = {
 		},
 		startTime: string,
 	},
-	mode: Zeit$PlanName,
+	plan: Zeit$PlanName,
 	error?: APIError,
 };
 

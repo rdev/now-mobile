@@ -8,7 +8,7 @@ import Triangle from 'react-native-triangle';
 // $FlowFixMe
 import Prompt from 'react-native-prompt-android'; // eslint-disable-line import/no-unresolved, import/extensions
 import api from '../lib/api';
-import { isAndroid } from '../lib/utils';
+import { isAndroid, themes } from '../lib/utils';
 import { connect } from '../Provider';
 import DropdownRow from './elements/DropdownRow';
 
@@ -36,7 +36,7 @@ const Container = styled.View`
 	top: ${isAndroid === 'android' ? '64px' : '86px'};
 	right: 10px;
 	width: 65%;
-	background-color: white;
+	background-color: ${props => props.theme.dropdownBackground};
 	border-radius: 7px;
 	shadow-opacity: 0.19;
 	shadow-radius: 20px;
@@ -129,7 +129,9 @@ export default class Dropdown extends React.Component<Props, State> {
 	};
 
 	render() {
-		const { user, teams, team } = this.props.context;
+		const {
+			user, teams, team, darkMode,
+		} = this.props.context;
 
 		return this.state.visible ? (
 			// $FlowFixMe
@@ -147,7 +149,11 @@ export default class Dropdown extends React.Component<Props, State> {
 					<Triangle
 						width={36}
 						height={16}
-						color="white"
+						color={
+							darkMode
+								? themes.dark.dropdownBackground
+								: themes.light.dropdownBackground
+						}
 						direction="up"
 						style={{ position: 'absolute', right: 12, top: -16 }}
 					/>

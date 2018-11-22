@@ -92,10 +92,13 @@ const handleLogs = async ({
 
 const notifyIfAppropriate = async (usage: Zeit$Usage) => {
 	// This part is a little convoluted, so bear with me
-	const limits = await getUsageLimits(usage.mode);
-	const plan = plans.get(usage.mode) || {};
-	const lastInstanceCountString = (await AsyncStorage.getItem('@now:lastInstanceCount')) || '0';
-	const lastInstanceCount = parseInt(lastInstanceCountString, 10);
+	const limits = await getUsageLimits(usage.plan);
+	const plan = plans.get(usage.plan);
+
+	if (!plan) return;
+
+	const lastInstanceCountString = await AsyncStorage.getItem('@now:lastInstanceCount');
+	const lastInstanceCount = lastInstanceCountString ? parseInt(lastInstanceCountString, 10) : 0;
 	const lastBandwidthAlert = await AsyncStorage.getItem('@now:lastBandwidthAlert');
 	const lastLogsAlert = await AsyncStorage.getItem('@now:lastLogsAlert');
 

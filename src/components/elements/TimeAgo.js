@@ -22,7 +22,7 @@ moment.updateLocale('en', {
 });
 
 const Text = styled.Text`
-	color: #848484;
+	color: ${props => props.theme.lightText};
 	font-weight: 300;
 	font-size: 16px;
 `;

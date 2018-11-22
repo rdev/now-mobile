@@ -7,7 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import Logo from '../components/Logo';
 import AuthInput from '../components/elements/AuthInput';
 import api from '../lib/api';
-import { viewport, platformBlackColor, isAndroid, isPad } from '../lib/utils';
+import { viewport, isAndroid, isPad } from '../lib/utils';
 import { connect } from '../Provider';
 
 type State = {
@@ -26,32 +26,32 @@ const Container = styled(SafeAreaView)`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	background-color: white;
+	background-color: ${props => props.theme.background};
 `;
 
 const Header = styled.Text`
 	font-size: 22px;
 	font-weight: 600;
 	margin-bottom: 20px;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Text = styled.Text`
 	font-size: 17px;
 	width: 80%;
 	text-align: center;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Email = styled.Text`
 	font-size: 17px;
 	font-weight: 600;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Code = styled.View`
 	width: 80%;
-	background-color: #f7f7f7;
+	background-color: ${props => props.theme.authCodeBackground};
 	justify-content: center;
 	align-items: center;
 	height: 50px;
@@ -62,7 +62,7 @@ const Code = styled.View`
 const CodeText = styled.Text`
 	font-size: 20px;
 	font-weight: 600;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 /**

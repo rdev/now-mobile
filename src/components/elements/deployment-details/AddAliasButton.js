@@ -16,7 +16,7 @@ type Props = {
 const ButtonText = styled.Text`
 	font-weight: 300;
 	font-size: 16px;
-	color: #b5b5b5;
+	color: ${props => props.theme.dimmedText};
 `;
 
 export default class AddAliasButton extends Component<Props> {

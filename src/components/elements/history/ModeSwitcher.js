@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	onSystemPress: Function,
@@ -16,7 +15,7 @@ const View = styled.View`
 	justify-content: space-around;
 	padding-vertical: 8px;
 	border-radius: 6px;
-	border-color: #dedede;
+	border-color: ${props => props.theme.modeSwitcherBorder};
 	border-width: 1px;
 	margin-bottom: 10px;
 	width: 100%;
@@ -26,14 +25,14 @@ const Switch = styled.TouchableOpacity`
 	justify-content: center;
 	align-items: center;
 	flex: 1;
-	border-right-color: #dedede;
+	border-right-color: ${props => props.theme.modeSwitcherBorder};
 	border-right-width: ${({ border }) => (border ? '1px' : '0')};
 `;
 
 const Text = styled.Text`
 	font-size: 14px;
 	font-weight: 300;
-	color: ${({ active }) => (active ? platformBlackColor : '#848484')};
+	color: ${({ active, theme }) => (active ? theme.text : theme.lightText)};
 `;
 
 export default ({

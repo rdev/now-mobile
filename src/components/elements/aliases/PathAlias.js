@@ -2,7 +2,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
-import { platformBlackColor, isAndroid, promptOpen } from '../../../lib/utils';
+import { isAndroid, promptOpen } from '../../../lib/utils';
 import GoIcon from '../../../../assets/go.png';
 
 type Props = {
@@ -18,14 +18,14 @@ const View = styled.View`
 const Address = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 const Path = styled.Text`
 	margin-top: 2px;
 	font-size: 16px;
 	font-weight: 300;
-	color: #b5b5b5;
+	color: ${props => props.theme.dimmedText};
 `;
 
 const TitleWrap = styled.View`

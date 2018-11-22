@@ -4,8 +4,8 @@ import { Alert } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import styled from 'styled-components';
 import { connect } from '../../../Provider';
+import { themes } from '../../../lib/utils';
 import api from '../../../lib/api';
-import { platformBlackColor } from '../../../lib/utils';
 
 type Props = {
 	alias: Zeit$Alias,
@@ -18,13 +18,13 @@ const Wrapper = styled.View`
 	padding-vertical: 10px;
 	width: 100%;
 	border-bottom-width: 1px;
-	border-bottom-color: #eaeaea;
+	border-bottom-color: ${props => props.theme.border};
 `;
 
 const Text = styled.Text`
 	font-size: 16px
 	font-weight: 300;
-	color: ${platformBlackColor};
+	color: ${props => props.theme.text};
 `;
 
 @connect
@@ -58,7 +58,9 @@ export default class DeploymentAlias extends Component<Props> {
 		return (
 			<Swipeout
 				right={[{ text: 'Remove', type: 'delete', onPress: this.removeAlias }]}
-				backgroundColor="white"
+				backgroundColor={
+					this.props.context.darkMode ? themes.dark.background : themes.light.background
+				}
 			>
 				<Wrapper>
 					<Text>{this.props.alias.alias}</Text>
