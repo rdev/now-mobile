@@ -20,8 +20,8 @@ import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import Separator from '../components/elements/settings/Separator';
 import SettingsRow from '../components/elements/settings/SettingsRow';
 import RowText from '../components/elements/settings/RowText';
+import TouchId from '../components/elements/settings/TouchId';
 import api from '../lib/api';
-import touchIdPrompt from '../lib/touch-id-prompt';
 import { isIphoneSE, isAndroid, themes } from '../lib/utils';
 import { connect } from '../Provider';
 import gradient from '../../assets/gradient.jpg';
@@ -32,7 +32,6 @@ type Props = {
 
 type State = {
 	editing: boolean,
-	touchId: boolean,
 	inputValue: string,
 	instanceLimit: string,
 	bandwidthLimit: string,
@@ -142,7 +141,6 @@ export default class Settings extends React.Component<Props, State> {
 	state = {
 		editing: false,
 		inputValue: this.props.context.user.username,
-		touchId: false,
 		instanceLimit: '0',
 		bandwidthLimit: '0',
 		logsLimit: '0',
@@ -168,7 +166,6 @@ export default class Settings extends React.Component<Props, State> {
 	};
 
 	componentDidMount = () => {
-		this.setTouchId();
 		this.getUsageLimits();
 	};
 
@@ -245,34 +242,6 @@ export default class Settings extends React.Component<Props, State> {
 					}
 				},
 			);
-		}
-	};
-
-	setTouchId = async () => {
-		const touchIdEnabled = await AsyncStorage.getItem('@now:touchId');
-		if (touchIdEnabled) {
-			this.setState({ touchId: true });
-		}
-	};
-
-	toggleTouchId = async (active: boolean) => {
-		const { biometry } = this.props.context;
-
-		if (active && biometry !== undefined) {
-			// $FlowFixMe this method won't ever be called if 'biometry === undefined'
-			try {
-				await touchIdPrompt({
-					biometryType: isAndroid
-						? 'fingerprint'
-						: `${biometry.replace(/^\w/, c => c.toUpperCase())} ID`,
-				});
-				this.setState({ touchId: true });
-			} catch (e) {
-				console.log('ERROR SETTING TOUCH ID', e);
-			}
-		} else {
-			await AsyncStorage.removeItem('@now:touchId');
-			this.setState({ touchId: false });
 		}
 	};
 
@@ -435,45 +404,7 @@ export default class Settings extends React.Component<Props, State> {
 									onValueChange={setDarkMode}
 								/>
 							</SettingsRow>
-							{(() => {
-								if (biometry) {
-									return (
-										// $FlowFixMe
-										<React.Fragment>
-											<Separator />
-											<SettingsRow>
-												<RowText>
-													Use{' '}
-													{isAndroid
-														? 'fingerprint'
-														: `${biometry.replace(/^\w/, c =>
-															c.toUpperCase())} ID`}
-												</RowText>
-												<Switch
-													onTintColor={
-														isAndroid
-															? '#bbbbbb'
-															: darkMode
-																? themes.dark.text
-																: themes.light.text
-													}
-													thumbTintColor={
-														isAndroid
-															? darkMode
-																? themes.dark.text
-																: themes.light.text
-															: null
-													}
-													value={this.state.touchId}
-													onValueChange={this.toggleTouchId}
-												/>
-											</SettingsRow>
-										</React.Fragment>
-									);
-								}
-
-								return null;
-							})()}
+							<TouchId biometry={biometry} darkMode={darkMode} />
 							{(() => {
 								if (watchIsReachable) {
 									return (
