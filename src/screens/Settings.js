@@ -113,7 +113,6 @@ export default class Settings extends React.Component<Props, State> {
 			watchIsReachable,
 			sendTokenToWatch,
 			usage,
-			team,
 			darkMode,
 			setDarkMode,
 		} = this.props.context;
