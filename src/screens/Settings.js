@@ -5,31 +5,24 @@ import {
 	SafeAreaView,
 	TouchableOpacity,
 	Switch,
-	AsyncStorage,
 } from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
-import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import Separator from '../components/elements/settings/Separator';
 import SettingsRow from '../components/elements/settings/SettingsRow';
 import RowText from '../components/elements/settings/RowText';
 import Button from '../components/elements/settings/Button';
 import Profile from '../components/elements/settings/Profile';
 import TouchId from '../components/elements/settings/TouchId';
+import UsageLimits from '../components/elements/settings/UsageLimits';
 import { isIphoneSE, isAndroid, themes } from '../lib/utils';
 import { connect } from '../Provider';
 
 type Props = {
 	context: Context,
-};
-
-type State = {
-	instanceLimit: string,
-	bandwidthLimit: string,
-	logsLimit: string,
 };
 
 const Container = styled(SafeAreaView)`
@@ -59,54 +52,8 @@ const Title = styled.Text`
 	color: ${props => props.theme.text};
 `;
 
-
-const SectionHeading = styled.Text`
-	font-size: 18px
-	font-weight: 700;
-	color: ${props => props.theme.text};
-	width: 80%;
-	margin-bottom: 15px;
-`;
-
 @connect
-export default class Settings extends React.Component<Props, State> {
-	state = {
-		instanceLimit: '0',
-		bandwidthLimit: '0',
-		logsLimit: '0',
-	};
-
-	componentDidMount = () => {
-		this.getUsageLimits();
-	};
-
-	getUsageLimits = async () => {
-		const instanceLimit =
-			(await AsyncStorage.getItem('@now:instanceLimit')) || this.state.instanceLimit;
-		const bandwidthLimit =
-			(await AsyncStorage.getItem('@now:bandwidthLimit')) || this.state.bandwidthLimit;
-		const logsLimit = (await AsyncStorage.getItem('@now:logsLimit')) || this.state.logsLimit;
-
-		this.setState({
-			instanceLimit,
-			bandwidthLimit,
-			logsLimit,
-		});
-	};
-
-	setLimit = async (value: string, type: 'instanceLimit' | 'bandwidthLimit' | 'logsLimit') => {
-		let limit = value.replace(/\D/g, '');
-		if (limit.length > 0 && limit.substr(0, 1) === '0') {
-			limit = limit.slice(1);
-		}
-		if (limit === '') {
-			limit = '0';
-		}
-
-		await AsyncStorage.setItem(`@now:${type}`, limit);
-		this.setState({ [type]: limit });
-	};
-
+export default class Settings extends React.Component<Props> {
 	render() {
 		const {
 			biometry,
@@ -171,47 +118,7 @@ export default class Settings extends React.Component<Props, State> {
 
 								return null;
 							})()}
-							{(() => {
-								if (usage.mode === 'on-demand' || usage.mode === 'unlimited') {
-									return (
-										// $FlowFixMe
-										<React.Fragment>
-											<Separator />
-											<SectionHeading>Usage limits</SectionHeading>
-											<SettingsRow>
-												<RowText>Instances</RowText>
-												<UsageLimitInput
-													value={this.state.instanceLimit}
-													onChangeText={(val: string) => {
-														this.setLimit(val, 'instanceLimit');
-													}}
-												/>
-											</SettingsRow>
-											<SettingsRow>
-												<RowText>Bandwidth</RowText>
-												<UsageLimitInput
-													value={this.state.bandwidthLimit}
-													onChangeText={(val: string) => {
-														this.setLimit(val, 'bandwidthLimit');
-													}}
-													label
-												/>
-											</SettingsRow>
-											<SettingsRow style={{ height: 40 }}>
-												<RowText>Logs</RowText>
-												<UsageLimitInput
-													value={this.state.logsLimit}
-													onChangeText={(val: string) => {
-														this.setLimit(val, 'logsLimit');
-													}}
-													label
-												/>
-											</SettingsRow>
-										</React.Fragment>
-									);
-								}
-								return null;
-							})()}
+							<UsageLimits usage={usage} />
 						</View>
 					</KeyboardAwareScrollView>
 					{/* $FlowFixMe */}
