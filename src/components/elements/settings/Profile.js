@@ -188,6 +188,7 @@ class Profile extends React.Component<Props, State> {
 			  };
 
 		return (
+			// $FlowFixMe
 			<React.Fragment>
 				<ProfilePic>
 					<Image
@@ -206,7 +207,7 @@ class Profile extends React.Component<Props, State> {
 					{(() => {
 						if (this.state.editing) {
 							return (
-							// $FlowFixMe
+								// $FlowFixMe
 								<React.Fragment>
 									<Input
 										onChangeText={this.handleInput}
@@ -231,7 +232,7 @@ class Profile extends React.Component<Props, State> {
 						}
 						// @TODO Team editing
 						return (
-						// $FlowFixMe
+							// $FlowFixMe
 							<React.Fragment>
 								<ProfileMeta>
 									<ProfileName>{`${current.name}`}</ProfileName>

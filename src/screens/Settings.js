@@ -129,6 +129,7 @@ export default class Settings extends React.Component<Props, State> {
 						scrollEnabled
 					>
 						<View>
+							{/* $FlowFixMe */}
 							<Profile />
 							<Separator />
 							<SettingsRow>
