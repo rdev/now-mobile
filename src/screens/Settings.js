@@ -6,8 +6,6 @@ import {
 	TouchableOpacity,
 	Switch,
 	AsyncStorage,
-	Alert,
-	ActionSheetIOS,
 } from 'react-native';
 import styled from 'styled-components';
 import * as Animatable from 'react-native-animatable';
@@ -70,10 +68,6 @@ const SectionHeading = styled.Text`
 	margin-bottom: 15px;
 `;
 
-const DeleteText = styled.Text`
-	color: ${props => props.theme.deploymentErrorText};
-`;
-
 @connect
 export default class Settings extends React.Component<Props, State> {
 	state = {
@@ -84,44 +78,6 @@ export default class Settings extends React.Component<Props, State> {
 
 	componentDidMount = () => {
 		this.getUsageLimits();
-	};
-
-	deleteTeam = async () => {
-		const message = 'Are you sure you want delete this team?';
-		const { deleteTeam, team } = this.props.context;
-
-		if (!team) return;
-
-		if (isAndroid) {
-			Alert.alert(
-				message,
-				null,
-				[
-					{ text: 'Cancel', onPress: () => {} },
-					{
-						text: 'Delete',
-						onPress: async () => {
-							await deleteTeam(team.id);
-						},
-					},
-				],
-				{ cancelable: false },
-			);
-		} else {
-			ActionSheetIOS.showActionSheetWithOptions(
-				{
-					title: message,
-					options: ['Cancel', 'Delete'],
-					destructiveButtonIndex: 1,
-					cancelButtonIndex: 0,
-				},
-				async (buttonIndex): any => {
-					if (buttonIndex === 1) {
-						await deleteTeam(team.id);
-					}
-				},
-			);
-		}
 	};
 
 	getUsageLimits = async () => {
@@ -175,20 +131,6 @@ export default class Settings extends React.Component<Props, State> {
 					>
 						<View>
 							<Profile />
-							{(() => {
-								if (team) {
-									return (
-										<TouchableOpacity
-											activeOpacity={0.65}
-											onPress={() => this.deleteTeam()}
-										>
-											<DeleteText>DELETE TEAM</DeleteText>
-										</TouchableOpacity>
-									);
-								}
-
-								return null;
-							})()}
 							<Separator />
 							<SettingsRow>
 								<RowText>Dark Mode</RowText>

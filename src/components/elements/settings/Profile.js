@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { TouchableOpacity, Alert, Image } from 'react-native';
+import { TouchableOpacity, Alert, Image, ActionSheetIOS } from 'react-native';
 import styled from 'styled-components';
 import { connect } from '../../../Provider';
 import { isAndroid } from '../../../lib/utils';
@@ -61,6 +61,10 @@ const Email = styled.Text`
 	font-weight: 300;
 	color: ${props => props.theme.dimmedText};
 	margin-top: 15px;
+`;
+
+const DeleteText = styled.Text`
+	color: ${props => props.theme.deploymentErrorText};
 `;
 
 @connect
@@ -126,6 +130,44 @@ class Profile extends React.Component<Props, State> {
 		const result = await api.teams.changeTeamName(team.id, this.state.inputValue);
 
 		this.handleNameChange(result.message);
+	};
+
+	deleteTeam = async () => {
+		const message = 'Are you sure you want delete this team?';
+		const { deleteTeam, team } = this.props.context;
+
+		if (!team) return;
+
+		if (isAndroid) {
+			Alert.alert(
+				message,
+				null,
+				[
+					{ text: 'Cancel', onPress: () => {} },
+					{
+						text: 'Delete',
+						onPress: async () => {
+							await deleteTeam(team.id);
+						},
+					},
+				],
+				{ cancelable: false },
+			);
+		} else {
+			ActionSheetIOS.showActionSheetWithOptions(
+				{
+					title: message,
+					options: ['Cancel', 'Delete'],
+					destructiveButtonIndex: 1,
+					cancelButtonIndex: 0,
+				},
+				async (buttonIndex): any => {
+					if (buttonIndex === 1) {
+						await deleteTeam(team.id);
+					}
+				},
+			);
+		}
 	};
 
 	render() {
@@ -213,6 +255,20 @@ class Profile extends React.Component<Props, State> {
 						);
 					})()}
 				</ProfileInfo>
+				{(() => {
+					if (team) {
+						return (
+							<TouchableOpacity
+								activeOpacity={0.65}
+								onPress={this.deleteTeam}
+							>
+								<DeleteText>DELETE TEAM</DeleteText>
+							</TouchableOpacity>
+						);
+					}
+
+					return null;
+				})()}
 			</React.Fragment>
 		);
 	}
