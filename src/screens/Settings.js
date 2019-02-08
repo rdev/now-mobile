@@ -17,6 +17,9 @@ import Header from '../components/Header';
 import Dropdown from '../components/Dropdown';
 import Input from '../components/elements/settings/Input';
 import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
+import Separator from '../components/elements/settings/Separator';
+import SettingsRow from '../components/elements/settings/SettingsRow';
+import RowText from '../components/elements/settings/RowText';
 import api from '../lib/api';
 import touchIdPrompt from '../lib/touch-id-prompt';
 import { isIphoneSE, isAndroid, themes } from '../lib/utils';
@@ -120,28 +123,6 @@ const Email = styled.Text`
 	font-weight: 300;
 	color: ${props => props.theme.dimmedText};
 	margin-top: 15px;
-`;
-
-const Separator = styled.View`
-	height: 1px;
-	border-bottom-color: ${props => props.theme.border};
-	border-bottom-width: 1px;
-	margin-vertical: 12px;
-	width: 80%;
-`;
-
-const SettingsRow = styled.View`
-	width: 80%;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	margin-vertical: 5px;
-`;
-
-const RowText = styled.Text`
-	font-size: 18px
-	font-weight: 400;
-	color: ${props => props.theme.text};
 `;
 
 const SectionHeading = styled.Text`
