@@ -1,4 +1,3 @@
-// @TODO This component is getting too huge for comfort
 // @flow
 import React from 'react';
 import {
