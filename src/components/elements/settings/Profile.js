@@ -3,7 +3,7 @@ import React from 'react';
 import { TouchableOpacity, Alert, Image } from 'react-native';
 import styled from 'styled-components';
 import { connect } from '../../../Provider';
-import { isAndroid, isIphoneSE } from '../../../lib/utils';
+import { isAndroid } from '../../../lib/utils';
 import api from '../../../lib/api';
 import gradient from '../../../../assets/gradient.jpg';
 import Input from './Input';
