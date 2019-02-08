@@ -20,6 +20,8 @@ import UsageLimitInput from '../components/elements/settings/UsageLimitInput';
 import Separator from '../components/elements/settings/Separator';
 import SettingsRow from '../components/elements/settings/SettingsRow';
 import RowText from '../components/elements/settings/RowText';
+import Button from '../components/elements/settings/Button';
+import Profile from '../components/elements/settings/Profile';
 import TouchId from '../components/elements/settings/TouchId';
 import api from '../lib/api';
 import { isIphoneSE, isAndroid, themes } from '../lib/utils';
@@ -65,16 +67,6 @@ const Title = styled.Text`
 	color: ${props => props.theme.text};
 `;
 
-export const ProfilePic = styled.View`
-	height: 128px;
-	width: 128px;
-	border-radius: 100px;
-	background: #e0e0e0;
-	overflow: hidden;
-	margin-bottom: 30px;
-	margin-top: ${isIphoneSE() ? '60px' : '120px'};
-`;
-
 const ProfileInfo = styled.View`
 	flex-direction: column;
 	align-items: center;
@@ -109,12 +101,6 @@ const Text = styled.Text`
 	font-weight: 300;
 	letter-spacing: 0.2px;
 	color: ${props => props.theme.text};
-`;
-
-export const Button = styled.Text`
-	font-size: 18px;
-	font-weight: 300;
-	color: ${props => props.theme.settingsButton};
 `;
 
 const Email = styled.Text`
