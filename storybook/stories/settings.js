@@ -3,7 +3,8 @@ import React from 'react';
 import { Image } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import Input from '../../src/components/elements/settings/Input';
-import { Button, ProfilePic } from '../../src/screens/Settings';
+import Button from '../../src/components/elements/settings/Button';
+import ProfilePic from '../../src/components/elements/settings/ProfilePic';
 import NowLogo from '../../assets/now-white.png';
 import center from './_center';
 
