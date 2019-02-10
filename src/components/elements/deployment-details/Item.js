@@ -68,7 +68,7 @@ export default ({
 				<Go source={GoIcon} />
 			</Button>
 		) : (
-			<Content value={value}>
+			<Content value={value} selectable>
 				{value instanceof Date ? (
 					<Content>
 						{value.toString()} <TimeAgo date={value.toString()} bracketed />
