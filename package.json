@@ -34,7 +34,7 @@
 		"react-native-watch-connectivity": "^0.2.0",
 		"react-navigation": "^1.5.12",
 		"styled-components": "^3.2.6",
-		"ua-parser-js": "^0.7.18"
+		"ua-parser-js": "^0.7.24"
 	},
 	"devDependencies": {
 		"@storybook/addon-actions": "^3.4.7",
